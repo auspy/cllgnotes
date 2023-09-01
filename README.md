@@ -11,12 +11,24 @@ This Turborepo includes the following packages/apps:
 - `types`: `types` used throughout the monorepo
 - `logger`: `logger` functions used throughout the monorepo
 
+### Prerequisites
+
+`pnpm` : need to install [pnpm](https://pnpm.io/installation) as package manager
+
+### Install
+
+Install dependencies before running dev or build commands
+
+```
+cd cllgnotes
+pnpm install
+```
+
 ### Build
 
 To build all apps and packages, run the following command:
 
 ```
-cd cllgnotes
 pnpm build
 ```
 
@@ -25,6 +37,5 @@ pnpm build
 To develop all apps and packages, run the following command:
 
 ```
-cd cllgnotes
 pnpm dev
 ```
