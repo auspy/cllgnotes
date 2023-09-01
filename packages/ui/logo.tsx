@@ -1,8 +1,7 @@
-import loading from "./public/loading.gif";
 const Logo = () => {
   return (
     <>
-      <img src={loading} alt="Logo" />
+      <img src={"loading.gif"} alt="Logo" />
     </>
   );
 };
