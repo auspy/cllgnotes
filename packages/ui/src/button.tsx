@@ -8,6 +8,7 @@ export function Button(): JSX.Element {
         alert("booped");
       }}
       type="button"
+      className="text-neutral-100"
     >
       Boop
     </button>

@@ -1,3 +1,4 @@
 // component exports
-export * from "./button";
-export * from "./header";
+export * from "./src/button";
+export * from "./src/header";
+export * from "./src/logo";
