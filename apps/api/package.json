@@ -14,7 +14,9 @@
   "dependencies": {
     "@apollo/server": "^4.9.3",
     "graphql": "^16.8.0",
-    "logger": "workspace:*"
+    "logger": "workspace:*",
+    "@cllgnotes/types": "workspace:*",
+    "@cllgnotes/lib": "workspace:*"
   },
   "devDependencies": {
     "@cllgnotes/types": "workspace:*",

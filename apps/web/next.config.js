@@ -1,4 +1,4 @@
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["ui", "types"],
+  transpilePackages: ["ui", "types", "@cllgnotes/lib"],
 };

@@ -48,6 +48,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@cllgnotes/lib':
+        specifier: workspace:*
+        version: link:../../packages/lib
       logger:
         specifier: workspace:*
         version: link:../../packages/logger
@@ -118,6 +121,8 @@ importers:
       eslint-config-turbo:
         specifier: ^1.10.12
         version: 1.10.12(eslint@8.48.0)
+
+  packages/lib: {}
 
   packages/logger:
     dependencies:
