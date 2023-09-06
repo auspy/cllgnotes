@@ -1,5 +1,20 @@
 @import "./colors.scss";
 @import "./shadows.scss";
+@import "./common.scss";
+@import "./mixins.scss";
+@import "./fonts.scss";
+
 .test {
   background-color: white;
+}
+
+.generalSans {
+  font-family: "GeneralSans-Variable";
+}
+.expose {
+  font-family: "Expose-Black";
+}
+body {
+  font-family: "GeneralSans-Variable";
+  @apply generalSans;
 }

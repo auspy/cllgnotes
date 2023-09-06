@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "GeneralSans-Variable";
+  src:
+    url("../fonts/general-sans/GeneralSans-Variable.woff2") format("woff2"),
+    url("../fonts/general-sans/GeneralSans-Variable.woff") format("woff"),
+    url("../fonts/general-sans/GeneralSans-Variable.ttf") format("truetype");
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Expose-Black";
+  src:
+    url("../fonts/expose/Expose-Black.woff2") format("woff2"),
+    url("../fonts/expose/Expose-Black.woff") format("woff"),
+    url("../fonts/expose/Expose-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+:root {
+  --expose: "Expose-Black";
+  --general-sans: "GeneralSans-Variable";
+}
