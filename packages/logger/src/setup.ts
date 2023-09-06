@@ -9,6 +9,6 @@ export const logger = winston.createLogger({
     // new winston.transports.File({ filename: "logs/combined.log" }), // can be used to log to a file
   ],
 });
-export const log = (message: string) => {
+export const log = (message: any) => {
   logger.info(message);
 };
