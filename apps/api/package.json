@@ -15,10 +15,10 @@
     "@apollo/server": "^4.9.3",
     "graphql": "^16.8.0",
     "logger": "workspace:*",
-    "@cllgnotes/types": "workspace:*",
     "@cllgnotes/lib": "workspace:*"
   },
   "devDependencies": {
+    "tsconfig": "workspace:*",
     "@cllgnotes/types": "workspace:*",
     "@types/node": "^20.5.7",
     "typescript": "^5.2.2"
