@@ -1,0 +1,14 @@
+@mixin fontStyles(
+  $fontSize: 89px,
+  $textShadow: 0px 4px 1px #d9d9d9,
+  $fontWeight: 600,
+  $lineHeight: 108%
+) {
+  @apply generalSans;
+  color: #141414;
+  text-shadow: $textShadow;
+  font-size: $fontSize;
+  font-style: normal;
+  font-weight: $fontWeight;
+  line-height: $lineHeight; /* 96.12px */
+}
