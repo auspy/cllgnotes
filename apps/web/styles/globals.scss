@@ -2,9 +2,27 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "../../../packages/ui/styles/sharedGlobals.scss";
+
 .testing {
   @apply bg-red-500;
   @apply text-white;
   @apply p-[50px];
   @apply m-[50px];
+}
+body {
+  background-color: var(--bg);
+  color: var(--dark);
+}
+
+button {
+  @apply generalSans;
+  border-radius: 5px;
+  border: 1px solid #141414;
+  background: #fff;
+  box-shadow: 5px 5px 0px 0px #141414;
+}
+
+// TEXT
+h1 {
+  @include fontStyles(89px);
 }
