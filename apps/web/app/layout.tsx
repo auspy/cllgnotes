@@ -8,7 +8,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className="testing">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
