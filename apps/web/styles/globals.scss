@@ -16,13 +16,27 @@ body {
 
 button {
   @apply generalSans;
-  border-radius: 5px;
-  border: 1px solid #141414;
-  background: #fff;
-  box-shadow: 5px 5px 0px 0px #141414;
+  background: none;
 }
 
 // TEXT
 h1 {
   @include fontStyles(89px);
+  font-size: clamp(52px, 6.2vw, 114px);
+}
+
+.h1Highlight {
+  text-shadow: var(--shadow-text);
+  color: var(--blue);
+  -webkit-text-fill-color: var(--blue);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--dark);
+}
+
+// BUTTONS
+.priBtn {
+  border-radius: 5px;
+  border: 1px solid #141414;
+  background: #fff;
+  box-shadow: 5px 5px 0px 0px #141414;
 }

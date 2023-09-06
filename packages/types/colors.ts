@@ -1,4 +1,4 @@
-const colors = {
+const ColorsType = {
   dark: "#141414",
   lDark: "#232426", // light dark
   grey: "#bfbfbf",
@@ -15,4 +15,4 @@ const colors = {
   red: "#DB4949",
 };
 
-export default colors;
+export default ColorsType;

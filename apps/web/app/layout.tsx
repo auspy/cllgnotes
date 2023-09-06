@@ -8,6 +8,12 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <title>Cllgnotes.com</title>
+        <meta name="description" content="Cllgnotes.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body>{children}</body>
     </html>
   );

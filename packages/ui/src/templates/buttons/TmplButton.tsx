@@ -1,4 +1,6 @@
 import { ButtonProps } from "@cllgnotes/types/buttons";
+import Text from "../../text/Text";
+import { FontSizeEnum } from "@cllgnotes/types/types.text";
 // TemplateButton
 // files needed: common.css
 const TmplButton = ({
@@ -6,23 +8,34 @@ const TmplButton = ({
   onClick,
   buttonStyles,
   buttonClasses,
-  buttonTextClasses,
-  buttonTextStyles,
+  textProps,
   icon,
   height,
+  fontSize,
   width,
   iconLeft,
+  padding,
+  iconGap = 10,
 }: ButtonProps) => {
   return (
     <button
-      className={`gcc ${buttonClasses}`}
-      style={{ height: height, width: width, ...buttonStyles }}
+      key={text}
+      className={`frcc ${buttonClasses}`}
+      style={{
+        height: height,
+        width: width,
+        columnGap: iconGap,
+        padding: padding,
+        ...buttonStyles,
+      }}
       onClick={onClick}
     >
       {iconLeft && icon}
-      <div className={`${buttonTextClasses}`} style={{ ...buttonTextStyles }}>
-        {text}
-      </div>
+      <Text
+        text={text}
+        fontSize={fontSize as unknown as FontSizeEnum}
+        {...textProps}
+      />
       {!iconLeft && icon}
     </button>
   );
