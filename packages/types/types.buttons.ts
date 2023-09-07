@@ -1,3 +1,4 @@
+import { ColorsType } from "./colors";
 import { TextProps } from "./types.text";
 
 export enum ButtonHeights {
@@ -17,6 +18,10 @@ export enum ButtonFontSizes {
   small = 16,
   large = 22,
 }
+export enum IconButtonSizesEnum {
+  small = 40,
+  large = 60,
+}
 export type ButtonProps = {
   text: string;
   textProps?: Omit<TextProps, "text" | "fontSize">;
@@ -30,7 +35,7 @@ export type ButtonProps = {
   iconGap?: number;
   iconLeft?: boolean;
   fontSize?: ButtonFontSizesBlack | ButtonFontSizes;
-  height?: ButtonHeightsBlackType | ButtonHeights;
+  height?: ButtonHeightsBlackType | ButtonHeights | IconButtonSizesEnum;
 };
 // causing error for some reason
 // & (
@@ -49,3 +54,9 @@ export type ButtonProps = {
 //   | { icon?: undefined }
 //   | { icon: React.ReactNode; iconPosition: "left" | "right" }
 // );
+export type IconButtonProps = {
+  size?: 40 | 60;
+  icon: React.ReactNode;
+  onBlack?: boolean;
+  color?: ColorsType;
+};

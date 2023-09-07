@@ -1,4 +1,4 @@
-import { ButtonProps } from "./buttons";
+import { ButtonProps } from "./types.buttons";
 
 export type ButtonRowProps = {
   data: ButtonProps[];

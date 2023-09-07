@@ -1,0 +1,13 @@
+// BUTTONS
+.priBtn {
+  border-radius: 5px;
+  border: 1px solid #141414;
+  background: #fff;
+  box-shadow: 5px 5px 0px 0px #141414;
+}
+
+.iconBtn:hover {
+  background-color: #fff !important;
+  color: var(--dark) !important;
+  opacity: 1 !important;
+}

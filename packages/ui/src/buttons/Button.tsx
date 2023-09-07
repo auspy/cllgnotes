@@ -2,7 +2,7 @@ import {
   ButtonProps,
   ButtonHeights,
   ButtonFontSizes,
-} from "@cllgnotes/types/buttons";
+} from "@cllgnotes/types/types.buttons";
 import TmplButton from "../templates/buttons/TmplButton";
 import { FontWeightEnum } from "@cllgnotes/types/types.text";
 

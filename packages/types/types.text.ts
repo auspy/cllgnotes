@@ -1,4 +1,4 @@
-import Colors from "./colors";
+import Colors, { ColorsType } from "./colors";
 
 export enum HeadingType {
   h1,
@@ -68,7 +68,6 @@ export const textClasses = {
 };
 type FontWeightType = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 type FontSizeType = 12 | 14 | 16 | 18 | 22 | 36 | 56 | 64;
-type Colors = keyof typeof Colors;
 export type TypeTextClass = keyof typeof textClasses;
 type TypeTextTransform = "uppercase" | "capitalize" | "none" | undefined;
 export type TextProps = {
@@ -81,5 +80,5 @@ export type TextProps = {
   fontFamily?: FontFamilyType;
   textAlign?: "left" | "center" | "right";
   textTransform?: TypeTextTransform;
-  color?: Colors;
+  color?: ColorsType;
 };

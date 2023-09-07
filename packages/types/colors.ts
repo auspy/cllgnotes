@@ -15,5 +15,5 @@ const Colors = {
   lYellow: "#f4f9df",
   red: "#DB4949",
 };
-
+export type ColorsType = keyof typeof Colors;
 export default Colors;

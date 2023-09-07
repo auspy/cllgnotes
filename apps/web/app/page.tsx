@@ -1,10 +1,18 @@
 import { log, logger } from "logger";
-import { Button, ButtonBlack, ButtonRow, Heading, SearchBar, Text } from "ui";
+import {
+  Button,
+  ButtonBlack,
+  ButtonRow,
+  Heading,
+  IconButton,
+  SearchBar,
+  Text,
+} from "ui";
 import { CONSTANT_TEST } from "@cllgnotes/lib/constants";
 import {
   ButtonFontSizes,
   ButtonFontSizesBlack,
-} from "@cllgnotes/types/buttons";
+} from "@cllgnotes/types/types.buttons";
 import { FontFamilyType, HeadingType } from "@cllgnotes/types/types.text";
 import {
   dummyFilterGrpsDocType,

@@ -1,4 +1,4 @@
-import { ButtonProps } from "@cllgnotes/types/buttons";
+import { ButtonProps } from "@cllgnotes/types/types.buttons";
 import Text from "../../text/Text";
 import { FontSizeEnum } from "@cllgnotes/types/types.text";
 // TemplateButton
@@ -31,11 +31,13 @@ const TmplButton = ({
       onClick={onClick}
     >
       {iconLeft && icon}
-      <Text
-        text={text}
-        fontSize={fontSize as unknown as FontSizeEnum}
-        {...textProps}
-      />
+      {text && (
+        <Text
+          text={text}
+          fontSize={fontSize as unknown as FontSizeEnum}
+          {...textProps}
+        />
+      )}
       {!iconLeft && icon}
     </button>
   );

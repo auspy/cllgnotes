@@ -1,4 +1,4 @@
-import { ButtonProps } from "@cllgnotes/types/buttons";
+import { ButtonProps } from "@cllgnotes/types/types.buttons";
 export const dummyFilterGrpsDocType: ButtonProps[] = [
   {
     text: "Notes",
