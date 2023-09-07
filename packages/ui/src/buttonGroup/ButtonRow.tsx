@@ -2,7 +2,7 @@ import { ButtonRowProps } from "@cllgnotes/types/buttonGrps";
 import Button from "../buttons/Button";
 import ShadowsType from "@cllgnotes/types/shadows";
 import { FontWeightEnum } from "@cllgnotes/types/types.text";
-import { ButtonFontSizes } from "@cllgnotes/types/buttons";
+import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
 
 const ButtonRow = ({
   data,
