@@ -4,7 +4,7 @@ import {
   ButtonProps,
 } from "@cllgnotes/types/buttons";
 import TmplButton from "../templates/buttons/TmplButton";
-import ColorsType from "@cllgnotes/types/colors";
+import Colors from "@cllgnotes/types/colors";
 import { FontWeightEnum } from "@cllgnotes/types/types.text";
 
 const ButtonBlack = ({
@@ -16,8 +16,8 @@ const ButtonBlack = ({
     <TmplButton
       {...props}
       buttonStyles={{
-        backgroundColor: ColorsType.dark,
-        color: ColorsType.white,
+        backgroundColor: Colors.dark,
+        color: Colors.white,
         borderRadius: 20,
       }}
       fontSize={fontSize}

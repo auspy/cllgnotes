@@ -4,7 +4,7 @@ import {
   textClasses,
 } from "@cllgnotes/types/types.text";
 import Heading from "./Heading";
-import ColorsType from "@cllgnotes/types/colors";
+import Colors from "@cllgnotes/types/colors";
 
 const Text = ({
   type,
@@ -12,12 +12,14 @@ const Text = ({
   textStyle,
   color,
   text,
+  textTransform,
+  textAlign,
   ...props
 }: TextProps) => {
   const classs = `${type && textClasses[type]} ${textClass}`;
-  const stylee = { ...props, ...textStyle };
+  const stylee = { textAlign, textTransform, ...props, ...textStyle };
   if (color) {
-    stylee.color = ColorsType[color];
+    stylee.color = Colors[color];
   }
   if (type?.includes("h")) {
     return (
