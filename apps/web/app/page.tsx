@@ -1,5 +1,5 @@
 import { log, logger } from "logger";
-import { Button, ButtonBlack, ButtonRow, Heading, Text } from "ui";
+import { Button, ButtonBlack, ButtonRow, Heading, SearchBar, Text } from "ui";
 import { CONSTANT_TEST } from "@cllgnotes/lib/constants";
 import {
   ButtonFontSizes,
@@ -40,6 +40,10 @@ export default function Page(): JSX.Element {
           maxWidth={318}
           minWidth={220}
           height={90}
+        />
+        <SearchBar
+          height={90}
+          options={["Srm university", "ashoka university"]}
         />
       </div>
     </>
