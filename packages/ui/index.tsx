@@ -6,5 +6,6 @@ export { default as Heading } from "./src/text/Heading";
 export { default as Text } from "./src/text/Text";
 export { default as SearchBar } from "./src/searchBar/SearchBar";
 export { default as IconButton } from "./src/buttons/IconButton";
+export { Card } from "./src/cards/Card"
 export * from "./src/header";
 export * from "./src/logo";

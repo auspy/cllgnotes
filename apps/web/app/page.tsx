@@ -1,4 +1,5 @@
 import { log, logger } from "logger";
+import { Card } from "ui"
 import {
   Button,
   ButtonBlack,
@@ -54,6 +55,15 @@ export default function Page(): JSX.Element {
           options={["Srm university", "ashoka university"]}
         />
       </div>
+      <Card 
+          imgSrc={"https://picsum.photos/300/200"}
+          imgAlt={"Card img"}
+          cource={"sciencegi".toUpperCase()}
+          degree={"b.tech".toUpperCase()}
+          semester={"2"}
+          subject={"dsa".toUpperCase()}
+          chapter={"dynamic programming"}
+        />
     </>
   );
 }
