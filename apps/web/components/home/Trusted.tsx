@@ -1,6 +1,7 @@
 import { Borders, TrustedProps } from "@cllgnotes/types";
 import Image from "next/image";
 import { Text } from "ui";
+import ImageClient from "./Image";
 
 const Trusted = ({ data }: TrustedProps) => {
   return (
@@ -27,7 +28,8 @@ const Trusted = ({ data }: TrustedProps) => {
           //       ...(rest as React.CSSProperties),
           //     }}
           //   >
-          <Image className="frc" {...rest} src={src} alt={alt} />
+          // <Image className="frc" {...rest} src={src} alt={alt} />
+          <ImageClient img={{ ...rest, src, alt }} />
           //   </div>
         ))}
       </div>
