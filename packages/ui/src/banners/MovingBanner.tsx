@@ -12,7 +12,14 @@ const MovingBanner = ({ text, item, textType }: BannerProps) => {
         paddingBlock: "0.6%",
       }}
     >
-      {text && <Text textClass="fs0" text={text} type={textType} />}
+      {text && (
+        <Text
+          textStyle={{ textShadow: "unset" }}
+          textClass="fs0"
+          text={text}
+          type={textType}
+        />
+      )}
       {item}
     </div>
   );

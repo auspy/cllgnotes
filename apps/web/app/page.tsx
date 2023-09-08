@@ -3,7 +3,12 @@ import HeroHome from "@/components/home/HeroHome";
 import WhatWeSell from "@/components/home/WhatWeSell";
 import Benefits from "@/components/home/Benefits";
 import { MovingBanner } from "ui";
-import { dummyBenefits, dummyWhatWeSell } from "@cllgnotes/lib/dummyData";
+import {
+  dummyBenefits,
+  dummyTestimonials,
+  dummyWhatWeSell,
+} from "@cllgnotes/lib/dummyData";
+import Testimonial from "@/components/testi/Testimonial";
 
 export default function Page(): JSX.Element {
   return (
@@ -26,6 +31,7 @@ export default function Page(): JSX.Element {
       >
         <WhatWeSell data={dummyWhatWeSell} />
         <Benefits data={dummyBenefits} />
+        <Testimonial data={dummyTestimonials} />
       </div>
     </>
   );

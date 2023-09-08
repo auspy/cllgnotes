@@ -4,7 +4,7 @@
     ".",
     "src/**/*.ts",
     "src/**/*.d.ts",
-    "../../apps/web/components/header/Navigation.tsx"
+    "../../apps/web/components/**/*.ts"
   ],
   "exclude": ["dist", "build", "node_modules"]
 }

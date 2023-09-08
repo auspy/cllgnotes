@@ -9,6 +9,7 @@ const IconButton = ({
   onBlack = false,
   icon = <ChevronRightRounded />,
   color,
+  onClick,
 }: IconButtonProps) => {
   const btnStyles: React.CSSProperties = {};
   if (color) {
@@ -17,6 +18,7 @@ const IconButton = ({
   if (onBlack) {
     return (
       <button
+        onClick={onClick}
         className={onBlack && `iconBtn`}
         style={{
           width: size,
@@ -34,6 +36,7 @@ const IconButton = ({
   return (
     <>
       <Button
+        onClick={onClick}
         buttonStyles={btnStyles}
         width={size}
         height={size}

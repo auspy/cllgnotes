@@ -22,15 +22,17 @@ export enum IconButtonSizesEnum {
   small = 40,
   large = 60,
 }
-export type ButtonProps = {
+export type ButtonCommonProps = {
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  buttonStyles?: React.CSSProperties;
+  buttonClasses?: string;
+};
+export type ButtonProps = ButtonCommonProps & {
   text: string;
   textProps?: Omit<TextProps, "text" | "fontSize">;
   disabled?: boolean;
   width?: number | "100%" | "inherit";
   padding?: number | string;
-  buttonStyles?: React.CSSProperties;
-  buttonClasses?: string;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
   iconGap?: number;
   iconLeft?: boolean;
@@ -59,7 +61,8 @@ export type ButtonBlackProps = Omit<ButtonProps, "fontSize" | "height"> & {
 //   | { icon?: undefined }
 //   | { icon: React.ReactNode; iconPosition: "left" | "right" }
 // );
-export type IconButtonProps = {
+
+export type IconButtonProps = ButtonCommonProps & {
   size?: 40 | 60;
   icon: React.ReactNode;
   onBlack?: boolean;
