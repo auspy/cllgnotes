@@ -25,5 +25,8 @@
   "peerDependencies": {
     "@cllgnotes/lib": "workspace:*",
     "@mui/icons-material": "^5.14.8"
+  },
+  "dependencies": {
+    "next": "^13.4.19"
   }
 }

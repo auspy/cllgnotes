@@ -14,8 +14,10 @@ const Text = ({
   text,
   textTransform,
   textAlign,
+  children,
   ...props
 }: TextProps) => {
+  const txt = text || children;
   const classs = `${type && textClasses[type]} ${textClass}`;
   const stylee = { textAlign, textTransform, ...props, ...textStyle };
   if (color) {
@@ -24,7 +26,7 @@ const Text = ({
   if (type?.includes("h")) {
     return (
       <Heading
-        text={text}
+        text={txt}
         headingClass={classs}
         headingStyle={stylee}
         type={
@@ -37,7 +39,7 @@ const Text = ({
   }
   return (
     <p className={classs} style={stylee}>
-      {text}
+      {txt}
     </p>
   );
 };

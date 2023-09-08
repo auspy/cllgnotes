@@ -4,6 +4,16 @@
   "private": true,
   "main": "index.ts",
   "types": "index.ts",
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./index.js"
+    },
+    "./dummyData": {
+      "import": "./dummyData/index.ts",
+      "require": "./dummyData/index.js"
+    }
+  },
   "scripts": {},
   "devDependencies": {
     "@cllgnotes/types": "workspace:*"

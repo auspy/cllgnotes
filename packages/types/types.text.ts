@@ -72,7 +72,6 @@ export type TypeTextClass = keyof typeof textClasses;
 type TypeTextTransform = "uppercase" | "capitalize" | "none" | undefined;
 export type TextProps = {
   type?: TypeTextClass;
-  text: string;
   fontSize?: FontSizeType;
   fontWeight?: FontWeightType;
   textClass?: string;
@@ -81,4 +80,13 @@ export type TextProps = {
   textAlign?: "left" | "center" | "right";
   textTransform?: TypeTextTransform;
   color?: ColorsType;
-};
+} & (
+  | {
+      children: string;
+      text?: undefined;
+    }
+  | {
+      children?: string;
+      text: string;
+    }
+);

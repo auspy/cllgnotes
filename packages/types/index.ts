@@ -9,3 +9,4 @@ export * from "./types.img";
 export * from "./types.text";
 export * from "./searchbar";
 export * from "./shadows";
+export * from "./types.sellTypes";
