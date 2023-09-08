@@ -20,9 +20,7 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className="fcc" style={{ paddingInline: 35 }}>
-        {children}
-      </body>
+      <body className="fcc">{children}</body>
     </html>
   );
 }

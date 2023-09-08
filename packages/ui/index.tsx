@@ -8,3 +8,4 @@ export { default as SearchBar } from "./src/searchBar/SearchBar";
 export { default as IconButton } from "./src/buttons/IconButton";
 export { default as Logo } from "./src/header/logo";
 export { default as Navigation } from "../../apps/web/components/header/Navigation";
+export { default as MovingBanner } from "./src/banners/MovingBanner";

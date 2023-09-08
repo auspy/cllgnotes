@@ -23,7 +23,7 @@ a {
 }
 h1 {
   @include fontStyles(89px);
-  font-size: clamp(52px, 6.2vw, 89.5px);
+  font-size: clamp(52px, 6.15vw, 89.5px);
 }
 
 .h1Highlight {
@@ -41,6 +41,7 @@ h1 {
 
 // CONTAINER
 .topContainer {
-  max-width: 1370px;
+  max-width: 1440px;
   width: 100%;
+  padding-inline: 35px;
 }

@@ -22,7 +22,7 @@
     "tsconfig": "workspace:*",
     "typescript": "^4.5.2"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@cllgnotes/lib": "workspace:*",
     "@mui/icons-material": "^5.14.8"
   }
