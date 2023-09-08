@@ -1,8 +1,12 @@
+import { ColorsType } from "./colors";
+
 export type typeNavigationItem = {
   text: string;
   href: string;
 };
 export type NavigationProps = {
-  data: typeNavigationItem[];
+  data?: typeNavigationItem[];
   gap?: number;
+  color?: ColorsType;
+  textTransform?: "uppercase" | "capitalize";
 };

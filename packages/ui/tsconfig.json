@@ -4,7 +4,8 @@
     ".",
     "src/**/*.ts",
     "src/**/*.d.ts",
-    "../../apps/web/components/**/*.ts"
+    "../../apps/web/components/**/*.ts",
+    "./custom.d.ts"
   ],
   "exclude": ["dist", "build", "node_modules"]
 }

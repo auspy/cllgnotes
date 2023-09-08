@@ -10,4 +10,7 @@
   background-color: #fff !important;
   color: var(--dark) !important;
   opacity: 1 !important;
+  path {
+    fill: var(--dark);
+  }
 }

@@ -11,6 +11,7 @@ import {
 } from "@cllgnotes/lib/dummyData";
 import Testimonial from "@/components/testi/Testimonial";
 import Trusted from "@/components/home/Trusted";
+import Footer from "@/components/footer/Footer";
 
 export default function Page(): JSX.Element {
   return (
@@ -35,6 +36,7 @@ export default function Page(): JSX.Element {
         <Benefits data={dummyBenefits} />
         <Testimonial data={dummyTestimonials} />
         <Trusted data={dummyTrusted} />
+        <Footer earnMoney={true} />
       </div>
     </>
   );
