@@ -54,7 +54,7 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
               <div
                 onClick={(e) => handleClick(e, i)}
                 key={title + i}
-                className="fcfs"
+                className="fcfs hover"
                 style={{
                   marginBlock: active == i ? 20 : 0,
                 }}

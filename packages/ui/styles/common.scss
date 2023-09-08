@@ -58,25 +58,33 @@ button {
 .frcc,
 .fccc,
 .frfssb,
+.frfesb,
 .frfe {
   display: flex;
 }
 
 .frc,
+.frcsb,
+.frcsa,
+.frfs,
+.frcc,
+.frfesb,
+.frfe {
+  flex-direction: row;
+}
+.frc,
 .fcc,
 .frcsb,
 .fccsb,
 .frcsa,
-.frfs,
 .frcc,
-.fccc,
-.frfe {
-  flex-direction: row;
+.fccc {
   align-items: center;
 }
 
 .fcfe,
-.frfe {
+.frfe,
+.frfesb {
   align-items: flex-end;
 }
 
@@ -98,6 +106,7 @@ button {
 
 .frcsb,
 .fccsb,
+.frfesb,
 .fcfssb,
 .frfssb {
   justify-content: space-between;
@@ -385,7 +394,9 @@ input[type="submit"]:hover:enabled,
 
 /* STICKY HEADER */
 #header {
-  transition: opacity 0.5s ease, position 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    position 0.5s ease;
 }
 .sticky {
   position: fixed;
