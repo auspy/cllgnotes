@@ -6,5 +6,5 @@ export { default as Heading } from "./src/text/Heading";
 export { default as Text } from "./src/text/Text";
 export { default as SearchBar } from "./src/searchBar/SearchBar";
 export { default as IconButton } from "./src/buttons/IconButton";
-export * from "./src/header";
-export * from "./src/logo";
+export { default as Logo } from "./src/header/logo";
+export { default as Navigation } from "../../apps/web/components/header/Navigation";

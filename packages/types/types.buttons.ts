@@ -37,6 +37,11 @@ export type ButtonProps = {
   fontSize?: ButtonFontSizesBlack | ButtonFontSizes;
   height?: ButtonHeightsBlackType | ButtonHeights | IconButtonSizesEnum;
 };
+
+export type ButtonBlackProps = Omit<ButtonProps, "fontSize" | "height"> & {
+  fontSize?: 14 | 18;
+  height?: 49 | 60;
+};
 // causing error for some reason
 // & (
 //   | {

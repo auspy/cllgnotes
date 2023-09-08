@@ -14,9 +14,16 @@ button {
 }
 
 // TEXT
+a {
+  color: var(--dark);
+}
+#logo {
+  font-family: "Gabriela", serif;
+  font-size: 24px;
+}
 h1 {
   @include fontStyles(89px);
-  font-size: clamp(52px, 6.2vw, 114px);
+  font-size: clamp(52px, 6.2vw, 89.5px);
 }
 
 .h1Highlight {
@@ -32,4 +39,8 @@ h1 {
   font-weight: 500;
 }
 
-// OPTION TAG
+// CONTAINER
+.topContainer {
+  max-width: 1370px;
+  width: 100%;
+}

@@ -13,8 +13,16 @@ export default function RootLayout({
         <title>Cllgnotes.com</title>
         <meta name="description" content="Cllgnotes.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap"
+          rel="stylesheet"
+        ></link>
       </head>
-      <body>{children}</body>
+      <body className="fcc" style={{ paddingInline: 35 }}>
+        {children}
+      </body>
     </html>
   );
 }

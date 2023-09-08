@@ -12,6 +12,7 @@
     "@cllgnotes/lib": "workspace:*",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
     "logger": "workspace:*",
     "next": "^13.4.19",

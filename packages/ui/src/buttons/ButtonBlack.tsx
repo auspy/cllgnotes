@@ -1,7 +1,7 @@
 import {
   ButtonFontSizesBlack,
   ButtonHeightsBlackType,
-  ButtonProps,
+  ButtonBlackProps,
 } from "@cllgnotes/types/types.buttons";
 import TmplButton from "../templates/buttons/TmplButton";
 import Colors from "@cllgnotes/types/colors";
@@ -11,7 +11,7 @@ const ButtonBlack = ({
   fontSize = ButtonFontSizesBlack.large,
   height = ButtonHeightsBlackType.large,
   ...props
-}: ButtonProps) => {
+}: ButtonBlackProps) => {
   return (
     <TmplButton
       {...props}
