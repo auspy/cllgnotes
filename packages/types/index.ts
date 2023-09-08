@@ -12,3 +12,4 @@ export * from "./shadows";
 export * from "./types.sellTypes";
 export * from "./types.benefits";
 export * from "./types.testi";
+export * from "./types.trusted";

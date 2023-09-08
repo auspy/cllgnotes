@@ -6,9 +6,11 @@ import { MovingBanner } from "ui";
 import {
   dummyBenefits,
   dummyTestimonials,
+  dummyTrusted,
   dummyWhatWeSell,
 } from "@cllgnotes/lib/dummyData";
 import Testimonial from "@/components/testi/Testimonial";
+import Trusted from "@/components/home/Trusted";
 
 export default function Page(): JSX.Element {
   return (
@@ -32,6 +34,7 @@ export default function Page(): JSX.Element {
         <WhatWeSell data={dummyWhatWeSell} />
         <Benefits data={dummyBenefits} />
         <Testimonial data={dummyTestimonials} />
+        <Trusted data={dummyTrusted} />
       </div>
     </>
   );
