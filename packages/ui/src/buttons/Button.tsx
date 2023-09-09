@@ -30,7 +30,7 @@ const Button = ({
       height={height}
       width={width}
       textProps={{ ...textProps }}
-      buttonClasses={`priBtn ${fontClass}`}
+      buttonClasses={`priBtn ${fontClass} ${props.buttonClasses}`}
     />
   );
 };

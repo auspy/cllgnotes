@@ -2,9 +2,10 @@ import Header from "@/components/header/Header";
 import HeroHome from "@/components/home/HeroHome";
 import WhatWeSell from "@/components/home/WhatWeSell";
 import Benefits from "@/components/home/Benefits";
-import { MovingBanner } from "ui";
+import { CardGrp, MovingBanner } from "ui";
 import {
   dummyBenefits,
+  dummyCardsData,
   dummyTestimonials,
   dummyTrusted,
   dummyWhatWeSell,
@@ -32,6 +33,7 @@ export default function Page(): JSX.Element {
           rowGap: 100,
         }}
       >
+        <CardGrp id="cardContainer" data={dummyCardsData({ minWidth: 360 })} />
         <WhatWeSell data={dummyWhatWeSell} />
         <Benefits data={dummyBenefits} />
         <Testimonial data={dummyTestimonials} />

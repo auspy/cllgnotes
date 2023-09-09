@@ -1,6 +1,6 @@
 "use client";
 import Colors from "@cllgnotes/types/colors";
-import { createTheme } from "./mui";
+import { createTheme } from "ui";
 const theme = createTheme({
   palette: {
     primary: {

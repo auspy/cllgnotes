@@ -12,7 +12,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/header/Navigation.tsx"
+    "components/**/*.ts",
+    "components/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

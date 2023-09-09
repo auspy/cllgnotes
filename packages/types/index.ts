@@ -14,3 +14,4 @@ export * from "./types.benefits";
 export * from "./types.testi";
 export * from "./types.trusted";
 export * from "./types.hero";
+export * from "./types.card";

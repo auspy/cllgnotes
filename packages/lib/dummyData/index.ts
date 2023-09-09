@@ -4,3 +4,4 @@ export * from "./data.sellTypes";
 export * from "./data.benefits";
 export * from "./data.testi";
 export * from "./data.trusted";
+export * from "./data.cards";

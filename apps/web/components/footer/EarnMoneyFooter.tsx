@@ -1,8 +1,7 @@
 import Colors from "@cllgnotes/types/colors";
 import HeroText from "../home/HeroText";
 import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
-import { Button } from "ui";
-import { TextField, ThemeProvider } from "../mui";
+import { Button, TextField, ThemeProvider } from "ui";
 import theme from "../muiTheme";
 
 const EarnMoneyFooter = ({

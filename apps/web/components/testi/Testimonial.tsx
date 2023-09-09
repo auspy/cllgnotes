@@ -1,6 +1,5 @@
 "use client";
-import { IconButton, Text } from "ui";
-import { ChevronLeftRounded, ChevronRightRounded } from "../mui";
+import { IconButton, Text, ChevronLeftRounded, ChevronRightRounded } from "ui";
 import { TestimonialProps } from "@cllgnotes/types";
 import { useEffect, useRef, useState } from "react";
 import TestiUserAvatar from "./TestiUserAvatar";

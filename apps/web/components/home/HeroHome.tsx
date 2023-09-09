@@ -1,6 +1,5 @@
-import { Button, SearchBar } from "ui";
+import { Button, SearchBar, ChevronRightRounded } from "ui";
 import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
-import { ChevronRightRounded } from "../mui";
 import HeroText from "./HeroText";
 
 const HeroHome = () => {

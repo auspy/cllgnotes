@@ -1,7 +1,6 @@
-import { Avatar } from "@/components/mui";
 import { Borders, TestiUser } from "@cllgnotes/types";
 import Colors from "@cllgnotes/types/colors";
-import { Text } from "ui";
+import { Text, Avatar } from "ui";
 const TestiUserAvatar = ({ username, img, name, onCard }: TestiUser) => {
   const user = name || username || "User";
   const size = onCard ? 55 : 70;

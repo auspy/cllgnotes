@@ -55,6 +55,7 @@ export const textClasses = {
   h1: "semi text-[64px]",
   h2: "semi text-4xl",
   h3: "semi text-[22px]",
+  semi12: "semi12",
   semi14: "semi14",
   semi16: "semi16",
   semi18: "semi text-[18px]",
