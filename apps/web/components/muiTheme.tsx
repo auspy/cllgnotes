@@ -37,6 +37,7 @@ const theme = createTheme({
           height: 90,
           fontSize: 22,
           fontWeight: 500,
+          paddingInline: 15,
           color: Colors.dark,
         },
         notchedOutline: {

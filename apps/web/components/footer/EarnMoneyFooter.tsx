@@ -40,8 +40,10 @@ const EarnMoneyFooter = ({
                   sx={{
                     "& .MuiFormLabel-root": {
                       top: 12,
+                      left: 10,
                       "&.Mui-focused": {
-                        top: 0,
+                        top: -2,
+                        left: 2,
                       },
                     },
                   }}

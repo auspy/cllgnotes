@@ -3,7 +3,7 @@ import Text from "../text/Text";
 const MovingBanner = ({ text, item, textType }: BannerProps) => {
   return (
     <div
-      className="w100"
+      className="w100 fcc"
       style={{
         borderTop: Borders.dark,
         borderBottom: Borders.dark,

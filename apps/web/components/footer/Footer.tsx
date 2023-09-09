@@ -6,7 +6,7 @@ import IconTwitter from "@public/icons/IconTwitter";
 const Footer = ({ earnMoney = false }: { earnMoney?: boolean }) => {
   return (
     <div
-      className="w100 rPosi"
+      className="w100 rPosi fcc"
       style={{
         backgroundColor: Colors.lDark,
         marginTop: earnMoney ? 185 : 0,
