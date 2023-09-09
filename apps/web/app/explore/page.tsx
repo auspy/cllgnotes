@@ -1,6 +1,8 @@
 import ExploreHero from "@/components/explore/hero/ExploreHero";
 import Suggestions from "@/components/explore/suggestions/Suggestions";
-import { MovingBanner } from "ui";
+import Footer from "@/components/footer/Footer";
+import { dummyCardsData } from "@cllgnotes/lib/dummyData";
+import { FilterSidebar, List, ListItem, MovingBanner, ToolBar } from "ui";
 
 const page = () => {
   return (
@@ -11,9 +13,20 @@ const page = () => {
         textType="h3e"
       />
       {/* BELOW HERO */}
-      <div className="topContainer mt40" style={{ gap: 60 }}>
+      <div
+        className="topContainer flex flex-col mt40"
+        style={{ rowGap: 60, marginBottom: 100 }}
+      >
         <Suggestions />
+        <div className="frfs w100" style={{ gap: 30 }}>
+          <FilterSidebar />
+          <div className="w100 fcc" style={{ gap: 25 }}>
+            <ToolBar />
+            <List id="" data={dummyCardsData()} />
+          </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

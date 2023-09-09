@@ -1,3 +1,4 @@
+import { FilterCheckboxListProps } from "@cllgnotes/types";
 import { ButtonProps } from "@cllgnotes/types/types.buttons";
 export const dummyFilterGrpsDocType: ButtonProps[] = [
   {
@@ -47,3 +48,9 @@ export const dummyFilterGrpsSubject: ButtonProps[] = [
     text: "Envirenmental Science",
   },
 ];
+
+export const dummyFilterList: FilterCheckboxListProps = {
+  Year: ["Fresher", "Sophomore", "Junior", "Senior"],
+  Years: ["Fresher", "Sophomore", "Junior", "Senior"],
+  Yearss: ["Fresher", "Sophomore", "Junior", "Senior"],
+};

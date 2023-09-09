@@ -16,3 +16,4 @@ export * from "./types.trusted";
 export * from "./types.hero";
 export * from "./types.card";
 export * from "./types.wrapper";
+export * from "./types.filter";

@@ -91,3 +91,18 @@ export type TextProps = {
       text: string;
     }
 );
+
+export type CardTextBoxProps = {
+  department: string;
+  padding?: string;
+  course: string;
+  semester: number;
+  color?: ColorsType;
+  isAbsolute?: boolean;
+};
+
+export type CardDetailsBoxProps = {
+  subject: string;
+  topic: string;
+  univ: string;
+};

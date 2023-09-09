@@ -5,6 +5,7 @@ import {
 } from "@cllgnotes/types/types.buttons";
 import TmplButton from "../templates/buttons/TmplButton";
 import { FontWeightEnum } from "@cllgnotes/types/types.text";
+import ShadowsType from "@cllgnotes/types/shadows";
 
 // this is wrpaper using template button. any changes to button should be done here.
 // template button is just to setup the structure of the button.
@@ -13,6 +14,7 @@ const Button = ({
   width = "100%",
   fontSize = ButtonFontSizes.large,
   textProps,
+  buttonStyles,
   ...props
 }: ButtonProps) => {
   let fontClass: string = "";
@@ -29,6 +31,10 @@ const Button = ({
       fontSize={fontSize}
       height={height}
       width={width}
+      buttonStyles={{
+        boxShadow: ShadowsType.box1,
+        ...buttonStyles,
+      }}
       textProps={{ ...textProps }}
       buttonClasses={`priBtn ${fontClass} ${props.buttonClasses}`}
     />

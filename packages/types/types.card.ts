@@ -1,5 +1,5 @@
-import { ColorsType } from "./colors";
 import { ImgProps } from "./types.img";
+import { CardDetailsBoxProps, CardTextBoxProps } from "./types.text";
 
 export enum CardFontSize {
   small = 12,
@@ -9,18 +9,13 @@ export enum CardFontWeight {
   small = 500,
   large = 600,
 }
-export type CardProps = {
-  img: ImgProps;
-  department: string;
-  course: string;
-  semester: number;
-  subject: string;
-  topic: string;
-  univ: string;
-  imgHeight?: 240 | 268;
-  minWidth?: number;
-  color?: ColorsType;
-};
+export type CardProps = Omit<CardTextBoxProps, "isAbsolute"> &
+  CardDetailsBoxProps & {
+    img: ImgProps;
+    imgHeight?: 240 | 268;
+    minWidth?: number;
+    likes?: number;
+  };
 
 type CardCommonProps = {};
 
