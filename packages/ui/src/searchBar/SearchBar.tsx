@@ -1,17 +1,26 @@
 "use client";
 import Colors from "@cllgnotes/types/colors";
 import { SearchBarProps } from "@cllgnotes/types/searchBar";
-import SearchIcon from "@mui/icons-material/Search";
+import { Search, ChevronRightRounded } from "../mui/mui";
 import { useState } from "react";
+import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
+import Button from "../buttons/Button";
 
 // search bar style for every search bar and works based on height
-const SearchBar = ({ height, options, maxWidth }: SearchBarProps) => {
+// todo add a query parameter that allows us to add query and run by button click. other option is to add send data to usestate of parent component and run query there
+const SearchBar = ({
+  height,
+  options,
+  maxWidth,
+  exploreBtn = false,
+}: SearchBarProps) => {
   // * STYLES
   let fontSize = 22;
-  if (height === 60 || height === 50) {
+  const isHeight50 = height === 50;
+  const isHeight60 = height === 60;
+  if (isHeight60 || isHeight50) {
     fontSize = 16;
   }
-  const isHeight50 = height === 50;
   const commonStyle: React.CSSProperties = {
     fontSize,
     height: "100%",
@@ -50,7 +59,7 @@ const SearchBar = ({ height, options, maxWidth }: SearchBarProps) => {
             ...commonStyle,
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
-            maxWidth: 270,
+            maxWidth: isHeight60 ? 193 : 270,
             borderRight: "none",
             backgroundColor: Colors.lGrey2,
           }}
@@ -73,23 +82,41 @@ const SearchBar = ({ height, options, maxWidth }: SearchBarProps) => {
           ...commonStyle,
           paddingInlineStart: 30,
           ...(isHeight50 ? height50Style : otherCommonStyle),
+          ...(isHeight60 && { borderRight: "none", borderRadius: 0 }),
         }}
         type="text"
         placeholder="Search for notes, papers, etc."
       ></input>
-      {isHeight50 && (
-        <button
-          onClick={handleSearch}
-          className="priBtn"
-          style={{
-            ...commonStyle,
-            ...otherCommonStyle,
-            paddingInline: 12,
-            backgroundColor: Colors.lGrey2,
-          }}
-        >
-          <SearchIcon />
-        </button>
+      {isHeight50 ||
+        (isHeight60 && (
+          <button
+            onClick={handleSearch}
+            className="priBtn"
+            style={{
+              ...commonStyle,
+              ...otherCommonStyle,
+              paddingInline: 12,
+              backgroundColor: Colors.lGrey2,
+            }}
+          >
+            <Search />
+          </button>
+        ))}
+      {exploreBtn && (
+        <Button
+          buttonStyles={{ maxWidth: 289, marginLeft: 25 }}
+          text="Explore Docs"
+          fontSize={ButtonFontSizes.large}
+          icon={
+            <ChevronRightRounded
+              color="inherit"
+              sx={{
+                fontSize: 32,
+              }}
+              style={{ strokeWidth: 5 }}
+            />
+          }
+        />
       )}
     </div>
   );

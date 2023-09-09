@@ -15,9 +15,12 @@ const ButtonRow = ({
 }: ButtonRowProps) => {
   return (
     <div
-      className={`frc flex-wrap w100`}
+      className={`flex overflow-scroll lg:overflow-hidden gap-x-[20px] lg:grid lg:grid-cols-[auto_auto_auto_auto] lg:gap-y-[${columnGap}]  w100`}
       style={{
-        gap: `${rowGap}px ${columnGap}px`,
+        rowGap: rowGap,
+        paddingBottom: 4,
+        paddingRight: 4,
+        // gridTemplateColumns: `repeat(auto-fit, minmax(${minWidth}px, 1fr))`,
       }}
     >
       {data.map((item, index) => (

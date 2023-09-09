@@ -2,7 +2,7 @@ import { typeNavigationItem } from "@cllgnotes/types/types.header";
 export const dummyNavData: typeNavigationItem[] = [
   {
     text: "Explore",
-    href: "/",
+    href: "/explore",
   },
   {
     text: "Papers",

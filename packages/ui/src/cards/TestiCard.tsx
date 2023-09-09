@@ -1,6 +1,6 @@
 import { Borders, TestiCardProps } from "@cllgnotes/types";
 import Colors from "@cllgnotes/types/colors";
-import TestiUserAvatar from "../avatar/TestiUserAvatar";
+import TestiUserAvatar from "../Avatar/TestiUserAvatar";
 import Text from "../text/Text";
 import { FavoriteBorderRounded, IconButton } from "../mui/mui";
 

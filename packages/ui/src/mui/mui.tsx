@@ -3,6 +3,7 @@ import {
   ChevronLeftRounded,
   ChevronRightRounded,
   FavoriteBorderRounded,
+  Search,
 } from "@mui/icons-material";
 import {
   Avatar,
@@ -16,6 +17,7 @@ export {
   ChevronRightRounded,
   ChevronLeftRounded,
   FavoriteBorderRounded,
+  Search,
   Avatar,
   TextField,
   ThemeProvider,

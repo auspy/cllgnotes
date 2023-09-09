@@ -12,6 +12,10 @@
     "./dummyData": {
       "import": "./dummyData/index.ts",
       "require": "./dummyData/index.js"
+    },
+    "./hooks": {
+      "import": "./hooks/index.ts",
+      "require": "./hooks/index.js"
     }
   },
   "scripts": {},

@@ -1,5 +1,4 @@
-import { Button, SearchBar, ChevronRightRounded } from "ui";
-import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
+import { SearchBar } from "ui";
 import HeroText from "./HeroText";
 
 const HeroHome = () => {
@@ -28,20 +27,7 @@ const HeroHome = () => {
             <SearchBar
               height={90}
               options={["Srm university", "ashoka university"]}
-            />
-            <Button
-              buttonStyles={{ maxWidth: 289 }}
-              text="Explore Docs"
-              fontSize={ButtonFontSizes.large}
-              icon={
-                <ChevronRightRounded
-                  color="inherit"
-                  sx={{
-                    fontSize: 32,
-                  }}
-                  style={{ strokeWidth: 5 }}
-                />
-              }
+              exploreBtn={true}
             />
           </>
         }

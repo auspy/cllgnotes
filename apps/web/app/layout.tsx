@@ -1,6 +1,5 @@
-// import "ui/styles/";
 import "@/styles/globals.scss"; // app specific global css
-
+import { DeviceTypeWrapper } from "@cllgnotes/lib/hooks";
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +23,9 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className="fcc">{children}</body>
+      <body className="fcc">
+        <DeviceTypeWrapper>{children}</DeviceTypeWrapper>
+      </body>
     </html>
   );
 }
