@@ -6,7 +6,7 @@ const Benefits = ({ data }: BenefitsProps) => {
     <div
       className="topContainer w100 fcc"
       style={{
-        rowGap: 50,
+        rowGap: 80,
       }}
     >
       {data.map((item, index) => (

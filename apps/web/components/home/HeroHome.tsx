@@ -6,7 +6,7 @@ const HeroHome = () => {
   return (
     <div
       className="topContainer rPosi"
-      style={{ height: "min(900px,max(660px,76vh))" || 660, display: "flex" }}
+      style={{ height: "min(860px,max(660px,76vh))" || 660, display: "flex" }}
     >
       <HeroText
         img={{

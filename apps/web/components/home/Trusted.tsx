@@ -1,5 +1,4 @@
 import { Borders, TrustedProps } from "@cllgnotes/types";
-import Image from "next/image";
 import { Text } from "ui";
 import ImageClient from "./Image";
 

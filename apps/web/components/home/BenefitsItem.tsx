@@ -8,13 +8,13 @@ const BenefitsItem = ({ title, desc, isRight }: BenefitItemProps) => {
       style={{
         flexDirection: isRight ? "row-reverse" : "row",
         borderBottom: Borders.dark,
-        paddingBottom: 50,
+        paddingBottom: 80,
       }}
     >
       <h1
         className="expose upper frc"
         style={{
-          fontSize: 89,
+          fontSize: 100,
           height: 67,
           // textShadow: "unset"
         }}

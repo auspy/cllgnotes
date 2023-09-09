@@ -41,13 +41,14 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
           Explore an array of resources for any subject, any semester, any
           course
         </Text>
-        <div className="frcsb w100 mt40">
+        <div className="frfssb w100 mt40">
           {/* types */}
           <div
             className="fcfs"
             style={{
               maxWidth: 572,
               rowGap: 20,
+              maxHeight: 341.5,
             }}
           >
             {data.map(({ title, desc, color }, i) => (
@@ -86,7 +87,7 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
             ))}
           </div>
           {/* image */}
-          <div className="fcc rPosi w100">
+          <div className="fcc rPosi w100" style={{ alignSelf: "flex-end" }}>
             <Image priority {...img} />
           </div>
         </div>

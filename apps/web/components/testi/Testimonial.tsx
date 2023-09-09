@@ -1,10 +1,16 @@
 "use client";
-import { IconButton, Text, ChevronLeftRounded, ChevronRightRounded } from "ui";
-import { TestimonialProps } from "@cllgnotes/types";
+import {
+  IconButton,
+  Text,
+  ChevronLeftRounded,
+  ChevronRightRounded,
+  TestiUserAvatar,
+  TestiGrp,
+} from "ui";
+import { TestiCardGrpProps } from "@cllgnotes/types";
 import { useEffect, useRef, useState } from "react";
-import TestiUserAvatar from "./TestiUserAvatar";
 
-const Testimonial = ({ data }: TestimonialProps) => {
+const Testimonial = ({ data }: TestiCardGrpProps) => {
   const [active, setActive] = useState(0);
   const activeRef = useRef(active);
   const changeActive = (increment: number) => {
@@ -26,28 +32,41 @@ const Testimonial = ({ data }: TestimonialProps) => {
     width: 30,
   };
   return (
-    <div className="frfssb topContainer">
-      <IconButton
-        onClick={() => {
-          changeActive(-1);
-        }}
-        icon={<ChevronLeftRounded style={iconStyle} />}
-      />
-      <div className="fcc w100" style={{ maxWidth: 1000, rowGap: 60 }}>
-        <Text
-          textAlign="center"
-          type="h1"
-          textStyle={{ fontSize: 56 }}
-        >{`"${data[active]?.text}"`}</Text>
-        <TestiUserAvatar {...data[active].user} onCard={false} />
-      </div>
+    <div className="w100 fcc" style={{ gap: 100 }}>
+      <div className="frfssb topContainer">
+        <IconButton
+          onClick={() => {
+            changeActive(-1);
+          }}
+          icon={<ChevronLeftRounded style={iconStyle} />}
+        />
+        <div
+          className="fcc rPosi w100"
+          style={{ maxWidth: 1000, rowGap: 60, paddingTop: 200 }}
+        >
+          <Text
+            textAlign="center"
+            type="h1"
+            textStyle={{
+              fontSize: 56,
+              position: "absolute",
+              top: 0,
+              height: 130,
+              // maxHeight: 130,
+              overflow: "hidden",
+            }}
+          >{`"${data[active]?.text}"`}</Text>
+          <TestiUserAvatar {...data[active].user} onCard={false} />
+        </div>
 
-      <IconButton
-        onClick={() => {
-          changeActive(1);
-        }}
-        icon={<ChevronRightRounded style={iconStyle} />}
-      />
+        <IconButton
+          onClick={() => {
+            changeActive(1);
+          }}
+          icon={<ChevronRightRounded style={iconStyle} />}
+        />
+      </div>
+      <TestiGrp data={data} />
     </div>
   );
 };

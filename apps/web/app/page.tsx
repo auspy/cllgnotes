@@ -22,24 +22,29 @@ export default function Page(): JSX.Element {
       <div className="my-[60px] w100">
         <MovingBanner
           text={
-            "notes 📖  question papers  📝  presentations  📖  question papers"
+            "notes 📖  question papers  📝  presentations  📖  notes 📖  question papers  📝  presentations "
           }
           textType="h1e"
         />
       </div>
+      <CardGrp id="cardContainer" data={dummyCardsData({ minWidth: 360 })} />
       <div
         className="fcc w100"
         style={{
-          rowGap: 100,
+          rowGap: 130,
+          marginTop: 60,
         }}
       >
-        <CardGrp id="cardContainer" data={dummyCardsData({ minWidth: 360 })} />
         <WhatWeSell data={dummyWhatWeSell} />
-        <Benefits data={dummyBenefits} />
+        <div className="my-[30px] w100 fcc">
+          <Benefits data={dummyBenefits} />
+        </div>
         <Testimonial data={dummyTestimonials} />
-        <Trusted data={dummyTrusted} />
-        <Footer earnMoney={true} />
       </div>
+      <div className="my-[80px]">
+        <Trusted data={dummyTrusted} />
+      </div>
+      <Footer earnMoney={true} />
     </>
   );
 }

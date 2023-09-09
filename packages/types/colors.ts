@@ -15,5 +15,9 @@ const Colors = {
   lYellow: "#f4f9df",
   red: "#DB4949",
 };
+export const GradientColors = {
+  white:
+    " radial-gradient(65.76% 65.76% at 49.96% -1.95%, rgba(244, 244, 244, 0.00) 0%, rgba(255, 255, 255, 0.00) 0.01%, rgba(250, 250, 250, 0.00) 54.33%, #F4F4F4 100%)",
+};
 export type ColorsType = keyof typeof Colors;
 export default Colors;

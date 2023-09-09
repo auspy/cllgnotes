@@ -1,9 +1,19 @@
-import { TestiCardProps } from "@cllgnotes/types";
+import { TestiCardProps, TestiUser } from "@cllgnotes/types";
+
+export const dummyTestiUser: TestiUser = {
+  name: "Rahul",
+  img: {
+    src: "",
+    alt: "",
+    fill: true,
+  },
+  username: "@rahul",
+};
 
 export const dummyTestimonials: TestiCardProps[] = [
   {
     user: {
-      name: "Rahul",
+      name: "Rahul singh bansal bansal",
       img: {
         src: "",
         alt: "",
@@ -11,7 +21,7 @@ export const dummyTestimonials: TestiCardProps[] = [
       },
       username: "@rahul",
     },
-    text: "cllg notes is awesome1",
+    text: "As a college student, finding quality study materials was a constant struggle until I stumbled upon CllgNotes. Their comprehensive notes saved me hours of studying and boosted my grades.",
     date: "3 : 41 pm - 16 july 2023",
     likes: 89,
     reposts: 12,
@@ -41,7 +51,97 @@ export const dummyTestimonials: TestiCardProps[] = [
       },
       username: "@rahul",
     },
-    text: "cllg notes is awesome3",
+    text: "As a college student, finding quality study materials was a constant struggle until I stumbled upon CllgNotes. ",
+    date: "3 : 41 pm - 16 july 2023",
+    likes: 89,
+    reposts: 12,
+  },
+  {
+    user: {
+      name: "Rahul3",
+      img: {
+        src: "",
+        alt: "",
+        fill: true,
+      },
+      username: "@rahul",
+    },
+    text: "Their comprehensive notes saved me hours of studying and boosted my grades.",
+    date: "3 : 41 pm - 16 july 2023",
+    likes: 89,
+    reposts: 12,
+  },
+  {
+    user: {
+      name: "Rahul3",
+      img: {
+        src: "",
+        alt: "",
+        fill: true,
+      },
+      username: "@rahul",
+    },
+    text: "cllg notes is awesome4. Their comprehensive notes saved me hours of studying and boosted my grades.",
+    date: "3 : 41 pm - 16 july 2023",
+    likes: 89,
+    reposts: 12,
+  },
+  {
+    user: {
+      name: "Rahul3",
+      img: {
+        src: "",
+        alt: "",
+        fill: true,
+      },
+      username: "@rahul",
+    },
+    text: "cllg notes is awesome4",
+    date: "3 : 41 pm - 16 july 2023",
+    likes: 89,
+    reposts: 12,
+  },
+  {
+    user: {
+      name: "Rahul3",
+      img: {
+        src: "",
+        alt: "",
+        fill: true,
+      },
+      username: "@rahul",
+    },
+    text: "cllg notes is awesome4",
+    date: "3 : 41 pm - 16 july 2023",
+    likes: 89,
+    reposts: 12,
+  },
+  {
+    user: {
+      name: "Rahul3",
+      img: {
+        src: "",
+        alt: "",
+        fill: true,
+      },
+      username: "@rahul",
+    },
+    text: "cllg notes is awesome4",
+    date: "3 : 41 pm - 16 july 2023",
+    likes: 89,
+    reposts: 12,
+  },
+  {
+    user: {
+      name: "Rahul3",
+      img: {
+        src: "",
+        alt: "",
+        fill: true,
+      },
+      username: "@rahul",
+    },
+    text: "cllg notes is awesome4",
     date: "3 : 41 pm - 16 july 2023",
     likes: 89,
     reposts: 12,

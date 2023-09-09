@@ -14,11 +14,13 @@ export type TestiCardProps = TestiItemProps & {
   date: string;
   likes: number;
   reposts: number;
+  style?: React.CSSProperties;
+  _class?: string;
 };
 export type TestimonialProps = {
   data: TestiItemProps[];
 };
 
-export type TestimonialCardsProps = {
+export type TestiCardGrpProps = {
   data: TestiCardProps[];
 };
