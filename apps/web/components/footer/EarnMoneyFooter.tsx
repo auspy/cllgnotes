@@ -1,8 +1,7 @@
 import Colors from "@cllgnotes/types/colors";
 import HeroText from "../home/HeroText";
 import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
-import { Button, TextField, ThemeProvider } from "ui";
-import theme from "../muiTheme";
+import { Button, TextField } from "ui";
 
 const EarnMoneyFooter = ({
   containerStyle,
@@ -33,27 +32,25 @@ const EarnMoneyFooter = ({
           highlightText="earn money?"
           element={
             <>
-              <ThemeProvider theme={theme}>
-                <TextField
-                  className={`priBtn ${textClasses["h3"]} upper`}
-                  label="Email"
-                  sx={{
-                    "& .MuiFormLabel-root": {
-                      top: 12,
-                      left: 10,
-                      "&.Mui-focused": {
-                        top: -2,
-                        left: 2,
-                      },
+              <TextField
+                className={`priBtn ${textClasses["h3"]} upper`}
+                label="Email"
+                sx={{
+                  "& .MuiFormLabel-root": {
+                    top: 12,
+                    left: 10,
+                    "&.Mui-focused": {
+                      top: -2,
+                      left: 2,
                     },
-                  }}
-                  style={{
-                    border: "unset",
-                    width: "100%",
-                  }}
-                  variant="outlined"
-                />
-              </ThemeProvider>
+                  },
+                }}
+                style={{
+                  border: "unset",
+                  width: "100%",
+                }}
+                variant="outlined"
+              />
               <Button
                 width={"100%"}
                 buttonStyles={{ maxWidth: loggedIn ? "none" : 289 }}

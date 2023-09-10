@@ -22,3 +22,5 @@ export { default as CardDetailsText } from "./src/text/CardDetailsText";
 export { default as ButtonLike } from "./src/buttons/ButtonLike";
 export { default as FilterSidebar } from "./src/bar/FilterSidebar";
 export { default as ToolBar } from "./src/bar/ToolBar";
+export { default as muiTheme } from "./src/mui/muiTheme";
+export { default as ButtonGridIcon } from "./src/buttons/ButtonGridIcon";

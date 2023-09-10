@@ -3,6 +3,7 @@ import { IconButtonProps } from "@cllgnotes/types/types.buttons";
 import Button from "./Button";
 import { ChevronRightRounded } from "@mui/icons-material";
 import Colors from "@cllgnotes/types/colors";
+import ShadowsType from "@cllgnotes/types/shadows";
 
 const IconButton = ({
   size = 60,
@@ -12,7 +13,12 @@ const IconButton = ({
   onClick,
   buttonClasses,
 }: IconButtonProps) => {
-  const btnStyles: React.CSSProperties = {};
+  const btnStyles: React.CSSProperties = {
+    boxShadow: ShadowsType.box2,
+  };
+  if (size == 40) {
+    btnStyles.boxShadow = ShadowsType.box1;
+  }
   if (color) {
     btnStyles.backgroundColor = Colors[color];
   }

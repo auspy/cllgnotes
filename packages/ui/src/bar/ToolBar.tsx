@@ -1,19 +1,26 @@
-import ButtonTagGrp from "../buttonGroup/ButtonTagGrp";
-import IconButton from "../buttons/IconButton";
+import ChipGrp from "../buttonGroup/ChipGrp";
 import Text from "../text/Text";
-import { ViewCompactRounded } from "../mui/mui";
 import Colors from "@cllgnotes/types/colors";
+import ButtonGridIcon from "../buttons/ButtonGridIcon";
+import { ToolbarProp$ } from "@cllgnotes/types";
 
-const ToolBar = ({ count = 1000 }: { count?: number }) => {
+const ToolBar = ({ found = 1000, chipGrpProps }: ToolbarProp$) => {
   return (
     <div className="frfssb w100">
       <div className="frc">
-        <Text type="medi16">{String(count) + " found"}</Text>
-        <ButtonTagGrp />
+        <Text textClass="fs0 mr15" type="medi16">
+          {String(found) + "+ found"}
+        </Text>
+        <ChipGrp
+          {...chipGrpProps}
+          // clearFilters={clearFilters}
+          // setChipData={setChipData}
+          // chipData={chipData}
+        />
       </div>
       <div className="frfs" style={{ color: Colors.dark }}>
         {/* will add select dropdown here */}
-        <IconButton size={40} icon={<ViewCompactRounded color="inherit" />} />
+        <ButtonGridIcon />
       </div>
     </div>
   );

@@ -9,9 +9,10 @@ const ButtonRow = ({
   maxWidth,
   minWidth,
   rowGap = 25,
-  buttonProps,
+  commonButtonProps,
   height = 120,
   columnGap = 30,
+  onClick,
 }: ButtonRowProps) => {
   return (
     <div
@@ -27,17 +28,19 @@ const ButtonRow = ({
         <>
           <Button
             key={item.text + index}
-            {...buttonProps}
+            {...commonButtonProps}
             {...item}
             buttonStyles={{
               maxWidth: maxWidth,
               minWidth: minWidth,
-              boxShadow: ShadowsType.box2,
-              ...buttonProps?.buttonStyles,
+              boxShadow: ShadowsType.box5,
+              ...commonButtonProps?.buttonStyles,
               ...item.buttonStyles,
             }}
             fontSize={
-              buttonProps?.fontSize || item.fontSize || ButtonFontSizes.small
+              commonButtonProps?.fontSize ||
+              item.fontSize ||
+              ButtonFontSizes.small
             }
             textProps={{
               fontWeight: FontWeightEnum.semi,
@@ -45,6 +48,9 @@ const ButtonRow = ({
             iconLeft={true}
             width={"100%"}
             height={height}
+            onClick={(e) => {
+              onClick && onClick(e, { label: item.text, key: item.text });
+            }}
           />
         </>
       ))}

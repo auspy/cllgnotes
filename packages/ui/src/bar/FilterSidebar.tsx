@@ -2,8 +2,9 @@ import SearchBar from "../searchBar/SearchBar";
 import Text from "../text/Text";
 import CheckboxGrp from "../buttonGroup/CheckboxGrp";
 import { dummyFilterList } from "@cllgnotes/lib/dummyData";
+import { ManageFiltersProps } from "@cllgnotes/types";
 
-const FilterSidebar = () => {
+const FilterSidebar = ({ addFilter, removeFilter }: ManageFiltersProps) => {
   return (
     <div className="w100" style={{ maxWidth: 320 }}>
       <div>
@@ -13,7 +14,11 @@ const FilterSidebar = () => {
         </Text>
       </div>
       <div className="mt30" />
-      <CheckboxGrp data={dummyFilterList} />
+      <CheckboxGrp
+        removeFilter={removeFilter}
+        addFilter={addFilter}
+        data={dummyFilterList}
+      />
     </div>
   );
 };

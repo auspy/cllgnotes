@@ -62,7 +62,7 @@ const SearchBar = ({
             ...commonStyle,
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
-            ...(!isHeight90 && { boxShadow: ShadowsType.box2 }),
+            ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
             maxWidth: isHeight60 ? 193 : 270,
             borderRight: "none",
             backgroundColor: Colors.lGrey2,
@@ -86,7 +86,7 @@ const SearchBar = ({
           ...commonStyle,
           paddingInlineStart: "4%",
           ...(isHeight50 ? height50Style : otherCommonStyle),
-          ...(!isHeight90 && { boxShadow: ShadowsType.box2 }),
+          ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
           ...(isHeight60 && { borderRight: "none", borderRadius: 0 }),
         }}
         type="text"
@@ -101,7 +101,7 @@ const SearchBar = ({
             ...otherCommonStyle,
             paddingInline: 12,
             backgroundColor: Colors.lGrey2,
-            ...(!isHeight90 && { boxShadow: ShadowsType.box2 }),
+            ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
           }}
         >
           <Search />

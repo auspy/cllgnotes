@@ -1,5 +1,6 @@
 import "@/styles/globals.scss"; // app specific global css
 import { DeviceTypeWrapper } from "@cllgnotes/lib/hooks";
+import { ThemeProvider, muiTheme } from "ui";
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +25,9 @@ export default function RootLayout({
         ></link>
       </head>
       <body className="fcc">
-        <DeviceTypeWrapper>{children}</DeviceTypeWrapper>
+        <DeviceTypeWrapper>
+          <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>
+        </DeviceTypeWrapper>
       </body>
     </html>
   );

@@ -6,6 +6,9 @@ import {
   FavoriteRounded,
   Search,
   ViewCompactRounded,
+  CloseRounded,
+  ViewListRounded,
+  ViewComfyRounded,
 } from "@mui/icons-material";
 import {
   Avatar,
@@ -18,6 +21,7 @@ import {
   ListItem,
   FormGroup,
   FormControlLabel,
+  Stack,
 } from "@mui/material";
 
 export {
@@ -27,6 +31,9 @@ export {
   FavoriteRounded,
   Search,
   ViewCompactRounded,
+  CloseRounded,
+  ViewListRounded,
+  ViewComfyRounded,
   Avatar,
   TextField,
   ThemeProvider,
@@ -37,4 +44,5 @@ export {
   ListItem,
   FormGroup,
   FormControlLabel,
+  Stack,
 };

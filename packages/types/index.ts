@@ -17,3 +17,4 @@ export * from "./types.hero";
 export * from "./types.card";
 export * from "./types.wrapper";
 export * from "./types.filter";
+export * from "./types.toolbar";

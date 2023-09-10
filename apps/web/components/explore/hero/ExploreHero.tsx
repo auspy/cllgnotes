@@ -1,6 +1,4 @@
-"use client";
 import Header from "@/components/header/Header";
-import { useDeviceType } from "@cllgnotes/lib/hooks";
 import Colors from "@cllgnotes/types/colors";
 import Image from "next/image";
 import { SearchBar, Text } from "ui";
@@ -9,8 +7,6 @@ const ExploreHero = ({
 }: {
   heading?: string;
 }) => {
-  const deviceType = useDeviceType();
-  const isDesktop = deviceType === "desktop";
   return (
     <div
       className="w100 fcc"
@@ -21,24 +17,36 @@ const ExploreHero = ({
     >
       <Header />
       <div className="frfesb topContainer" style={{ height: "100%" }}>
-        <div className="fcfs" style={{ gap: 30, paddingBottom: 43 }}>
+        <div
+          className="fcfs w100 xl:w-auto "
+          style={{ gap: 30, paddingBottom: 43 }}
+        >
           <Text type="h1">{heading}</Text>
           <SearchBar
             options={["SRM Haryana", "Ashoke University"]}
             height={60}
           />
         </div>
-        {isDesktop && (
+        <div
+          className="w100 hidden lg:grid "
+          style={{
+            maxWidth: 629,
+            height: 229,
+          }}
+        >
           <div
-            className="rPosi"
-            style={{
-              width: 629,
-              height: 229,
-            }}
+            style={{ alignSelf: "flex-end", justifySelf: "center" }}
+            className="rPosi hidden lg:block lg:w-[483px] lg:h-4/5 xl:h-full xl:w-full "
           >
-            <Image src={"/images/explore.png"} alt="notes" fill priority />
+            <Image
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              src={"/images/explore.png"}
+              alt="notes"
+              fill
+              priority
+            />
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

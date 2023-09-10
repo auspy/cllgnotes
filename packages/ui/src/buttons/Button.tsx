@@ -32,7 +32,7 @@ const Button = ({
       height={height}
       width={width}
       buttonStyles={{
-        boxShadow: ShadowsType.box1,
+        boxShadow: ShadowsType.box3,
         ...buttonStyles,
       }}
       textProps={{ ...textProps }}
