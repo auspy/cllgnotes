@@ -27,7 +27,9 @@ export default function Page(): JSX.Element {
           textType="h1e"
         />
       </div>
-      <CardGrp id="cardContainer" data={dummyCardsData({ minWidth: 360 })} />
+      <div className="topContainer">
+        <CardGrp id="cardContainer" data={dummyCardsData({ minWidth: 360 })} />
+      </div>
       <div
         className="fcc w100"
         style={{

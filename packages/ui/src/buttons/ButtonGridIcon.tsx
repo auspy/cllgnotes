@@ -1,10 +1,10 @@
 "use client";
+import { ButtonGridProps } from "@cllgnotes/types";
 import IconButton from "../buttons/IconButton";
 import { ViewListRounded, ViewComfyRounded } from "../mui/mui";
 import { useState } from "react";
 
-const ButtonGridIcon = () => {
-  const [isGrid, setIsGrid] = useState<boolean>(false);
+const ButtonGridIcon = ({ isGrid, setIsGrid }: ButtonGridProps) => {
   const size = 18;
   return (
     <>

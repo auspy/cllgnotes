@@ -4,7 +4,12 @@ import Colors from "@cllgnotes/types/colors";
 import ButtonGridIcon from "../buttons/ButtonGridIcon";
 import { ToolbarProp$ } from "@cllgnotes/types";
 
-const ToolBar = ({ found = 1000, chipGrpProps }: ToolbarProp$) => {
+const ToolBar = ({
+  found = 1000,
+  chipGrpProps,
+  isGrid,
+  setIsGrid,
+}: ToolbarProp$) => {
   return (
     <div className="frfssb w100">
       <div className="frc">
@@ -20,7 +25,7 @@ const ToolBar = ({ found = 1000, chipGrpProps }: ToolbarProp$) => {
       </div>
       <div className="frfs" style={{ color: Colors.dark }}>
         {/* will add select dropdown here */}
-        <ButtonGridIcon />
+        <ButtonGridIcon isGrid={isGrid} setIsGrid={setIsGrid} />
       </div>
     </div>
   );

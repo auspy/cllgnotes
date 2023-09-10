@@ -18,7 +18,7 @@ const CardGrp = ({
     : `flex-wrap`;
   return (
     <>
-      <div className="topContainer w100">
+      <div className=" w100">
         {needHeading && (
           <Text type="h3" textClass="mb20" textTransform="uppercase">
             top picks

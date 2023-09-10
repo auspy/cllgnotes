@@ -68,3 +68,8 @@ export type IconButtonProps = ButtonCommonProps & {
   onBlack?: boolean;
   color?: ColorsType;
 };
+
+export type ButtonGridProps = {
+  isGrid: boolean;
+  setIsGrid: React.Dispatch<React.SetStateAction<boolean>>;
+};

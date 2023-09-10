@@ -3,10 +3,10 @@ import Suggestions from "@/components/explore/suggestions/Suggestions";
 import { dummyCardsData } from "@cllgnotes/lib/dummyData";
 import { FilterChipMap, FilterChipProps } from "@cllgnotes/types";
 import { useState } from "react";
-import { FilterSidebar, List, ToolBar } from "ui";
+import { CardGrp, FilterSidebar, List, ToolBar } from "ui";
 const BelowHeroExplore = () => {
   const [filterChips, setFilterChips] = useState<FilterChipMap>({});
-  console.log(filterChips);
+  const [showGrid, setShowGrid] = useState(true);
   const clearFilters = () => {
     setFilterChips({});
   };
@@ -34,6 +34,8 @@ const BelowHeroExplore = () => {
           <FilterSidebar removeFilter={removeAFilter} addFilter={addFilter} />
           <div className="w100 fcc" style={{ gap: 25 }}>
             <ToolBar
+              isGrid={showGrid}
+              setIsGrid={setShowGrid}
               chipGrpProps={{
                 clearFilters: clearFilters,
                 setChipData: setFilterChips,
@@ -44,7 +46,16 @@ const BelowHeroExplore = () => {
               // setChipData={setFilterChips}
               found={100}
             />
-            <List id="" data={dummyCardsData()} />
+            {!showGrid ? (
+              <CardGrp
+                needHeading={false}
+                type="grid"
+                id="nice"
+                data={dummyCardsData({ imgHeight: 240 })}
+              />
+            ) : (
+              <List id="" data={dummyCardsData()} />
+            )}
           </div>
         </div>
       </div>
