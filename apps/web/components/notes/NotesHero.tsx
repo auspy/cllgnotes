@@ -17,11 +17,12 @@ const NotesHero = () => {
   //   transition: "transform 0.4s ease",
   // };
   const isDesktop = true;
+  const notLoggedIn = false;
   return (
     <>
       <TmplHero
         leftElement={
-          <div style={{ width: "100%", maxWidth: 915 }}>
+          <div style={{ width: "100%", maxWidth: notLoggedIn ? 915 : "none" }}>
             <Text type="h2">
               Dynamic programming has a very long name that we cant even read
               properly and need some special people to do that
@@ -33,16 +34,18 @@ const NotesHero = () => {
           </div>
         }
         rightElement={
-          <BuyNowCard
-            price={146}
-            {...defaultImg}
-            style={{
-              top: 30,
-              right: 35,
-            }}
-            cardProps={dummyCardsData()[0]}
-            _id={"1"}
-          />
+          notLoggedIn && (
+            <BuyNowCard
+              price={146}
+              {...defaultImg}
+              style={{
+                top: 30,
+                right: 35,
+              }}
+              cardProps={dummyCardsData()[0]}
+              _id={"1"}
+            />
+          )
         }
       />
     </>

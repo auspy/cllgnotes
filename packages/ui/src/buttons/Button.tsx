@@ -15,6 +15,7 @@ const Button = ({
   fontSize = ButtonFontSizes.large,
   textProps,
   buttonStyles,
+  boxShadow,
   ...props
 }: ButtonProps) => {
   let fontClass: string = "";
@@ -32,7 +33,7 @@ const Button = ({
       height={height}
       width={width}
       buttonStyles={{
-        boxShadow: ShadowsType.box3,
+        boxShadow: boxShadow || ShadowsType.box3,
         ...buttonStyles,
       }}
       textProps={{ ...textProps }}

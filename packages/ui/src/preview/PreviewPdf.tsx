@@ -4,7 +4,7 @@ import Image from "next/image";
 import PurchaseToRead from "../cards/PurchaseToRead";
 
 const PreviewPdf = () => {
-  const notLoggedIn = true;
+  const notPurchased = true;
   const img = { ...defaultImg };
   return (
     <div
@@ -13,7 +13,7 @@ const PreviewPdf = () => {
         maxWidth: 955,
       }}
     >
-      <PurchaseToRead />
+      {notPurchased && <PurchaseToRead />}
       <div
         className="w100 fcc"
         style={{
@@ -23,7 +23,7 @@ const PreviewPdf = () => {
         }}
       >
         {/* gradient to hide */}
-        {notLoggedIn && (
+        {notPurchased && (
           <div
             className="w-[99.6%] h-[99.8%] aPosi b-0 l-0"
             style={{ background: GradientColors.pdf, zIndex: 1 }}

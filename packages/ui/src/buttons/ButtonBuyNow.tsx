@@ -1,4 +1,5 @@
 "use client";
+import ShadowsType from "@cllgnotes/types/shadows";
 // import PURCHASE from "@/api/graphql/mutations/purchaseCourse.graphql";
 // import { useMutation } from "@apollo/client";
 import { useState } from "react";
@@ -58,8 +59,9 @@ const ButtonBuyNow = ({
   return (
     <Button
       disabled={clicked}
+      boxShadow={ShadowsType.box5}
       text="buy now"
-      height={90}
+      height={70}
       buttonClasses={buttonClass}
       onClick={handleClick}
     />

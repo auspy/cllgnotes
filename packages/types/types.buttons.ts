@@ -1,4 +1,5 @@
 import { ColorsType } from "./colors";
+import ShadowsType from "./shadows";
 import { TextProps } from "./types.text";
 
 export enum ButtonHeights {
@@ -38,6 +39,7 @@ export type ButtonProps = ButtonCommonProps & {
   iconLeft?: boolean;
   fontSize?: ButtonFontSizesBlack | ButtonFontSizes;
   height?: ButtonHeightsBlackType | ButtonHeights | IconButtonSizesEnum;
+  boxShadow?: ShadowsType;
 };
 
 export type ButtonBlackProps = Omit<ButtonProps, "fontSize" | "height"> & {

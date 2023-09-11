@@ -3,7 +3,7 @@ import Image from "next/image";
 import { defaultImg } from "@cllgnotes/lib";
 import { BuyNowCardProps, HeadingType } from "@cllgnotes/types";
 import { ButtonBuyNow, Heading, Text } from "ui";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import ShadowsType from "@cllgnotes/types/shadows";
 import Colors from "@cllgnotes/types/colors";
 

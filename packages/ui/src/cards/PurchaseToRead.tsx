@@ -1,4 +1,5 @@
 import { ButtonFontSizes } from "@cllgnotes/types";
+import ShadowsType from "@cllgnotes/types/shadows";
 import Image from "next/image";
 import { ChevronRightRounded, Button } from "ui";
 
@@ -21,6 +22,8 @@ const PurchaseToRead = () => {
         buttonStyles={{}}
         text="purchase to read"
         fontSize={ButtonFontSizes.large}
+        height={70}
+        boxShadow={ShadowsType.box5}
         icon={
           <ChevronRightRounded
             color="inherit"
