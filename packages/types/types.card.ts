@@ -17,7 +17,14 @@ export type CardProps = Omit<CardTextBoxProps, "isAbsolute"> &
     likes?: number;
   };
 
-type CardCommonProps = {};
+export type CardStyleProps = {
+  cardClass?: string;
+  cardStyle?: React.CSSProperties;
+  cardImageClass?: string;
+  cardImageStyle?: React.CSSProperties;
+  cardTitleClass?: string;
+  cardTitleStyle?: React.CSSProperties;
+};
 
 export type CardGrpProps = {
   id: string;
@@ -27,3 +34,12 @@ export type CardGrpProps = {
   colGap?: number;
   needHeading?: boolean;
 };
+
+export type BuyNowCardProps = CardStyleProps &
+  ImgProps & {
+    _id: string;
+    price: number;
+    cardProps: CardProps;
+    discount?: number;
+    saleAlarm?: React.ReactNode;
+  };

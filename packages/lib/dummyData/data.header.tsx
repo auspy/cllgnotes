@@ -6,15 +6,15 @@ export const dummyNavData: typeNavigationItem[] = [
   },
   {
     text: "Papers",
-    href: "/",
+    href: "/notes",
   },
   {
     text: "Notes",
-    href: "/",
+    href: "/notes",
   },
   {
     text: "Presentations",
-    href: "/",
+    href: "/notes",
   },
   //   {
   //     text: "About Us",

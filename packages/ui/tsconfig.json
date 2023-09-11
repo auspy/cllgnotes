@@ -7,5 +7,11 @@
     "../../apps/web/components/**/*.ts",
     "./custom.d.ts"
   ],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "ui": ["./index"]
+    }
+  },
   "exclude": ["dist", "build", "node_modules"]
 }

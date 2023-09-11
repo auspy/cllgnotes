@@ -3,6 +3,10 @@
 @import "tailwindcss/utilities";
 @import "../../../packages/ui/styles/sharedGlobals.scss";
 
+:root {
+  --x-buynowcard: 853px;
+}
+
 body {
   background-color: var(--bg);
   color: var(--dark);
@@ -42,4 +46,10 @@ h1 {
   max-width: 1440px;
   width: 100%;
   padding-inline: 35px;
+}
+
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  border-radius: 5px;
 }

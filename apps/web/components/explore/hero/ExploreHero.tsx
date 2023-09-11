@@ -1,7 +1,6 @@
-import Header from "@/components/header/Header";
 import Colors from "@cllgnotes/types/colors";
 import Image from "next/image";
-import { SearchBar, Text } from "ui";
+import { SearchBar, Text, Header } from "ui";
 const ExploreHero = ({
   heading = "Explore documents",
 }: {

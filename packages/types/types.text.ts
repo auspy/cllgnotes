@@ -106,3 +106,11 @@ export type CardDetailsBoxProps = {
   topic: string;
   univ: string;
 };
+export type DetailTabProps = {
+  title: string;
+  value: string;
+};
+
+export type DetailTabGroupProps = {
+  data: DetailTabProps[];
+};
