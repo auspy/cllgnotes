@@ -10,6 +10,20 @@ module.exports = {
     "../../packages/types/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    extend: {
+      fontFamily: {
+        'gabriela': ['Gabriela', 'sans-serif']
+      },
+      animation: {
+        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0%)' },
+          to: { transform: 'translateX(-100%)' },
+        }
+      }
+    }
     // extend: {
     //   colors: {
     //     brandblue: colors.blue[500],

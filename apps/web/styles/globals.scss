@@ -13,6 +13,11 @@ button {
   background: none;
 }
 
+.btn-click:active{
+  margin-top: 5px;
+  margin-left: 3px;
+}
+
 // TEXT
 h1 {
   @include fontStyles(89px);
@@ -30,6 +35,11 @@ h1 {
 // PLACEHOLDER
 ::placeholder {
   font-weight: 500;
+}
+
+@font-face {
+    font-family: "Gabriela";
+    src: url(../../../packages/ui/fonts/Gabriela/Gabriela-Regular.ttf);
 }
 
 // OPTION TAG
