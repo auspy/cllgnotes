@@ -8,11 +8,11 @@ type Creator{
 type Doc {
     _id: ID!
     title: String!
-    description: String
+    desc: String
     price: Float
-    imageLink: String!
+    img: String!
     published: Boolean!
-    createdAt: String!
+    createdAt: String
     creator: Creator!
     likedBy: [String]
     rating: Float
@@ -22,35 +22,75 @@ type Doc {
     year: Int
     university: String
     topic: [String]
-    subject: String
+    subject: Subjects!
+    subjectCode: SubjectCode!
     chapters: [String]
   }
 input CreateDocInput {
     title: String!
-    description: String
+    desc: String
     price: Float
-    imageLink: String!
+    img: String!
     published: Boolean!
     course: String
     department: String
     year: Int
     university: String
-    topic: [String!]!
-    subject: String!
-    chapters: [String!]!
+    topic: [Topics!]!
+    subject: Subjects!
+    subjectCode: SubjectCode!
+    chapters: [Chapters!]!
+}
+enum Chapters{
+    Essentials of Communication
+    test
+}
+enum Subjects {
+    Maths
+    Physics
+    Chemistry
+    Biology
+    Computer
+    English
+    Hindi
+}
+enum SubjectCode {
+    _20MA0102
+    _123
+    _11
+    _22
+    _1
+    _2
+    _3
+}
+enum Topics{
+    Maths
+    Physics
+    Chemistry
+    Biology
+    Computer
+    English
+    Hindi
+    Sanskrit
+    History
+    Geography
+    Civics
+    Economics
+    BusinessStudies
 }
 input UpdateDocInput {
     title: String
-    description: String
+    desc: String
     price: Float
-    imageLink: String
+    img: String
     published: Boolean
     course: String
     department: String
     year: Int
     university: String
     topic: [String]
-    subject: String
+    subject: Subjects
+    subjectCode: SubjectCode
     chapters: [String]
 }
 union DocResData = Doc | updateRes

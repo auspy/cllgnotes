@@ -1,4 +1,4 @@
-import { resolverDocs, resolverMutDocs } from "./resolvers/resolver.courses.js";
+import { resolverDocs, resolverMutDocs } from "./resolvers/resolver.docs.js";
 import resolverAuth from "./resolvers/resolvers.auth.js";
 
 const resolvers = {

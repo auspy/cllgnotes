@@ -1,5 +1,5 @@
 import typeAuth from "./typedefs/type.auth.js";
-import typeDocs from "./typedefs/type.courses.js";
+import typeDocs from "./typedefs/type.docs.js";
 import typeMongodb from "./typedefs/type.mongodb.js";
 import typeMutation from "./typedefs/type.mutation.js";
 import typeQuery from "./typedefs/type.query.js";

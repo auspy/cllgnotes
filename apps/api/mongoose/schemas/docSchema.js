@@ -2,9 +2,9 @@ import { Schema } from "mongoose";
 
 const docSchema = new Schema({
   title: { type: String, required: true },
-  description: { type: String },
-  price: { type: Number, required: true },
-  imageLink: { type: String },
+  desc: { type: String },
+  price: { type: Number },
+  img: { type: String, required: true },
   published: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },
   creator: { type: Schema.Types.ObjectId, ref: "Admin" }, // Reference to the "Admin" model
@@ -18,6 +18,7 @@ const docSchema = new Schema({
   university: { type: String },
   topic: [{ type: String, required: true }],
   subject: { type: String, required: true },
+  subjectCode: { type: String, required: true },
   chapters: [{ type: String, required: true }], // a notes can be part of multiple units
 });
 
