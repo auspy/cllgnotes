@@ -10,6 +10,7 @@ import { FontWeightEnum } from "@cllgnotes/types/types.text";
 const ButtonBlack = ({
   fontSize = ButtonFontSizesBlack.large,
   height = ButtonHeightsBlackType.large,
+  buttonClasses,
   ...props
 }: ButtonBlackProps) => {
   return (
@@ -20,6 +21,7 @@ const ButtonBlack = ({
         color: Colors.white,
         borderRadius: 20,
       }}
+      buttonClasses={`blackBtn ${buttonClasses}`}
       fontSize={fontSize}
       textProps={{
         textTransform: "uppercase",

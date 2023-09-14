@@ -11,6 +11,7 @@ const CardGrp = ({
   rowGap = 20,
   colGap = 20,
   needHeading = true,
+  heading,
 }: CardGrpProps) => {
   const isRow = type === "row";
   const containerClasses: string = isRow
@@ -21,7 +22,7 @@ const CardGrp = ({
       <div className=" w100">
         {needHeading && (
           <Text type="h3" textClass="mb20" textTransform="uppercase">
-            top picks
+            {heading || "top picks"}
           </Text>
         )}
         <div className="frfs">

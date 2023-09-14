@@ -1,15 +1,15 @@
 "use client";
 import Image from "next/image";
 import { defaultImg } from "@cllgnotes/lib";
-import { BuyNowCardProps, HeadingType } from "@cllgnotes/types";
-import { ButtonBuyNow, Heading, Text } from "ui";
+import { BuyNowCardProps } from "@cllgnotes/types";
+import { ButtonBuyNow, Text } from "ui";
 // import { useEffect } from "react";
 import ShadowsType from "@cllgnotes/types/shadows";
 import Colors from "@cllgnotes/types/colors";
 
 const BuyNowCard = ({
-  src = defaultImg.src,
-  alt = defaultImg.alt,
+  src,
+  alt,
   price,
   discount,
   style,
@@ -61,7 +61,7 @@ const BuyNowCard = ({
           border: "1px solid #383838",
           boxShadow: ShadowsType.box4,
           borderRadius: 5,
-          padding: 7,
+          padding: 5,
           backgroundColor: Colors.bg,
           ...style,
         }}
@@ -79,7 +79,7 @@ const BuyNowCard = ({
             src={src || defaultImg.src}
             alt={alt || defaultImg.alt}
             fill
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", scale: 3 }}
           />
         </div>
         {/* BELOW IMAGE DATA */}

@@ -1,9 +1,7 @@
-import { defaultImg } from "@cllgnotes/lib";
-import { dummyCardsData } from "@cllgnotes/lib/dummyData";
+import { NotesHeroTextProps } from "@cllgnotes/types";
 import { BuyNowCard, DetailTabGroup, Text, TmplHero } from "ui";
 
-const NotesHero = () => {
-  const desc = "description of the course";
+const NotesHero = ({ title, labels, desc, img }: NotesHeroTextProps) => {
   // const deviceType = useContext(ContextDeviceType);
   // const sticky = useContext(ContextHeaderSticky);
   // const sticky = false;
@@ -17,32 +15,31 @@ const NotesHero = () => {
   //   transition: "transform 0.4s ease",
   // };
   const isDesktop = true;
-  const notLoggedIn = false;
+  const notLoggedIn = true;
+  const firstLetterUppercase = (str: string) =>
+    str.charAt(0)?.toUpperCase() + str.slice(1);
   return (
     <>
       <TmplHero
         leftElement={
           <div style={{ width: "100%", maxWidth: notLoggedIn ? 915 : "none" }}>
-            <Text type="h2">
-              Dynamic programming has a very long name that we cant even read
-              properly and need some special people to do that
-            </Text>
+            <Text type="h2">{firstLetterUppercase(title)}</Text>
             <p className="regu16 mt15 mb20" style={{ opacity: 0.8 }}>
-              {desc && desc.charAt(0)?.toUpperCase() + desc.slice(1)}
+              {firstLetterUppercase(desc)}
             </p>
-            <DetailTabGroup data={[{ title: "title", value: "value" }]} />
+            <DetailTabGroup data={labels} />
           </div>
         }
         rightElement={
           notLoggedIn && (
             <BuyNowCard
               price={146}
-              {...defaultImg}
+              {...img}
               style={{
                 top: 30,
                 right: 35,
               }}
-              cardProps={dummyCardsData()[0]}
+              cardProps={[] as any}
               _id={"1"}
             />
           )

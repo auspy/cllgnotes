@@ -5,7 +5,9 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "../../apps/web/components/**/*.ts",
-    "./custom.d.ts"
+    "./custom.d.ts",
+    "../lib/hooks/ToastWrapper.tsx",
+    "../../apps/web/components/ToastWrapper.tsx"
   ],
   "compilerOptions": {
     "paths": {

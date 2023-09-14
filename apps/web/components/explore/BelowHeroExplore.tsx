@@ -1,7 +1,15 @@
 "use client";
+import { GET_DOCS } from "@/api/graphql/gql";
 import Suggestions from "@/components/explore/suggestions/Suggestions";
-import { dummyCardsData } from "@cllgnotes/lib/dummyData";
-import { FilterChipMap, FilterChipProps } from "@cllgnotes/types";
+import { useSuspenseQuery } from "@apollo/client";
+import { modifyToCardsData } from "@cllgnotes/lib";
+import {
+  CardProps,
+  DocsQueryProps,
+  FilterChipMap,
+  FilterChipProps,
+} from "@cllgnotes/types";
+import { log, logger } from "logger";
 import { useState } from "react";
 import { CardGrp, FilterSidebar, List, ToolBar } from "ui";
 const BelowHeroExplore = () => {
@@ -23,6 +31,16 @@ const BelowHeroExplore = () => {
       return { ...prev, [chip.key]: chip.label };
     });
   };
+  // GRAPHQL QUERY
+  const { data } = useSuspenseQuery<DocsQueryProps>(GET_DOCS);
+  const docs = data?.getDocs?.data;
+  const cardsData = modifyToCardsData(docs, { imgHeight: 240 }) as CardProps[];
+  const l = cardsData.length;
+  const foundCourses = data?.getDocs?.status == "success" && Boolean(cardsData);
+  console.log("docs", docs);
+  if (!foundCourses) {
+    return <div>loading...</div>;
+  }
   return (
     <>
       <div
@@ -44,17 +62,17 @@ const BelowHeroExplore = () => {
               // clearFilters={clearFilter}
               // chipData={filterChips}
               // setChipData={setFilterChips}
-              found={100}
+              found={l > 1000 ? Math.ceil(l / 10) * 10 : l}
             />
             {!showGrid ? (
               <CardGrp
                 needHeading={false}
                 type="grid"
                 id="nice"
-                data={dummyCardsData({ imgHeight: 240 })}
+                data={cardsData}
               />
             ) : (
-              <List id="" data={dummyCardsData()} />
+              <List id="" data={cardsData!} />
             )}
           </div>
         </div>

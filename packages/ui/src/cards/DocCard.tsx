@@ -1,5 +1,6 @@
 import { CardProps } from "@cllgnotes/types";
 import Image from "next/image";
+import Link from "next/link";
 import { CardDetailsText, CardTextBox } from "ui";
 
 export const DocCard = ({
@@ -11,13 +12,15 @@ export const DocCard = ({
   minWidth,
   department,
   course,
-  semester,
+  year,
   color,
+  _id,
 }: CardProps) => {
   return (
     <>
-      <div
-        className="rPosi pl-[7px] pr-[7px] pb-[20px] pt-[7px] border border-black-500 border-solid rounded-md"
+      <Link
+        href={`/notes/${_id}`}
+        className="rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] border border-black-500 border-solid rounded-md"
         style={{ maxWidth: 400, minWidth: minWidth || 320 }}
       >
         <div className="mb15">
@@ -36,13 +39,18 @@ export const DocCard = ({
             isAbsolute={true}
             department={department}
             course={course}
-            semester={semester}
+            year={year}
             color={color}
           />
         </div>
         {/* DETAILS */}
-        <CardDetailsText subject={subject} topic={topic} univ={univ} />
-      </div>
+        <CardDetailsText
+          _id={_id}
+          subject={subject}
+          topic={topic}
+          univ={univ}
+        />
+      </Link>
     </>
   );
 };

@@ -9,15 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.3",
+    "@apollo/experimental-nextjs-app-support": "^0.4.2",
     "@cllgnotes/lib": "workspace:*",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
+    "graphql": "^16.7.1",
+    "graphql-tag": "^2.12.6",
     "logger": "workspace:*",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "recoil": "^0.7.7",
     "ui": "workspace:*"
   },
   "devDependencies": {

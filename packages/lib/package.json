@@ -16,6 +16,10 @@
     "./hooks": {
       "import": "./hooks/index.ts",
       "require": "./hooks/index.js"
+    },
+    "./helpers": {
+      "import": "./helpers/index.ts",
+      "require": "./helpers/index.js"
     }
   },
   "scripts": {},

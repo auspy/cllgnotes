@@ -14,7 +14,7 @@ type Doc {
     published: Boolean!
     createdAt: String
     creator: Creator!
-    likedBy: [String]
+    tLikes: [String]
     rating: Float
     purchaseCount: Int
     course: String

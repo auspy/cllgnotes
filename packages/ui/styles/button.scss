@@ -1,9 +1,45 @@
 // BUTTONS
+button.priBtn:hover {
+  box-shadow: 7px 7px 0px 0px #141414;
+  transform: translate(-2px, -2px);
+}
+button.priBtn.shadow-box1:hover {
+  box-shadow: 4px 4px 0px 0px #141414;
+  transform: translate(-2px, -2px);
+}
+button.priBtn.shadow-box2:hover {
+  box-shadow: 6px 6px 0px 0px #141414;
+  transform: translate(-2px, -2px);
+}
+button.priBtn.shadow-box5:hover {
+  box-shadow: 5px 5px 0px 0px #141414;
+  transform: translate(-2px, -2px);
+}
+
 .priBtn {
   border-radius: 5px;
   border: 1px solid #141414;
   background: #fff;
   box-shadow: 5px 5px 0px 0px #141414;
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
+  &:hover {
+    opacity: 1 !important;
+  }
+
+  &:active {
+    box-shadow: unset !important;
+    transform: scale(0.98) translate(3px, 3px) !important;
+  }
+}
+
+.blackBtn {
+  transition: border-radius 0.2s ease-in-out;
+  &:hover {
+    border-radius: 5px !important;
+    opacity: 1 !important;
+  }
 }
 
 .iconBtn:hover {

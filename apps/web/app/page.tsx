@@ -1,10 +1,9 @@
 import HeroHome from "@/components/home/HeroHome";
 import WhatWeSell from "@/components/home/WhatWeSell";
 import Benefits from "@/components/home/Benefits";
-import { CardGrp, MovingBanner, Header } from "ui";
+import { MovingBanner, Header } from "ui";
 import {
   dummyBenefits,
-  dummyCardsData,
   dummyTestimonials,
   dummyTrusted,
   dummyWhatWeSell,
@@ -12,6 +11,7 @@ import {
 import Testimonial from "@/components/testi/Testimonial";
 import Trusted from "@/components/home/Trusted";
 import Footer from "@/components/footer/Footer";
+import FilterDocs from "@/components/home/FilterDocs";
 
 export default function Page(): JSX.Element {
   return (
@@ -27,7 +27,7 @@ export default function Page(): JSX.Element {
         />
       </div>
       <div className="topContainer">
-        <CardGrp id="cardContainer" data={dummyCardsData({ minWidth: 360 })} />
+        <FilterDocs />
       </div>
       <div
         className="fcc w100"

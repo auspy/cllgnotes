@@ -1,6 +1,9 @@
+import { AuthWrapper } from "@/api/auth/useLogout";
+import { ApolloWrapper } from "@/api/graphql/ApolloWrapper";
 import "@/styles/globals.scss"; // app specific global css
 import { DeviceTypeWrapper } from "@cllgnotes/lib/hooks";
-import { ThemeProvider, muiTheme } from "ui";
+import { ThemeProvider, muiTheme, RecoilWrapper } from "ui";
+import ToastWrapper from "@/components/ToastWrapper";
 export default function RootLayout({
   children,
 }: {
@@ -25,9 +28,16 @@ export default function RootLayout({
         ></link>
       </head>
       <body className="fcc">
-        <DeviceTypeWrapper>
-          <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>
-        </DeviceTypeWrapper>
+        <ApolloWrapper>
+          <RecoilWrapper>
+            <DeviceTypeWrapper>
+              <AuthWrapper>
+                <ToastWrapper />
+                <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>
+              </AuthWrapper>
+            </DeviceTypeWrapper>
+          </RecoilWrapper>
+        </ApolloWrapper>
       </body>
     </html>
   );

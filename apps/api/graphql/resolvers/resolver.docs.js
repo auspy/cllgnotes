@@ -203,16 +203,16 @@ const resolverMutDocs = {
           msg: "Login with user account to purchase!",
           status: "failed",
         };
-      const { courseId, amount, payMethod } = args;
+      const { docId, amount, payMethod } = args;
       // check if course exists
-      const course = await Docs.findById(courseId);
+      const course = await Docs.findById(docId);
       // match price with amount
       if (course.price !== amount)
         return { msg: "Invalid amount", status: "failed" };
       // Add to purchased courses
       const updatePurchasedDocs = await User.updateOne(
         { _id: user._id },
-        { $addToSet: { purchasedDocs: courseId } }
+        { $addToSet: { purchasedDocs: docId } }
       );
       if (
         updatePurchasedDocs.acknowledged == true &&

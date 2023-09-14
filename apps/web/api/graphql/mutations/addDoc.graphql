@@ -1,0 +1,19 @@
+mutation ($input:CreateDocInput!){
+    addDoc(input:$input){
+        status
+        msg
+        err
+        data{
+            ...on updateRes{
+                acknowledged
+                matchedCount
+                modifiedCount
+            }
+            ...on Doc{
+                title
+                _id
+                img
+            }
+        }
+    }
+}

@@ -1,11 +1,8 @@
-import { defaultImg } from "@cllgnotes/lib";
-import { Borders, GradientColors } from "@cllgnotes/types";
+import { Borders, GradientColors, PreviewPdf } from "@cllgnotes/types";
 import Image from "next/image";
 import PurchaseToRead from "../cards/PurchaseToRead";
 
-const PreviewPdf = () => {
-  const notPurchased = true;
-  const img = { ...defaultImg };
+const PreviewPdf = ({ notPurchased = true, img }: PreviewPdf) => {
   return (
     <div
       className="w100 rPosi grid"
@@ -30,7 +27,10 @@ const PreviewPdf = () => {
           ></div>
         )}
 
-        <Image style={{ padding: 2, borderRadius: 5 }} {...img} />
+        <Image
+          style={{ padding: 2, borderRadius: 5, objectFit: "cover" }}
+          {...img}
+        />
       </div>
     </div>
   );

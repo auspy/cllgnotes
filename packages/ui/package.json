@@ -26,10 +26,11 @@
     "@cllgnotes/lib": "workspace:*",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.8",
-    "@mui/icons-material": "^5.14.8"
+    "@mui/icons-material": "^5.14.8",
+    "@mui/material": "^5.14.8"
   },
   "dependencies": {
-    "next": "^13.4.19"
+    "next": "^13.4.19",
+    "recoil": "^0.7.7"
   }
 }

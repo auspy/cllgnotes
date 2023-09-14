@@ -10,7 +10,7 @@ const docSchema = new Schema({
   creator: { type: Schema.Types.ObjectId, ref: "Admin" }, // Reference to the "Admin" model
   rating: { type: Number }, // Floating-point number for rating
   purchaseCount: { type: Number }, // Integer for purchase count
-  likedBy: { type: Number }, // Integer for like count
+  tLikes: { type: Number }, // Integer for like count
   // university and course details
   course: { type: String },
   department: { type: String },

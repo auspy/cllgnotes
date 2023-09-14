@@ -37,7 +37,7 @@ const ButtonBuyNow = ({
     // // MAKE THE PURCHASE
     // purchase({
     //   variables: {
-    //     courseId: _id,
+    //     docId: _id,
     //     amt: amount,
     //     method: "UPI",
     //   },

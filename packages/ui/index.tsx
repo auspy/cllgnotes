@@ -31,3 +31,6 @@ export { default as DetailTab } from "./src/text/DetailTab";
 export { default as ButtonBuyNow } from "./src/buttons/ButtonBuyNow";
 export { default as BuyNowCard } from "./src/cards/BuyNowCard";
 export { default as PreviewPdf } from "./src/preview/PreviewPdf";
+export { default as LinkButton } from "./src/buttons/LinkButton";
+// WRAPPERS
+export { default as RecoilWrapper } from "./src/wrappers/RecoilWrapper";

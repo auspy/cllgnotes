@@ -83,11 +83,11 @@ export type TextProps = {
   color?: ColorsType;
 } & (
   | {
-      children: string;
+      children: React.ReactNode;
       text?: undefined;
     }
   | {
-      children?: string;
+      children?: React.ReactNode;
       text: string;
     }
 );
@@ -96,7 +96,8 @@ export type CardTextBoxProps = {
   department: string;
   padding?: string;
   course: string;
-  semester: number;
+  semester?: number;
+  year: number;
   color?: ColorsType;
   isAbsolute?: boolean;
 };
@@ -104,6 +105,7 @@ export type CardTextBoxProps = {
 export type CardDetailsBoxProps = {
   subject: string;
   topic: string;
+  _id: string;
   univ: string;
 };
 export type DetailTabProps = {

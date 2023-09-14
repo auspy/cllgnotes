@@ -38,75 +38,92 @@ const SearchBar = ({
     borderBottomLeftRadius: 0,
     borderLeft: "1px dashed var(--dark)",
   };
+  const focusdStyle: React.CSSProperties = {
+    boxShadow: "unset",
+    transform: "scale(0.98) translate(3px, 3px)",
+    border: `1.5px solid ${Colors.dark}`,
+  };
   //   * STATES
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [option, setOption] = useState<string>(options?.[0] || "");
   const handleSearch = () => {
     console.log("searching");
   };
   return (
-    <div
-      className="w100 frc"
-      style={{
-        height,
-        maxWidth,
-      }}
-    >
-      {/* dropdown menu */}
-      {!isHeight50 && (
-        <select
-          onChange={(e) => setOption(e.target.value)}
-          className={`priBtn w100 semi caps`}
-          value={option}
-          style={{
-            ...commonStyle,
-            borderTopRightRadius: 0,
-            borderBottomRightRadius: 0,
-            ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
-            maxWidth: isHeight60 ? 193 : 270,
-            borderRight: "none",
-            backgroundColor: Colors.lGrey2,
-          }}
-        >
-          {options &&
-            options.map((item, index) => (
-              <option key={index} value={item} className={`text-center`}>
-                {item}
-              </option>
-            ))}
-        </select>
-      )}
-      <input
-        className={`priBtn w100 medi`}
-        onChange={(e) => {
-          setSearchText(e.target.value);
-        }}
-        value={searchText}
+    <div className="w100 frc">
+      <div
+        className="searchBar priBtn frc w100 overflow-hidden"
         style={{
-          ...commonStyle,
-          paddingInlineStart: "4%",
-          ...(isHeight50 ? height50Style : otherCommonStyle),
-          ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
-          ...(isHeight60 && { borderRight: "none", borderRadius: 0 }),
+          height,
+          maxWidth,
+          ...(isFocused
+            ? focusdStyle
+            : !isHeight90 && { boxShadow: ShadowsType.box5 }),
         }}
-        type="text"
-        placeholder={placeholder || "Search for notes, papers, etc."}
-      ></input>
-      {!isHeight90 && (
-        <button
-          onClick={handleSearch}
-          className="priBtn"
+      >
+        {/* dropdown menu */}
+        {!isHeight50 && (
+          <select
+            onChange={(e) => setOption(e.target.value)}
+            className={` w100 semi caps`}
+            value={option}
+            style={{
+              ...commonStyle,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+
+              maxWidth: isHeight60 ? 193 : 270,
+              borderRight: "none",
+              backgroundColor: Colors.lGrey2,
+            }}
+          >
+            {options &&
+              options.map((item, index) => (
+                <option key={index} value={item} className={`text-center`}>
+                  {item}
+                </option>
+              ))}
+          </select>
+        )}
+        <input
+          className={`w100 medi`}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+          onFocus={() => {
+            setIsFocused(true);
+          }}
+          onBlur={() => {
+            setIsFocused(false);
+          }}
+          value={searchText}
           style={{
             ...commonStyle,
-            ...otherCommonStyle,
-            paddingInline: 12,
-            backgroundColor: Colors.lGrey2,
+            paddingInlineStart: "4%",
+            ...(isHeight50 ? height50Style : otherCommonStyle),
             ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
+            ...(isHeight60 && { borderRight: "none", borderRadius: 0 }),
           }}
-        >
-          <Search />
-        </button>
-      )}
+          type="text"
+          placeholder={placeholder || "Search for notes, papers, etc."}
+        ></input>
+        {!isHeight90 && (
+          <button
+            onClick={handleSearch}
+            className=""
+            style={{
+              ...commonStyle,
+              ...otherCommonStyle,
+              paddingInline: 12,
+              backgroundColor: Colors.lGrey2,
+              ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
+            }}
+          >
+            <Search />
+          </button>
+        )}
+      </div>
       {exploreBtn && (
         <Button
           buttonStyles={{ maxWidth: 289, marginLeft: 25 }}

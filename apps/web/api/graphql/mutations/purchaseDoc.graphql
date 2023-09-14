@@ -1,0 +1,14 @@
+mutation($docId:ID!,$method:String!,$amt:Float!) {
+    purchaseDoc(docId:$docId,amount:$amt,payMethod:$method){
+        status
+        msg
+        err
+        data{
+            ...on updateRes{
+                acknowledged
+                matchedCount
+                modifiedCount
+            }
+        }
+    }
+}

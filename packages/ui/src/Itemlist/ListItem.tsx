@@ -12,7 +12,9 @@ const ListItem = ({
   department,
   course,
   semester,
+  year,
   color,
+  _id,
   likes = 56,
 }: CardProps) => {
   const size = 120;
@@ -42,11 +44,17 @@ const ListItem = ({
             course={course}
             semester={semester}
             color={color}
+            year={year}
             padding="4px 9px"
           />
           <ButtonLike likes={likes} />
         </div>
-        <CardDetailsText subject={subject} topic={topic} univ={univ} />
+        <CardDetailsText
+          _id={_id}
+          subject={subject}
+          topic={topic}
+          univ={univ}
+        />
       </div>
     </div>
   );

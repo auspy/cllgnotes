@@ -75,3 +75,7 @@ export type ButtonGridProps = {
   isGrid: boolean;
   setIsGrid: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type LinkButtonProps = ButtonProps & {
+  href: string;
+};

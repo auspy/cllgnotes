@@ -33,6 +33,7 @@ export type CardGrpProps = {
   rowGap?: number;
   colGap?: number;
   needHeading?: boolean;
+  heading?: string;
 };
 
 export type BuyNowCardProps = CardStyleProps &

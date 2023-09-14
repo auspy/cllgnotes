@@ -1,9 +1,4 @@
-import {
-  FavoriteBorderRounded,
-  IconButton,
-  Checkbox,
-  FavoriteRounded,
-} from "../mui/mui";
+import { FavoriteBorderRounded, Checkbox, FavoriteRounded } from "../mui/mui";
 import Colors from "@cllgnotes/types/colors";
 import Text from "../text/Text";
 type ButtonLikeProps = {
