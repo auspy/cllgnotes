@@ -3,8 +3,14 @@ import Colors from "@cllgnotes/types/colors";
 type TmplHeroProps = React.PropsWithChildren & {
   leftElement?: React.ReactNode;
   rightElement?: React.ReactNode;
+  height?: number | string;
 };
-const TmplHero = ({ leftElement, rightElement, children }: TmplHeroProps) => {
+const TmplHero = ({
+  leftElement,
+  rightElement,
+  children,
+  height,
+}: TmplHeroProps) => {
   return (
     <>
       <div className="fcc w100">
@@ -12,7 +18,7 @@ const TmplHero = ({ leftElement, rightElement, children }: TmplHeroProps) => {
           className="w100 fcc"
           style={{
             backgroundColor: Colors.lGrey,
-            height: "min(700px,max(422px,50vh))",
+            height: height || "min(700px,max(422px,50vh))",
           }}
         >
           <Header />

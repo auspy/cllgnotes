@@ -27,7 +27,7 @@ a {
 }
 h1 {
   @include fontStyles(89px);
-  font-size: clamp(52px, 6.15vw, 89.5px);
+  font-size: clamp(52px, 6.14vw, 89px);
 }
 
 .h1Highlight {

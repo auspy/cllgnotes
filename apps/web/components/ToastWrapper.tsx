@@ -1,6 +1,6 @@
 "use client";
 import { muiTheme, CloseRounded } from "ui";
-import { atomToast } from "state";
+import { atomToast } from "@cllgnotes/lib";
 import {
   Alert,
   AlertColor,

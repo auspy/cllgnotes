@@ -1,6 +1,7 @@
 import { CardDetailsBoxProps, TextProps } from "@cllgnotes/types";
 import Text from "./Text";
 import Link from "next/link";
+import { pathDocId } from "@cllgnotes/lib";
 
 const CardDetailsText = ({
   subject,
@@ -18,7 +19,7 @@ const CardDetailsText = ({
       <div className="space-y-1">
         <Text {...detailsTextProps}>{subject}</Text>
         <Text type="h3">
-          <Link href={(_id && "notes/" + _id) || ""}>
+          <Link href={pathDocId(_id)}>
             {String(topic?.[0].toUpperCase() + topic?.slice(1).toLowerCase())}
           </Link>
         </Text>

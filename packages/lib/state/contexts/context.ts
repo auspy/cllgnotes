@@ -1,3 +1,4 @@
+"use client";
 import { DeviceTypeEnum } from "@cllgnotes/types";
 import { createContext } from "react";
 

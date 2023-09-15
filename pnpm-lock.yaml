@@ -108,6 +108,9 @@ importers:
       '@cllgnotes/types':
         specifier: workspace:*
         version: link:../../packages/types
+      '@mui/types':
+        specifier: ^7.2.4
+        version: 7.2.4(@types/react@18.2.14)
       '@next/eslint-plugin-next':
         specifier: ^13.4.19
         version: 13.4.19
@@ -158,6 +161,10 @@ importers:
         version: 1.10.12(eslint@8.48.0)
 
   packages/lib:
+    dependencies:
+      recoil:
+        specifier: ^0.7.7
+        version: 0.7.7(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@cllgnotes/types':
         specifier: workspace:*
@@ -1363,7 +1370,6 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.2.14
-    dev: false
 
   /@mui/types@7.2.4(@types/react@18.2.5):
     resolution: {integrity: sha512-LBcwa8rN84bKF+f5sDyku42w1NTxaPgPyYKODsh01U1fVstTClbUoSA96oyRBnSNyEiAVjKm6Gwx9vjR+xyqHA==}

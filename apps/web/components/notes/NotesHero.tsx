@@ -44,6 +44,7 @@ const NotesHero = ({ title, labels, desc, img }: NotesHeroTextProps) => {
             />
           )
         }
+        height={422}
       />
     </>
   );

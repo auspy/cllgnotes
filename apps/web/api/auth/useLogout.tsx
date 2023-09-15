@@ -2,7 +2,7 @@
 import { authLogout } from "@/api/auth/auth";
 import { useRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
-import { atomUserName, ContextAuthLogout } from "state";
+import { atomUserName, ContextAuthLogout } from "@cllgnotes/lib";
 import { useMutation } from "@apollo/client";
 import { LOGOUT } from "@/api/graphql/gql";
 import { useContext } from "react";

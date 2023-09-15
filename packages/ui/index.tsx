@@ -32,5 +32,9 @@ export { default as ButtonBuyNow } from "./src/buttons/ButtonBuyNow";
 export { default as BuyNowCard } from "./src/cards/BuyNowCard";
 export { default as PreviewPdf } from "./src/preview/PreviewPdf";
 export { default as LinkButton } from "./src/buttons/LinkButton";
+export { default as ButtonLogin } from "./src/buttons/ButtonLogin";
+export { default as UserAvatarMenu } from "./src/avatar/UserAvatarMenu";
+export { default as AccountMenu } from "./src/menu/AccountMenu";
 // WRAPPERS
 export { default as RecoilWrapper } from "./src/wrappers/RecoilWrapper";
+export { default as LinkWrapper } from "./src/wrappers/LinkWrapper";

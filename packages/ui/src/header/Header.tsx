@@ -1,5 +1,5 @@
 import Colors, { ColorsType } from "@cllgnotes/types/colors";
-import { LinkButton, Logo, Navigation } from "ui";
+import { ButtonLogin, LinkButton, Logo, Navigation } from "ui";
 const Header = ({ color }: { color?: ColorsType }) => {
   return (
     <div
@@ -10,7 +10,7 @@ const Header = ({ color }: { color?: ColorsType }) => {
       {/* navigation */}
       <Navigation />
       {/* login btn */}
-      <LinkButton text="Login" href="/auth" />
+      <ButtonLogin />
     </div>
   );
 };

@@ -20,10 +20,17 @@
     "./helpers": {
       "import": "./helpers/index.ts",
       "require": "./helpers/index.js"
+    },
+    "./state": {
+      "import": "./state/index.ts",
+      "require": "./state/index.js"
     }
   },
   "scripts": {},
   "devDependencies": {
     "@cllgnotes/types": "workspace:*"
+  },
+  "dependencies": {
+    "recoil": "^0.7.7"
   }
 }

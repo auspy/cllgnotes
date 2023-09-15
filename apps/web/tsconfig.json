@@ -4,8 +4,7 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"],
-      "@public/*": ["./public/*"],
-      "state": ["./state/index"]
+      "@public/*": ["./public/*"]
     }
   },
   "include": [
