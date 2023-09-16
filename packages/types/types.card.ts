@@ -15,6 +15,7 @@ export type CardProps = Omit<CardTextBoxProps, "isAbsolute"> &
     imgHeight?: 240 | 268;
     minWidth?: number;
     likes?: number;
+    href?: string;
   };
 
 export type CardStyleProps = {

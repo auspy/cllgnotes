@@ -7,6 +7,7 @@ const CardTextBox = ({
   course,
   semester,
   color,
+  year,
   isAbsolute,
   padding,
 }: CardTextBoxProps) => {
@@ -35,7 +36,7 @@ const CardTextBox = ({
         <Text {...barTextProps}>{"•"}</Text>
         <Text {...barTextProps}>{course}</Text>
         <Text {...barTextProps}>{"•"}</Text>
-        <Text {...barTextProps}>{String(semester)}</Text>
+        <Text {...barTextProps}>{String(year || semester)}</Text>
       </div>
     </div>
   );

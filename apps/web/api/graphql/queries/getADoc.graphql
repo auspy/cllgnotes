@@ -13,6 +13,8 @@ query($id:ID!) {
                 department
                 university
                 title
+                topic
+                chapters
                 creator{
                     _id
                     username

@@ -8,6 +8,7 @@ const CardDetailsText = ({
   topic,
   univ,
   _id,
+  href,
 }: CardDetailsBoxProps) => {
   const detailsTextProps: Partial<TextProps> = {
     textStyle: { height: 16 },
@@ -19,7 +20,7 @@ const CardDetailsText = ({
       <div className="space-y-1">
         <Text {...detailsTextProps}>{subject}</Text>
         <Text type="h3">
-          <Link href={pathDocId(_id)}>
+          <Link href={pathDocId(_id, href)}>
             {String(topic?.[0].toUpperCase() + topic?.slice(1).toLowerCase())}
           </Link>
         </Text>

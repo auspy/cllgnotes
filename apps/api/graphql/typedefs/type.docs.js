@@ -22,8 +22,10 @@ type Doc {
     year: Int
     university: String
     topic: [String]
-    subject: Subjects!
-    subjectCode: SubjectCode!
+   # subject: Subjects!
+    subject: String!
+   # subjectCode: SubjectCode!
+    subjectCode: String!
     chapters: [String]
   }
 input CreateDocInput {
@@ -36,10 +38,10 @@ input CreateDocInput {
     department: String
     year: Int
     university: String
-    topic: [Topics!]!
-    subject: Subjects!
-    subjectCode: SubjectCode!
-    chapters: [Chapters!]!
+    topic: [String!]!
+    subject: String!
+    subjectCode: String!
+    chapters: [String!]!
 }
 enum Chapters{
     Essentials of Communication
@@ -89,8 +91,8 @@ input UpdateDocInput {
     year: Int
     university: String
     topic: [String]
-    subject: Subjects
-    subjectCode: SubjectCode
+    subject: String
+    subjectCode: String
     chapters: [String]
 }
 union DocResData = Doc | updateRes

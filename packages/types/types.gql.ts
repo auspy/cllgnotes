@@ -10,6 +10,7 @@ export type DocProps = {
   rating?: string;
   purchaseCount?: string;
   tLikes?: string[];
+  // university related
   course?: string;
   department?: string;
   year?: number;
@@ -35,3 +36,6 @@ export type DocsQueryProps = {
   getCreatedDocs?: ResData;
   getDoc?: ResData;
 };
+
+export type CreateDocs = Omit<DocProps, "rating" | "purchaseCount" | "tLikes">;
+export type UpdateDocs = Partial<CreateDocs>;

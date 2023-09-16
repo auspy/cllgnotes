@@ -107,6 +107,7 @@ export type CardDetailsBoxProps = {
   topic: string;
   _id: string;
   univ: string;
+  href?: string;
 };
 export type DetailTabProps = {
   title: string;

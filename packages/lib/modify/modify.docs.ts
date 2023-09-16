@@ -30,3 +30,20 @@ export const modifyToCardsData = (
   }
   return arr;
 };
+
+export const modifyCoursesData = (
+  docs: DocProps[],
+  href: string | false = false
+) => {
+  return docs.map((doc) => ({
+    doc: {
+      ...doc,
+      img: {
+        src: doc.img,
+        alt: doc.title,
+        fill: true,
+      },
+    },
+    href,
+  }));
+};

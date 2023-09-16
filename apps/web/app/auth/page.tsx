@@ -31,10 +31,13 @@ import Image from "next/image";
 import { BannerFontSizeEnum } from "@cllgnotes/types";
 
 export default function Login() {
+  console.log("Login");
   const params = useSearchParams().get("t");
+  const roleType =
+    useSearchParams().get("role") == "creator" ? "ADMIN" : "USER";
   const [isLoginPage, setIsLogin] = useState<boolean>(params != "r");
   const [_, setUserState] = useRecoilState(atomUserName);
-  const [role, setRole] = useState<"USER" | "ADMIN">("USER");
+  const [role, setRole] = useState<"USER" | "ADMIN">(roleType);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -144,7 +147,7 @@ export default function Login() {
           );
           // set token
           const token = data?.login?.token;
-          localStorage.setItem("authToken", data?.login?.token);
+          // localStorage.setItem("authToken", data?.login?.token);
           if (!token) {
             setToast({
               text: "Login failed. Try again!",

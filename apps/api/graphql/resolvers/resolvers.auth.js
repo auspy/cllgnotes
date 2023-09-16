@@ -35,22 +35,34 @@ const resolverAuth = {
     const env = process.env.NODE_ENV;
     const isDev = env === "development";
     const cookieOptions = {
-      httpOnly: true,
-      domain: isDev ? "localhost" : "",
+      httpOnly: true, // HttpOnly: if true, the cookie cannot be accessed from within the client-side javascript code.
+      // domain: isDev ? "localhost" : "",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
-      sameSite: "None",
+      sameSite: "Lax",
     };
     if (!isDev) {
       cookieOptions.secure = true;
     }
-    context.res.cookie("authToken", token, cookieOptions);
-    console.log("Login success");
-    return {
-      msg: "login success",
-      token,
-      status: "success",
-      data: user,
-    };
+    try {
+      context.res.cookie("authToken", token, cookieOptions);
+      console.log("Login success", cookieOptions);
+      return {
+        msg: "login success",
+        token,
+        status: "success",
+        data: user,
+      };
+    } catch (error) {
+      console.log("Error setting cookie", error);
+      context.res.status(500).send("Error setting cookie");
+      return {
+        msg: "login failed",
+        token,
+        error,
+        status: "failed",
+        data: user,
+      };
+    }
   },
   register: async (parent, args) => {
     let type = User;

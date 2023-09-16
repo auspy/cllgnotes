@@ -34,6 +34,7 @@ export type ButtonProps = ButtonCommonProps & {
   disabled?: boolean;
   width?: number | "100%" | "inherit";
   padding?: number | string;
+  loading?: boolean;
   icon?: React.ReactNode;
   iconGap?: number;
   iconLeft?: boolean;
@@ -78,4 +79,9 @@ export type ButtonGridProps = {
 
 export type LinkButtonProps = ButtonProps & {
   href: string;
+};
+
+export type ButtonDrawerToggle = Partial<IconButtonProps> & {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

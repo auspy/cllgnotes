@@ -1,1 +1,2 @@
-export const pathDocId = (_id?: string) => (_id ? "notes/" + _id : "");
+export const pathDocId = (_id?: string, base: string = "notes") =>
+  _id ? `${base}/` + _id : "";

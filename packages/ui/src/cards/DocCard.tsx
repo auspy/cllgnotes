@@ -15,10 +15,11 @@ export const DocCard = ({
   year,
   color,
   _id,
+  href, // will be used as base. endpoint will remain same
 }: CardProps) => {
   return (
     <>
-      <LinkWrapper href={pathDocId(_id)}>
+      <LinkWrapper href={pathDocId(_id, href)}>
         <div
           className="rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] border border-black-500 border-solid rounded-md"
           style={{ maxWidth: 400, minWidth: minWidth || 320 }}
@@ -49,6 +50,7 @@ export const DocCard = ({
             subject={subject}
             topic={topic}
             univ={univ}
+            href={href}
           />
         </div>
       </LinkWrapper>

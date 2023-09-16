@@ -5,3 +5,5 @@ export * from "./data.benefits";
 export * from "./data.testi";
 export * from "./data.trusted";
 export * from "./data.cards";
+export * from "./data.menu";
+export * from "./data.createDocForm";

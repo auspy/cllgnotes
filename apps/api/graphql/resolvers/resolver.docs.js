@@ -70,6 +70,7 @@ const resolverDocs = {
   },
   getCreatedDocs: async (_, __, context) => {
     try {
+      console.log("in get created courses");
       const { user } = context;
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
       // console.log("getting courses for user", user._id);
@@ -146,6 +147,7 @@ const resolverMutDocs = {
     try {
       // CHECKING USER
       const { user } = context;
+      console.log("in update course");
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
       // DATA RECEIVED
       const input = args.input;

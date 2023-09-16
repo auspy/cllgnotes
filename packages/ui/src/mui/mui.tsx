@@ -9,6 +9,9 @@ import {
   CloseRounded,
   ViewListRounded,
   ViewComfyRounded,
+  ArrowLeftRounded,
+  ArrowRightRounded,
+  SchoolRounded,
 } from "@mui/icons-material";
 import {
   Avatar,
@@ -22,6 +25,8 @@ import {
   FormGroup,
   FormControlLabel,
   Stack,
+  BottomNavigation,
+  BottomNavigationAction,
 } from "@mui/material";
 
 export {
@@ -34,6 +39,9 @@ export {
   CloseRounded,
   ViewListRounded,
   ViewComfyRounded,
+  ArrowLeftRounded,
+  ArrowRightRounded,
+  SchoolRounded,
   Avatar,
   TextField,
   ThemeProvider,
@@ -45,4 +53,6 @@ export {
   FormGroup,
   FormControlLabel,
   Stack,
+  BottomNavigation,
+  BottomNavigationAction,
 };
