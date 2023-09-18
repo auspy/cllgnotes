@@ -1,8 +1,10 @@
-import { Borders, CardProps } from "@cllgnotes/types";
+import { Borders, CardProps, DeviceTypeEnum } from "@cllgnotes/types";
 import CardDetailsText from "../text/CardDetailsText";
 import CardTextBox from "../text/CardTextBox";
 import Image from "next/image";
 import ButtonLike from "../buttons/ButtonLike";
+import { memo } from "react";
+import { ShowInDevice } from "@cllgnotes/lib";
 
 const ListItem = ({
   img,
@@ -17,27 +19,28 @@ const ListItem = ({
   _id,
   likes = 56,
 }: CardProps) => {
-  const size = 120;
+  const like = <ButtonLike likes={likes} />;
   return (
     <div
-      className="frc w100"
+      className="frfs w100 pb-[10px] sm:pb-[15px]"
       style={{
         borderBottom: Borders.darkDash,
-        paddingBottom: 15,
       }}
     >
-      <div
-        className="rPosi mr20 fs0"
-        style={{
-          width: size,
-          height: size,
-          borderRadius: 5,
-          overflow: "hidden",
-        }}
-      >
-        <Image {...img} />
+      <div>
+        <div
+          className={`rPosi mr20 w-[80px] h-[80px] sm:h-[120px] sm:w-[120px]`}
+          style={{
+            borderRadius: 5,
+            overflow: "hidden",
+          }}
+        >
+          <Image {...img} />
+        </div>
+        <ShowInDevice devices={[DeviceTypeEnum.mobile]}>{like}</ShowInDevice>
       </div>
-      <div className="w100">
+
+      <div className="w100 flex flex-col gap-2 sm:gap-0">
         <div className="frfssb w100">
           <CardTextBox
             department={department}
@@ -47,7 +50,11 @@ const ListItem = ({
             year={year}
             padding="4px 9px"
           />
-          <ButtonLike likes={likes} />
+          <ShowInDevice
+            devices={[DeviceTypeEnum.tablet, DeviceTypeEnum.desktop]}
+          >
+            {like}
+          </ShowInDevice>
         </div>
         <CardDetailsText
           _id={_id}
@@ -60,4 +67,4 @@ const ListItem = ({
   );
 };
 
-export default ListItem;
+export default memo(ListItem);

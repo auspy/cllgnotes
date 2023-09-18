@@ -1,16 +1,26 @@
 import Colors, { ColorsType } from "@cllgnotes/types/colors";
-import { ButtonLogin, LinkButton, Logo, Navigation } from "ui";
+import { ButtonLogin, Logo, Navigation, RightDrawer } from "ui";
+import { ShowInDevice } from "@cllgnotes/lib";
+import { DeviceTypeEnum } from "@cllgnotes/types";
 const Header = ({ color }: { color?: ColorsType }) => {
   return (
     <div
-      className="frcsb topContainer py-[20px]"
+      id="header"
+      className="frcsb topContainer py-[20px] rPosi"
       style={{ backgroundColor: (color && Colors[color]) || "transparent" }}
     >
       <Logo />
       {/* navigation */}
-      <Navigation />
+      {/* <div className="hideInMobile"> */}
+      <ShowInDevice devices={[DeviceTypeEnum.desktop]}>
+        <Navigation />
+      </ShowInDevice>
+      {/* </div> */}
       {/* login btn */}
-      <ButtonLogin />
+      <div className="frc gap-x-3">
+        <RightDrawer />
+        <ButtonLogin />
+      </div>
     </div>
   );
 };

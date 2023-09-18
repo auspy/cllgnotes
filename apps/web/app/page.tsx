@@ -21,13 +21,13 @@ export default function Page(): JSX.Element {
       <div className="my-[60px] w100">
         <MovingBanner
           text={
-            "notes 📖  question papers  📝  presentations  📖  notes 📖  question papers  📝  presentations "
+            "notes 📖  question papers  📝  presentations  📖  notes 📖  question papers  📝  presentations 📖  notes 📖  question papers  📝  presentations "
           }
           textType="h1e"
         />
       </div>
       <div className="topContainer">
-        <FilterDocs />
+        <FilterDocs minWidth={305} />
       </div>
       <div
         className="fcc w100"
@@ -37,13 +37,13 @@ export default function Page(): JSX.Element {
         }}
       >
         <WhatWeSell data={dummyWhatWeSell} />
-        <div className="my-[30px] w100 fcc">
+        <div className="mb-[30px] w100 fcc">
           <Benefits data={dummyBenefits} />
         </div>
         <Testimonial data={dummyTestimonials} />
       </div>
       <div className="my-[80px]">
-        <Trusted data={dummyTrusted} />
+        <Trusted data={dummyTrusted(80)} />
       </div>
       <Footer earnMoney={true} />
     </>

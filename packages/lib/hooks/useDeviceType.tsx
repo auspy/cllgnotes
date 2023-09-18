@@ -12,9 +12,9 @@ export const DeviceTypeWrapper = ({ children }: React.PropsWithChildren) => {
   );
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 620) {
+      if (window.innerWidth < 640) {
         setDeviceType(DeviceTypeEnum.mobile);
-      } else if (window.innerWidth < 992) {
+      } else if (window.innerWidth < 1024) {
         setDeviceType(DeviceTypeEnum.tablet);
       } else {
         setDeviceType(DeviceTypeEnum.desktop);
@@ -35,9 +35,41 @@ export const DeviceTypeWrapper = ({ children }: React.PropsWithChildren) => {
   );
 };
 
-const useDeviceType = () => {
+export const ShowInDevice = ({
+  children,
+  devices,
+}: {
+  children: React.ReactNode;
+  devices: DeviceTypeEnum[];
+}) => {
+  const currentDevice = useDeviceType();
+  return devices.includes(currentDevice) ? <>{children}</> : null;
+};
+
+type DeviceTypeSpread = {
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+};
+
+type useDeviceTypeReturn<S extends boolean> = S extends true
+  ? DeviceTypeSpread
+  : DeviceTypeEnum;
+
+const useDeviceType = <S extends boolean = false>(
+  spread: S = false as S
+): useDeviceTypeReturn<S> => {
   const device = useContext(ContextDeviceType);
-  return device;
+
+  if (spread) {
+    return {
+      isMobile: device === DeviceTypeEnum.mobile,
+      isTablet: device === DeviceTypeEnum.tablet,
+      isDesktop: device === DeviceTypeEnum.desktop,
+    } as useDeviceTypeReturn<S>;
+  }
+
+  return device as useDeviceTypeReturn<S>;
 };
 
 export default useDeviceType;

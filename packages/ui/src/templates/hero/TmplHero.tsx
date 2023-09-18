@@ -24,7 +24,7 @@ const TmplHero = ({
           <Header />
           <div className="frfesb topContainer rPosi" style={{ height: "100%" }}>
             <div
-              className="fcfs w100 xl:w-auto rPosi"
+              className="fcfs w-0 lg:w-full xl:w-auto rPosi "
               style={{ gap: 30, paddingBottom: 43 }}
             >
               {leftElement}
@@ -33,7 +33,7 @@ const TmplHero = ({
           </div>
         </div>
         <MovingBanner
-          text="notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers"
+          text="notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers"
           textType="h3e"
         />
         {children}

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
 import Button from "../buttons/Button";
 import ShadowsType from "@cllgnotes/types/shadows";
+import { useDeviceType } from "@cllgnotes/lib";
 
 // search bar style for every search bar and works based on height
 // todo add a query parameter that allows us to add query and run by button click. other option is to add send data to usestate of parent component and run query there
@@ -16,6 +17,13 @@ const SearchBar = ({
   exploreBtn = false,
   placeholder,
 }: SearchBarProps) => {
+  const device = useDeviceType();
+  const needSearchButton = height !== 90;
+  const isMobile = device === "mobile";
+  const isDesktop = device === "desktop";
+  // if (height == 90 && isMobile) {
+  //   height = 60;
+  // }
   // * STYLES
   let fontSize = 22;
   const isHeight50 = height === 50;
@@ -51,12 +59,13 @@ const SearchBar = ({
     console.log("searching");
   };
   return (
-    <div className="w100 frc">
+    <div className="w100 frc flex-col md:flex-row gap-x-[25px] gap-y-4">
       <div
         className="searchBar priBtn frc w100 overflow-hidden"
         style={{
           height,
           maxWidth,
+          // minWidth: 490,
           ...(isFocused
             ? focusdStyle
             : !isHeight90 && { boxShadow: ShadowsType.box5 }),
@@ -72,7 +81,7 @@ const SearchBar = ({
               ...commonStyle,
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
-
+              flex: 1,
               maxWidth: isHeight60 ? 193 : 270,
               borderRight: "none",
               backgroundColor: Colors.lGrey2,
@@ -99,6 +108,7 @@ const SearchBar = ({
           }}
           value={searchText}
           style={{
+            flex: 3,
             ...commonStyle,
             paddingInlineStart: "4%",
             ...(isHeight50 ? height50Style : otherCommonStyle),
@@ -108,7 +118,7 @@ const SearchBar = ({
           type="text"
           placeholder={placeholder || "Search for notes, papers, etc."}
         ></input>
-        {!isHeight90 && (
+        {needSearchButton && (
           <button
             onClick={handleSearch}
             className=""
@@ -126,8 +136,9 @@ const SearchBar = ({
       </div>
       {exploreBtn && (
         <Button
-          buttonStyles={{ maxWidth: 289, marginLeft: 25 }}
+          buttonStyles={{ maxWidth: !isDesktop ? "unset" : 289 }}
           text="Explore Docs"
+          height={height == 50 ? 60 : height}
           fontSize={ButtonFontSizes.large}
           icon={
             <ChevronRightRounded

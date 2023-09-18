@@ -1,8 +1,9 @@
 import { Heading, Text } from "ui";
 import { HeadingType } from "@cllgnotes/types/types.text";
-import { HomeHeroTextProps } from "@cllgnotes/types";
-import Image from "next/image";
+import { DeviceTypeEnum, HomeHeroTextProps, ImgProps } from "@cllgnotes/types";
 import Colors from "@cllgnotes/types/colors";
+import HeroImg from "./HeroImg";
+import { ShowInDevice } from "@cllgnotes/lib";
 
 const HeroText = ({
   desc,
@@ -14,32 +15,30 @@ const HeroText = ({
   descMaxWidth,
   color,
 }: HomeHeroTextProps) => {
+  const img = (
+    devices: DeviceTypeEnum[] = [DeviceTypeEnum.desktop],
+    styles?: React.CSSProperties
+  ) => (
+    <ShowInDevice devices={[...devices]}>
+      <HeroImg
+        width={width}
+        height={height}
+        img={restImg as ImgProps}
+        imgStyles={{ ...styles, ...imgStyles }}
+      />
+    </ShowInDevice>
+  );
   return (
     <>
-      <div
-        id="homeHeroImg"
-        className="w100 fcc"
-        style={{
-          maxHeight: height || 470,
-          maxWidth: width || 734,
-          height: "inherit",
-          position: "absolute",
-          right: 0,
-          bottom: "32%",
-          ...imgStyles,
-        }}
-      >
-        <Image {...restImg} fill priority />
-      </div>
-      <div className="w100" style={{ alignSelf: "flex-end" }}>
+      {img()}
+      <div className="w100 flex flex-wrap flex-col-reverse self-start pt-[40px] lg:pt-0 lg:flex-row gap-6  lg:self-end">
         <Text
           text={desc}
-          textStyle={{ maxWidth: descMaxWidth || 669 }}
+          textClass={`max-w-[100%] lg:max-w-[50%]`}
           type="medi22"
         />
         <Heading
           type={HeadingType.h1}
-          headingClass="my-[20px]"
           text={text}
           highlightText={highlightText}
           highlightTextStyle={{
@@ -47,9 +46,17 @@ const HeroText = ({
             WebkitTextFillColor: Colors[color || "blue"],
           }}
         />
-        <div className="frcsb w100" style={{ columnGap: 25 }}>
+        <div
+          className="frcsb w100 -order-1 lg:order-last"
+          style={{ columnGap: 25 }}
+        >
           {element}
         </div>
+        {img([DeviceTypeEnum.mobile, DeviceTypeEnum.tablet], {
+          position: "relative",
+          bottom: 0,
+          order: -2,
+        })}
       </div>
     </>
   );

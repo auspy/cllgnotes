@@ -12,6 +12,8 @@ import {
   ArrowLeftRounded,
   ArrowRightRounded,
   SchoolRounded,
+  MenuRounded,
+  FilterAltRounded,
 } from "@mui/icons-material";
 import {
   Avatar,
@@ -27,6 +29,12 @@ import {
   Stack,
   BottomNavigation,
   BottomNavigationAction,
+  Drawer,
+  Fab,
+  Box,
+  styled,
+  Skeleton,
+  SwipeableDrawer,
 } from "@mui/material";
 
 export {
@@ -42,6 +50,8 @@ export {
   ArrowLeftRounded,
   ArrowRightRounded,
   SchoolRounded,
+  MenuRounded,
+  FilterAltRounded,
   Avatar,
   TextField,
   ThemeProvider,
@@ -55,4 +65,10 @@ export {
   Stack,
   BottomNavigation,
   BottomNavigationAction,
+  Drawer,
+  Fab,
+  Box,
+  styled,
+  Skeleton,
+  SwipeableDrawer,
 };

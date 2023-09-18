@@ -1,24 +1,25 @@
 import Colors from "@cllgnotes/types/colors";
 import HeroText from "../home/HeroText";
-import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
-import { Button, TextField } from "ui";
+import EarnMoneyForm from "./EarnMoneyForm";
 
 const EarnMoneyFooter = ({
   containerStyle,
+  containerClass,
 }: {
   containerStyle?: React.CSSProperties;
+  containerClass?: string;
 }) => {
-  const loggedIn = false;
   return (
-    <div className="topContainer" style={{ ...containerStyle }}>
+    <div
+      className={`topContainer ${containerClass}`}
+      style={{ ...containerStyle }}
+    >
       <div
-        className="rPosi"
+        className="rPosi h-auto lg:h-[660px] p-5 sm:p-7"
         style={{
-          height: 660,
           display: "flex",
           backgroundColor: Colors.lGrey2,
           borderRadius: 20,
-          padding: 30,
         }}
       >
         <HeroText
@@ -30,42 +31,14 @@ const EarnMoneyFooter = ({
             </>
           }
           highlightText="earn money?"
-          element={
-            <>
-              <TextField
-                className={`priBtn ${textClasses["h3"]} upper`}
-                label="Email"
-                sx={{
-                  "& .MuiFormLabel-root": {
-                    top: 12,
-                    left: 10,
-                    "&.Mui-focused": {
-                      top: -2,
-                      left: 2,
-                    },
-                  },
-                }}
-                style={{
-                  border: "unset",
-                  width: "100%",
-                }}
-                variant="outlined"
-              />
-              <Button
-                width={"100%"}
-                buttonStyles={{ maxWidth: loggedIn ? "none" : 289 }}
-                text="vote for note 😉"
-                fontSize={ButtonFontSizes.large}
-              />
-            </>
-          }
+          element={<EarnMoneyForm />}
           img={{
             src: "/images/earn.png",
             alt: "earn money",
             height: 361,
             width: 579,
           }}
-          imgStyles={{ bottom: "unset", top: 55, right: 30 }}
+          // imgStyles={{ bottom: "unset", top: 55, right: 30 }}
           descMaxWidth={441}
           color="green"
         />

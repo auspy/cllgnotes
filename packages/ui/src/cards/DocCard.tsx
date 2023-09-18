@@ -1,5 +1,5 @@
 import { pathDocId } from "@cllgnotes/lib";
-import { CardProps } from "@cllgnotes/types";
+import { Borders, CardProps } from "@cllgnotes/types";
 import Image from "next/image";
 import { CardDetailsText, CardTextBox, LinkWrapper } from "ui";
 
@@ -21,10 +21,10 @@ export const DocCard = ({
     <>
       <LinkWrapper href={pathDocId(_id, href)}>
         <div
-          className="rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] border border-black-500 border-solid rounded-md"
-          style={{ maxWidth: 400, minWidth: minWidth || 320 }}
+          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md max-w-[620px] sm:max-w-[400px] "
+          style={{ minWidth: minWidth || 320, border: Borders.dark }}
         >
-          <div className="mb15">
+          <div className="">
             {/* IMAGE */}
             <div
               className="relative rounded-ss-[5px] rounded-se-[5px]"
@@ -45,6 +45,7 @@ export const DocCard = ({
             />
           </div>
           {/* DETAILS */}
+          <div className="mt-[25px]"></div>
           <CardDetailsText
             _id={_id}
             subject={subject}

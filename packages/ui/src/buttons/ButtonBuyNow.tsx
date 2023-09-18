@@ -62,7 +62,7 @@ const ButtonBuyNow = ({
       boxShadow={ShadowsType.box5}
       text="buy now"
       height={70}
-      buttonClasses={buttonClass}
+      buttonClasses={`${buttonClass}`}
       onClick={handleClick}
     />
   );

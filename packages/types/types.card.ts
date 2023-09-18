@@ -41,7 +41,8 @@ export type BuyNowCardProps = CardStyleProps &
   ImgProps & {
     _id: string;
     price: number;
-    cardProps: CardProps;
+    children?: React.ReactNode;
     discount?: number;
     saleAlarm?: React.ReactNode;
+    className?: string;
   };

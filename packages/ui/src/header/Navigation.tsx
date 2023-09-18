@@ -7,9 +7,13 @@ const Navigation = ({
   data = dummyNavData,
   textTransform,
   color,
+  flexDir = "row",
 }: NavigationProps) => {
   return (
-    <div className="frcsb" style={{ columnGap: gap }}>
+    <div
+      className={`${flexDir == "row" ? "frcsb flex-col sm:flex-row" : "fcfs"} `}
+      style={{ gap: gap }}
+    >
       {data.map(({ href, text }, index) => (
         <Link key={index + href} href={href}>
           <Text

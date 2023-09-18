@@ -35,4 +35,5 @@ export type AddFilterProps = {
 
 export type ManageFiltersProps = AddFilterProps & {
   removeFilter: (chip: FilterChipProps) => void;
+  maxWidth?: number | string;
 };

@@ -1,5 +1,8 @@
-import { NotesHeroTextProps } from "@cllgnotes/types";
-import { BuyNowCard, DetailTabGroup, Text, TmplHero } from "ui";
+import { NotesHeroTextProps, DeviceTypeEnum } from "@cllgnotes/types";
+import { ShowInDevice } from "@cllgnotes/lib";
+import { BuyNowCard, TmplHero } from "ui";
+import NotesPageTextBox from "./NotesPageTextBox";
+import { defaultImg } from "@cllgnotes/lib";
 
 const NotesHero = ({ title, labels, desc, img }: NotesHeroTextProps) => {
   // const deviceType = useContext(ContextDeviceType);
@@ -14,34 +17,28 @@ const NotesHero = ({ title, labels, desc, img }: NotesHeroTextProps) => {
   //   zIndex: 2000,
   //   transition: "transform 0.4s ease",
   // };
-  const isDesktop = true;
   const notLoggedIn = true;
-  const firstLetterUppercase = (str: string) =>
-    str.charAt(0)?.toUpperCase() + str.slice(1);
+  const textbox = (
+    <NotesPageTextBox
+      title={title}
+      labels={labels}
+      desc={desc}
+      img={defaultImg}
+    />
+  );
   return (
     <>
       <TmplHero
         leftElement={
-          <div style={{ width: "100%", maxWidth: notLoggedIn ? 915 : "none" }}>
-            <Text type="h2">{firstLetterUppercase(title)}</Text>
-            <p className="regu16 mt15 mb20" style={{ opacity: 0.8 }}>
-              {firstLetterUppercase(desc)}
-            </p>
-            <DetailTabGroup data={labels} />
-          </div>
+          <ShowInDevice devices={[DeviceTypeEnum.desktop]}>
+            {textbox}
+          </ShowInDevice>
         }
         rightElement={
           notLoggedIn && (
-            <BuyNowCard
-              price={146}
-              {...img}
-              style={{
-                top: 30,
-                right: 35,
-              }}
-              cardProps={[] as any}
-              _id={"1"}
-            />
+            <BuyNowCard price={146} {...img} _id={"1"}>
+              {textbox}
+            </BuyNowCard>
           )
         }
         height={422}

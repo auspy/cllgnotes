@@ -1,7 +1,7 @@
+@import "../../../packages/ui/styles/sharedGlobals.scss";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "../../../packages/ui/styles/sharedGlobals.scss";
 
 :root {
   --x-buynowcard: 853px;
@@ -47,9 +47,28 @@ h1 {
   width: 100%;
   padding-inline: 35px;
 }
+@media (max-width: 640px) {
+  .topContainer {
+    padding-inline: 20px;
+  }
+}
 
 .card {
   background-color: var(--white);
   border: 1px solid var(--dark);
   border-radius: 5px;
+}
+
+// * RESPONSIVE
+@media (max-width: 620px) {
+  .cToFs {
+    align-items: flex-start;
+  }
+}
+
+// HERO
+@media (max-width: 1024px) {
+  #heroHome {
+    height: unset !important;
+  }
 }

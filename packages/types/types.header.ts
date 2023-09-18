@@ -9,4 +9,5 @@ export type NavigationProps = {
   gap?: number;
   color?: ColorsType;
   textTransform?: "uppercase" | "capitalize";
+  flexDir?: "row" | "column";
 };

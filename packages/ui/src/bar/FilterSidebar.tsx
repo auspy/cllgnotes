@@ -4,9 +4,13 @@ import CheckboxGrp from "../buttonGroup/CheckboxGrp";
 import { dummyFilterList } from "@cllgnotes/lib/dummyData";
 import { ManageFiltersProps } from "@cllgnotes/types";
 
-const FilterSidebar = ({ addFilter, removeFilter }: ManageFiltersProps) => {
+const FilterSidebar = ({
+  addFilter,
+  removeFilter,
+  maxWidth,
+}: ManageFiltersProps) => {
   return (
-    <div className="w100" style={{ maxWidth: 320 }}>
+    <div className="w100" style={{ maxWidth: maxWidth }}>
       <div>
         <SearchBar placeholder="Search for keywords" height={50} />
         <Text textClass="mt10" type="medi12" color="dGrey">

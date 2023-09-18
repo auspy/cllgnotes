@@ -2,6 +2,7 @@ import { CardDetailsBoxProps, TextProps } from "@cllgnotes/types";
 import Text from "./Text";
 import Link from "next/link";
 import { pathDocId } from "@cllgnotes/lib";
+import { memo } from "react";
 
 const CardDetailsText = ({
   subject,
@@ -24,10 +25,10 @@ const CardDetailsText = ({
             {String(topic?.[0].toUpperCase() + topic?.slice(1).toLowerCase())}
           </Link>
         </Text>
-        <Text {...detailsTextProps}>{univ}</Text>
+        <Text {...detailsTextProps}>{univ || "SRM University"}</Text>
       </div>
     </>
   );
 };
 
-export default CardDetailsText;
+export default memo(CardDetailsText);

@@ -2,17 +2,19 @@
 import { GET_DOCS } from "@/api/graphql/gql";
 import Suggestions from "@/components/explore/suggestions/Suggestions";
 import { useSuspenseQuery } from "@apollo/client";
-import { modifyToCardsData } from "@cllgnotes/lib";
+import { modifyToCardsData, useDeviceType } from "@cllgnotes/lib";
 import {
   CardProps,
   DocsQueryProps,
   FilterChipMap,
   FilterChipProps,
 } from "@cllgnotes/types";
-import { log, logger } from "logger";
 import { useState } from "react";
-import { CardGrp, FilterSidebar, List, ToolBar } from "ui";
+import { BottomDrawer, CardGrp, FilterSidebar, List, ToolBar } from "ui";
 const BelowHeroExplore = () => {
+  const device = useDeviceType();
+  // console.log(device);
+  const isDesktop = device == "desktop";
   const [filterChips, setFilterChips] = useState<FilterChipMap>({});
   const [showGrid, setShowGrid] = useState(true);
   const clearFilters = () => {
@@ -37,7 +39,13 @@ const BelowHeroExplore = () => {
   const cardsData = modifyToCardsData(docs, { imgHeight: 240 }) as CardProps[];
   const l = cardsData.length;
   const foundCourses = data?.getDocs?.status == "success" && Boolean(cardsData);
-  console.log("docs", docs);
+  const filter = (maxWidth: string | number = 320) => (
+    <FilterSidebar
+      maxWidth={maxWidth}
+      removeFilter={removeAFilter}
+      addFilter={addFilter}
+    />
+  );
   if (!foundCourses) {
     return <div>loading...</div>;
   }
@@ -49,7 +57,11 @@ const BelowHeroExplore = () => {
       >
         <Suggestions addFilter={addFilter} />
         <div className="frfs w100" style={{ gap: 30 }}>
-          <FilterSidebar removeFilter={removeAFilter} addFilter={addFilter} />
+          {!isDesktop ? (
+            <BottomDrawer>{filter("unset")}</BottomDrawer>
+          ) : (
+            filter()
+          )}
           <div className="w100 fcc" style={{ gap: 25 }}>
             <ToolBar
               isGrid={showGrid}

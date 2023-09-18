@@ -416,3 +416,36 @@ input[type="submit"]:hover:enabled,
 .fs0 {
   flex-shrink: 0;
 }
+// RESPONSIVE
+.showInDesktop {
+  display: flex;
+}
+.showInTablet {
+  display: none;
+}
+.showInMobile {
+  display: none;
+}
+@media (max-width: 620px) {
+  .showInMobile {
+    display: flex;
+  }
+  .showInTablet {
+    display: flex;
+  }
+  .showInDesktop {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .showInMobile {
+    display: none;
+  }
+  .showInTablet {
+    display: flex;
+  }
+  .showInDesktop {
+    display: none;
+  }
+}

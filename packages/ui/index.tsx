@@ -13,7 +13,6 @@ export { default as DocCard } from "./src/cards/DocCard";
 export { default as CardGrp } from "./src/cardGroup/CardGrp";
 export * from "./src/mui/mui";
 export { default as TestiCard } from "./src/cards/TestiCard";
-export { default as TestiUserAvatar } from "./src/Avatar/TestiUserAvatar";
 export { default as TestiGrp } from "./src/cardGroup/TestiGrp";
 export { default as ListItem } from "./src/Itemlist/ListItem";
 export { default as List } from "./src/Itemlist/List";
@@ -33,8 +32,10 @@ export { default as BuyNowCard } from "./src/cards/BuyNowCard";
 export { default as PreviewPdf } from "./src/preview/PreviewPdf";
 export { default as LinkButton } from "./src/buttons/LinkButton";
 export { default as ButtonLogin } from "./src/buttons/ButtonLogin";
-export { default as UserAvatarMenu } from "./src/avatar/UserAvatarMenu";
 export { default as ButtonDrawerToggle } from "./src/buttons/ButtonDrawerToggle";
+// AVATARS
+export { default as TestiUserAvatar } from "./src/Avatar/TestiUserAvatar";
+export { default as UserAvatarMenu } from "./src/Avatar/UserAvatarMenu";
 // WRAPPERS
 export { default as RecoilWrapper } from "./src/wrappers/RecoilWrapper";
 export { default as LinkWrapper } from "./src/wrappers/LinkWrapper";
@@ -48,3 +49,6 @@ export { default as BottomNavigationMenu } from "./src/menu/BottomNavigation";
 export { default as AccountMenu } from "./src/menu/AccountMenu";
 // FALLBACKS
 export { default as LoginToContinue } from "./src/fallbacks/LoginToContinue";
+// DRAWERS
+export { default as RightDrawer } from "./src/drawer/RightDrawer";
+export { default as BottomDrawer } from "./src/drawer/BottomDrawer";

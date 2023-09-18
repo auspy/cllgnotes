@@ -9,12 +9,12 @@ const Trusted = ({ data }: TrustedProps) => {
         Trusted by students at
       </Text>
       <div
-        className="fcc w100 mt-[25px]"
+        className="fcc w-screen mt-[25px]"
         style={{
           overflow: "hidden",
           columnGap: 60,
           borderBlock: Borders.dark,
-          paddingBlock: "0.7%",
+          paddingBlock: 15,
           paddingInline: 35,
         }}
       >
@@ -34,7 +34,9 @@ const Trusted = ({ data }: TrustedProps) => {
             //     }}
             //   >
             // <Image className="frc" {...rest} src={src} alt={alt} />
-            <ImageClient img={{ ...rest, src, alt }} />
+            <ImageClient
+              img={{ ...rest, src, alt, style: { maxWidth: "unset" } }}
+            />
             //   </div>
           ))}
         </div>

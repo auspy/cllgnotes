@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { defaultImg } from "@cllgnotes/lib";
+import { defaultImg, useDeviceType } from "@cllgnotes/lib";
 import { BuyNowCardProps } from "@cllgnotes/types";
 import { ButtonBuyNow, Text } from "ui";
 // import { useEffect } from "react";
@@ -14,12 +14,13 @@ const BuyNowCard = ({
   discount,
   style,
   _id,
-  cardProps,
+  children,
   saleAlarm = (
     <>
       Hurry 😱<span className="semi"> 7 hours</span> left at this price!
     </>
   ),
+  className,
 }: BuyNowCardProps) => {
   // console.log("is client");
   // useEffect(() => {
@@ -38,26 +39,31 @@ const BuyNowCard = ({
   //     window.removeEventListener("resize", handleEvent);
   //   };
   // }, []);
-  const isDesktop = true;
-  const isTablet = false;
-  const isMobile = false;
+  const device = useDeviceType();
+  const isDesktop = device == "desktop";
+  const isTablet = device == "tablet";
+  const isMobile = device == "mobile";
   const color = "red";
   const desktopContainerStyle: React.CSSProperties = {
     width: 361,
     // transform: "translate(var(--x-buynowcard), 0)",
     position: "absolute",
-    zIndex: 2000,
+    top: 0,
+    zIndex: 10,
+    right: 35,
   };
   const mobileContainerStyle: React.CSSProperties = {
-    width: "100%",
+    width: isMobile ? "calc(100% - 40px)" : "calc(100% - 70px)",
+    right: isMobile ? 20 : 35,
   };
   return (
     <>
       <div
         id="buynowcard"
-        className="fcc"
+        className={`fcc ${className}`}
         style={{
-          ...(isDesktop ? desktopContainerStyle : mobileContainerStyle),
+          ...desktopContainerStyle,
+          ...(!isDesktop && mobileContainerStyle),
           border: "1px solid #383838",
           boxShadow: ShadowsType.box4,
           borderRadius: 5,
@@ -83,50 +89,49 @@ const BuyNowCard = ({
           />
         </div>
         {/* BELOW IMAGE DATA */}
-        <div className={` w100 ${""}`}>
-          {/* {!isDesktop && <CourseDetails {...cardProps} />} */}
-          <div
-            className={`w100 ${isTablet ? "frcsb" : isMobile && "frc"}`}
-            style={{
-              ...(isMobile ? { flexWrap: "wrap" } : {}),
-              padding: 8,
-            }}
-          >
-            <div className="">
-              <div className="frc" style={{ gap: 10 }}>
-                <Text textClass="fs0" type="h2">
-                  {"₹ " + price}
-                </Text>
-                <Text
-                  textStyle={{ textDecorationLine: "line-through" }}
-                  textClass="fs0"
-                  type="medi22"
-                >
-                  ₹ 3129
-                </Text>
-                <Text
-                  textStyle={{
-                    color: Colors[color],
-                    WebkitTextFillColor: Colors[color],
-                    fontSize: 36,
-                  }}
-                  textTransform="uppercase"
-                  textClass="fs0 h1Highlight"
-                  type="h2"
-                  text={`${
-                    discount || 100 - Number(((price / 3129) * 100).toFixed())
-                  }%
+        <div
+          className={`w100 ${isTablet ? "frcsb" : isMobile && "frc"} flex-wrap`}
+          style={{
+            ...(isMobile ? { flexWrap: "wrap" } : {}),
+            padding: 8,
+          }}
+        >
+          <div className="w100 mb-[15px]">{!isDesktop && children}</div>
+
+          <div className="">
+            <div className="frc flex-wrap" style={{ gap: 10 }}>
+              <Text textClass="fs0" type="h2">
+                {"₹ " + price}
+              </Text>
+              <Text
+                textStyle={{ textDecorationLine: "line-through" }}
+                textClass="fs0"
+                type="medi22"
+              >
+                ₹ 3129
+              </Text>
+              <Text
+                textStyle={{
+                  color: Colors[color],
+                  WebkitTextFillColor: Colors[color],
+                  fontSize: 36,
+                }}
+                textTransform="uppercase"
+                textClass="fs0 h1Highlight"
+                type="h2"
+                text={`${
+                  discount || 100 - Number(((price / 3129) * 100).toFixed())
+                }%
                 off`}
-                ></Text>
-              </div>
-              {/* SALE ALARM */}
-              {/* <p className="regu12 mt5" style={{ color: "var(--red)" }}>
+              ></Text>
+            </div>
+            {/* SALE ALARM */}
+            {/* <p className="regu12 mt5" style={{ color: "var(--red)" }}>
                 {saleAlarm}
               </p> */}
-            </div>
-            {/* BUTTON */}
-            <ButtonBuyNow amount={price} _id={_id} buttonClass="mt20" />
           </div>
+          {/* BUTTON */}
+          <ButtonBuyNow amount={price} _id={_id} buttonClass="mt20" />
         </div>
       </div>
     </>

@@ -8,7 +8,7 @@ const page = () => {
     <div className="fcc w100">
       <ExploreHero />
       <MovingBanner
-        text="notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers"
+        text="notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers notes  📖  question papers 📝 presentations 📖 notes  📖  question papers"
         textType="h3e"
       />
       {/* BELOW HERO */}

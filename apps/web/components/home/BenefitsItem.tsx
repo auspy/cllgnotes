@@ -4,19 +4,21 @@ import { Text } from "ui";
 const BenefitsItem = ({ title, desc, isRight }: BenefitItemProps) => {
   return (
     <div
-      className="frfesb w100"
+      className={`frfesb  items-start flex-col sm:items-end  w100 ${
+        isRight ? "sm:flex-row-reverse" : "sm:flex-row"
+      }`}
       style={{
-        flexDirection: isRight ? "row-reverse" : "row",
         borderBottom: Borders.dark,
-        paddingBottom: 80,
+        paddingBlock: "7%",
+        gap: 20,
       }}
     >
       <h1
-        className="expose upper frc"
+        className={`expose upper frc ${
+          isRight ? "sm:text-right" : "text-left"
+        } `}
         style={{
-          fontSize: 100,
-          height: 67,
-          // textShadow: "unset"
+          fontSize: "clamp(64px, 7vw,100px)",
         }}
       >
         {title}

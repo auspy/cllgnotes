@@ -11,7 +11,7 @@ const LinkWrapper = ({ href, children }: LinkCardWrapperProps) => {
       onClick={() => {
         router.push(href);
       }}
-      className="hover"
+      className="hover w100"
     >
       {children}
     </div>

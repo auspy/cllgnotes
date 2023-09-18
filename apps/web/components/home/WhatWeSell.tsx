@@ -1,4 +1,5 @@
 "use client";
+import { useDeviceType } from "@cllgnotes/lib";
 import { WhatWeSellProps } from "@cllgnotes/types";
 import Colors from "@cllgnotes/types/colors";
 import ShadowsType from "@cllgnotes/types/shadows";
@@ -7,6 +8,10 @@ import { useState } from "react";
 import { Text } from "ui";
 
 const WhatWeSell = ({ data }: WhatWeSellProps) => {
+  const device = useDeviceType();
+  const isDesktop = device === "desktop";
+  const isMobile = device === "mobile";
+  const isTablet = device === "tablet";
   const [active, setActive] = useState(0);
   const handleClick = (e, i: number) => {
     setActive(i);
@@ -16,7 +21,19 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
     opacity: 1,
     textShadow: ShadowsType.text,
   };
-  const { img } = data[active];
+  const imgg = (actv = active) => (
+    <div className="fcc rPosi w100" style={{ alignSelf: "flex-end" }}>
+      <Image priority {...data[actv].img} />
+    </div>
+  );
+  // STLES
+  const notDesktopStyle: React.CSSProperties = isDesktop
+    ? {}
+    : {
+        maxWidth: "unset",
+        rowGap: 60,
+        maxHeight: "unset",
+      };
 
   return (
     <div className="topContainer">
@@ -25,9 +42,9 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
         style={{
           backgroundColor: Colors.lDark,
           borderRadius: 20,
-          padding: "80px 45px",
+          padding: isDesktop ? "80px 45px" : "80px 25px",
           color: Colors.white,
-          height: 706,
+          height: isDesktop ? 706 : "unset",
         }}
       >
         <Text
@@ -41,7 +58,7 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
           Explore an array of resources for any subject, any semester, any
           course
         </Text>
-        <div className="frfssb w100 mt40">
+        <div className="frfssb flex-col lg:flex-row w100 mt40">
           {/* types */}
           <div
             className="fcfs"
@@ -49,6 +66,7 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
               maxWidth: 572,
               rowGap: 20,
               maxHeight: 341.5,
+              ...notDesktopStyle,
             }}
           >
             {data.map(({ title, desc, color }, i) => (
@@ -57,21 +75,23 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
                 key={title + i}
                 className="fcfs hover"
                 style={{
-                  marginBlock: active == i ? 20 : 0,
+                  marginBlock: active == i || !isDesktop ? 20 : 0,
+                  gap: !isDesktop ? 20 : "unset",
                 }}
               >
                 <Text
                   type="h1"
                   textStyle={{
+                    fontSize: "clamp(40px, 6vw,64px)",
                     opacity: 0.4,
                     textShadow: "unset",
-                    ...(active == i && activeStyle),
+                    ...((active == i || !isDesktop) && activeStyle),
                   }}
-                  color={active == i ? color : "dGrey"}
+                  color={active == i || !isDesktop ? color : "dGrey"}
                 >
                   {title}
                 </Text>
-                {active == i && (
+                {(active == i || !isDesktop) && (
                   <Text
                     type="medi22"
                     textClass="mt10"
@@ -83,13 +103,12 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
                     {desc}
                   </Text>
                 )}
+                {!isDesktop && imgg(i)}
               </div>
             ))}
           </div>
           {/* image */}
-          <div className="fcc rPosi w100" style={{ alignSelf: "flex-end" }}>
-            <Image priority {...img} />
-          </div>
+          {isDesktop && imgg()}
         </div>
       </div>
     </div>

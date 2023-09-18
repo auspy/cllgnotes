@@ -4,6 +4,7 @@ import HeroText from "./HeroText";
 const HeroHome = () => {
   return (
     <div
+      id="heroHome"
       className="topContainer rPosi"
       style={{ height: "min(860px,max(660px,76vh))" || 660, display: "flex" }}
     >

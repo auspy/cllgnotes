@@ -1,7 +1,8 @@
-import { CardGrpProps } from "@cllgnotes/types";
+import { CardGrpProps, DeviceTypeEnum } from "@cllgnotes/types";
 import DocCard from "../cards/DocCard";
 import Text from "../text/Text";
 import ArrowBtns from "../buttons/ArrowBtns";
+import { ShowInDevice } from "@cllgnotes/lib";
 
 // this will be used to arrange cards in a group and will allow both scroll and even a grid like structure
 const CardGrp = ({
@@ -26,7 +27,11 @@ const CardGrp = ({
           </Text>
         )}
         <div className="frfs">
-          {isRow && <ArrowBtns id={id} />}
+          {isRow && (
+            <ShowInDevice devices={[DeviceTypeEnum.desktop]}>
+              <ArrowBtns id={id} />
+            </ShowInDevice>
+          )}
           <div
             id={id}
             className={`w100 frc ${containerClasses}`}

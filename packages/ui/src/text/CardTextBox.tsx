@@ -32,11 +32,23 @@ const CardTextBox = ({
           justifySelf: "center",
         }}
       >
-        <Text {...barTextProps}>{department}</Text>
-        <Text {...barTextProps}>{"•"}</Text>
-        <Text {...barTextProps}>{course}</Text>
-        <Text {...barTextProps}>{"•"}</Text>
-        <Text {...barTextProps}>{String(year || semester)}</Text>
+        {Boolean(department) && (
+          <Text {...barTextProps}>
+            {department.replace("Engineering", "Engg.")}
+          </Text>
+        )}
+        {Boolean(department && course) && <Text {...barTextProps}>{"•"}</Text>}
+        {Boolean(course) && (
+          <Text {...barTextProps}>
+            {course.replace("Engineering", "Engg.")}
+          </Text>
+        )}
+        {Boolean(year || semester) && (
+          <>
+            <Text {...barTextProps}>{"•"}</Text>
+            <Text {...barTextProps}>{String(year || semester)}</Text>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,1 +1,5 @@
-export { default as useDeviceType, DeviceTypeWrapper } from "./useDeviceType";
+export {
+  default as useDeviceType,
+  DeviceTypeWrapper,
+  ShowInDevice,
+} from "./useDeviceType";

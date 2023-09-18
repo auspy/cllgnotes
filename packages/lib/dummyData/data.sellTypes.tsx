@@ -12,7 +12,7 @@ export const dummyWhatWeSell: WhatWeSellItem[] = [
     color: "lPink",
   },
   {
-    title: "Prentations",
+    title: "Presentations",
     desc: "Your One-Stop Store for Notes, Presentations, and Question Papers, All Tailored to Your College Syllabus. This is where accessibility meets knowledge.",
     img: {
       src: "/images/presentations.png",

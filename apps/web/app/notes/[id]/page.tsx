@@ -22,18 +22,10 @@ const page = async ({ params }) => {
   }
   const labels = () => {
     log("labels function called");
-    const neededLabels = [
-      "department",
-      "semester",
-      "subject",
-      "course",
-      "year",
-      "subjectCode",
-      "creator",
-    ];
+    const notNeededLabels = ["_id", "img", "desc", "__typename"];
     const arr: DetailTabProps[] = [];
-    for (const key of neededLabels) {
-      if (doc[key]) {
+    for (const key in doc) {
+      if (!notNeededLabels.includes(key) && doc[key]) {
         if (key == "creator") {
           arr.push({ title: key, value: doc[key].username });
           continue;
@@ -51,7 +43,7 @@ const page = async ({ params }) => {
         desc={doc.desc || ""}
         labels={labels()}
       />
-      <div className="topContainer mt40 mb-[100px] fcfs">
+      <div className="topContainer mt-[350px] sm:mt-[200px] lg:mt-[40px] mb-[100px] fcfs">
         <PreviewPdf
           notPurchased={false}
           img={{ src: doc.img || "", alt: doc.title || "", fill: true }}

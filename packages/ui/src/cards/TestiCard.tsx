@@ -14,12 +14,11 @@ const TestiCard = ({
 }: TestiCardProps) => {
   return (
     <div
-      className={`w100 fcc p20 ${_class}`}
+      className={`w100 fcc p20 ${_class} max-w-640 sm:max-w-420`}
       style={{
         border: Borders.dark,
         backgroundColor: Colors.white,
         borderRadius: 5,
-        maxWidth: 420,
         minWidth: 220,
         height: "fit-content",
         breakInside: "avoid",

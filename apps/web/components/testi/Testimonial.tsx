@@ -9,8 +9,10 @@ import {
 } from "ui";
 import { TestiCardGrpProps } from "@cllgnotes/types";
 import { useEffect, useRef, useState } from "react";
+import { useDeviceType } from "@cllgnotes/lib";
 
 const Testimonial = ({ data }: TestiCardGrpProps) => {
+  const device = useDeviceType(true);
   const [active, setActive] = useState(0);
   const activeRef = useRef(active);
   const changeActive = (increment: number) => {
@@ -31,15 +33,26 @@ const Testimonial = ({ data }: TestiCardGrpProps) => {
     height: 30,
     width: 30,
   };
+  const leftIcon = (
+    <IconButton
+      onClick={() => {
+        changeActive(-1);
+      }}
+      icon={<ChevronLeftRounded style={iconStyle} />}
+    />
+  );
+  const rightIcon = (
+    <IconButton
+      onClick={() => {
+        changeActive(1);
+      }}
+      icon={<ChevronRightRounded style={iconStyle} />}
+    />
+  );
   return (
     <div className="w100 fcc" style={{ gap: 100 }}>
       <div className="frfssb topContainer">
-        <IconButton
-          onClick={() => {
-            changeActive(-1);
-          }}
-          icon={<ChevronLeftRounded style={iconStyle} />}
-        />
+        {device.isDesktop && leftIcon}
         <div
           className="fcc rPosi w100"
           style={{ maxWidth: 1000, rowGap: 60, paddingTop: 200 }}
@@ -48,7 +61,7 @@ const Testimonial = ({ data }: TestiCardGrpProps) => {
             textAlign="center"
             type="h1"
             textStyle={{
-              fontSize: 56,
+              fontSize: "clamp(40px,6vw,56px)",
               position: "absolute",
               top: 0,
               height: 130,
@@ -56,15 +69,13 @@ const Testimonial = ({ data }: TestiCardGrpProps) => {
               overflow: "hidden",
             }}
           >{`"${data[active]?.text}"`}</Text>
-          <TestiUserAvatar {...data[active].user} onCard={false} />
+          <div className={device.isDesktop ? "" : "frcsb gap-y-4 w100"}>
+            {!device.isDesktop && leftIcon}
+            <TestiUserAvatar {...data[active].user} onCard={false} />
+            {!device.isDesktop && rightIcon}
+          </div>
         </div>
-
-        <IconButton
-          onClick={() => {
-            changeActive(1);
-          }}
-          icon={<ChevronRightRounded style={iconStyle} />}
-        />
+        {device.isDesktop && rightIcon}
       </div>
       <TestiGrp data={data} />
     </div>
