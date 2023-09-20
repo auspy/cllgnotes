@@ -20,6 +20,8 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ["picsum.photos"],
+    domains: ["picsum.photos", "res.cloudinary.com"],
+    // loader: "custom",
+    // loaderFile: "./loader.config.ts",
   },
 };

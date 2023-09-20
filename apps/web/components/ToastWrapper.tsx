@@ -19,6 +19,7 @@ const ToastWrapper = ({ children }: { children?: React.PropsWithChildren }) => {
 
     // Clear the toast message when it's opened
     if (toast.text !== "") {
+      console.log("toast set", toast);
       timerId = setTimeout(() => {
         setToast({ ...toast, text: "", type: ToastType.INFO });
         console.log("toast cleared");
@@ -35,7 +36,7 @@ const ToastWrapper = ({ children }: { children?: React.PropsWithChildren }) => {
   return (
     <>
       <ThemeProvider theme={muiTheme}>
-        <Collapse in={!!toast.text}>
+        <Collapse id="toast" in={!!toast.text}>
           <Alert
             action={
               <IconButton

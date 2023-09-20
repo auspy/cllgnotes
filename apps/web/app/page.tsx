@@ -32,17 +32,17 @@ export default function Page(): JSX.Element {
       <div
         className="fcc w100"
         style={{
-          rowGap: 130,
+          rowGap: 100,
           marginTop: 60,
         }}
       >
         <WhatWeSell data={dummyWhatWeSell} />
-        <div className="mb-[30px] w100 fcc">
+        <div className="my-[60px] w100 fcc">
           <Benefits data={dummyBenefits} />
         </div>
         <Testimonial data={dummyTestimonials} />
       </div>
-      <div className="my-[80px]">
+      <div className="my-[60px]">
         <Trusted data={dummyTrusted(80)} />
       </div>
       <Footer earnMoney={true} />

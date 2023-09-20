@@ -38,6 +38,7 @@ const CardGrp = ({
             style={{
               columnGap: colGap,
               rowGap: isRow ? 0 : rowGap,
+              width: "min-content",
             }}
           >
             {data.map((cardData, i) => (

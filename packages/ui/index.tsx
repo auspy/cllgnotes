@@ -27,12 +27,13 @@ export { default as Header } from "./src/header/Header";
 export { default as TmplHero } from "./src/templates/hero/TmplHero";
 export { default as DetailTabGroup } from "./src/text/DetailTabGroup";
 export { default as DetailTab } from "./src/text/DetailTab";
-export { default as ButtonBuyNow } from "./src/buttons/ButtonBuyNow";
+export { default as ButtonBuyNow } from "../../apps/web/components/buttons/ButtonBuyNow";
 export { default as BuyNowCard } from "./src/cards/BuyNowCard";
 export { default as PreviewPdf } from "./src/preview/PreviewPdf";
 export { default as LinkButton } from "./src/buttons/LinkButton";
 export { default as ButtonLogin } from "./src/buttons/ButtonLogin";
 export { default as ButtonDrawerToggle } from "./src/buttons/ButtonDrawerToggle";
+export * from "./loader.config";
 // AVATARS
 export { default as TestiUserAvatar } from "./src/Avatar/TestiUserAvatar";
 export { default as UserAvatarMenu } from "./src/Avatar/UserAvatarMenu";
@@ -52,3 +53,5 @@ export { default as LoginToContinue } from "./src/fallbacks/LoginToContinue";
 // DRAWERS
 export { default as RightDrawer } from "./src/drawer/RightDrawer";
 export { default as BottomDrawer } from "./src/drawer/BottomDrawer";
+// BUTTONS
+export { default as ButtonArrow } from "./src/buttons/ButtonArrow";

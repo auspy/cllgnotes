@@ -18,6 +18,9 @@ const CardTextBox = ({
     transform: "translateY(-50%)",
     position: "absolute",
   };
+  if (!(year || department || course)) {
+    return <div></div>;
+  }
   return (
     <div style={{ display: "grid" }}>
       <div

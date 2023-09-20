@@ -2,7 +2,7 @@ import { ImgProps } from "@cllgnotes/types";
 
 export const CONSTANT_TEST = "test";
 export const defaultImg: ImgProps = {
-  src: "https://picsum.photos/200/300",
+  src: "/images/pageImg.png",
   alt: "random image",
   fill: true,
 };

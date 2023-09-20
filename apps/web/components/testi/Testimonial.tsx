@@ -1,12 +1,5 @@
 "use client";
-import {
-  IconButton,
-  Text,
-  ChevronLeftRounded,
-  ChevronRightRounded,
-  TestiUserAvatar,
-  TestiGrp,
-} from "ui";
+import { Text, TestiUserAvatar, TestiGrp, ButtonArrow } from "ui";
 import { TestiCardGrpProps } from "@cllgnotes/types";
 import { useEffect, useRef, useState } from "react";
 import { useDeviceType } from "@cllgnotes/lib";
@@ -29,24 +22,20 @@ const Testimonial = ({ data }: TestiCardGrpProps) => {
     }, 10000);
     return () => clearInterval(interval);
   }, []);
-  const iconStyle: React.CSSProperties = {
-    height: 30,
-    width: 30,
-  };
+
   const leftIcon = (
-    <IconButton
+    <ButtonArrow
       onClick={() => {
         changeActive(-1);
       }}
-      icon={<ChevronLeftRounded style={iconStyle} />}
+      isLeft={true}
     />
   );
   const rightIcon = (
-    <IconButton
+    <ButtonArrow
       onClick={() => {
         changeActive(1);
       }}
-      icon={<ChevronRightRounded style={iconStyle} />}
     />
   );
   return (

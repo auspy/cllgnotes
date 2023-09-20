@@ -15,7 +15,9 @@ export type HomeHeroTextProps = {
 
 export type NotesHeroTextProps = {
   title: string;
+  price: number;
   desc: string;
   labels: DetailTabProps[];
   img: ImgProps;
+  _id: string;
 };

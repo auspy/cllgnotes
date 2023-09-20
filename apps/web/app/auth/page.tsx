@@ -16,6 +16,7 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  SxProps,
   TextField,
 } from "@mui/material";
 import { useState } from "react";
@@ -31,7 +32,7 @@ import Image from "next/image";
 import { BannerFontSizeEnum } from "@cllgnotes/types";
 
 export default function Login() {
-  console.log("Login");
+  // console.log("Login");
   const params = useSearchParams().get("t");
   const roleType =
     useSearchParams().get("role") == "creator" ? "ADMIN" : "USER";
@@ -173,14 +174,14 @@ export default function Login() {
     width: "100%",
     fontSize: 16,
   };
-  const nonEmptyTextFieldStyle = {
+  const nonEmptyTextFieldStyle: SxProps = {
     "& .MuiFormLabel-root": {
       top: 0,
       textTransform: "capitalize",
       fontWeight: 500,
     },
   };
-  const textFieldSx = {
+  const textFieldSx: SxProps = {
     m: 1,
     width: "35ch",
     fontSize: 16,

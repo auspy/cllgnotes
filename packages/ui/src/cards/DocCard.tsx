@@ -29,11 +29,20 @@ export const DocCard = ({
             <div
               className="relative rounded-ss-[5px] rounded-se-[5px]"
               style={{
-                height: imgHeight,
+                height: imgHeight || img.height,
+                width: img.width,
                 overflow: "hidden",
               }}
             >
-              <Image {...img} />
+              <Image
+                {...img}
+                style={{
+                  objectFit: "cover",
+                  border: Borders.dark,
+                  borderTopLeftRadius: "5px",
+                  borderTopRightRadius: "5px",
+                }}
+              />
             </div>
             {/* INFO CARD */}
             <CardTextBox

@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
+    "apollo-upload-client": "^17.0.0",
     "graphql": "^16.7.1",
     "graphql-tag": "^2.12.6",
     "logger": "workspace:*",

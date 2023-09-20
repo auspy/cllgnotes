@@ -23,7 +23,7 @@ const ToolBar = ({
           // chipData={chipData}
         />
       </div>
-      <div className="frfs" style={{ color: Colors.dark }}>
+      <div className="frfs ml15" style={{ color: Colors.dark }}>
         {/* will add select dropdown here */}
         <ButtonGridIcon isGrid={isGrid} setIsGrid={setIsGrid} />
       </div>

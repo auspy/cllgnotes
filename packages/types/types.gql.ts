@@ -1,9 +1,12 @@
+export type DocType = "notes" | "paper" | "presentation";
 export type DocProps = {
   _id: string;
   title: string;
   desc?: string;
   price?: number;
   img: string;
+  pageCount: number;
+  type: DocType;
   published: boolean;
   createdAt?: string;
   creator: Creator;
@@ -35,7 +38,11 @@ export type DocsQueryProps = {
   getPurchasedDocs?: ResData;
   getCreatedDocs?: ResData;
   getDoc?: ResData;
+  purchaseDoc?: ResData;
 };
 
-export type CreateDocs = Omit<DocProps, "rating" | "purchaseCount" | "tLikes">;
-export type UpdateDocs = Partial<CreateDocs>;
+export type CreateDocs = Omit<
+  DocProps,
+  "rating" | "purchaseCount" | "tLikes" | "_id" | "creator" | "pageCount"
+>;
+export type UpdateDocs = Partial<Omit<CreateDocs, "img">>;

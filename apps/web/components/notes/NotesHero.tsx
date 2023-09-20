@@ -4,7 +4,14 @@ import { BuyNowCard, TmplHero } from "ui";
 import NotesPageTextBox from "./NotesPageTextBox";
 import { defaultImg } from "@cllgnotes/lib";
 
-const NotesHero = ({ title, labels, desc, img }: NotesHeroTextProps) => {
+const NotesHero = ({
+  title,
+  labels,
+  desc,
+  img,
+  _id,
+  price,
+}: NotesHeroTextProps) => {
   // const deviceType = useContext(ContextDeviceType);
   // const sticky = useContext(ContextHeaderSticky);
   // const sticky = false;
@@ -17,13 +24,15 @@ const NotesHero = ({ title, labels, desc, img }: NotesHeroTextProps) => {
   //   zIndex: 2000,
   //   transition: "transform 0.4s ease",
   // };
-  const notLoggedIn = true;
+  const notPurchased = true;
   const textbox = (
     <NotesPageTextBox
       title={title}
       labels={labels}
       desc={desc}
       img={defaultImg}
+      price={price}
+      _id={_id}
     />
   );
   return (
@@ -35,8 +44,8 @@ const NotesHero = ({ title, labels, desc, img }: NotesHeroTextProps) => {
           </ShowInDevice>
         }
         rightElement={
-          notLoggedIn && (
-            <BuyNowCard price={146} {...img} _id={"1"}>
+          notPurchased && (
+            <BuyNowCard price={price} {...img} _id={_id}>
               {textbox}
             </BuyNowCard>
           )

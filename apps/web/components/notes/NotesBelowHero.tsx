@@ -1,9 +1,5 @@
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { dummyCardsData } from "@cllgnotes/lib/dummyData";
-import { GET_DOCS } from "@/api/graphql/gql";
-import { CardGrp, MovingBanner, PreviewPdf } from "ui";
-import { DocsQueryProps } from "@cllgnotes/types";
-import { log } from "logger";
+import { CardGrp } from "ui";
 import FilterDocs from "../home/FilterDocs";
 
 const NotesBelowHero = () => {

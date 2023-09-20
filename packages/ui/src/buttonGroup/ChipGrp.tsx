@@ -18,6 +18,7 @@ const ChipGrp = ({
       <Stack
         useFlexGap
         direction={"row"}
+        className="flex-wrap"
         sx={{
           gap: 0.7,
         }}

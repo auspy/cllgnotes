@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import { defaultImg, useDeviceType } from "@cllgnotes/lib";
-import { BuyNowCardProps } from "@cllgnotes/types";
-import { ButtonBuyNow, Text } from "ui";
+import { Borders, BuyNowCardProps } from "@cllgnotes/types";
+import { ButtonBuyNow, CustomImageLoader, Text } from "ui";
 // import { useEffect } from "react";
 import ShadowsType from "@cllgnotes/types/shadows";
 import Colors from "@cllgnotes/types/colors";
@@ -14,6 +14,7 @@ const BuyNowCard = ({
   discount,
   style,
   _id,
+  type,
   children,
   saleAlarm = (
     <>
@@ -82,10 +83,15 @@ const BuyNowCard = ({
           }}
         >
           <Image
-            src={src || defaultImg.src}
+            src={CustomImageLoader({ src, page: 1, type })}
             alt={alt || defaultImg.alt}
             fill
-            style={{ objectFit: "cover", scale: 3 }}
+            style={{
+              objectFit: "cover",
+              border: Borders.dark,
+              borderTopRightRadius: 5,
+              borderTopLeftRadius: 5,
+            }}
           />
         </div>
         {/* BELOW IMAGE DATA */}

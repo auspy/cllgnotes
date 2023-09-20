@@ -1,7 +1,7 @@
 import { BenefitItemProps, Borders } from "@cllgnotes/types";
 import { Text } from "ui";
 
-const BenefitsItem = ({ title, desc, isRight }: BenefitItemProps) => {
+const BenefitsItem = ({ title, desc, isRight, style }: BenefitItemProps) => {
   return (
     <div
       className={`frfesb  items-start flex-col sm:items-end  w100 ${
@@ -9,8 +9,9 @@ const BenefitsItem = ({ title, desc, isRight }: BenefitItemProps) => {
       }`}
       style={{
         borderBottom: Borders.dark,
-        paddingBlock: "7%",
+        paddingBlock: "5%",
         gap: 20,
+        ...style,
       }}
     >
       <h1

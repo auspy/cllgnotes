@@ -14,6 +14,9 @@ query{
                 department
                 university
                 title
+                pageCount
+                type
+                year
                 creator{
                     _id
                     username

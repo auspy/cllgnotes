@@ -1,14 +1,23 @@
 import { CardProps } from "@cllgnotes/types";
+import { defaultImg } from "../constants";
 
 export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
   data
 ) => [
   {
-    img: {
-      src: "https://picsum.photos/300/200",
-      alt: "Card img",
-      fill: true,
-    },
+    img: defaultImg,
+    department: "engineering".toUpperCase(),
+    course: "b.tech".toUpperCase(),
+    year: 2,
+    semester: 3,
+    _id: "123",
+    subject: "DSA",
+    topic: "Dynamic Programming",
+    univ: "IIT Delhi",
+    ...(data || {}),
+  },
+  {
+    img: defaultImg,
     department: "engineering".toUpperCase(),
     course: "b.tech".toUpperCase(),
     year: 2,
@@ -18,11 +27,7 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     ...(data || {}),
   },
   {
-    img: {
-      src: "https://picsum.photos/300/200",
-      alt: "Card img",
-      fill: true,
-    },
+    img: defaultImg,
     department: "engineering".toUpperCase(),
     course: "b.tech".toUpperCase(),
     year: 2,
@@ -32,11 +37,7 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     ...(data || {}),
   },
   {
-    img: {
-      src: "https://picsum.photos/300/200",
-      alt: "Card img",
-      fill: true,
-    },
+    img: defaultImg,
     department: "engineering".toUpperCase(),
     course: "b.tech".toUpperCase(),
     year: 2,
@@ -46,11 +47,7 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     ...(data || {}),
   },
   {
-    img: {
-      src: "https://picsum.photos/300/200",
-      alt: "Card img",
-      fill: true,
-    },
+    img: defaultImg,
     department: "engineering".toUpperCase(),
     course: "b.tech".toUpperCase(),
     year: 2,
@@ -60,11 +57,7 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     ...(data || {}),
   },
   {
-    img: {
-      src: "https://picsum.photos/300/200",
-      alt: "Card img",
-      fill: true,
-    },
+    img: defaultImg,
     department: "engineering".toUpperCase(),
     course: "b.tech".toUpperCase(),
     year: 2,
@@ -74,25 +67,7 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     ...(data || {}),
   },
   {
-    img: {
-      src: "https://picsum.photos/300/200",
-      alt: "Card img",
-      fill: true,
-    },
-    department: "engineering".toUpperCase(),
-    course: "b.tech".toUpperCase(),
-    year: 2,
-    subject: "DSA",
-    topic: "Dynamic Programming",
-    univ: "IIT Delhi",
-    ...(data || {}),
-  },
-  {
-    img: {
-      src: "https://picsum.photos/300/200",
-      alt: "Card img",
-      fill: true,
-    },
+    img: defaultImg,
     department: "engineering".toUpperCase(),
     course: "b.tech".toUpperCase(),
     year: 2,

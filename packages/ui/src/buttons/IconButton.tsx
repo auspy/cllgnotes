@@ -11,6 +11,7 @@ const IconButton = ({
   color,
   onClick,
   buttonClasses,
+  disabled,
 }: IconButtonProps) => {
   const btnStyles: React.CSSProperties = {};
   const shadowClass = size == 40 ? "shadow-box1" : "shadow-box2";
@@ -20,6 +21,7 @@ const IconButton = ({
   if (onBlack) {
     return (
       <button
+        disabled={disabled}
         onClick={onClick}
         className={`${onBlack && `iconBtn`} ${buttonClasses}`}
         style={{
@@ -38,6 +40,7 @@ const IconButton = ({
   return (
     <>
       <Button
+        disabled={disabled}
         buttonClasses={`${shadowClass} ${buttonClasses}`}
         onClick={onClick}
         buttonStyles={btnStyles}

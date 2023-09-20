@@ -19,7 +19,10 @@ const DashCourses = () => {
         needHeading={false}
         type="grid"
         id="dashDocs"
-        data={modifyToCardsData(courses as DocProps[], { href: "dashboard" })}
+        data={modifyToCardsData(courses as DocProps[], {
+          href: "dashboard",
+          img: { width: undefined, height: undefined, fill: true },
+        })}
       />
     </>
   );

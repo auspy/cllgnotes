@@ -16,10 +16,12 @@ const TmplButton = ({
   iconLeft,
   padding,
   iconGap = 10,
+  disabled,
 }: ButtonProps) => {
   return (
     <button
       key={text}
+      disabled={disabled}
       className={`frcc ${buttonClasses}`}
       style={{
         height: height,

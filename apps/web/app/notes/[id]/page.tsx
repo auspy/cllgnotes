@@ -1,5 +1,5 @@
 import { getClient } from "@/api/graphql/ApolloClient";
-import { GET_DOCS } from "@/api/graphql/gql";
+import { GET_DOC } from "@/api/graphql/gql";
 import Footer from "@/components/footer/Footer";
 import NotesBelowHero from "@/components/notes/NotesBelowHero";
 import NotesHero from "@/components/notes/NotesHero";
@@ -8,24 +8,29 @@ import { log } from "logger";
 import { MovingBanner, PreviewPdf } from "ui";
 
 const page = async ({ params }) => {
+  console.log(params, "params", params["id"]);
+
   const { data } = await getClient().query<DocsQueryProps>({
-    query: GET_DOCS,
-    variables: { id: params.id || "64ffd9eb884f58895d58b51e" },
+    query: GET_DOC,
+    variables: { id: String(params["id"]) },
   });
-  const doc = data?.getDocs?.data?.[0];
-  const status = data?.getDocs?.status;
+  const doc = data?.getDoc?.data?.[0];
+  const status = data?.getDoc?.status;
   const foundCourses = status == "success";
 
   log(data);
-  if (!doc) {
+  if (!doc || !foundCourses) {
     return <h2>no data found</h2>;
   }
   const labels = () => {
-    log("labels function called");
     const notNeededLabels = ["_id", "img", "desc", "__typename"];
     const arr: DetailTabProps[] = [];
     for (const key in doc) {
       if (!notNeededLabels.includes(key) && doc[key]) {
+        if (Array.isArray(doc[key])) {
+          arr.push({ title: key, value: doc[key].join(", ") });
+          continue;
+        }
         if (key == "creator") {
           arr.push({ title: key, value: doc[key].username });
           continue;
@@ -38,15 +43,24 @@ const page = async ({ params }) => {
   return (
     <>
       <NotesHero
+        _id={params.id}
         img={{ src: doc.img || "", alt: doc.title || "", fill: true }}
         title={doc.title}
         desc={doc.desc || ""}
         labels={labels()}
+        price={doc.price || 0}
       />
       <div className="topContainer mt-[350px] sm:mt-[200px] lg:mt-[40px] mb-[100px] fcfs">
         <PreviewPdf
+          type={doc.type}
           notPurchased={false}
-          img={{ src: doc.img || "", alt: doc.title || "", fill: true }}
+          totalPages={doc.pageCount}
+          img={{
+            src: doc.img || "",
+            alt: doc.title || "",
+            height: 1348,
+            width: 955,
+          }}
         />
       </div>
       <MovingBanner

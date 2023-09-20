@@ -1,3 +1,4 @@
+import { DocType } from "./types.gql";
 import { ImgProps } from "./types.img";
 import { CardDetailsBoxProps, CardTextBoxProps } from "./types.text";
 
@@ -45,4 +46,5 @@ export type BuyNowCardProps = CardStyleProps &
     discount?: number;
     saleAlarm?: React.ReactNode;
     className?: string;
+    type: DocType;
   };

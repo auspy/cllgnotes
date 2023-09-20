@@ -35,7 +35,7 @@ const ListItem = ({
             overflow: "hidden",
           }}
         >
-          <Image {...img} />
+          <Image {...img} style={{ objectFit: "cover" }} />
         </div>
         <ShowInDevice devices={[DeviceTypeEnum.mobile]}>{like}</ShowInDevice>
       </div>

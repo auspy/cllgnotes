@@ -12,9 +12,12 @@ query($id:ID!) {
                 course
                 department
                 university
+                published
                 title
                 topic
                 chapters
+                pageCount
+                type
                 creator{
                     _id
                     username

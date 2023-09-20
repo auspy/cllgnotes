@@ -7,7 +7,8 @@
     "../../apps/web/components/**/*.ts",
     "./custom.d.ts",
     "../lib/hooks/ToastWrapper.tsx",
-    "../../apps/web/components/ToastWrapper.tsx"
+    "../../apps/web/components/ToastWrapper.tsx",
+    "../../apps/web/components/buttons/ButtonBuyNow.tsx"
   ],
   "compilerOptions": {
     "paths": {

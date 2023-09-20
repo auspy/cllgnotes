@@ -70,6 +70,7 @@ export type IconButtonProps = ButtonCommonProps & {
   icon: React.ReactNode;
   onBlack?: boolean;
   color?: ColorsType;
+  disabled?: boolean;
 };
 
 export type ButtonGridProps = {

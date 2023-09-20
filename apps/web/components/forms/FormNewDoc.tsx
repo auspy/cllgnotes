@@ -14,8 +14,17 @@ import { Button } from "ui";
 import { useMutation } from "@apollo/client";
 import { CREATE_DOC, UPDATE_DOC } from "@/api/graphql/gql";
 import { useRecoilState } from "recoil";
-import { atomToast, dummyCourses } from "@cllgnotes/lib";
-import { CreateDocs, FormNewDocProps, UpdateDocs } from "@cllgnotes/types";
+import {
+  atomToast,
+  dummyCourses,
+  removeUndefindedFromObject,
+} from "@cllgnotes/lib";
+import {
+  CreateDocs,
+  DocType,
+  FormNewDocProps,
+  UpdateDocs,
+} from "@cllgnotes/types";
 
 type YearType = 1 | 2 | 3 | 4 | 5;
 
@@ -36,6 +45,7 @@ const FormNewDoc = ({
   course: crs,
   year,
   subject,
+  type,
   img,
   _id,
 }: FormNewDocProps) => {
@@ -53,6 +63,7 @@ const FormNewDoc = ({
   const [univ, setUniversity] = useState<string>(
     university || "SRM University"
   );
+  const [typee, setType] = useState<DocType>(type || "notes");
   const [selectedTopics, setTopics] = useState<string[]>(topic || []);
   const [topicsLists, setTopicsList] = useState<string[]>([]);
   const [subj, setSubj] = useState<string>(subject || "");
@@ -70,20 +81,42 @@ const FormNewDoc = ({
   const unitss = Object.keys(
     dummyCourses?.[depart]?.[course]?.[yr]?.[subj]?.units || {}
   );
+  console.log(unitss);
+
   useEffect(() => {
     const topicList: string[] = [];
-    units?.map((item) =>
-      topicList.push(
-        ...(dummyCourses[depart]?.[course]?.[yr]?.[subj]?.units?.[
-          item
-        ] as unknown as string[])
-      )
+    console.log(topicList);
+
+    units?.map(
+      (item) =>
+        item &&
+        dummyCourses[depart]?.[course]?.[yr]?.[subj]?.units?.[item] &&
+        topicList.push(
+          ...(dummyCourses[depart]?.[course]?.[yr]?.[subj]?.units?.[
+            item
+          ] as unknown as string[])
+        )
     );
     setTopicsList(topicList);
   }, [units]);
 
   // CREATE/UPDATE COURSE
-  const sendData: UpdateDocs | CreateDocs = {
+  const sendDataUpdate: UpdateDocs = {
+    title: titlee?.trim(),
+    desc: descr?.trim(),
+    price: Number(amt),
+    department: depart,
+    published: publish,
+    course: course,
+    year: yr,
+    type: typee,
+    subject: subj,
+    subjectCode: dummyCourses?.[depart]?.[yr]?.[subj]?.code || "CHY100",
+    chapters: units,
+    topic: selectedTopics,
+    university: univ,
+  };
+  const sendDataCreate: CreateDocs = {
     title: titlee?.trim(),
     desc: descr?.trim(),
     price: Number(amt),
@@ -92,6 +125,7 @@ const FormNewDoc = ({
     published: publish,
     course: course,
     year: yr,
+    type: typee,
     subject: subj,
     subjectCode: dummyCourses?.[depart]?.[yr]?.[subj]?.code || "CHY100",
     chapters: units,
@@ -102,7 +136,9 @@ const FormNewDoc = ({
     input: UpdateDocs | CreateDocs;
     id?: string;
   } = {
-    input: sendData,
+    input: removeUndefindedFromObject(
+      toUpdate ? sendDataUpdate : sendDataCreate
+    ),
   };
   if (toUpdate) {
     variables["id"] = _id;
@@ -234,22 +270,43 @@ const FormNewDoc = ({
             setDesc(e.target.value);
           }}
         />
-        <TextField
-          {...commonProps}
-          sx={{ ...commonProps.sx }}
-          id="outlined-basic"
-          label="image"
-          required={true}
-          value={image}
-          variant="outlined"
-          type="text"
-          helperText={"Maximum 250 characters"}
-          color={"primary"}
-          onChange={(e) => {
-            setImage(e.target.value);
-          }}
-        />
+        {!toUpdate && (
+          <TextField
+            {...commonProps}
+            sx={{ ...commonProps.sx }}
+            id="outlined-basic"
+            label="image"
+            required={true}
+            value={image}
+            variant="outlined"
+            type="text"
+            helperText={"Maximum 250 characters"}
+            color={"primary"}
+            onChange={(e) => {
+              setImage(e.target.value);
+            }}
+          />
+        )}
         {/*  */}
+        <FormControl {...commonProps}>
+          <InputLabel id="demo-simple-select-type">Type</InputLabel>
+          <Select
+            labelId="demo-simple-select-type"
+            id="demo-simple-select"
+            value={typee}
+            required={true}
+            label="Type"
+            onChange={(e) => {
+              setType(e.target.value as DocType);
+            }}
+          >
+            {["notes", "presentation", "paper"]?.map((cat, index) => (
+              <MenuItem key={index + cat} value={cat}>
+                {cat}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <FormControl {...commonProps}>
           <InputLabel id="demo-simple-select-depart">Department</InputLabel>
           <Select

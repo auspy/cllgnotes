@@ -42,7 +42,6 @@ const muiTheme = createTheme({
           fontSize: 22,
           textTransform: "uppercase",
           fontWeight: 700,
-          fontFamily: "Poppins",
           color: Colors.dark,
           top: 12,
           "&.Mui-focused": {
