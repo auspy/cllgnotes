@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { Admin, Docs, User } from "../../mongoose/modals/modals.js";
+import saveImgToCloud from "../../helper/cloudinary/saveImgToCloud.js";
+import deleteImgFromCloud from "../../helper/cloudinary/deleteImgFromCloud.js";
 
 const resolverDocs = {
   getDocs: async () => {
@@ -16,6 +18,7 @@ const resolverDocs = {
   getDoc: async (_, args) => {
     try {
       const { id } = args;
+      console.log("in get course", id);
       const data = await Docs.findById(id).populate("creator").exec();
       if (!data) {
         return {
@@ -101,6 +104,7 @@ const resolverDocs = {
 };
 
 const resolverMutDocs = {
+  // todo for now the image is just being added. we need to verify that the uploaded image is correct. so need to add some fature which dont show the image to user until admin verifies it
   addDoc: async (_, args, context) => {
     try {
       const { user } = context;
@@ -109,7 +113,18 @@ const resolverMutDocs = {
       const { input } = args;
       if (!input.createdAt) input.createdAt = new Date();
       if (!input.creator) input.creator = user._id;
+      // managing image upload
+      const uploadedImg = await saveImgToCloud(input.img, input.type);
+      if (!uploadedImg) return { msg: "Image upload failed", status: "failed" };
+      const { pageCount, img: fileName, cloudinaryResponse } = uploadedImg;
+      // Update input.pageCount and input.img
+      input.pageCount = pageCount;
+      input.img = fileName; // Store the Cloudinary URL
+      const publicID = cloudinaryResponse.public_id;
       input.creator = new mongoose.Types.ObjectId(input.creator);
+      input.purchaseCount = 0;
+      input.tLikes = 0;
+      // ADD COURSE TO ADMIN
       const newDoc = new Docs(input);
       const updateCreatedDocs = await Admin.updateOne(
         { _id: input.creator },
@@ -120,13 +135,16 @@ const resolverMutDocs = {
         updateCreatedDocs.acknowledged === false ||
         updateCreatedDocs.modifiedCount === 0 ||
         updateCreatedDocs.matchedCount === 0
-      )
-        // not updated
+      ) {
+        // not updated, delete img from cloud if saved
+        deleteImgFromCloud(publicID);
         return {
           msg: "failed to add course to admim, admin not found",
           status: "failed",
           data: [updateCreatedDocs],
         };
+      }
+      // SAVE COURSE
       const doc = await newDoc.save();
       // console.log(doc);
       return {
@@ -136,6 +154,7 @@ const resolverMutDocs = {
       };
     } catch (error) {
       console.log(`Error in addDoc: ${error.message}`);
+      deleteImgFromCloud(publicID);
       return {
         msg: error.message,
         status: "failed",
@@ -155,13 +174,13 @@ const resolverMutDocs = {
       // console.log("data received", input, id, user);
       if (!id) return { msg: "Invalid id", status: "failed" };
       // UPDATING DATA
-      console.log(
-        "updating course",
-        id,
-        user._id,
-        input,
-        new mongoose.Types.ObjectId(user._id)
-      );
+      // console.log(
+      //   "updating course",
+      //   id,
+      //   user._id,
+      //   input,
+      //   new mongoose.Types.ObjectId(user._id)
+      // );
       const updateData = await Docs.updateOne(
         { _id: id, creator: user._id }, // using creator to make sure that only the creator can update the course
         { $set: input }

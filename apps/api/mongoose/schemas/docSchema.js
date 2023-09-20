@@ -5,12 +5,18 @@ const docSchema = new Schema({
   desc: { type: String },
   price: { type: Number },
   img: { type: String, required: true },
+  pageCount: { type: Number, required: true },
   published: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },
   creator: { type: Schema.Types.ObjectId, ref: "Admin" }, // Reference to the "Admin" model
   rating: { type: Number }, // Floating-point number for rating
   purchaseCount: { type: Number }, // Integer for purchase count
   tLikes: { type: Number }, // Integer for like count
+  type: {
+    type: String,
+    enum: ["notes", "paper", "presentation"],
+    required: true,
+  },
   // university and course details
   course: { type: String },
   department: { type: String },

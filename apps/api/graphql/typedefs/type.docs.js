@@ -1,9 +1,15 @@
 // "!" means that the field is necessary in response
 const typeDocs = `#related to docs
+scalar Upload
 type Creator{
     _id: ID!
     username: String!
     createdDocs: [Doc!]!
+}
+enum docType{
+    notes
+    paper
+    presentation
 }
 type Doc {
     _id: ID!
@@ -11,10 +17,12 @@ type Doc {
     desc: String
     price: Float
     img: String!
+    pageCount: Int
+    type: docType!
     published: Boolean!
     createdAt: String
     creator: Creator!
-    tLikes: [String]
+    tLikes: Int
     rating: Float
     purchaseCount: Int
     course: String
@@ -32,7 +40,8 @@ input CreateDocInput {
     title: String!
     desc: String
     price: Float
-    img: String!
+    img: Upload!
+    type: docType!
     published: Boolean!
     course: String
     department: String
@@ -84,7 +93,8 @@ input UpdateDocInput {
     title: String
     desc: String
     price: Float
-    img: String
+    # img: Upload #cant change img for now. will add this feature later
+    type: docType
     published: Boolean
     course: String
     department: String

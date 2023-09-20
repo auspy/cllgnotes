@@ -1,6 +1,9 @@
+import dotenv from "dotenv";
+const env = process.env.NODE_ENV || "development";
+dotenv.config({ path: `.env.${env}` });
+
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 import { decryptAccessToken } from "./helper/jwtToken.js";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -11,11 +14,19 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolver.js";
 import cookieParser from "cookie-parser";
+import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
+import { v2 as cloudinary } from "cloudinary";
+console.log("CLOUDINARY_CLOUD_NAME", process.env.CLOUDINARY_CLOUD_NAME);
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+export { cloudinary };
 // SETUP FOR REST AND GRAPHQL
-const env = process.env.NODE_ENV || "development";
-dotenv.config({ path: `.env.${env}` });
-console.log("NODE_ENV", process.env.ENV, env);
+
+console.log("NODE_ENV", process.env.TEST, env);
 const app = express();
 const port = process.env.PORT || 4000;
 const httpServer = http.createServer(app);
@@ -34,7 +45,8 @@ app.use(
     credentials: true,
   }),
   bodyParser.json(),
-  cookieParser()
+  cookieParser(),
+  graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 1 })
 );
 
 // ATTACHING GRAPHQL MIDDLEWARE TO EXPRESS
