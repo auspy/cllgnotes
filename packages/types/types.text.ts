@@ -108,6 +108,7 @@ export type CardDetailsBoxProps = {
   _id: string;
   univ: string;
   href?: string;
+  allowWrap?: boolean;
 };
 export type DetailTabProps = {
   title: string;

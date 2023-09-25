@@ -2,7 +2,7 @@ import { getClient } from "@/api/graphql/ApolloClient";
 import { GET_DOC } from "@/api/graphql/gql";
 import FormNewDoc from "@/components/forms/FormNewDoc";
 import { Heading, Text } from "ui";
-import { DocsQueryProps } from "@cllgnotes/types";
+import { DocsQueryProps, FormTypeEnum } from "@cllgnotes/types";
 
 const page = async ({
   params,
@@ -26,7 +26,7 @@ const page = async ({
   return (
     <>
       <Text type="h2" text={"Course: " + doc.title || "Update Course"} />
-      <FormNewDoc {...doc} type={0} />
+      <FormNewDoc formType={FormTypeEnum.NEW} {...doc} />
     </>
   );
 };

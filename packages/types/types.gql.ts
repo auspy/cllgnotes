@@ -43,6 +43,14 @@ export type DocsQueryProps = {
 
 export type CreateDocs = Omit<
   DocProps,
-  "rating" | "purchaseCount" | "tLikes" | "_id" | "creator" | "pageCount"
->;
-export type UpdateDocs = Partial<Omit<CreateDocs, "img">>;
+  | "rating"
+  | "purchaseCount"
+  | "tLikes"
+  | "_id"
+  | "creator"
+  | "pageCount"
+  | "img"
+> & { img: File };
+export type UpdateDocs = Partial<Omit<CreateDocs, "img">> & {
+  img?: undefined;
+};

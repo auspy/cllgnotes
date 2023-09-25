@@ -25,6 +25,7 @@ import {
   FormNewDocProps,
   UpdateDocs,
 } from "@cllgnotes/types";
+import { urlGql } from "@/constants";
 
 type YearType = 1 | 2 | 3 | 4 | 5;
 
@@ -44,8 +45,8 @@ const FormNewDoc = ({
   topic,
   course: crs,
   year,
-  subject,
   type,
+  subject,
   img,
   _id,
 }: FormNewDocProps) => {
@@ -55,11 +56,10 @@ const FormNewDoc = ({
   const [descr, setDesc] = useState<string>(desc || "");
   const [amt, setAmt] = useState(price);
   const [depart, setDepart] = useState<string>(department || "");
-  const [image, setImage] = useState<string>(
-    img || "https://picsum.photos/id/0/1280/720"
-  );
+  const [image, setImage] = useState<File>({} as File);
   const [course, setCourse] = useState<string>(crs || "");
   const [yr, setYear] = useState<YearType>((year as YearType) || 1);
+  const [uploadedImg, setUploadedImg] = useState<string>("");
   const [univ, setUniversity] = useState<string>(
     university || "SRM University"
   );
@@ -121,7 +121,7 @@ const FormNewDoc = ({
     desc: descr?.trim(),
     price: Number(amt),
     department: depart,
-    img: image?.trim(),
+    img: image || (null as unknown as File),
     published: publish,
     course: course,
     year: yr,
@@ -180,8 +180,8 @@ const FormNewDoc = ({
     }
     setClicked(false);
   };
-  const onError = () => {
-    console.log("error", error);
+  const onError = (e) => {
+    console.log("error", error, e);
     setToast({
       text: "Doc Creation Failed 😢. " + error?.message ?? "",
       type: "error",
@@ -190,12 +190,57 @@ const FormNewDoc = ({
     setClicked(false);
   };
   const handleButtonClick = () => {
+    console.log("data sent", variables);
     setClicked(true);
     mutateDoc({
       onCompleted: toUpdate ? onDocUpdated : onDocCreated,
       onError,
     });
+    // if (toUpdate) {
+    //   mutateDoc({
+    //     onCompleted: onDocUpdated,
+    //     onError,
+    //   });
+    // } else {
+    //   mutateDoc({
+    //     onCompleted: onDocCreated,
+    //     onError,
+    //   });
+    //   return;
+    //   // send data using formdata
+    //   // const formData = new FormData();
+    //   // formData.append(
+    //   //   "operations",
+    //   //   JSON.stringify({
+    //   //     query:
+    //   //       "mutation ($input: CreateDocInput!) { addDoc(input: $input) { status msg err data { ... on updateRes { acknowledged matchedCount modifiedCount } ... on Doc { title _id img } } } }",
+    //   //     variables: {
+    //   //       input: sendDataCreate,
+    //   //     },
+    //   //   })
+    //   // );
+    //   // formData.append("map", JSON.stringify({ "0": ["variables.input.img"] }));
+    //   // formData.append("0", image);
+    //   // fetch(urlGql, {
+    //   //   method: "POST",
+    //   //   body: formData,
+    //   //   headers: {
+    //   //     credentials: "include",
+    //   //     // "x-apollo-operation-name": "addDoc",
+    //   //     "apollo-require-preflight": "true",
+    //   //   },
+    //   // })
+    //   //   .then((res) => {
+    //   //     console.log("fetch res", res);
+    //   //     // onDocCreated(res.json());
+    //   //   })
+    //   //   .catch((e) => {
+    //   //     console.log("fetch error", e);
+    //   //     onError(e);
+    //   //   });
+    // }
   };
+
   const buttonDisabled =
     titlee.length < 4 ||
     descr.length < 10 ||
@@ -271,23 +316,26 @@ const FormNewDoc = ({
           }}
         />
         {!toUpdate && (
-          <TextField
-            {...commonProps}
-            sx={{ ...commonProps.sx }}
-            id="outlined-basic"
-            label="image"
-            required={true}
-            value={image}
-            variant="outlined"
-            type="text"
-            helperText={"Maximum 250 characters"}
-            color={"primary"}
-            onChange={(e) => {
-              setImage(e.target.value);
-            }}
-          />
+          <>
+            <input
+              {...commonProps}
+              value={uploadedImg || ""}
+              type="file"
+              accept="application/pdf, application/vnd.ms-excel"
+              required={true}
+              onChange={({ target: { validity, files, value } }) => {
+                const file = files?.[0];
+                if (file && validity.valid) {
+                  setImage(file);
+                  console.log(file);
+                  // setUploadedImg(URL.createObjectURL(file));
+                }
+                setUploadedImg(value);
+              }}
+            />
+            {/* <iframe src={uploadedImg} height={160} width={90} /> */}
+          </>
         )}
-        {/*  */}
         <FormControl {...commonProps}>
           <InputLabel id="demo-simple-select-type">Type</InputLabel>
           <Select

@@ -10,17 +10,21 @@ const CardDetailsText = ({
   univ,
   _id,
   href,
+  allowWrap = false,
 }: CardDetailsBoxProps) => {
   const detailsTextProps: Partial<TextProps> = {
     textStyle: { height: 16 },
     type: "medi12",
     textTransform: "uppercase",
   };
+  const noWrapStyle: React.CSSProperties = allowWrap
+    ? {}
+    : { whiteSpace: "nowrap", textOverflow: "ellipsis" };
   return (
     <>
       <div className="space-y-1">
         <Text {...detailsTextProps}>{subject}</Text>
-        <Text type="h3">
+        <Text textStyle={{ ...noWrapStyle }} type="h3">
           <Link href={pathDocId(_id, href)}>
             {String(topic?.[0].toUpperCase() + topic?.slice(1).toLowerCase())}
           </Link>

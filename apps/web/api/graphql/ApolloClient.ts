@@ -1,7 +1,7 @@
 import { urlGql } from "@/constants";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
-import { createUploadLink } from "apollo-upload-client";
+// import { createUploadLink } from "apollo-upload-client";
 
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({

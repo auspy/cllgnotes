@@ -108,11 +108,14 @@ const resolverMutDocs = {
   addDoc: async (_, args, context) => {
     try {
       const { user } = context;
-      // console.log(user, "in add course");
+      console.log(user, "in add course");
+      // console.log("in add cousrse", args,args.input.img);
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
+      // DATA RECEIVED
       const { input } = args;
       if (!input.createdAt) input.createdAt = new Date();
       if (!input.creator) input.creator = user._id;
+      // console.log("in add course", input, input.img);
       // managing image upload
       const uploadedImg = await saveImgToCloud(input.img, input.type);
       if (!uploadedImg) return { msg: "Image upload failed", status: "failed" };

@@ -5,7 +5,7 @@ query{
         data{
             __typename
             ...on Doc{
-                  _id
+                 _id
                 img
                 subject
                 subjectCode
@@ -13,7 +13,12 @@ query{
                 course
                 department
                 university
+                published
                 title
+                topic
+                chapters
+                pageCount
+                type
                 creator{
                     _id
                     username

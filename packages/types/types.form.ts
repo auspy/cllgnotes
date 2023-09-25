@@ -1,8 +1,8 @@
 import { CreateDocs, UpdateDocs } from "./types.gql";
 
 export type FormNewDocProps = { _id?: string } & (
-  | (CreateDocs & { type: FormTypeEnum.NEW })
-  | (UpdateDocs & { type: FormTypeEnum.UPDATE })
+  | (CreateDocs & { formType: FormTypeEnum.NEW })
+  | (UpdateDocs & { formType?: FormTypeEnum.UPDATE })
 );
 export enum FormTypeEnum {
   NEW = 0,
