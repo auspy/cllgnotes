@@ -37,15 +37,19 @@ const HeroText = ({
           textClass={`max-w-[100%] lg:max-w-[50%]`}
           type="medi22"
         />
-        <Heading
-          type={HeadingType.h1}
-          text={text}
-          highlightText={highlightText}
-          highlightTextStyle={{
-            color: Colors[color || "blue"],
-            WebkitTextFillColor: Colors[color || "blue"],
-          }}
-        />
+        <div className="overflow-hidden pb-2">
+          <Heading
+            headingClass={"heroText" + color}
+            type={HeadingType.h1}
+            text={text}
+            highlightText={highlightText}
+            highlightTextStyle={{
+              color: Colors[color || "blue"],
+              WebkitTextFillColor: Colors[color || "blue"],
+            }}
+          />
+        </div>
+
         <div
           className="frcsb w100 -order-1 lg:order-last"
           style={{ columnGap: 25 }}

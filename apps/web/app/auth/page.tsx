@@ -204,7 +204,7 @@ export default function Login() {
   return (
     <>
       <div
-        className="fcc h-full lg:h-screen"
+        className="fcc h-full lg:h-screen lineBg"
         style={{
           overflow: "hidden",
           paddingTop: 30,
@@ -339,7 +339,7 @@ export default function Login() {
               </ToggleButton>
             </ToggleButtonGroup> */}
             <Button
-              buttonClasses="btn-click mt10"
+              buttonClasses="btn-click mt10 shadow-box2"
               text={isLoginPage ? "Login" : "Register"}
               height={70}
               width={"100%"}

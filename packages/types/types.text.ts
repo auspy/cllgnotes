@@ -9,6 +9,7 @@ export enum HeadingType {
 }
 
 export type HeadingProps = {
+  id?: string;
   text: string | React.ReactNode;
   headingClass?: string;
   headingStyle?: React.CSSProperties;

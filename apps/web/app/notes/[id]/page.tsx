@@ -23,7 +23,7 @@ const page = async ({ params }) => {
     return <h2>no data found</h2>;
   }
   const labels = () => {
-    const notNeededLabels = ["_id", "img", "desc", "__typename"];
+    const notNeededLabels = ["_id", "img", "desc", "__typename", "published"];
     const arr: DetailTabProps[] = [];
     for (const key in doc) {
       if (!notNeededLabels.includes(key) && doc[key]) {
@@ -48,6 +48,7 @@ const page = async ({ params }) => {
         title={doc.title}
         desc={doc.desc || ""}
         labels={labels()}
+        type={doc.type}
         price={doc.price || 0}
       />
       <div className="topContainer mt-[350px] sm:mt-[200px] lg:mt-[40px] mb-[100px] fcfs">
@@ -65,7 +66,8 @@ const page = async ({ params }) => {
       </div>
       <MovingBanner
         textType="h1e"
-        text="🥰 You might also like 🥰 You might also like 😍 You might also like 😍"
+        text="🥰 You might also like 😍 You might also like "
+        repeat={3}
       />
       <div className="topContainer mt30 mb-[100px]">
         <NotesBelowHero />

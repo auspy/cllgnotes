@@ -449,3 +449,35 @@ input[type="submit"]:hover:enabled,
     display: none;
   }
 }
+
+// ANIMATION
+@keyframes moveRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(100px);
+    // opacity: 0.01;
+  }
+  100% {
+    transform: translateY(0);
+    // opacity: 1;
+  }
+}
+.slideIn {
+  animation: slideIn 0.7s cubic-bezier(0, 0, 0.3, 1) both;
+}

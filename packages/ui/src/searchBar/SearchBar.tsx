@@ -49,7 +49,7 @@ const SearchBar = ({
   const focusdStyle: React.CSSProperties = {
     boxShadow: "unset",
     transform: "scale(0.98) translate(3px, 3px)",
-    border: `1.5px solid ${Colors.dark}`,
+    border: `1.75px solid ${Colors.dark}`,
   };
   //   * STATES
   const [isFocused, setIsFocused] = useState<boolean>(false);

@@ -24,3 +24,4 @@ export * from "./types.pdf";
 export * from "./types.dash";
 export * from "./types.menu";
 export * from "./types.form";
+export * from "./types.animate";

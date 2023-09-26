@@ -9,8 +9,7 @@ const NotesHero = ({
   labels,
   desc,
   img,
-  _id,
-  price,
+  ...props
 }: NotesHeroTextProps) => {
   // const deviceType = useContext(ContextDeviceType);
   // const sticky = useContext(ContextHeaderSticky);
@@ -31,8 +30,7 @@ const NotesHero = ({
       labels={labels}
       desc={desc}
       img={defaultImg}
-      price={price}
-      _id={_id}
+      {...props}
     />
   );
   return (
@@ -45,7 +43,7 @@ const NotesHero = ({
         }
         rightElement={
           notPurchased && (
-            <BuyNowCard price={price} {...img} _id={_id}>
+            <BuyNowCard {...props} {...img}>
               {textbox}
             </BuyNowCard>
           )

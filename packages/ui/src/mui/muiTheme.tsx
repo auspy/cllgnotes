@@ -56,12 +56,9 @@ const muiTheme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderColor: `${Colors.dark}`,
-          borderWidth: 1,
-          height: 90,
-          fontSize: 22,
+          // borderColor: `${Colors.dark}`,
+          // borderWidth: 1,
           fontWeight: 500,
-          paddingInline: 15,
           color: Colors.dark,
         },
         notchedOutline: {

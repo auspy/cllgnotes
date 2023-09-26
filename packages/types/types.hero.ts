@@ -1,4 +1,5 @@
 import { ColorsType } from "./colors";
+import { DocType } from "./types.gql";
 import { ImgProps } from "./types.img";
 import { DetailTabProps } from "./types.text";
 
@@ -20,4 +21,5 @@ export type NotesHeroTextProps = {
   labels: DetailTabProps[];
   img: ImgProps;
   _id: string;
+  type: DocType;
 };

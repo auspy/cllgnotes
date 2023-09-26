@@ -1,12 +1,10 @@
 import { BenefitItemProps, Borders } from "@cllgnotes/types";
-import { Text } from "ui";
+import { AnimateWrapper, Text } from "ui";
 
 const BenefitsItem = ({ title, desc, isRight, style }: BenefitItemProps) => {
   return (
     <div
-      className={`frfesb  items-start flex-col sm:items-end  w100 ${
-        isRight ? "sm:flex-row-reverse" : "sm:flex-row"
-      }`}
+      className="w100"
       style={{
         borderBottom: Borders.dark,
         paddingBlock: "5%",
@@ -14,19 +12,30 @@ const BenefitsItem = ({ title, desc, isRight, style }: BenefitItemProps) => {
         ...style,
       }}
     >
-      <h1
-        className={`expose upper frc ${
-          isRight ? "sm:text-right" : "text-left"
-        } `}
-        style={{
-          fontSize: "clamp(64px, 7vw,100px)",
-        }}
+      <AnimateWrapper elementId="benefitItem" animation="slideIn" />
+      <div
+        className={`frfesb overflow-hidden items-start flex-col sm:items-end w100 ${
+          isRight ? "sm:flex-row-reverse" : "sm:flex-row"
+        }`}
       >
-        {title}
-      </h1>
-      <Text textStyle={{ maxWidth: 271 }} type="medi16">
-        {desc}
-      </Text>
+        <h1
+          className={`benefitItem expose upper frc ${
+            isRight ? "sm:text-right" : "text-left"
+          } `}
+          style={{
+            fontSize: "clamp(64px, 7vw,100px)",
+          }}
+        >
+          {title}
+        </h1>
+        <Text
+          textClass="benefitItem"
+          textStyle={{ maxWidth: 271 }}
+          type="medi16"
+        >
+          {desc}
+        </Text>
+      </div>
     </div>
   );
 };
