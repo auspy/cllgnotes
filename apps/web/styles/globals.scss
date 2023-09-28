@@ -104,6 +104,11 @@ h1 {
   padding-inline: 35px;
   transform: translate(0);
 }
+@media (max-width: 640px) {
+  .earnFooterAnim {
+    padding-inline: 20px;
+  }
+}
 
 .earnFooterAnim > div:first-child {
   border-radius: 20px;
@@ -115,4 +120,7 @@ h1 {
   @apply fcc;
   @apply h-full;
   background: url("../public/images/lines.svg") repeat-x;
+}
+.nice {
+  display: flex;
 }

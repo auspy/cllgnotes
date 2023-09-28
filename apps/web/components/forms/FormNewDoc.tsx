@@ -22,13 +22,19 @@ import {
 import {
   CreateDocs,
   DocType,
+  DocTypeArr,
   FormNewDocProps,
+  TestType,
+  TestTypeArr,
   UpdateDocs,
 } from "@cllgnotes/types";
-import { urlGql } from "@/constants";
 
-type YearType = 1 | 2 | 3 | 4 | 5;
-
+type Semester = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+const sems = [1, 2, 3, 4, 5, 6, 7, 8];
+type Year = 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 | 2027 | 2028;
+const Years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028];
+type University = "SRM University";
+const Universitys = ["SRM University"];
 /**
  how much work is done in admin panel?
  need to setup sending pdf to amazon s3 and first page image to 
@@ -43,10 +49,13 @@ const FormNewDoc = ({
   chapters,
   university,
   topic,
+  testType,
+  subjectCode,
   course: crs,
   year,
   type,
   subject,
+  semester,
   img,
   _id,
 }: FormNewDocProps) => {
@@ -58,15 +67,24 @@ const FormNewDoc = ({
   const [depart, setDepart] = useState<string>(department || "");
   const [image, setImage] = useState<File>({} as File);
   const [course, setCourse] = useState<string>(crs || "");
-  const [yr, setYear] = useState<YearType>((year as YearType) || 1);
+  const [yr, setYear] = useState<Year>(year || 2023);
+  const [sem, setSem] = useState<Semester>(semester || 1);
   const [uploadedImg, setUploadedImg] = useState<string>("");
   const [univ, setUniversity] = useState<string>(
     university || "SRM University"
   );
   const [typee, setType] = useState<DocType>(type || "notes");
+  const [testTypee, setTestType] = useState<TestType>(testType || "mst1");
+  const isPaper = typee === "paper";
   const [selectedTopics, setTopics] = useState<string[]>(topic || []);
   const [topicsLists, setTopicsList] = useState<string[]>([]);
   const [subj, setSubj] = useState<string>(subject || "");
+  console.log(subject, "subject");
+  const [subjCode, setSubjCode] = useState<string>(
+    subjectCode ||
+      dummyCourses?.[depart]?.[course]?.[sem]?.[subj]?.code ||
+      "Randmo"
+  );
   const [units, setUnits] = useState<string[]>(chapters || []);
   // https://picsum.photos/id/0/1280/720
   //   const [benefitList, setBenefits] = useState<string[]>(benefits);
@@ -77,22 +95,23 @@ const FormNewDoc = ({
   // DATA
   const departs = Object.keys(dummyCourses);
   const courses = Object.keys(dummyCourses?.[depart] || {});
-  const subjects = Object.keys(dummyCourses?.[depart]?.[course]?.[yr] || {});
+  const subjects = Object.keys(dummyCourses?.[depart]?.[course]?.[sem] || {});
+
   const unitss = Object.keys(
-    dummyCourses?.[depart]?.[course]?.[yr]?.[subj]?.units || {}
+    dummyCourses?.[depart]?.[course]?.[sem]?.[subj]?.units || {}
   );
-  console.log(unitss);
+  // console.log(unitss);
 
   useEffect(() => {
     const topicList: string[] = [];
-    console.log(topicList);
+    // console.log(topicList);
 
     units?.map(
       (item) =>
         item &&
-        dummyCourses[depart]?.[course]?.[yr]?.[subj]?.units?.[item] &&
+        dummyCourses[depart]?.[course]?.[sem]?.[subj]?.units?.[item] &&
         topicList.push(
-          ...(dummyCourses[depart]?.[course]?.[yr]?.[subj]?.units?.[
+          ...(dummyCourses[depart]?.[course]?.[sem]?.[subj]?.units?.[
             item
           ] as unknown as string[])
         )
@@ -102,36 +121,43 @@ const FormNewDoc = ({
 
   // CREATE/UPDATE COURSE
   const sendDataUpdate: UpdateDocs = {
-    title: titlee?.trim(),
-    desc: descr?.trim(),
     price: Number(amt),
     department: depart,
     published: publish,
     course: course,
+    semester: sem,
     year: yr,
     type: typee,
     subject: subj,
-    subjectCode: dummyCourses?.[depart]?.[yr]?.[subj]?.code || "CHY100",
-    chapters: units,
-    topic: selectedTopics,
+    subjectCode: subjCode,
     university: univ,
   };
   const sendDataCreate: CreateDocs = {
-    title: titlee?.trim(),
-    desc: descr?.trim(),
     price: Number(amt),
     department: depart,
     img: image || (null as unknown as File),
     published: publish,
     course: course,
+    semester: sem,
     year: yr,
     type: typee,
     subject: subj,
-    subjectCode: dummyCourses?.[depart]?.[yr]?.[subj]?.code || "CHY100",
-    chapters: units,
-    topic: selectedTopics,
+    subjectCode: subjCode,
     university: univ,
   };
+  if (isPaper) {
+    sendDataCreate["testType"] = testTypee;
+    sendDataUpdate["testType"] = testTypee;
+  } else if (typee === "notes") {
+    sendDataCreate["topics"] = selectedTopics;
+    sendDataCreate["units"] = units;
+    sendDataCreate["desc"] = descr?.trim();
+    sendDataCreate["title"] = titlee?.trim();
+    sendDataUpdate["topics"] = selectedTopics;
+    sendDataUpdate["units"] = units;
+    sendDataUpdate["desc"] = descr?.trim();
+    sendDataUpdate["title"] = titlee?.trim();
+  }
   const variables: {
     input: UpdateDocs | CreateDocs;
     id?: string;
@@ -264,23 +290,84 @@ const FormNewDoc = ({
   return (
     <>
       <FormGroup style={{ gap: 20 }} className="fcfs mt30">
-        <TextField
-          {...commonProps}
-          sx={{ ...commonProps.sx }}
-          id="outlined-basic"
-          label="Title"
-          variant="outlined"
-          required={true}
-          type="text"
-          //   helperText={usernameHelperText()}
-          color={"primary"}
-          value={titlee}
-          error={titlee.length > 0 && titlee?.length < 4}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
-
+        <FormControl {...commonProps}>
+          <InputLabel id="demo-simple-select-type">Type</InputLabel>
+          <Select
+            labelId="demo-simple-select-type"
+            id="demo-simple-select"
+            value={typee}
+            required={true}
+            label="Type"
+            onChange={(e) => {
+              setType(e.target.value as DocType);
+            }}
+          >
+            {DocTypeArr?.map((cat, index) => (
+              <MenuItem key={index + cat} value={cat}>
+                {cat}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        {isPaper ? (
+          <FormControl {...commonProps}>
+            <InputLabel id="demo-simple-test-type">Exam Type</InputLabel>
+            <Select
+              labelId="demo-simple-test-type"
+              id="demo-simple-test-type"
+              value={testTypee}
+              required={true}
+              label="Exam Type"
+              onChange={(e) => {
+                setTestType(e.target.value as TestType);
+              }}
+            >
+              {TestTypeArr.map((cat, index) => (
+                <MenuItem key={index + cat} value={cat}>
+                  {cat}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        ) : (
+          <>
+            <TextField
+              {...commonProps}
+              sx={{ ...commonProps.sx }}
+              id="outlined-basic"
+              label="Title"
+              variant="outlined"
+              required={true}
+              type="text"
+              //   helperText={usernameHelperText()}
+              color={"primary"}
+              value={titlee}
+              error={titlee.length > 0 && titlee?.length < 4}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+            <TextField
+              {...commonProps}
+              sx={{ ...commonProps.sx }}
+              maxRows={4}
+              multiline={true}
+              id="outlined-basic"
+              label="Description"
+              value={descr}
+              variant="outlined"
+              type="text"
+              helperText={"Maximum 250 characters"}
+              color={"primary"}
+              error={
+                (descr.length > 0 && descr?.length < 10) || descr.length > 250
+              }
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+            />
+          </>
+        )}
         <TextField
           {...commonProps}
           id="outlined-basic"
@@ -296,23 +383,6 @@ const FormNewDoc = ({
             // console.log(e.target.value);
             // setAmt(e.target.value as unknown as number);
             setAmt(0);
-          }}
-        />
-        <TextField
-          {...commonProps}
-          sx={{ ...commonProps.sx }}
-          maxRows={4}
-          multiline={true}
-          id="outlined-basic"
-          label="Description"
-          value={descr}
-          variant="outlined"
-          type="text"
-          helperText={"Maximum 250 characters"}
-          color={"primary"}
-          error={(descr.length > 0 && descr?.length < 10) || descr.length > 250}
-          onChange={(e) => {
-            setDesc(e.target.value);
           }}
         />
         {!toUpdate && (
@@ -336,25 +406,7 @@ const FormNewDoc = ({
             {/* <iframe src={uploadedImg} height={160} width={90} /> */}
           </>
         )}
-        <FormControl {...commonProps}>
-          <InputLabel id="demo-simple-select-type">Type</InputLabel>
-          <Select
-            labelId="demo-simple-select-type"
-            id="demo-simple-select"
-            value={typee}
-            required={true}
-            label="Type"
-            onChange={(e) => {
-              setType(e.target.value as DocType);
-            }}
-          >
-            {["notes", "presentation", "paper"]?.map((cat, index) => (
-              <MenuItem key={index + cat} value={cat}>
-                {cat}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+
         <FormControl {...commonProps}>
           <InputLabel id="demo-simple-select-depart">Department</InputLabel>
           <Select
@@ -368,6 +420,65 @@ const FormNewDoc = ({
             }}
           >
             {departs?.map((cat, index) => (
+              <MenuItem key={index + cat} value={cat}>
+                {cat}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl {...commonProps}>
+          <InputLabel id="years">Semester</InputLabel>
+          <Select
+            labelId="years"
+            id="demo-simple-Semester"
+            value={sem}
+            required={true}
+            label="Semester"
+            onChange={(e) => {
+              setSem(e.target.value as unknown as Semester);
+            }}
+          >
+            {sems.map((num, index) => (
+              <MenuItem key={index + num} value={num}>
+                {num}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl {...commonProps}>
+          <InputLabel id="years">Year</InputLabel>
+          <Select
+            labelId="years"
+            id="demo-simple-Year"
+            value={yr}
+            required={true}
+            label="Year"
+            placeholder="2023"
+            onChange={(e) => {
+              setYear(e.target.value as unknown as Year);
+            }}
+          >
+            {Years.map((num, index) => (
+              <MenuItem key={index + num} value={num}>
+                {num}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl {...commonProps}>
+          <InputLabel id="demo-simple-univ">University</InputLabel>
+          <Select
+            labelId="demo-simple-univ"
+            id="demo-simple-univ"
+            value={univ}
+            required={isPaper}
+            label="University"
+            onChange={(e) => {
+              setUniversity(e.target.value as University);
+            }}
+          >
+            {Universitys.map((cat, index) => (
               <MenuItem key={index + cat} value={cat}>
                 {cat}
               </MenuItem>
@@ -395,25 +506,6 @@ const FormNewDoc = ({
             </Select>
           </FormControl>
         )}
-        <FormControl {...commonProps}>
-          <InputLabel id="years">Year</InputLabel>
-          <Select
-            labelId="years"
-            id="demo-simple-year"
-            value={yr}
-            required={true}
-            label="Year"
-            onChange={(e) => {
-              setYear(e.target.value as unknown as YearType);
-            }}
-          >
-            {[1, 2, 3, 4, 5].map((num, index) => (
-              <MenuItem key={index + num} value={num}>
-                {num}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
         {course && (
           <FormControl {...commonProps}>
             <InputLabel id="demo-simple-subj">Subject</InputLabel>
@@ -425,6 +517,11 @@ const FormNewDoc = ({
               label="Subject"
               onChange={(e) => {
                 setSubj(e.target.value);
+                !toUpdate &&
+                  setSubjCode(
+                    dummyCourses?.[depart]?.[course]?.[sem]?.[e.target.value]
+                      ?.code || "random"
+                  );
               }}
             >
               {subjects?.map((cat, index) => (
@@ -435,53 +532,74 @@ const FormNewDoc = ({
             </Select>
           </FormControl>
         )}
-        {subj && (
-          <FormControl {...commonProps}>
-            <InputLabel id="demo-simple-units">Units</InputLabel>
-            <Select
-              multiple
-              labelId="demo-simple-units"
-              id="demo-simple-units"
-              required={true}
-              value={units}
-              label="Units"
-              onChange={(e) => {
-                const v = e.target.value as unknown as string[];
-                if (v.length > 0) {
-                  setUnits(v);
-                }
-              }}
-            >
-              {unitss?.map((cat, index) => (
-                <MenuItem key={index + cat} value={cat}>
-                  {cat}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        )}
-        {units.length > 0 && (
-          <FormControl {...commonProps}>
-            <InputLabel id="demo-simple-topics">Topics</InputLabel>
-            <Select
-              multiple
-              labelId="demo-simple-topics"
-              id="demo-simple-topics"
-              value={selectedTopics}
-              required={true}
-              label="Topics"
-              onChange={(e) => {
-                const a = e.target.value;
-                setTopics(a as unknown as string[]);
-              }}
-            >
-              {topicsLists?.map((cat, index) => (
-                <MenuItem key={index + cat} value={cat}>
-                  {cat}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+
+        <TextField
+          {...commonProps}
+          sx={{ ...commonProps.sx }}
+          id="outlined-basic"
+          label="Subject Code"
+          variant="outlined"
+          required={true}
+          type="text"
+          //   helperText={usernameHelperText()}
+          color={"primary"}
+          value={subjCode}
+          disabled={!toUpdate}
+          onChange={(e) => {
+            setSubjCode(e.target.value);
+          }}
+        />
+        {!isPaper && (
+          <>
+            {subj && (
+              <FormControl {...commonProps}>
+                <InputLabel id="demo-simple-units">Units</InputLabel>
+                <Select
+                  multiple
+                  labelId="demo-simple-units"
+                  id="demo-simple-units"
+                  required={true}
+                  value={units}
+                  label="Units"
+                  onChange={(e) => {
+                    const v = e.target.value as unknown as string[];
+                    if (v.length > 0) {
+                      setUnits(v);
+                    }
+                  }}
+                >
+                  {unitss?.map((cat, index) => (
+                    <MenuItem key={index + cat} value={cat}>
+                      {cat}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
+            {units.length > 0 && (
+              <FormControl {...commonProps}>
+                <InputLabel id="demo-simple-topics">Topics</InputLabel>
+                <Select
+                  multiple
+                  labelId="demo-simple-topics"
+                  id="demo-simple-topics"
+                  value={selectedTopics}
+                  required={true}
+                  label="Topics"
+                  onChange={(e) => {
+                    const a = e.target.value;
+                    setTopics(a as unknown as string[]);
+                  }}
+                >
+                  {topicsLists?.map((cat, index) => (
+                    <MenuItem key={index + cat} value={cat}>
+                      {cat}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
+          </>
         )}
 
         <FormControlLabel

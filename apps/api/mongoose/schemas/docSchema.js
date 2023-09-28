@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 
 const docSchema = new Schema({
-  title: { type: String, required: true },
+  title: { type: String },
   desc: { type: String },
   price: { type: Number },
   img: { type: String, required: true },
@@ -17,15 +17,17 @@ const docSchema = new Schema({
     enum: ["notes", "paper", "presentation"],
     required: true,
   },
+  testType: { type: String, enum: ["mst1", "mst2", "endSem"] },
   // university and course details
   course: { type: String },
   department: { type: String },
-  year: { type: String },
+  year: { type: Number, min: 2010, max: new Date().getFullYear() },
+  semester: { type: Number, min: 1, max: 8 },
   university: { type: String },
-  topic: [{ type: String, required: true }],
+  topics: [{ type: String }],
   subject: { type: String, required: true },
   subjectCode: { type: String, required: true },
-  chapters: [{ type: String, required: true }], // a notes can be part of multiple units
+  units: [{ type: String }], // a notes can be part of multiple units
 });
 
 export default docSchema;

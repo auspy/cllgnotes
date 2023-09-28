@@ -8,7 +8,7 @@ import { log } from "logger";
 import { MovingBanner, PreviewPdf } from "ui";
 
 const page = async ({ params }) => {
-  console.log(params, "params", params["id"]);
+  // console.log(params, "params", params["id"]);
 
   const { data } = await getClient().query<DocsQueryProps>({
     query: GET_DOC,
@@ -23,7 +23,17 @@ const page = async ({ params }) => {
     return <h2>no data found</h2>;
   }
   const labels = () => {
-    const notNeededLabels = ["_id", "img", "desc", "__typename", "published"];
+    const notNeededLabels = [
+      "_id",
+      "img",
+      "title",
+      "desc",
+      "__typename",
+      "published",
+      "year",
+      "course",
+      "department",
+    ];
     const arr: DetailTabProps[] = [];
     for (const key in doc) {
       if (!notNeededLabels.includes(key) && doc[key]) {
@@ -44,17 +54,25 @@ const page = async ({ params }) => {
     <>
       <NotesHero
         _id={params.id}
-        img={{ src: doc.img || "", alt: doc.title || "", fill: true }}
+        img={{ src: doc.img || "", alt: doc.title || doc.subject, fill: true }}
         title={doc.title}
         desc={doc.desc || ""}
         labels={labels()}
+        subject={doc.subject}
+        subjectCode={doc.subjectCode}
+        testType={doc.testType}
         type={doc.type}
         price={doc.price || 0}
+        textBoxProps={{
+          department: doc.department!,
+          course: doc.course!,
+          year: doc.year!,
+        }}
       />
       <div className="topContainer mt-[350px] sm:mt-[200px] lg:mt-[40px] mb-[100px] fcfs">
         <PreviewPdf
           type={doc.type}
-          notPurchased={false}
+          notPurchased={true}
           totalPages={doc.pageCount}
           img={{
             src: doc.img || "",
@@ -62,6 +80,8 @@ const page = async ({ params }) => {
             height: 1348,
             width: 955,
           }}
+          _id={doc._id}
+          price={doc.price || 0}
         />
       </div>
       <MovingBanner

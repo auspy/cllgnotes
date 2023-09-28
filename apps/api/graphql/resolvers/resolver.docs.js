@@ -27,7 +27,7 @@ const resolverDocs = {
           data: [],
         };
       }
-      console.log("getDoc", data);
+      // console.log("getDoc", data);
       return {
         msg: "Docs fetched successfully",
         status: "success",
@@ -75,7 +75,9 @@ const resolverDocs = {
     try {
       console.log("in get created courses");
       const { user } = context;
+      console.log("validating user");
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
+      console.log("user validated");
       // console.log("getting courses for user", user._id);
       const courses = await Admin.findById(user._id)
         .populate({
@@ -86,7 +88,7 @@ const resolverDocs = {
         })
         .limit(50) // just a most easy but bad way to prevent many course get fetched
         .exec();
-      console.log("get created courses", courses);
+      // console.log("get created courses", courses.createdDocs);
       return {
         msg: "Docs fetched successfully",
         status: "success",
@@ -106,13 +108,17 @@ const resolverDocs = {
 const resolverMutDocs = {
   // todo for now the image is just being added. we need to verify that the uploaded image is correct. so need to add some fature which dont show the image to user until admin verifies it
   addDoc: async (_, args, context) => {
+    let publicID;
     try {
       const { user } = context;
-      console.log(user, "in add course");
+      console.log("--- in add course ---");
       // console.log("in add cousrse", args,args.input.img);
+      console.log("validating user");
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
+      console.log("user validated");
       // DATA RECEIVED
       const { input } = args;
+      console.log("data received", input);
       if (!input.createdAt) input.createdAt = new Date();
       if (!input.creator) input.creator = user._id;
       // console.log("in add course", input, input.img);
@@ -123,7 +129,7 @@ const resolverMutDocs = {
       // Update input.pageCount and input.img
       input.pageCount = pageCount;
       input.img = fileName; // Store the Cloudinary URL
-      const publicID = cloudinaryResponse.public_id;
+      publicID = cloudinaryResponse.public_id;
       input.creator = new mongoose.Types.ObjectId(input.creator);
       input.purchaseCount = 0;
       input.tLikes = 0;

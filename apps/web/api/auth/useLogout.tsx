@@ -8,10 +8,11 @@ import { LOGOUT } from "@/api/graphql/gql";
 import { useContext } from "react";
 
 export const AuthWrapper = ({ children }: React.PropsWithChildren) => {
-  const [, setUserState] = useRecoilState(atomUserName);
+  const [user, setUserState] = useRecoilState(atomUserName);
+  const isAdmin = user.role === "ADMIN";
   const router = useRouter();
   const [logout, { client }] = useMutation(LOGOUT);
-  const logoutFunc = (changePage: boolean = false) => {
+  const logoutFunc = (changePage: boolean = isAdmin) => {
     authLogout({
       router,
       setUsername: setUserState,

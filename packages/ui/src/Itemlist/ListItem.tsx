@@ -9,13 +9,15 @@ import { ShowInDevice } from "@cllgnotes/lib";
 const ListItem = ({
   img,
   subject,
-  topic,
+  title,
   univ,
   department,
   course,
   semester,
+  subjectCode,
   year,
   color,
+  testType,
   _id,
   likes = 56,
 }: CardProps) => {
@@ -59,8 +61,11 @@ const ListItem = ({
         <CardDetailsText
           _id={_id}
           subject={subject}
-          topic={topic}
+          title={title}
           univ={univ}
+          subjectCode={subjectCode}
+          year={year}
+          testType={testType!}
         />
       </div>
     </div>

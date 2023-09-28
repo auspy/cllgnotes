@@ -36,6 +36,7 @@ export type CardGrpProps = {
   colGap?: number;
   needHeading?: boolean;
   heading?: string;
+  style?: React.CSSProperties;
 };
 
 export type BuyNowCardProps = CardStyleProps &

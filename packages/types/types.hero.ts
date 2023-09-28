@@ -1,7 +1,11 @@
 import { ColorsType } from "./colors";
 import { DocType } from "./types.gql";
 import { ImgProps } from "./types.img";
-import { DetailTabProps } from "./types.text";
+import {
+  CardDetailsBoxProps,
+  CardTextBoxProps,
+  DetailTabProps,
+} from "./types.text";
 
 export type HomeHeroTextProps = {
   text: React.ReactNode;
@@ -14,12 +18,14 @@ export type HomeHeroTextProps = {
   color?: ColorsType;
 };
 
-export type NotesHeroTextProps = {
-  title: string;
+export type NotesHeroTextProps = Omit<
+  CardDetailsBoxProps,
+  "allowWrap" | "href" | "univ"
+> & {
   price: number;
   desc: string;
   labels: DetailTabProps[];
   img: ImgProps;
-  _id: string;
   type: DocType;
+  textBoxProps: CardTextBoxProps;
 };

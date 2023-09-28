@@ -1,28 +1,43 @@
-export type DocType = "notes" | "paper" | "presentation";
-export type DocProps = {
+export type DocType = "notes" | "paper";
+export const DocTypeArr = ["notes", "paper"];
+export const TestTypeArr = ["mst1", "mst2", "endSem"];
+export type TestType = "mst1" | "mst2" | "endSem";
+interface DocCommon {
   _id: string;
-  title: string;
-  desc?: string;
-  price?: number;
   img: string;
-  pageCount: number;
-  type: DocType;
   published: boolean;
-  createdAt?: string;
-  creator: Creator;
-  rating?: string;
-  purchaseCount?: string;
-  tLikes?: string[];
-  // university related
-  course?: string;
-  department?: string;
-  year?: number;
-  university?: string;
-  topic?: string[];
   subject: string;
   subjectCode: string;
-  chapters?: string[];
-};
+  type: DocType;
+  pageCount?: number;
+  createdAt?: string;
+  tLikes?: number;
+  rating?: number;
+  purchaseCount?: number;
+  course?: string;
+  department?: string;
+  semester?: number;
+  year?: number;
+  university?: string;
+  creator?: Creator;
+  price?: number;
+}
+interface Notes extends DocCommon {
+  title: string;
+  creator: Creator;
+  //
+  desc?: string;
+  topics?: string[];
+  units?: string[];
+}
+
+interface Paper extends DocCommon {
+  university: string;
+  testType: TestType;
+}
+
+export type DocProps = Notes | Paper;
+
 type Creator = {
   _id: string;
   username: string;
@@ -41,16 +56,29 @@ export type DocsQueryProps = {
   purchaseDoc?: ResData;
 };
 
-export type CreateDocs = Omit<
-  DocProps,
-  | "rating"
-  | "purchaseCount"
-  | "tLikes"
-  | "_id"
-  | "creator"
-  | "pageCount"
-  | "img"
-> & { img: File };
+export type CreateDocs = (
+  | (Omit<
+      Paper,
+      | "rating"
+      | "purchaseCount"
+      | "tLikes"
+      | "_id"
+      | "creator"
+      | "pageCount"
+      | "img"
+    > & { type: "paper" })
+  | (Omit<
+      Notes,
+      | "rating"
+      | "purchaseCount"
+      | "tLikes"
+      | "_id"
+      | "creator"
+      | "pageCount"
+      | "img"
+    > & { type: "notes" })
+) & { img: File };
+
 export type UpdateDocs = Partial<Omit<CreateDocs, "img">> & {
   img?: undefined;
 };

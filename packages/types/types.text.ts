@@ -1,4 +1,5 @@
 import Colors, { ColorsType } from "./colors";
+import { TestType } from "./types.gql";
 
 export enum HeadingType {
   h1,
@@ -101,16 +102,29 @@ export type CardTextBoxProps = {
   year: number;
   color?: ColorsType;
   isAbsolute?: boolean;
+  style?: React.CSSProperties;
 };
 
 export type CardDetailsBoxProps = {
-  subject: string;
-  topic: string;
   _id: string;
+  subject: string;
   univ: string;
   href?: string;
   allowWrap?: boolean;
-};
+} & (
+  | {
+      testType?: undefined;
+      year?: number;
+      title: string;
+      subjectCode?: string;
+    }
+  | {
+      testType: TestType;
+      year: number;
+      subjectCode: string;
+      title?: string;
+    }
+);
 export type DetailTabProps = {
   title: string;
   value: string;

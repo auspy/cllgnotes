@@ -47,7 +47,7 @@ export default function Login() {
   const router = useRouter();
   const [clicked, setClicked] = useState<boolean>(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const [login, { data, loading }] = useMutation(
+  const [login, { data, client, loading }] = useMutation(
     isLoginPage ? LOGIN : REGISTER
   );
   const buttonDisabled =
@@ -157,6 +157,8 @@ export default function Login() {
             });
             return;
           }
+          // * LOGIN SUCCESS
+          client.resetStore();
           // console.log("token", data?.login?.token);
           setUserState({ username: data.login.data?.username, role });
           if (role == "ADMIN") {
@@ -376,7 +378,7 @@ const SwitchPageType = ({
   };
   return (
     <>
-      <div className="frc mt30">
+      <div className="frc mt30 flex-wrap">
         <Text textClass="mr5" type="regu14" text={text} />
         <button
           onClick={handleClick}
@@ -385,6 +387,7 @@ const SwitchPageType = ({
             color: "var(--primary)",
             textDecoration: "underline",
             textTransform: "none",
+            textAlign: "left",
           }}
         >
           {linkText}

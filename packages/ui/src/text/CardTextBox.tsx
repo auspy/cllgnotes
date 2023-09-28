@@ -10,6 +10,7 @@ const CardTextBox = ({
   year,
   isAbsolute,
   padding,
+  style,
 }: CardTextBoxProps) => {
   const barTextProps: Partial<TextProps> = {
     type: "semi12",
@@ -33,6 +34,7 @@ const CardTextBox = ({
           borderRadius: 5,
           backgroundColor: Colors[color || "white"],
           justifySelf: "center",
+          ...style,
         }}
       >
         {Boolean(department) && (
@@ -46,10 +48,10 @@ const CardTextBox = ({
             {course.replace("Engineering", "Engg.")}
           </Text>
         )}
-        {Boolean(year || semester) && (
+        {Boolean(semester) && (
           <>
             <Text {...barTextProps}>{"•"}</Text>
-            <Text {...barTextProps}>{String(year || semester)}</Text>
+            <Text {...barTextProps}>{String(semester + " sem")}</Text>
           </>
         )}
       </div>

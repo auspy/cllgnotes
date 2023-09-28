@@ -50,3 +50,17 @@ button.priBtn.shadow-box5:hover:enabled {
     fill: var(--dark);
   }
 }
+
+.exploreBtn {
+  & > .arrowIcons > * {
+    transform: translateX(-20px);
+  }
+  &:hover {
+    // & > .arrowIcons > :first-child {
+    //   display: block;
+    // }
+    & > .arrowIcons > * {
+      transform: translateX(-2px);
+    }
+  }
+}

@@ -31,7 +31,28 @@ export const dummyCourses = {
     },
     "Civil Engineering": {},
     "Biomedical Engineering": {},
-    "Computer Science & Engineering": {},
+    "Computer Science & Engineering": {
+      "4": {
+        "Theory of Computation": {
+          code: "21CS2004/CS2004",
+          units: {},
+        },
+        "Analysis and Design of Algorithms": {
+          code: "21CS2008",
+          units: {},
+        },
+      },
+      "6": {
+        Microservices: {
+          code: "CCM3008",
+          units: {},
+        },
+        "Neural Network and Fuzzy Logic": {
+          code: "CS3030",
+          units: {},
+        },
+      },
+    },
     "Electrical & Electronics Engineering": {},
     "Electronics & Communication Engineering": {},
     "Mechanical Engineering": {},

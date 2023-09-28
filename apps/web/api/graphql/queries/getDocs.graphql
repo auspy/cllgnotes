@@ -4,24 +4,7 @@ query{
         status
         data{
             __typename
-            ...on Doc{
-                _id
-                img
-                subject
-                subjectCode
-                desc
-                course
-                department
-                university
-                title
-                pageCount
-                type
-                year
-                creator{
-                    _id
-                    username
-                }
-            }
+            ...DocData
         }
    }
 }

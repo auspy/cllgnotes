@@ -6,4 +6,6 @@ export type PreviewPdfProps = {
   notPurchased: boolean;
   type: DocType;
   totalPages: number;
+  price: number;
+  _id: string;
 };

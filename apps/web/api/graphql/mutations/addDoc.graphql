@@ -10,10 +10,15 @@ mutation ($input:CreateDocInput!){
                 modifiedCount
             }
             ...on Doc{
-                title
+                ...on Notes{
+                    _id
+                    title
+                    }
+                    ...on Paper{
                 _id
-                img
             }
+            }
+            
         }
     }
 }

@@ -10,6 +10,7 @@ import {
 import { createUploadLink } from "apollo-upload-client";
 
 import { setContext } from "@apollo/client/link/context";
+import { cacheOptions } from "./cache.config";
 
 // // FOR HEADER AUTH
 const authLink = setContext((_, { headers }) => {
@@ -37,7 +38,10 @@ const authLink = setContext((_, { headers }) => {
 // have a function to create a client for you
 function makeClient() {
   const httpLink = authLink.concat(
-    createUploadLink({ uri: urlGql, credentials: "include" })
+    createUploadLink({
+      uri: urlGql,
+      credentials: "include",
+    })
   );
 
   // new HttpLink({
@@ -51,7 +55,7 @@ function makeClient() {
 
   return new NextSSRApolloClient({
     // use the `NextSSRInMemoryCache`, not the normal `InMemoryCache`
-    cache: new NextSSRInMemoryCache(),
+    cache: new NextSSRInMemoryCache(cacheOptions),
     connectToDevTools: true,
     // credentials: "include",
     link:

@@ -9,35 +9,93 @@ type Creator{
 enum docType{
     notes
     paper
-    presentation
 }
-type Doc {
+interface DocCommon{
     _id: ID!
-    title: String!
-    desc: String
-    price: Float
     img: String!
-    pageCount: Int
-    type: docType!
     published: Boolean!
+    type: docType!
+    subject: String!
+    subjectCode: String!
+    pageCount: Int
     createdAt: String
-    creator: Creator!
     tLikes: Int
     rating: Float
     purchaseCount: Int
     course: String
     department: String
+    semester: Int
     year: Int
     university: String
-    topic: [String]
-   # subject: Subjects!
-    subject: String!
-   # subjectCode: SubjectCode!
-    subjectCode: String!
-    chapters: [String]
-  }
-input CreateDocInput {
+    creator: Creator
+    price: Float
+}
+type Notes implements DocCommon {
+    _id: ID!
     title: String!
+    img: String!
+    type: docType!
+    published: Boolean!
+    creator: Creator!
+    subject: String!
+    subjectCode: String!
+    desc: String
+    price: Float
+    pageCount: Int
+    createdAt: String
+    tLikes: Int
+    rating: Float
+    purchaseCount: Int
+    # make them mandatory
+    course: String
+    department: String
+    year: Int
+    semester: Int
+    university: String
+    topics: [String]
+    units: [String]
+    # subjectCode: SubjectCode!
+    # subject: Subjects!
+  }
+type Paper implements DocCommon {
+    _id: ID!
+    img: String!
+    pageCount: Int
+    published: Boolean!
+    createdAt: String
+    creator: Creator!
+    type: docType!
+    testType: TestType!
+    subject: String!
+    subjectCode: String!
+    tLikes: Int
+    rating: Float
+    purchaseCount: Int
+    price: Float
+    # make them mandatory
+    course: String
+    department: String
+    semester: Int
+    year: Int
+    university: String
+}
+enum TestType{
+    mst1
+    mst2
+    endSem
+    # assignment
+    # quiz
+    # surpriseTest
+    # classTest
+    # practical
+    # labTest
+    # project
+    # viva
+    other
+}
+union Doc = Notes | Paper
+input CreateDocInput {
+    title: String
     desc: String
     price: Float
     img: Upload!
@@ -45,49 +103,14 @@ input CreateDocInput {
     published: Boolean!
     course: String
     department: String
+    semester: Int
     year: Int
     university: String
-    topic: [String!]!
+    topics: [String]
     subject: String!
     subjectCode: String!
-    chapters: [String!]!
-}
-enum Chapters{
-    Essentials of Communication
-    test
-}
-enum Subjects {
-    Maths
-    Physics
-    Chemistry
-    Biology
-    Computer
-    English
-    Hindi
-}
-enum SubjectCode {
-    _20MA0102
-    _123
-    _11
-    _22
-    _1
-    _2
-    _3
-}
-enum Topics{
-    Maths
-    Physics
-    Chemistry
-    Biology
-    Computer
-    English
-    Hindi
-    Sanskrit
-    History
-    Geography
-    Civics
-    Economics
-    BusinessStudies
+    units: [String]
+    testType: TestType
 }
 input UpdateDocInput {
     title: String
@@ -95,17 +118,19 @@ input UpdateDocInput {
     price: Float
     # img: Upload #cant change img for now. will add this feature later
     type: docType
+    testType: TestType
     published: Boolean
     course: String
     department: String
+    semester: Int
     year: Int
     university: String
-    topic: [String]
+    topics: [String]
     subject: String
     subjectCode: String
-    chapters: [String]
+    units: [String]
 }
-union DocResData = Doc | updateRes
+union DocResData = Notes | Paper | updateRes
 type docRes{
     msg: String
     err: String
@@ -114,3 +139,41 @@ type docRes{
 }`;
 
 export default typeDocs;
+
+// enum Chapters{
+//     Essentials of Communication
+//     test
+// }
+// enum Subjects {
+//     Maths
+//     Physics
+//     Chemistry
+//     Biology
+//     Computer
+//     English
+//     Hindi
+// }
+// enum SubjectCode {
+//     _20MA0102
+//     _123
+//     _11
+//     _22
+//     _1
+//     _2
+//     _3
+// }
+// enum Topics{
+//     Maths
+//     Physics
+//     Chemistry
+//     Biology
+//     Computer
+//     English
+//     Hindi
+//     Sanskrit
+//     History
+//     Geography
+//     Civics
+//     Economics
+//     BusinessStudies
+// }

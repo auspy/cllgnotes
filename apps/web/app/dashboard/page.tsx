@@ -1,5 +1,5 @@
-import { Heading, LinkButton, Text } from "ui";
-import DashCourses from "./DashDocs";
+import { LinkButton, Text } from "ui";
+import DashDocs from "./DashDocs";
 
 const page = () => {
   return (
@@ -23,7 +23,7 @@ const page = () => {
         <h4 className="upper semi mb20" style={{ opacity: 0.5 }}>
           Created Docs
         </h4>
-        <DashCourses />
+        <DashDocs />
       </div>
     </>
   );

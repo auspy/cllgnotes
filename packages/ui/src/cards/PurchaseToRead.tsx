@@ -1,9 +1,7 @@
-import { ButtonFontSizes } from "@cllgnotes/types";
-import ShadowsType from "@cllgnotes/types/shadows";
 import Image from "next/image";
-import { ChevronRightRounded, Button } from "ui";
+import { ButtonBuyNow } from "ui";
 
-const PurchaseToRead = () => {
+const PurchaseToRead = ({ price, _id }: { price: number; _id: string }) => {
   return (
     <div
       className="card aPosi w100 p20 fccc"
@@ -17,22 +15,11 @@ const PurchaseToRead = () => {
       <div className="w100 rPosi" style={{ height: 245, maxWidth: 250 }}>
         <Image src={"/images/reading.png"} alt="reading book" fill />
       </div>
-      <Button
-        buttonClasses="mt30"
-        buttonStyles={{}}
-        text="purchase to read"
-        fontSize={ButtonFontSizes.large}
-        height={70}
-        boxShadow={ShadowsType.box5}
-        icon={
-          <ChevronRightRounded
-            color="inherit"
-            sx={{
-              fontSize: 32,
-            }}
-            style={{ strokeWidth: 5 }}
-          />
-        }
+      <ButtonBuyNow
+        text="Purchase To read"
+        amount={price}
+        _id={_id}
+        buttonClass="mt20"
       />
     </div>
   );

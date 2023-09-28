@@ -8,3 +8,5 @@ export enum FormTypeEnum {
   NEW = 0,
   UPDATE = 1,
 }
+
+export type DynamicFormProps = {};

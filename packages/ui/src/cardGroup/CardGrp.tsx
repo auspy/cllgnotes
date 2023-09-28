@@ -13,6 +13,7 @@ const CardGrp = ({
   colGap = 20,
   needHeading = true,
   heading,
+  style,
 }: CardGrpProps) => {
   const isRow = type === "row";
   const containerClasses: string = isRow
@@ -39,10 +40,14 @@ const CardGrp = ({
               columnGap: colGap,
               rowGap: isRow ? 0 : rowGap,
               width: "min-content",
+              ...style,
             }}
           >
             {data.map((cardData, i) => (
-              <DocCard key={i + cardData.topic} {...cardData} />
+              <DocCard
+                key={i + (cardData.title ? cardData.title : "0")}
+                {...cardData}
+              />
             ))}
           </div>
         </div>

@@ -1,13 +1,15 @@
 "use client";
-import { confettiEffect, useDeviceType } from "@cllgnotes/lib";
+import { atomUserName, confettiEffect, useDeviceType } from "@cllgnotes/lib";
 import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import { Button, TextField } from "ui";
 
 // will send mails to us using user mails
 const EarnMoneyForm = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const loggedIn = false;
+  const [atomUserNme] = useRecoilState(atomUserName);
+  const loggedIn = atomUserNme.role === "USER" && atomUserNme.username;
   const device = useDeviceType();
   const isDesktop = device === "desktop";
   const handleClick = (e) => {

@@ -45,7 +45,7 @@ const resolverAuth = {
     }
     try {
       context.res.cookie("authToken", token, cookieOptions);
-      console.log("Login success", cookieOptions);
+      // console.log("Login success", cookieOptions);
       return {
         msg: "login success",
         token,

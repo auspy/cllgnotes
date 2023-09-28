@@ -38,6 +38,14 @@ const BelowHeroExplore = () => {
   const docs = data?.getDocs?.data;
   const cardsData = modifyToCardsData(docs, { imgHeight: 240 }) as CardProps[];
   const l = cardsData.length;
+  // console.log(
+  //   "DOCS DATA HERE --->",
+  //   data,
+  //   cardsData,
+  //   error,
+  //   networkStatus,
+  //   client
+  // );
   const foundCourses = data?.getDocs?.status == "success" && Boolean(cardsData);
   const filter = (maxWidth: string | number = 320) => (
     <FilterSidebar
@@ -81,6 +89,7 @@ const BelowHeroExplore = () => {
                 needHeading={false}
                 type="grid"
                 id="nice"
+                style={{ width: "100%" }}
                 data={cardsData}
               />
             ) : (

@@ -18,7 +18,9 @@ export const animateInViewPort = ({
         const elementBottom = element.getBoundingClientRect().bottom;
 
         const isVisible =
-          elementTop >= 0 && elementBottom <= window.innerHeight;
+          elementTop >= 0 && window.innerHeight > elementTop - elementBottom
+            ? elementBottom <= window.innerHeight
+            : true;
 
         if (isVisible) {
           element.classList.add(animation);

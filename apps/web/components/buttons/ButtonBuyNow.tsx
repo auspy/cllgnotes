@@ -10,7 +10,9 @@ const ButtonBuyNow = ({
   amount,
   _id,
   buttonClass,
+  text,
 }: {
+  text?: string;
   amount: number;
   _id: string;
   buttonClass?: string;
@@ -60,7 +62,7 @@ const ButtonBuyNow = ({
   return (
     <Button
       disabled={clicked}
-      text="buy now"
+      text={text || "buy now"}
       height={70}
       buttonClasses={`shadow-box5 ${buttonClass}`}
       onClick={handleClick}

@@ -1,28 +1,10 @@
+#import "../fragments/DocData.graphql"
 query($id:ID!) {
     getDoc(id:$id){
         msg
         status
         data{
-            ...on Doc{
-                 _id
-                img
-                subject
-                subjectCode
-                desc
-                course
-                department
-                university
-                published
-                title
-                topic
-                chapters
-                pageCount
-                type
-                creator{
-                    _id
-                    username
-                }
-            }
+            ...DocData
         }
     }
 }

@@ -1,12 +1,13 @@
 import { urlGql } from "@/constants";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
+import { cacheOptions } from "./cache.config";
 // import { createUploadLink } from "apollo-upload-client";
 
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
     connectToDevTools: true,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache(cacheOptions),
     link:
       // createUploadLink({ uri: urlGql, credentials: "include" }),
       new HttpLink({

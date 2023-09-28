@@ -1,0 +1,24 @@
+fragment NotesData on Notes{
+    _id
+    img
+    title
+    type
+    topics
+    subject
+    subjectCode
+    course
+    department
+    purchaseCount
+    published
+    subject
+    subjectCode
+    year
+    semester
+    tLikes
+    type
+    university
+    creator{
+        _id
+        username
+    }
+}

@@ -136,18 +136,30 @@ const SearchBar = ({
       </div>
       {exploreBtn && (
         <Button
+          buttonClasses="exploreBtn"
           buttonStyles={{ maxWidth: !isDesktop ? "unset" : 289 }}
           text="Explore Docs"
           height={height == 50 ? 60 : height}
           fontSize={ButtonFontSizes.large}
           icon={
-            <ChevronRightRounded
-              color="inherit"
-              sx={{
-                fontSize: 32,
-              }}
-              style={{ strokeWidth: 5 }}
-            />
+            <div className="arrowIcons frc h-[32px] w-[32px] overflow-hidden">
+              <ChevronRightRounded
+                color="inherit"
+                sx={{
+                  fontSize: 32,
+                }}
+                className="mr-[-20px]"
+                style={{ strokeWidth: 5 }}
+              />
+              <ChevronRightRounded
+                color="inherit"
+                sx={{
+                  fontSize: 32,
+                }}
+                style={{ strokeWidth: 5 }}
+                className="transition-all duration-300"
+              />
+            </div>
           }
         />
       )}

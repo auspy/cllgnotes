@@ -19,7 +19,7 @@ const page = async ({
   const doc = data?.getDoc?.data?.[0];
   const status = data?.getDoc?.status;
   const foundCourses = status == "success";
-  console.log("dashboard/id", doc);
+  // console.log("dashboard/id", doc);
   if (!foundCourses || !doc) {
     return <h4>Doc not found</h4>;
   }

@@ -10,35 +10,22 @@ export const modifyToCardsData = (
     return;
   }
   for (const doc of data) {
-    const {
-      course,
-      department,
-      university,
-      title,
-      subject,
-      year,
-      img,
-      _id,
-      ...rest
-    } = doc;
+    const { img, ...rest } = doc;
     // if (
     //   !(course && department && university && title && subject && year && img)
     // ) {
     //   return;
     // }
     arr.push({
-      course: course,
-      department: department,
-      univ: university,
-      subject: subject,
-      year: year,
-      _id: _id,
       ...rest,
-      topic: title,
       ...commonData,
       img: {
-        src: CustomImageLoader({ src: img, type: doc.type, width: 120 }),
-        alt: title,
+        src: CustomImageLoader({
+          src: img,
+          type: doc.type || doc.__typename?.toLowerCase(),
+          width: 120,
+        }),
+        alt: rest._id,
         width: 120,
         height: 120,
         ...(commonData?.img || {}),
@@ -48,7 +35,7 @@ export const modifyToCardsData = (
   return arr;
 };
 
-export const modifyCoursesData = (
+export const modifyDocsData = (
   docs: DocProps[],
   href: string | false = false
 ) => {
@@ -57,7 +44,7 @@ export const modifyCoursesData = (
       ...doc,
       img: {
         src: CustomImageLoader({ src: doc.img, type: doc.type, width: 120 }),
-        alt: doc.title,
+        alt: doc.img,
         fill: true,
       },
     },

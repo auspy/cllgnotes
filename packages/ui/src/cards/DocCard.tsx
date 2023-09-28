@@ -6,7 +6,9 @@ import { CardDetailsText, CardTextBox, LinkWrapper } from "ui";
 export const DocCard = ({
   img,
   subject,
-  topic,
+  title,
+  testType,
+  subjectCode,
   univ,
   imgHeight = 268,
   minWidth,
@@ -19,24 +21,26 @@ export const DocCard = ({
 }: CardProps) => {
   return (
     <>
-      <LinkWrapper href={pathDocId(_id, href)}>
+      <LinkWrapper href={pathDocId(_id, href)} className="nice">
         <div
-          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md max-w-[620px] sm:max-w-[400px] "
+          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md max-w-[620px] sm:max-w-[335px] "
           style={{ minWidth: minWidth || 320, border: Borders.dark }}
         >
-          <div className="">
+          <div className="w100">
             {/* IMAGE */}
             <div
               className="relative rounded-ss-[5px] rounded-se-[5px]"
               style={{
                 height: imgHeight || img.height,
-                width: img.width,
+                width: "100%" || img.width,
                 overflow: "hidden",
               }}
             >
               <Image
                 {...img}
                 style={{
+                  width: "100%",
+                  height: img.fill ? "100%" : "inherit",
                   objectFit: "cover",
                   border: Borders.dark,
                   borderTopLeftRadius: "5px",
@@ -57,8 +61,11 @@ export const DocCard = ({
           <div className="mt-[25px]"></div>
           <CardDetailsText
             _id={_id}
+            subjectCode={subjectCode}
             subject={subject}
-            topic={topic}
+            title={title}
+            year={year}
+            testType={testType}
             univ={univ}
             href={href}
           />

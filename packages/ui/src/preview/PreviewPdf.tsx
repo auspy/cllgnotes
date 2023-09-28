@@ -11,6 +11,7 @@ const PreviewPdf = ({
   img,
   type,
   totalPages: tP,
+  ...props
 }: PreviewPdfProps) => {
   const [page, setPage] = useState(1);
   const totalPages = tP || 1;
@@ -27,7 +28,7 @@ const PreviewPdf = ({
         maxWidth: 955,
       }}
     >
-      {totalPages > 1 && (
+      {!notPurchased && totalPages > 1 && (
         <div className="frcsb mb20">
           <ButtonArrow
             disabled={page === 1}
@@ -44,7 +45,7 @@ const PreviewPdf = ({
           />
         </div>
       )}
-      {notPurchased && <PurchaseToRead />}
+      {notPurchased && <PurchaseToRead {...props} />}
       <div
         className="w100 fcc"
         style={{
