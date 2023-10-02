@@ -4,7 +4,7 @@ import saveImgToCloud from "../../helper/cloudinary/saveImgToCloud.js";
 import deleteImgFromCloud from "../../helper/cloudinary/deleteImgFromCloud.js";
 
 const resolverDocs = {
-  getDocs: async () => {
+  getDocs: async (_, __, context) => {
     const docs = await Docs.find({ published: true })
       .populate("creator")
       .limit(100) // just a most easy but bad way to prevent many course get fetched
@@ -15,7 +15,7 @@ const resolverDocs = {
       data: docs,
     };
   },
-  getDoc: async (_, args) => {
+  getDoc: async (_, args, context) => {
     try {
       const { id } = args;
       console.log("in get course", id);

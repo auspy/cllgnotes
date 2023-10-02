@@ -16,14 +16,16 @@ export const DocCard = ({
   course,
   year,
   color,
+  type,
+  textType,
   _id,
   href, // will be used as base. endpoint will remain same
 }: CardProps) => {
   return (
     <>
-      <LinkWrapper href={pathDocId(_id, href)} className="nice">
+      <LinkWrapper href={pathDocId(_id, href)} className="flex">
         <div
-          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md max-w-[620px] sm:max-w-[335px] "
+          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md max-w-[620px] sm:max-w-[320px] "
           style={{ minWidth: minWidth || 320, border: Borders.dark }}
         >
           <div className="w100">
@@ -61,6 +63,7 @@ export const DocCard = ({
           <div className="mt-[25px]"></div>
           <CardDetailsText
             _id={_id}
+            textType={textType}
             subjectCode={subjectCode}
             subject={subject}
             title={title}
@@ -68,6 +71,7 @@ export const DocCard = ({
             testType={testType}
             univ={univ}
             href={href}
+            type={type}
           />
         </div>
       </LinkWrapper>

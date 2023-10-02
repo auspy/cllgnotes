@@ -1,21 +1,26 @@
 "use client";
-import { atomUserName, dummyLeftMenuItems } from "@cllgnotes/lib";
-import { LeftMenuItemProps } from "@cllgnotes/types";
+import { dummyLeftMenuItems } from "@cllgnotes/lib";
 import { useContext, useState } from "react";
-import { useRecoilState } from "recoil";
+import { LeftMenuItemProps } from "@cllgnotes/types";
 import HeaderDashboard from "./HeaderDashboard";
 import { ContextDeviceType } from "@cllgnotes/lib";
-import { BottomNavigationMenu, LoginToContinue, LeftMenu } from "ui";
+import { LoginToContinue } from "ui";
+import { useSession } from "next-auth/react";
 
 interface DashLayoutProps extends React.PropsWithChildren {}
 const DashLayout = ({ children }: DashLayoutProps) => {
   const [active, setActive] = useState<string>("Courses");
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
-  const [userState] = useRecoilState(atomUserName);
+  const { data, status } = useSession();
   const deviceType = useContext(ContextDeviceType);
   const isDesktop = deviceType === "desktop";
   const menu: LeftMenuItemProps[] = dummyLeftMenuItems as LeftMenuItemProps[];
-  const child = userState.role == "ADMIN" ? children : <LoginToContinue />;
+  const child =
+    data?.user?.role == "ADMIN" && status == "authenticated" ? (
+      children
+    ) : (
+      <LoginToContinue />
+    );
   if (!isDesktop) {
     return (
       <>

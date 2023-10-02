@@ -1,14 +1,4 @@
 "use client";
-const items = [
-  <div className="space-x-5 flex iniline-flex">
-    <div>📝 </div>
-    <div> PRESENTATIONS</div>
-    <div>📖 </div>
-    <div> NOTES</div>
-    <div>📖 </div>
-    <div> QUESTION PAPERS</div>
-  </div>,
-];
 import { Logo, Button, MovingBanner, Text } from "ui";
 import {
   FormControl,
@@ -19,25 +9,29 @@ import {
   SxProps,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useMutation } from "@apollo/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
+import { signIn, useSession } from "next-auth/react";
 // gql imports
 import { LOGIN, REGISTER } from "@/api/graphql/gql";
-import { atomToast, atomUserName } from "@cllgnotes/lib";
+import { atomToast } from "@cllgnotes/lib";
 import Image from "next/image";
 import { BannerFontSizeEnum } from "@cllgnotes/types";
 
 export default function Login() {
   // console.log("Login");
-  const params = useSearchParams().get("t");
+  const session = useSession();
+  console.log("session", session, new Date().toLocaleString());
+  const params = useSearchParams();
+
+  const loginRole = params.get("t");
   const roleType =
     useSearchParams().get("role") == "creator" ? "ADMIN" : "USER";
-  const [isLoginPage, setIsLogin] = useState<boolean>(params != "r");
-  const [_, setUserState] = useRecoilState(atomUserName);
+  const [isLoginPage, setIsLogin] = useState<boolean>(loginRole != "r");
   const [role, setRole] = useState<"USER" | "ADMIN">(roleType);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
@@ -58,6 +52,19 @@ export default function Login() {
     !role ||
     password?.length > 30 ||
     username?.length > 70;
+  // ERROR MANAGEMENT
+  const redirectError = params.get("error");
+  useEffect(() => {
+    if (redirectError) {
+      setToast({
+        text: redirectError,
+        type: "error",
+        secs: 5000,
+      });
+      setClicked(false);
+    }
+  }, [redirectError]);
+  // END
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: "USER" | "ADMIN"
@@ -84,7 +91,21 @@ export default function Login() {
     // }
     return "";
   };
-  const handleButtonClick = () => {
+  const onLoginSuccess = () => {
+    setToast({
+      text: "Login successful. Welcome To Cllgnotes 🥳",
+      type: "success",
+      secs: 5000,
+    });
+    client.resetStore();
+    // console.log("token", data?.login?.token);
+    if (role == "ADMIN") {
+      router.push("/dashboard");
+      return;
+    }
+    router.push("/");
+  };
+  const handleButtonClick = async () => {
     // console.log(username, password);
     setClicked(true);
     if (
@@ -93,83 +114,40 @@ export default function Login() {
       (isLoginPage ? true : email?.length > 13)
     ) {
       // console.log("clicked");
-
-      login({
-        variables: {
-          username: username.trim(),
-          password: password.trim(),
-          ...(isLoginPage ? {} : { email: email.trim() }),
-          role,
-        },
-        onError: (error) => {
-          console.log("error", error);
+      const params = {
+        username: username.trim(),
+        password: password.trim(),
+        ...(isLoginPage ? {} : { email: email.trim() }),
+        role,
+      };
+      if (isLoginPage) {
+        params["callbackUrl"] = role == "ADMIN" ? "dashboard" : "/";
+      }
+      const auth = await signIn("credentials", params)
+        .then((res) => {
+          console.log("res", res);
+          return res;
+        })
+        .catch((err) => {
+          console.log("err in signIn", err);
+        });
+      console.log("AUTH ----", auth?.status);
+      if (auth?.ok) {
+        if (isLoginPage) {
+          onLoginSuccess();
+        } else {
           setToast({
-            text: "Error: Login failed",
-            type: "error",
-            secs: 5000,
-          });
-          setClicked(false);
-        },
-        onCompleted: (data) => {
-          setUsername("");
-          setPassword("");
-          // console.log("completed 2", data);
-          if (
-            data?.login?.status == "failed" ||
-            data?.register?.status == "failed"
-          ) {
-            setToast({
-              text: data?.login?.msg || data?.register?.msg,
-              type: "error",
-              secs: 5000,
-            });
-            setClicked(false);
-            return;
-          }
-          if (!isLoginPage) {
-            setToast({
-              text: "Registration successful. Please login",
-              type: "success",
-              secs: 5000,
-            });
-
-            setIsLogin(true);
-            setClicked(false);
-            return;
-          }
-          setToast({
-            text: "Login successful. Welcome To Cllgnotes 🥳",
+            text: "Registration successful. Please login",
             type: "success",
             secs: 5000,
           });
-          localStorage.setItem(
-            "user",
-            JSON.stringify({ username: data.login.data?.username, role })
-          );
-          // set token
-          const token = data?.login?.token;
-          // localStorage.setItem("authToken", data?.login?.token);
-          if (!token) {
-            setToast({
-              text: "Login failed. Try again!",
-              type: "failed",
-              secs: 5000,
-            });
-            return;
-          }
-          // * LOGIN SUCCESS
-          client.resetStore();
-          // console.log("token", data?.login?.token);
-          setUserState({ username: data.login.data?.username, role });
-          if (role == "ADMIN") {
-            router.push("/dashboard");
-            return;
-          }
-          router.push("/");
-        },
-      });
+
+          setIsLogin(true);
+          setClicked(false);
+          return;
+        }
+      }
     }
-    // console.log("query data", data, loading);
   };
   const textFieldStyle: React.CSSProperties = {
     height: 60,
@@ -345,8 +323,26 @@ export default function Login() {
               text={isLoginPage ? "Login" : "Register"}
               height={70}
               width={"100%"}
+              disabled={clicked}
+              loading={loading || clicked}
               onClick={handleButtonClick}
             />
+            {role == "USER" && (
+              <Button
+                disabled={clicked}
+                loading={loading || clicked}
+                buttonClasses="btn-click mt10 shadow-box2"
+                text={"Login with Google"}
+                height={70}
+                width={"100%"}
+                onClick={async () => {
+                  const data = await signIn("google", {
+                    callbackUrl: "/",
+                  });
+                  console.log("signin data ====>", data);
+                }}
+              />
+            )}
             {/* <Button
               type="submit"
               value={pageType}

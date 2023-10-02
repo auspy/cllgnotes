@@ -119,8 +119,5 @@ h1 {
   @apply w100;
   @apply fcc;
   @apply h-full;
-  background: url("../public/images/lines.svg") repeat-x;
-}
-.nice {
-  display: flex;
+  background: url("../public/images/lines.svg") repeat;
 }

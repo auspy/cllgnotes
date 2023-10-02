@@ -1,6 +1,7 @@
 import { ButtonProps } from "@cllgnotes/types/types.buttons";
 import Text from "../../text/Text";
 import { FontSizeEnum } from "@cllgnotes/types/types.text";
+import { CircularProgress } from "ui";
 // TemplateButton
 // files needed: common.css
 const TmplButton = ({
@@ -16,12 +17,13 @@ const TmplButton = ({
   iconLeft,
   padding,
   iconGap = 10,
+  loading,
   disabled,
 }: ButtonProps) => {
   return (
     <button
       key={text}
-      disabled={disabled}
+      disabled={disabled || loading}
       className={`frcc ${buttonClasses}`}
       style={{
         height: height,
@@ -32,15 +34,21 @@ const TmplButton = ({
       }}
       onClick={onClick}
     >
-      {iconLeft && icon}
-      {text && (
-        <Text
-          text={text}
-          fontSize={fontSize as unknown as FontSizeEnum}
-          {...textProps}
-        />
+      {loading ? (
+        <CircularProgress size={16} />
+      ) : (
+        <>
+          {iconLeft && icon}
+          {text && (
+            <Text
+              text={text}
+              fontSize={fontSize as unknown as FontSizeEnum}
+              {...textProps}
+            />
+          )}
+          {!iconLeft && icon}
+        </>
       )}
-      {!iconLeft && icon}
     </button>
   );
 };

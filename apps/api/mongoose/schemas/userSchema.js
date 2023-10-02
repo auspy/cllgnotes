@@ -5,6 +5,7 @@ const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   purchasedDocs: [{ type: Schema.Types.ObjectId, ref: "Docs" }],
+  role: { type: String, required: true },
   // // maybe later after testing we can add these fields as well
   // firstName: { type: String },
   // lastName: { type: String },

@@ -1,15 +1,17 @@
 "use client";
-import { atomUserName, confettiEffect, useDeviceType } from "@cllgnotes/lib";
+import { confettiEffect, useDeviceType } from "@cllgnotes/lib";
 import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
 import { Button, TextField } from "ui";
 
 // will send mails to us using user mails
 const EarnMoneyForm = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [atomUserNme] = useRecoilState(atomUserName);
-  const loggedIn = atomUserNme.role === "USER" && atomUserNme.username;
+  const { data, status } = useSession();
+  // todo add role here if needed
+  // const loggedIn = atomUserNme.role === "USER" && atomUserNme.username;
+  const loggedIn = status == "authenticated";
   const device = useDeviceType();
   const isDesktop = device === "desktop";
   const handleClick = (e) => {

@@ -1,5 +1,5 @@
 import Colors, { ColorsType } from "./colors";
-import { TestType } from "./types.gql";
+import { DocType, TestType } from "./types.gql";
 
 export enum HeadingType {
   h1,
@@ -111,6 +111,8 @@ export type CardDetailsBoxProps = {
   univ: string;
   href?: string;
   allowWrap?: boolean;
+  type?: DocType;
+  textType?: "semi16" | "h3";
 } & (
   | {
       testType?: undefined;

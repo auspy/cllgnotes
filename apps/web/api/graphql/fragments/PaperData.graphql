@@ -14,7 +14,6 @@ fragment PaperData on Paper{
     semester
     testType
     tLikes
-    type
     university
     creator{
         _id

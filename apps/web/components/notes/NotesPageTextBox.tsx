@@ -1,8 +1,8 @@
 "use client";
-import { atomUserName, firstLetterUppercase } from "@cllgnotes/lib";
+import { firstLetterUppercase } from "@cllgnotes/lib";
 import { NotesHeroTextProps } from "@cllgnotes/types";
+import { useSession } from "next-auth/react";
 import { memo } from "react";
-import { useRecoilState } from "recoil";
 import { CardTextBox, DetailTabGroup, Text } from "ui";
 
 const NotesPageTextBox = ({
@@ -14,9 +14,8 @@ const NotesPageTextBox = ({
   subjectCode,
   textBoxProps,
 }: NotesHeroTextProps) => {
-  // console.log("NotesPageTextBox is ssr");
-  const [user] = useRecoilState(atomUserName);
-  const notLoggedIn = !user.username;
+  const { status } = useSession();
+  const notLoggedIn = status !== "authenticated";
   return (
     <>
       <div style={{ width: "100%", maxWidth: notLoggedIn ? 915 : "none" }}>

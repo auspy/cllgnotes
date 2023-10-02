@@ -1,21 +1,23 @@
 "use client";
 import { authLogout } from "@/api/auth/auth";
-import { useRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
-import { atomUserName, ContextAuthLogout } from "@cllgnotes/lib";
+import { ContextAuthLogout } from "@cllgnotes/lib";
 import { useMutation } from "@apollo/client";
 import { LOGOUT } from "@/api/graphql/gql";
 import { useContext } from "react";
+import { signOut, useSession } from "next-auth/react";
 
 export const AuthWrapper = ({ children }: React.PropsWithChildren) => {
-  const [user, setUserState] = useRecoilState(atomUserName);
-  const isAdmin = user.role === "ADMIN";
+  const { data } = useSession();
+  const isAdmin = data?.user?.role == "ADMIN";
   const router = useRouter();
   const [logout, { client }] = useMutation(LOGOUT);
   const logoutFunc = (changePage: boolean = isAdmin) => {
+    signOut({
+      redirect: changePage,
+    });
     authLogout({
       router,
-      setUsername: setUserState,
       localStorage,
       sessionStorage,
       logoutApi: logout,

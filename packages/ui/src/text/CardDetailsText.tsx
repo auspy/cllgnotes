@@ -13,7 +13,9 @@ const CardDetailsText = ({
   univ,
   testType,
   _id,
+  type,
   href,
+  textType,
   allowWrap = false,
 }: CardDetailsBoxProps) => {
   const detailsTextProps: Partial<TextProps> = {
@@ -28,8 +30,11 @@ const CardDetailsText = ({
     <>
       <div className="space-y-1">
         {title && <Text {...detailsTextProps}>{subject}</Text>}
-        <Text textStyle={{ ...noWrapStyle }} type="h3">
-          <Link href={pathDocId(_id, href)}>
+        <Text {...detailsTextProps} textTransform="capitalize">
+          {type == "notes" ? "📓 Notes" : "📝 Paper"}
+        </Text>
+        <Text textStyle={{ ...noWrapStyle }} type={textType || "h3"}>
+          <Link className="mt5" href={pathDocId(_id, href)}>
             {title
               ? firstLetterUppercase(title)
               : `${
@@ -37,9 +42,11 @@ const CardDetailsText = ({
                 } ${subject} ${subjectCode ? `- ${subjectCode}` : ""}`}
           </Link>
         </Text>
-        <Text {...detailsTextProps}>
-          {(univ || "SRM University") + (year ? ", " + year : "")}
-        </Text>
+        <div className="frcsb w100">
+          <Text {...detailsTextProps}>
+            {(univ || "SRM University") + (year ? ", " + year : "")}
+          </Text>
+        </div>
       </div>
     </>
   );

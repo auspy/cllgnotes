@@ -18,7 +18,7 @@ const page = async ({ params }) => {
   const status = data?.getDoc?.status;
   const foundCourses = status == "success";
 
-  log(data);
+  // log(data);
   if (!doc || !foundCourses) {
     return <h2>no data found</h2>;
   }
@@ -33,6 +33,7 @@ const page = async ({ params }) => {
       "year",
       "course",
       "department",
+      "creator",
     ];
     const arr: DetailTabProps[] = [];
     for (const key in doc) {
@@ -41,10 +42,10 @@ const page = async ({ params }) => {
           arr.push({ title: key, value: doc[key].join(", ") });
           continue;
         }
-        if (key == "creator") {
-          arr.push({ title: key, value: doc[key].username });
-          continue;
-        }
+        // if (key == "creator") {
+        //   arr.push({ title: key, value: doc[key].username });
+        //   continue;
+        // }
         arr.push({ title: key, value: doc[key] });
       }
     }

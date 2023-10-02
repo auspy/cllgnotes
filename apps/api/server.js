@@ -57,12 +57,15 @@ app.use(
       // console.log("Request headers", req.body);
       // Verify and decode JWT token from request headers
       // const token = req.headers.authorization;
-      const token = req.cookies.authToken;
+      // let token = req.cookies.authToken;
+      // if (!token) token = req.cookies["next-auth.session-token"];
       // console.log("Token found in request", token);
+
+      const token = req.cookies["next-auth.session-token"];
       try {
         if (!token) return { res };
-        const user = decryptAccessToken(token);
-        console.log("User found in token", user);
+        const user = await decryptAccessToken(token, res);
+        console.log("User found after decoding", user);
         return { user, res };
       } catch (error) {
         // Handle token verification errors, if any

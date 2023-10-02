@@ -29,7 +29,7 @@ const resolvers = {
   },
   Mutation: {
     ...resolverMutDocs,
-    ...resolverAuth,
+    // ...resolverAuth,
   },
 };
 export default resolvers;

@@ -36,7 +36,10 @@ const BelowHeroExplore = () => {
   // GRAPHQL QUERY
   const { data } = useSuspenseQuery<DocsQueryProps>(GET_DOCS);
   const docs = data?.getDocs?.data;
-  const cardsData = modifyToCardsData(docs, { imgHeight: 240 }) as CardProps[];
+  const cardsData = modifyToCardsData(docs, {
+    imgHeight: 240,
+    textType: "semi16",
+  }) as CardProps[];
   const l = cardsData.length;
   // console.log(
   //   "DOCS DATA HERE --->",

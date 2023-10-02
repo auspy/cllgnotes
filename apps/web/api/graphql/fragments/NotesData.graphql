@@ -15,7 +15,6 @@ fragment NotesData on Notes{
     year
     semester
     tLikes
-    type
     university
     creator{
         _id

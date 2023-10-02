@@ -1,9 +1,11 @@
 import jwt from "jsonwebtoken";
+import { User } from "../mongoose/modals/modals.js";
+import { cookieOptions } from "../constants.js";
 const encryptAccessToken = (user) => {
   const secret = process.env.JWT_SECRET;
   if (!(user && secret)) return null;
-  return jwt.sign({ user }, secret, {
-    expiresIn: "1d",
+  return jwt.sign({ ...user }, secret, {
+    expiresIn: "7d",
   });
 };
 
@@ -25,22 +27,37 @@ const decryptAccessTokenMW = (req, res, next) => {
   }
 };
 
-const decryptAccessToken = (accessToken) => {
+const decryptAccessToken = (accessToken, res) => {
   try {
     if (accessToken) {
       const token = accessToken; // if cookie
       // const token = accessToken.split(" ")[1]; // if header
-      return jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
-        if (err || !data || !data.user?.username) {
-          console.log(
-            "Error is in decryptAccessToken",
-            data,
-            data?.user?.username
-          );
-          return null;
-        }
-        console.log("User found in token", data?.user);
-        return data?.user;
+      return new Promise((resolve) => {
+        jwt.verify(token, process.env.JWT_SECRET, async (err, data) => {
+          if (err || !data || !data.username) {
+            console.log("Error is in decryptAccessToken", data, data?.username);
+            return null;
+          }
+          // if (!data._id) {
+          //   if (!res) return null;
+          //   const user = await User.findOne({ username: data.username });
+          //   if (!user) {
+          //     console.log("User not found in database");
+          //     return null;
+          //   }
+          //   data._id = user._id;
+          //   const newToken = encryptAccessToken(data);
+          //   res.cookie("next-auth.session-token", newToken, cookieOptions);
+          //   // const cookie = serialize(
+          //   //   "next-auth.session-token",
+          //   //   newToken,
+          //   //   cookieOptions
+          //   // );
+          //   // res.setHeader("Set-Cookie", cookie);
+          // }
+          console.log("User found in token", data);
+          resolve(data);
+        });
       });
     }
   } catch (error) {

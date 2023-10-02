@@ -1,5 +1,6 @@
 import { Admin, User } from "../../mongoose/modals/modals.js";
 import { encryptAccessToken } from "../../helper/jwtToken.js";
+import { cookieOptions } from "../../constants.js";
 
 const resolverAuth = {
   login: async (parent, args, context) => {
@@ -32,19 +33,8 @@ const resolverAuth = {
       };
     }
     // add token to authorization header
-    const env = process.env.NODE_ENV;
-    const isDev = env === "development";
-    const cookieOptions = {
-      httpOnly: true, // HttpOnly: if true, the cookie cannot be accessed from within the client-side javascript code.
-      // domain: isDev ? "localhost" : "",
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-      sameSite: "Lax",
-    };
-    if (!isDev) {
-      cookieOptions.secure = true;
-    }
     try {
-      context.res.cookie("authToken", token, cookieOptions);
+      context.res.cookie("next-auth.session-token", token, cookieOptions);
       // console.log("Login success", cookieOptions);
       return {
         msg: "login success",

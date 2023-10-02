@@ -41,6 +41,7 @@ export { default as UserAvatarMenu } from "./src/Avatar/UserAvatarMenu";
 export { default as RecoilWrapper } from "./src/wrappers/RecoilWrapper";
 export { default as LinkWrapper } from "./src/wrappers/LinkWrapper";
 export { default as AnimateWrapper } from "./src/wrappers/AnimateWrapper";
+export { default as SessionWrapper } from "./src/wrappers/SessionWrapper";
 // LEFT MENU
 export { default as LeftMenu } from "./src/leftMenu/LeftMenu";
 export { default as LeftMenuBottomNavi } from "./src/leftMenu/LeftMenuBottomNavi";

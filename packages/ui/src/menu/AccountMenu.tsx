@@ -4,11 +4,11 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import { Divider, styled } from "@mui/material";
-import { useRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
-import { atomUserName, ContextAuthLogout } from "@cllgnotes/lib";
+import { ContextAuthLogout } from "@cllgnotes/lib";
 import { Dashboard, MenuBook } from "@mui/icons-material";
 import { useContext } from "react";
+import { useSession } from "next-auth/react";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -64,7 +64,8 @@ export default function AccountMenu({
   clicked: boolean;
 }) {
   const router = useRouter();
-  const [userState] = useRecoilState(atomUserName);
+  const { data } = useSession();
+  // console.log("data", data);
   const open = Boolean(anchorEl);
   const logout = useContext(ContextAuthLogout);
 
@@ -82,10 +83,12 @@ export default function AccountMenu({
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
       <MenuItem disabled={true}>
-        <span className="bold16 caps">{userState.username}</span>
+        <span className="bold16 caps">
+          {data?.user?.name || data?.user?.username}
+        </span>
       </MenuItem>
       <Divider />
-      {userState.role == "ADMIN" && (
+      {data?.user?.role == "ADMIN" ? (
         <MenuItem
           onClick={() => {
             // send to dashboard
@@ -98,8 +101,7 @@ export default function AccountMenu({
           </ListItemIcon>
           <span className="medi14">Dashboard</span>
         </MenuItem>
-      )}
-      {userState.role == "USER" && (
+      ) : (
         <MenuItem
           onClick={() => {
             // send to dashboard
