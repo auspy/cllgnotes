@@ -12,6 +12,7 @@ interface DocCommon {
   pageCount?: number;
   createdAt?: string;
   tLikes?: number;
+  isPurchased?: boolean;
   rating?: number;
   purchaseCount?: number;
   course?: string;
@@ -29,9 +30,12 @@ interface Notes extends DocCommon {
   desc?: string;
   topics?: string[];
   units?: string[];
+  testType?: undefined;
 }
 
 interface Paper extends DocCommon {
+  title?: undefined;
+  desc?: undefined;
   university: string;
   testType: TestType;
 }

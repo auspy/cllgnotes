@@ -8,6 +8,8 @@ const NotesData = `fragment NotesData on Notes{
     purchaseCount
     published
     subject
+    isPurchased
+    pageCount
     subjectCode
     year
     semester
@@ -26,6 +28,8 @@ const PaperData = `fragment PaperData on Paper{
     course
     department
     purchaseCount
+    isPurchased
+    pageCount
     published
     subject
     subjectCode

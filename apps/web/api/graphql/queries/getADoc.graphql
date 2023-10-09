@@ -1,6 +1,6 @@
 #import "../fragments/DocData.graphql"
-query($id:ID!) {
-    getDoc(id:$id){
+query($id:ID!,$userId:String) {
+    getDoc(id:$id,userId:$userId){
         msg
         status
         data{

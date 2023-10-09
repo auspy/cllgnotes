@@ -29,6 +29,7 @@ interface DocCommon{
     university: String
     creator: Creator
     price: Float
+    isPurchased: Boolean
 }
 type Notes implements DocCommon {
     _id: ID!
@@ -46,6 +47,7 @@ type Notes implements DocCommon {
     tLikes: Int
     rating: Float
     purchaseCount: Int
+    isPurchased: Boolean
     # make them mandatory
     course: String
     department: String
@@ -72,6 +74,7 @@ type Paper implements DocCommon {
     rating: Float
     purchaseCount: Int
     price: Float
+    isPurchased: Boolean
     # make them mandatory
     course: String
     department: String

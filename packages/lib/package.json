@@ -24,13 +24,19 @@
     "./state": {
       "import": "./state/index.ts",
       "require": "./state/index.js"
+    },
+    "./server": {
+      "import": "./server/index.ts",
+      "require": "./server/index.js"
     }
   },
   "scripts": {},
   "devDependencies": {
-    "@cllgnotes/types": "workspace:*"
+    "@cllgnotes/types": "workspace:*",
+    "@types/bcrypt": "^5.0.0"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "canvas-confetti": "^1.6.0",
     "recoil": "^0.7.7",
     "ui": "workspace:*"

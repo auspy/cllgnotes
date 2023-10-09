@@ -28,4 +28,5 @@ export type NotesHeroTextProps = Omit<
   img: ImgProps;
   type: DocType;
   textBoxProps: CardTextBoxProps;
+  notPurchased?: boolean;
 };

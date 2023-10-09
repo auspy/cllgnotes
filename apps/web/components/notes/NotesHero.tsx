@@ -9,6 +9,7 @@ const NotesHero = ({
   labels,
   desc,
   img,
+  notPurchased = true,
   ...props
 }: NotesHeroTextProps) => {
   // const deviceType = useContext(ContextDeviceType);
@@ -23,7 +24,6 @@ const NotesHero = ({
   //   zIndex: 2000,
   //   transition: "transform 0.4s ease",
   // };
-  const notPurchased = true;
   const textbox = (
     <NotesPageTextBox
       title={title}

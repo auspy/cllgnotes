@@ -18,9 +18,10 @@ const EarnMoneyFooter = ({
         style={{ ...containerStyle }}
       >
         <div
-          className="rPosi h-auto b lg:h-[660px] p-5 sm:p-7"
+          className="rPosi h-auto b lg:h-[660px] p-5 sm:p-7 lineBg"
           style={{
             display: "flex",
+            flexDirection: "row",
             backgroundColor: Colors.lGrey2,
           }}
         >

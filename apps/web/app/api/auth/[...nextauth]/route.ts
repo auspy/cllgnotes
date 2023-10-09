@@ -5,20 +5,35 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/adapters/mongodb";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { comparePassword, hashPassword } from "@cllgnotes/lib/server";
 
-type getUserProps =
+type getUserProps = { needPass?: boolean } & (
   | { username: string; email?: string }
-  | { username?: string; email: string };
+  | { username?: string; email: string }
+);
 
-const getUser = async ({ username, email }: getUserProps) => {
+const getUser = async ({ username, email, needPass = false }: getUserProps) => {
   const data: any = [];
   if (username) data.push({ username: username });
   if (email) data.push({ email: email });
   try {
     const client = await clientPromise;
-    const user = await client.db().collection("users").findOne({
-      $or: data,
-    });
+    const user = await client
+      .db()
+      .collection("users")
+      .findOne(
+        {
+          $or: data,
+        },
+        {
+          projection: {
+            password: needPass ? 1 : 0,
+            username: 1,
+            role: 1,
+            _id: 1,
+          },
+        }
+      );
     return user;
   } catch (error) {
     console.log("getUser error", error);
@@ -57,7 +72,7 @@ export const authOptions: AuthOptions = {
           data["username"] = user.username;
           data["role"] = user.role || "USER";
         }
-        console.log("GOOGLE PROFILE", data);
+        // console.log("GOOGLE PROFILE", data);
         return data;
       },
     }),
@@ -72,17 +87,18 @@ export const authOptions: AuthOptions = {
       authorize: async (credentials, req) => {
         if (!credentials) return null;
         const { username, email, password, role } = credentials;
-        const user = await getUser({ username: username });
+        const user = await getUser({ username: username, needPass: true });
         if (!user) {
           console.log("-- registering user --");
           if (!(email && username && password))
             throw new Error("Invalid data: Check fields and try again");
           // register user
           const client = await clientPromise;
+          const hashPass = await hashPassword(password);
           const newUser = await client.db().collection("users").insertOne({
             username,
             email,
-            password,
+            password: hashPass,
             role,
           });
           if (!newUser) {
@@ -94,7 +110,8 @@ export const authOptions: AuthOptions = {
         // LOGIN CODE
         console.log("-- logging in user --");
         const usr = { ...user };
-        if (password === user.password) {
+        const isMatch = await comparePassword(password, user.password);
+        if (isMatch) {
           delete usr.password;
           console.log("LOGGED IN USER", usr);
           return {
@@ -109,9 +126,10 @@ export const authOptions: AuthOptions = {
   session: { strategy: "jwt" },
   jwt: {
     async encode({ secret, token }) {
-      console.log("jwt encode ==>", token);
+      // console.log("jwt encode ==>", token);
       const newToken = {
         ...token,
+        _id: token?._id || token?.id,
         username: token?.username || token?.email?.split("@")[0],
       };
       return jwt.sign(newToken, secret);
@@ -132,13 +150,13 @@ export const authOptions: AuthOptions = {
         ...token,
         ...user,
       };
-      console.log("jwt callback ==>", newToken);
+      // console.log("jwt callback ==>", newToken);
       return newToken;
     },
-    signIn: async ({ user }) => {
-      if (user.status == "failed") return false;
-      return true;
-    },
+    // signIn: async ({ user }) => {
+    //   if (user.status == "failed") return false;
+    //   return true;
+    // },
     session: async ({ session, user, token }) => {
       const newSession = {
         ...session,

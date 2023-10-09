@@ -1,6 +1,4 @@
 import jwt from "jsonwebtoken";
-import { User } from "../mongoose/modals/modals.js";
-import { cookieOptions } from "../constants.js";
 const encryptAccessToken = (user) => {
   const secret = process.env.JWT_SECRET;
   if (!(user && secret)) return null;
@@ -55,7 +53,7 @@ const decryptAccessToken = (accessToken, res) => {
           //   // );
           //   // res.setHeader("Set-Cookie", cookie);
           // }
-          console.log("User found in token", data);
+          // console.log("User found in token", data);
           resolve(data);
         });
       });

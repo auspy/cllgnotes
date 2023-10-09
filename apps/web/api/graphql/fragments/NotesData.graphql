@@ -9,6 +9,8 @@ fragment NotesData on Notes{
     course
     department
     purchaseCount
+    isPurchased
+    pageCount
     published
     subject
     subjectCode

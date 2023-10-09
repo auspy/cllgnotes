@@ -11,7 +11,7 @@ module.exports = {
     // };
     // console.log("Alias path:", aliasPath, config.resolve.alias["@"]);
     // console.log("Import path:", "@/static/parts/box/PartBoxRight");
-
+    config.resolve.fallback = { fs: false, path: false };
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,

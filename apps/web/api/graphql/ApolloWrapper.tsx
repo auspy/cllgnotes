@@ -41,6 +41,9 @@ function makeClient() {
     createUploadLink({
       uri: urlGql,
       credentials: "include",
+      fetchOptions: {
+        cache: "no-store",
+      },
     })
   );
 

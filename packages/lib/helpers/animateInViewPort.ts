@@ -19,7 +19,8 @@ export const animateInViewPort = ({
 
         const isVisible =
           elementTop >= 0 && window.innerHeight > elementTop - elementBottom
-            ? elementBottom <= window.innerHeight
+            ? elementBottom - (elementBottom - elementTop) / 2 <=
+              window.innerHeight
             : true;
 
         if (isVisible) {
