@@ -1,13 +1,21 @@
 import { Header, MovingBanner } from "ui";
 import Colors from "@cllgnotes/types/colors";
-type TmplHeroProps = React.PropsWithChildren & {
-  leftElement?: React.ReactNode;
-  rightElement?: React.ReactNode;
-  height?: number | string;
-};
+type TmplHeroProps = React.PropsWithChildren & { height?: number | string } & (
+    | {
+        centerElement?: undefined;
+        leftElement?: React.ReactNode;
+        rightElement?: React.ReactNode;
+      }
+    | {
+        centerElement?: React.ReactNode;
+        leftElement?: undefined;
+        rightElement?: undefined;
+      }
+  );
 const TmplHero = ({
   leftElement,
   rightElement,
+  centerElement,
   children,
   height,
 }: TmplHeroProps) => {
@@ -24,16 +32,22 @@ const TmplHero = ({
           <Header />
           <div className="lineBg">
             <div
-              className="frfesb topContainer rPosi"
+              className={`${
+                centerElement ? "fccc" : "frfesb"
+              } topContainer rPosi`}
               style={{ height: "100%" }}
             >
-              <div
-                className="fcfs w-0 lg:w-full xl:w-auto rPosi "
-                style={{ gap: 30, paddingBottom: 43 }}
-              >
-                {leftElement}
-              </div>
-              {rightElement}
+              {centerElement || (
+                <>
+                  <div
+                    className="fcfs w-0 lg:w-full xl:w-auto rPosi "
+                    style={{ gap: 30, paddingBottom: 43 }}
+                  >
+                    {leftElement}
+                  </div>
+                  {rightElement}
+                </>
+              )}
             </div>
           </div>
         </div>

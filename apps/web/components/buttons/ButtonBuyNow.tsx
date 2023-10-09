@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import { Button } from "ui";
 import { DocsQueryProps } from "@cllgnotes/types";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 const ButtonBuyNow = ({
   amount,
   _id,
@@ -18,11 +19,15 @@ const ButtonBuyNow = ({
   _id: string;
   buttonClass?: string;
 }) => {
+  const router = useRouter();
   const [purchase, { loading }] = useMutation<DocsQueryProps>(PURCHASE_DOC);
   const [clicked, setClicked] = useState<boolean>(false);
   const { data, status } = useSession();
   const [, setToast] = useRecoilState(atomToast);
   const handleClick = () => {
+    if (clicked) {
+      return;
+    }
     setClicked(true);
     // CHECK IF USER LOGGED IN
     // purchase will be allowed if the role is user and user is logged in
@@ -38,7 +43,11 @@ const ButtonBuyNow = ({
     }
     // MAKE THE PURCHASE
     console.log("making purchase", _id, amount);
-
+    const conf = confirm("Do you want to purchase this document?");
+    if (!conf) {
+      console.log("purchase cancelled");
+      return;
+    }
     purchase({
       variables: {
         docId: _id,
@@ -52,6 +61,7 @@ const ButtonBuyNow = ({
           type: data?.purchaseDoc?.status == "failed" ? "error" : "success",
           secs: 5000,
         });
+        // router.push("/learnings");
         setClicked(false);
       },
       onError: (err) => {

@@ -1,5 +1,4 @@
 import { resolverDocs, resolverMutDocs } from "./resolvers/resolver.docs.js";
-import resolverAuth from "./resolvers/resolvers.auth.js";
 
 const docType = (obj) => {
   // console.log(obj, "doc type");

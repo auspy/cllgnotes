@@ -84,7 +84,7 @@ const resolverDocs = {
       }
       // IF USER EXISTS
       if ((user && user._id) || userId) {
-        const uid = user?._id || userId;
+        const uid = (Boolean(user) && user._id) || userId;
         let isPurchased = false;
         // CHECK IF DOC IS PURCHASED IN CACHE
         console.log("--- getting purchased doc from cache ---");
@@ -113,24 +113,21 @@ const resolverDocs = {
       };
     }
   },
-  getPurchasedDocs: async (_, __, context) => {
+  getPurchasedDocs: async (_, args, context) => {
     try {
+      const { userId } = args;
       const { user } = context;
-      console.log(user, "in get purchased courses");
-      if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
+      const uid = (Boolean(user) && user._id) || userId;
+      console.log(uid, "in get purchased docs");
+      if (!uid) return { msg: "Invalid user", status: "failed" };
       // CHECK IF PURCHASED DOCS INFO EXISTS IN CACHE
       const pDocs = [];
-      let infoExists = await redisClient.hget(
-        user._id + ":purchasedDocs",
-        "info"
-      );
+      let infoExists = await redisClient.hget(uid + ":purchasedDocs", "info");
       // IF EXISTS IN CACHE
       if (infoExists) {
-        console.log("--- using cached purchased courses info ---");
+        console.log("--- using cached purchased docs info ---");
         // GET PDOCS FROM CACHE
-        const cachedPDocs = await redisClient.hvals(
-          user._id + ":purchasedDocs"
-        );
+        const cachedPDocs = await redisClient.hvals(uid + ":purchasedDocs");
         // SET PURCHASED DOCS
         for (const doc of cachedPDocs) {
           try {
@@ -144,8 +141,8 @@ const resolverDocs = {
       }
       // IF NOT FOUND IN CACHE, GET FROM DB (PUTTING IN IF STATEMENT TO CALL DB IF ERROR OCCURS IN CACHE)
       if (!infoExists) {
-        // console.log("getting purchased courses for user", user._id);
-        const courses = await User.findById(user._id)
+        // console.log("getting purchased courses for user", uid);
+        const docs = await User.findById(uid)
           .select("purchasedDocs")
           .populate({
             path: "purchasedDocs",
@@ -155,26 +152,30 @@ const resolverDocs = {
           })
           .limit(50) // just a most easy but bad way to prevent many course get fetched
           .exec();
-        Array.prototype.push.apply(pDocs, courses.purchasedDocs);
+        console.log(docs.length, "found in purchased docs --");
+        Array.prototype.push.apply(pDocs, docs.purchasedDocs);
         // STORE NEW DOCS IN CACHE
-        const a = courses.purchasedDocs.reduce(
+        const a = docs.purchasedDocs.reduce(
           (acc, doc) => ({
             ...acc,
             [doc._id]: JSON.stringify(doc),
           }),
           {}
         );
-        redisClient.hset(user._id + ":purchasedDocs", { info: true, ...a });
-        console.log("-- added purchased courses info in cache --");
+        redisClient.hset(uid + ":purchasedDocs", { info: true, ...a });
+        console.log("-- added purchased docs info in cache --");
+      }
+      console.log("-- get purchased docs", pDocs.length);
+      if (pDocs.length === 0) {
+        return {
+          msg: "No purchased docs found",
+          status: "success",
+        };
       }
       return {
         msg: "Docs fetched successfully",
         status: "success",
-        data:
-          courses.purchasedDocs?.map((doc) => ({
-            ...doc,
-            isPurchased: true, // putting this here so that if apollo uses these courses then it will show the course as purchased
-          })) || [],
+        data: pDocs,
       };
     } catch (error) {
       console.log(`Error in getPurchasedDocs: ${error.message}`);

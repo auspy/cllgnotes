@@ -24,7 +24,6 @@ export { default as ToolBar } from "./src/bar/ToolBar";
 export { default as muiTheme } from "./src/mui/muiTheme";
 export { default as ButtonGridIcon } from "./src/buttons/ButtonGridIcon";
 export { default as Header } from "./src/header/Header";
-export { default as TmplHero } from "./src/templates/hero/TmplHero";
 export { default as DetailTabGroup } from "./src/text/DetailTabGroup";
 export { default as DetailTab } from "./src/text/DetailTab";
 export { default as ButtonBuyNow } from "../../apps/web/components/buttons/ButtonBuyNow";
@@ -57,3 +56,6 @@ export { default as RightDrawer } from "./src/drawer/RightDrawer";
 export { default as BottomDrawer } from "./src/drawer/BottomDrawer";
 // BUTTONS
 export { default as ButtonArrow } from "./src/buttons/ButtonArrow";
+// TEMPLATES
+export { default as TmplHero } from "./src/templates/hero/TmplHero";
+export { default as TmplHeroCenter } from "./src/templates/hero/TmplHeroCenter";

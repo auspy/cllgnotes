@@ -23,9 +23,12 @@ export const DocCard = ({
 }: CardProps) => {
   return (
     <>
-      <LinkWrapper href={pathDocId(_id, href)} className="flex">
+      <LinkWrapper
+        href={pathDocId(_id, href)}
+        className="flex max-w-[620px] md:max-w-[460px] xl:max-w-[320px]"
+      >
         <div
-          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md max-w-[620px] sm:max-w-[320px] "
+          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md "
           style={{ minWidth: minWidth || 320, border: Borders.dark }}
         >
           <div className="w100">

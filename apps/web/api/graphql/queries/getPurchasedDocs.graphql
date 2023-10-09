@@ -1,5 +1,5 @@
-query{
-    getPurchasedDocs{
+query($userId:String){
+    getPurchasedDocs(userId:$userId){
         msg
         status
         data{

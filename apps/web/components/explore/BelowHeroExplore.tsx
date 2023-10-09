@@ -93,7 +93,9 @@ const BelowHeroExplore = () => {
                 type="grid"
                 id="nice"
                 style={{ width: "100%" }}
-                data={cardsData}
+                data={cardsData.sort(
+                  (a, b) => a.title?.localeCompare(b.title) || 0
+                )}
               />
             ) : (
               <List id="" data={cardsData!} />

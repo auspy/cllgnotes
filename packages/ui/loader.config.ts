@@ -1,4 +1,3 @@
-"use client";
 import { DocType } from "@cllgnotes/types";
 import { ImageLoaderProps } from "next/image";
 

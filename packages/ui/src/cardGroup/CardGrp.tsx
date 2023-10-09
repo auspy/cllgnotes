@@ -18,7 +18,7 @@ const CardGrp = ({
   const isRow = type === "row";
   const containerClasses: string = isRow
     ? ` overflow-scroll overflow-y-hidden`
-    : `flex-wrap`;
+    : `grid`;
   return (
     <>
       <div className=" w100">
@@ -35,11 +35,12 @@ const CardGrp = ({
           )}
           <div
             id={id}
-            className={`w100 frc ${containerClasses}`}
+            className={`w100 frc  ${containerClasses}`}
             style={{
               columnGap: colGap,
               rowGap: isRow ? 0 : rowGap,
               width: "min-content",
+              grid: "auto-flow / repeat(auto-fill, minmax(320px, 1fr))",
               ...style,
             }}
           >

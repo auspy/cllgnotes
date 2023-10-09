@@ -105,14 +105,14 @@ export default function AccountMenu({
         <MenuItem
           onClick={() => {
             // send to dashboard
-            router.push("/purchased");
+            router.push("/learnings");
             handleClose();
           }}
         >
           <ListItemIcon>
             <MenuBook fontSize="small" />
           </ListItemIcon>
-          <span className="medi14">My Docs</span>
+          <span className="medi14">My Learnings</span>
         </MenuItem>
       )}
       <MenuItem

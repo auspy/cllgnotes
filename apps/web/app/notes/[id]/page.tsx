@@ -41,7 +41,9 @@ const page = async ({ params }) => {
     for (const key in doc) {
       if (!notNeededLabels.includes(key) && doc[key]) {
         if (Array.isArray(doc[key])) {
-          arr.push({ title: key, value: doc[key].join(", ") });
+          if (doc[key].length > 0) {
+            arr.push({ title: key, value: doc[key].join(", ") });
+          }
           continue;
         }
         // if (key == "creator") {
