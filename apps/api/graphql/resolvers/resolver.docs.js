@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoConn from "../../config/mongoose.config.js";
 import { Admin, Docs, User } from "../../mongoose/modals/modals.js";
 import saveImgToCloud from "../../helper/cloudinary/saveImgToCloud.js";
 import deleteImgFromCloud from "../../helper/cloudinary/deleteImgFromCloud.js";
@@ -353,35 +354,31 @@ const resolverMutDocs = {
     }
   },
   purchaseDoc: async (_, args, context) => {
+    // const session = await mongoConn.startSession();
+    // await session.startTransaction();
     try {
       const { user } = context;
       if (!(user && user._id))
-        return {
-          msg: "Login with user account to purchase!",
-          status: "failed",
-        };
+        throw new Error("Invalid user, please login to purchase!");
       const { docId, amount, payMethod } = args;
       // check if course exists
       const course = await Docs.findById(docId);
       // match price with amount
       if (course.price !== amount)
-        return { msg: "Invalid amount", status: "failed" };
+        throw new Error("Price mismatch, please try again later!");
       // Add to purchased courses
       const updatePurchasedDocs = await User.updateOne(
         { _id: user._id },
         { $addToSet: { purchasedDocs: docId } }
       );
+      // .session(session);
       if (
         updatePurchasedDocs.acknowledged == true &&
         updatePurchasedDocs.matchedCount == 1 &&
         updatePurchasedDocs.modifiedCount == 0
       ) {
         console.log("Doc already purchased!");
-        return {
-          msg: "Doc already purchased!",
-          status: "failed",
-          data: [updatePurchasedDocs],
-        };
+        throw new Error("Doc already purchased!");
       }
       if (
         updatePurchasedDocs.acknowledged === false ||
@@ -390,12 +387,27 @@ const resolverMutDocs = {
       ) {
         console.log("failed to update purchased courses");
         // not updated
-        return {
-          msg: "Transaction failed, please try again later!",
-          status: "failed",
-          data: [updatePurchasedDocs],
-        };
+        throw new Error("Transaction failed, please try again later!");
       }
+
+      // UPDATE PURCHASE COUNT
+      const updatePurchaseCount = await Docs.updateOne(
+        { _id: docId },
+        {
+          $inc: { purchaseCount: 1 },
+        }
+      );
+      // .session(session);
+      if (
+        updatePurchaseCount.acknowledged === false ||
+        updatePurchaseCount.modifiedCount === 0 ||
+        updatePurchaseCount.matchedCount === 0
+      ) {
+        console.log("failed to update purchase count");
+        // not updated
+        throw new Error("Transaction failed, please try again later!");
+      }
+
       // UPDATE CACHE IF EXISTS
       const keyExists = await redisClient.exists(user._id + ":purchasedDocs");
       if (keyExists) {
@@ -414,9 +426,15 @@ const resolverMutDocs = {
           data = await Docs.findById(docId).populate("creator").exec();
         }
         console.log("--- updating purchased courses cache ---");
-        await redisClient.hset(user._id + ":purchasedDocs", docId, data);
+        await redisClient.hset(user._id + ":purchasedDocs", docId, {
+          ...data,
+          purchaseCount: data.purchaseCount + 1,
+        });
         console.log("--- updated purchased courses cache ---");
       }
+
+      // await session.commitTransaction();
+      // session.endSession();
       return {
         msg: "Doc purchased successfully 👍!",
         status: "success",
@@ -424,6 +442,8 @@ const resolverMutDocs = {
       };
     } catch (error) {
       console.log(`Error in purchaseDoc: ${error.message}`);
+      // await session.abortTransaction();
+      // session.endSession();
       return {
         msg: error.message,
         status: "failed",

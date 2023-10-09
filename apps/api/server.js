@@ -3,7 +3,6 @@ const env = process.env.NODE_ENV || "development";
 dotenv.config({ path: `.env.${env}` });
 
 import express from "express";
-import mongoose from "mongoose";
 import { decryptAccessToken } from "./helper/jwtToken.js";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -16,7 +15,6 @@ import resolvers from "./graphql/resolver.js";
 import cookieParser from "cookie-parser";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 import { v2 as cloudinary } from "cloudinary";
-console.log("CLOUDINARY_CLOUD_NAME", process.env.CLOUDINARY_CLOUD_NAME);
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -78,20 +76,3 @@ app.use(
 
 await new Promise((resolve) => httpServer.listen({ port }, resolve));
 console.log(`🚀 Server ready at ${port}`);
-
-// MONGOOSE
-const { connect, connection: conn } = mongoose;
-const mongoUrl = process.env.MONGO_URI;
-connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  autoCreate: true,
-});
-
-conn.once("open", (_) => {
-  console.log("Database connected");
-});
-
-conn.on("error", (err) => {
-  console.error("connection error:", err);
-});
