@@ -26,6 +26,7 @@ const NotesHero = ({
   // };
   const textbox = (
     <NotesPageTextBox
+      notPurchased={notPurchased}
       title={title}
       labels={labels}
       desc={desc}

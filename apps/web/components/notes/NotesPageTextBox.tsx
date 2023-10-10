@@ -1,7 +1,5 @@
-"use client";
 import { firstLetterUppercase } from "@cllgnotes/lib";
 import { NotesHeroTextProps } from "@cllgnotes/types";
-import { useSession } from "next-auth/react";
 import { memo } from "react";
 import { CardTextBox, DetailTabGroup, Text } from "ui";
 
@@ -13,12 +11,11 @@ const NotesPageTextBox = ({
   subject,
   subjectCode,
   textBoxProps,
+  notPurchased = true,
 }: NotesHeroTextProps) => {
-  const { status } = useSession();
-  const notLoggedIn = status !== "authenticated";
   return (
     <>
-      <div style={{ width: "100%", maxWidth: notLoggedIn ? 915 : "none" }}>
+      <div style={{ width: "100%", maxWidth: notPurchased ? 915 : "none" }}>
         <CardTextBox
           {...textBoxProps}
           style={{

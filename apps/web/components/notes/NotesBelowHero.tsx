@@ -11,7 +11,7 @@ const NotesBelowHero = () => {
       <CardGrp
         heading="Related"
         id="idcards"
-        data={dummyCardsData({ minWidth: 360 })}
+        data={dummyCardsData({ className: "min-w-[305px] sm:min-w-[360px]" })}
       />
       <FilterDocs />
     </div>

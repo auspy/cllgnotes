@@ -19,13 +19,16 @@ export const DocCard = ({
   type,
   textType,
   _id,
+  className,
   href, // will be used as base. endpoint will remain same
 }: CardProps) => {
   return (
     <>
       <LinkWrapper
         href={pathDocId(_id, href)}
-        className="flex max-w-[620px] md:max-w-[460px] xl:max-w-[320px]"
+        className={
+          "flex max-w-[620px] md:max-w-[460px] xl:max-w-[400px] " + className
+        }
       >
         <div
           className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md "

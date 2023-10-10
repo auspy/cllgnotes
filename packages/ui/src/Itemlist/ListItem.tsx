@@ -27,6 +27,7 @@ const ListItem = ({
       className="frfs w100 pb-[10px] sm:pb-[15px]"
       style={{
         borderBottom: Borders.darkDash,
+        overflow: "hidden",
       }}
     >
       <div>
