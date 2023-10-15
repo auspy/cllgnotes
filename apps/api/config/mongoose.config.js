@@ -4,7 +4,7 @@ const env = process.env.NODE_ENV || "development";
 dotenv.config({ path: `.env.${env}` });
 // MONGOOSE
 const { connect, connection: mongoConn } = mongoose;
-connect(process.env.MONGO_URI, {
+const mongoConnect = connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   autoCreate: true,

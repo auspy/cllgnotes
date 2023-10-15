@@ -10,11 +10,12 @@ redisClient.on("error", (err) => {
 export const getRedisItems = async (key, fieldName) => {
   const getKey = (key, fieldName) =>
     !fieldName ? redisClient.get(key) : redisClient.hget(key, fieldName);
+  let data = null;
   try {
-    const data = await getKey(key, fieldName);
+    data = await getKey(key, fieldName);
     return JSON.parse(data);
   } catch (error) {
-    console.log(error, "in redisClient getitems");
+    console.log(error, data, "in redisClient getitems");
   }
 };
 export const setRedisItems = async (key, fieldName, data) => {

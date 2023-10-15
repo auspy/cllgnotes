@@ -8,7 +8,6 @@ import {
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { createUploadLink } from "apollo-upload-client";
-
 import { setContext } from "@apollo/client/link/context";
 import { cacheOptions } from "./cache.config";
 

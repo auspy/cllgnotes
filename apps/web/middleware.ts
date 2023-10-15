@@ -17,14 +17,17 @@ export default withAuth(
         //   token,
         // );
         const jwtToken = req.cookies.get("authToken");
-        // const nextSession = req.cookies.get("next-auth.session-token");
+        const nextSession = req.cookies.get("next-auth.session-token");
         // console.log(
         //   "nextSession",
         //   nextSession,
         //   jwtToken,
         //   req.nextUrl.pathname
         // );
-        if (req.nextUrl.pathname.startsWith("/dashboard") && !jwtToken) {
+        if (
+          req.nextUrl.pathname.startsWith("/dashboard") &&
+          !(jwtToken || nextSession)
+        ) {
           return false;
         }
         return true;

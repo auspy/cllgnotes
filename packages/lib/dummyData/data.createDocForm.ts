@@ -51,6 +51,10 @@ export const dummyCourses = {
           code: "CS3030",
           units: {},
         },
+        "Artificial Intelligence": {
+          code: "CCM3002",
+          units: {},
+        },
       },
     },
     "Electrical & Electronics Engineering": {},

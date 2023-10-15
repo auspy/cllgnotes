@@ -27,7 +27,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.7",
-    "ui": "workspace:*"
+    "ui": "workspace:*",
+    "@cllgnotes/zod": "workspace:*"
   },
   "devDependencies": {
     "@cllgnotes/tailwind": "workspace:*",

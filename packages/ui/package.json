@@ -23,6 +23,7 @@
     "typescript": "^4.5.2"
   },
   "peerDependencies": {
+    "@cllgnotes/zod": "workspace:*",
     "@cllgnotes/lib": "workspace:*",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",

@@ -20,6 +20,7 @@ import {
   removeUndefindedFromObject,
 } from "@cllgnotes/lib";
 import {
+  Borders,
   CreateDocs,
   DocType,
   DocTypeArr,
@@ -28,6 +29,8 @@ import {
   TestTypeArr,
   UpdateDocs,
 } from "@cllgnotes/types";
+import { zodUpdateDoc, zodCreateDocClient, getZodErrMsg } from "@cllgnotes/zod";
+import Colors from "@cllgnotes/types/colors";
 
 type Semester = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 const sems = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -60,6 +63,8 @@ const FormNewDoc = ({
   _id,
 }: FormNewDocProps) => {
   const toUpdate = _id ? true : false;
+  const zod = toUpdate ? zodUpdateDoc : zodCreateDocClient;
+  // const commonDoc = zod?.shape?.input?.shape;
   console.log("toUpdate", toUpdate);
   const [titlee, setTitle] = useState<string>(title);
   const [descr, setDesc] = useState<string>(desc || "");
@@ -91,7 +96,7 @@ const FormNewDoc = ({
   const [publish, setPublished] = useState<boolean>(published);
   const [clicked, setClicked] = useState<boolean>(false);
   const [, setToast] = useRecoilState(atomToast);
-
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   // DATA
   const departs = Object.keys(dummyCourses);
   const courses = Object.keys(dummyCourses?.[depart] || {});
@@ -216,12 +221,36 @@ const FormNewDoc = ({
     setClicked(false);
   };
   const handleButtonClick = () => {
-    console.log("data sent", variables);
-    setClicked(true);
-    mutateDoc({
-      onCompleted: toUpdate ? onDocUpdated : onDocCreated,
-      onError,
-    });
+    console.log("data sent", zod.shape, variables);
+    try {
+      const a = { ...zod.parse(variables), img: image };
+      console.log("data sent", a);
+      setClicked(true);
+      mutateDoc({
+        variables: a,
+        onCompleted: toUpdate ? onDocUpdated : onDocCreated,
+        onError,
+      });
+      setErrors({});
+    } catch (error) {
+      const issues = error?.issues;
+      console.log(error?.issues, "here");
+      const a = {};
+      if (issues) {
+        for (const err of issues) {
+          console.log(err, err.path?.length);
+
+          a[err.path[1]] = err.message;
+        }
+        setToast({
+          type: "error",
+          text: getZodErrMsg(error),
+          secs: 5000,
+        });
+        setErrors(a);
+      }
+    }
+
     // if (toUpdate) {
     //   mutateDoc({
     //     onCompleted: onDocUpdated,
@@ -339,10 +368,10 @@ const FormNewDoc = ({
               variant="outlined"
               required={true}
               type="text"
-              //   helperText={usernameHelperText()}
+              helperText={errors["title"] || ""}
               color={"primary"}
               value={titlee}
-              error={titlee.length > 0 && titlee?.length < 4}
+              error={Boolean(errors["title"])}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -357,11 +386,9 @@ const FormNewDoc = ({
               value={descr}
               variant="outlined"
               type="text"
-              helperText={"Maximum 250 characters"}
+              helperText={errors["desc"] || ""}
               color={"primary"}
-              error={
-                (descr.length > 0 && descr?.length < 10) || descr.length > 250
-              }
+              error={"desc" in errors}
               onChange={(e) => {
                 setDesc(e.target.value);
               }}
@@ -375,10 +402,10 @@ const FormNewDoc = ({
           variant="outlined"
           required={true}
           type="number"
-          helperText={"0 for free"}
+          helperText={errors["price"] || ""}
           color={"primary"}
           value={amt}
-          // error={price == 0}
+          error={Boolean(errors["price"])}
           onChange={(e) => {
             // console.log(e.target.value);
             // setAmt(e.target.value as unknown as number);
@@ -388,9 +415,19 @@ const FormNewDoc = ({
         {!toUpdate && (
           <>
             <input
-              {...commonProps}
+              // {...commonProps}
+              style={
+                errors["img"]
+                  ? {
+                      border: Borders.red,
+                      padding: "10px 20px 10px 5px",
+                      borderRadius: 5,
+                    }
+                  : {}
+              }
               value={uploadedImg || ""}
               type="file"
+              name="img"
               accept="application/pdf, application/vnd.ms-excel"
               required={true}
               onChange={({ target: { validity, files, value } }) => {
@@ -403,6 +440,13 @@ const FormNewDoc = ({
                 setUploadedImg(value);
               }}
             />
+            <label
+              style={{ color: Colors.red }}
+              className="regu12"
+              htmlFor="img"
+            >
+              {errors["img"]}
+            </label>
             {/* <iframe src={uploadedImg} height={160} width={90} /> */}
           </>
         )}
@@ -541,9 +585,10 @@ const FormNewDoc = ({
           variant="outlined"
           required={true}
           type="text"
-          //   helperText={usernameHelperText()}
+          helperText={errors["subjectCode"] || ""}
           color={"primary"}
           value={subjCode}
+          error={Boolean(errors["subjectCode"])}
           disabled={!toUpdate}
           onChange={(e) => {
             setSubjCode(e.target.value);

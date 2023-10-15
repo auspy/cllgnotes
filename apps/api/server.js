@@ -52,7 +52,8 @@ app.use(
   "/graphql",
   expressMiddleware(server, {
     context: async ({ req, res }) => {
-      // console.log("Request headers", req.body);
+      console.log("--- RECIEVED REQUEST ---");
+      // console.log("Request headers", req);
       // Verify and decode JWT token from request headers
       // const token = req.headers.authorization;
       // let token = req.cookies.authToken;

@@ -8,7 +8,7 @@ const docSchema = new Schema({
   pageCount: { type: Number, required: true },
   published: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },
-  creator: { type: Schema.Types.ObjectId, ref: "Admin" }, // Reference to the "Admin" model
+  creator: { type: Schema.Types.ObjectId, ref: "User" }, // Reference to the "Admin" model
   rating: { type: Number }, // Floating-point number for rating
   purchaseCount: { type: Number }, // Integer for purchase count
   tLikes: { type: Number }, // Integer for like count

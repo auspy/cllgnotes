@@ -1,13 +1,16 @@
 import { PDFDocument } from "pdf-lib";
 import { createWriteStream, readFileSync, unlinkSync } from "fs";
 import { cloudinary } from "../../server.js";
+import { zodFileUpload } from "@cllgnotes/zod";
 
 const saveImgToCloud = async (img, type) => {
+  let pathName = "";
   if (img && type) {
-    const file = await img;
+    const data = await img;
+    const file = zodFileUpload.parse(data && data.file);
     const fileName = new Date().getTime().toString();
-    const stream = file.file?.createReadStream();
-    const pathName = `./${fileName}.pdf`;
+    const stream = file?.createReadStream();
+    pathName = `./${fileName}.pdf`;
 
     // Define a function to count the pages in the PDF
     const countPages = async () => {
@@ -50,6 +53,7 @@ const saveImgToCloud = async (img, type) => {
         cloudinaryResponse,
       };
     } catch (error) {
+      pathName && unlinkSync(pathName);
       console.error("Error handling the PDF:", error);
       throw error;
     }
