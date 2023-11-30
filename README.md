@@ -3,8 +3,10 @@
 This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
-
+## Apps
 - `web`: a [Next.js](https://nextjs.org/) app
+- `api`: a GraphQl based backend
+## Packages
 - `ui`: a stub React component library shared by both frontend applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
