@@ -1,8 +1,25 @@
 :root {
   --shadow-box1: 2px 2px 0px 0px #141414;
   --shadow-box2: 4px 4px 0px 0px #141414;
+  --shadow-box5: 3px 3px 0px 0px #141414;
   --shadow-box3: 5px 5px 0px 0px #141414;
-  --shadow-box2: 0px 10px 19px 0px rgba(4, 4, 4, 0.15);
+  --shadow-box4: 0px 10px 19px 0px rgba(4, 4, 4, 0.15);
   --shadow-text: 0px 4px 0px #141414;
   --shadow-lText: 0px 4px 0px #d9d9d9;
+}
+
+.shadow-box1 {
+  box-shadow: var(--shadow-box1);
+}
+.shadow-box2 {
+  box-shadow: var(--shadow-box2);
+}
+.shadow-box3 {
+  box-shadow: var(--shadow-box3);
+}
+.shadow-box4 {
+  box-shadow: var(--shadow-box4);
+}
+.shadow-box5 {
+  box-shadow: var(--shadow-box5);
 }

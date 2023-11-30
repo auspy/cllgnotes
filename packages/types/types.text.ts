@@ -1,4 +1,5 @@
 import Colors, { ColorsType } from "./colors";
+import { DocType, TestType } from "./types.gql";
 
 export enum HeadingType {
   h1,
@@ -9,6 +10,7 @@ export enum HeadingType {
 }
 
 export type HeadingProps = {
+  id?: string;
   text: string | React.ReactNode;
   headingClass?: string;
   headingStyle?: React.CSSProperties;
@@ -83,11 +85,53 @@ export type TextProps = {
   color?: ColorsType;
 } & (
   | {
-      children: string;
+      children: React.ReactNode;
       text?: undefined;
     }
   | {
-      children?: string;
+      children?: React.ReactNode;
       text: string;
     }
 );
+
+export type CardTextBoxProps = {
+  department: string;
+  padding?: string;
+  course: string;
+  semester?: number;
+  year: number;
+  color?: ColorsType;
+  isAbsolute?: boolean;
+  style?: React.CSSProperties;
+};
+
+export type CardDetailsBoxProps = {
+  _id: string;
+  subject: string;
+  univ: string;
+  href?: string;
+  allowWrap?: boolean;
+  type?: DocType;
+  textType?: "semi16" | "h3";
+} & (
+  | {
+      testType?: undefined;
+      year?: number;
+      title: string;
+      subjectCode?: string;
+    }
+  | {
+      testType: TestType;
+      year: number;
+      subjectCode: string;
+      title?: string;
+    }
+);
+export type DetailTabProps = {
+  title: string;
+  value: string;
+};
+
+export type DetailTabGroupProps = {
+  data: DetailTabProps[];
+};

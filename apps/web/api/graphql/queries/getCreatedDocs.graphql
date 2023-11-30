@@ -1,0 +1,10 @@
+query{
+    getCreatedDocs{
+        msg
+        status
+        data{
+            __typename
+            ...DocData
+        }
+    }
+}

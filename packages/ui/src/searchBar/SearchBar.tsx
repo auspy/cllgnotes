@@ -1,17 +1,37 @@
 "use client";
 import Colors from "@cllgnotes/types/colors";
 import { SearchBarProps } from "@cllgnotes/types/searchBar";
-import SearchIcon from "@mui/icons-material/Search";
+import { Search, ChevronRightRounded } from "../mui/mui";
 import { useState } from "react";
+import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
+import Button from "../buttons/Button";
+import ShadowsType from "@cllgnotes/types/shadows";
+import { useDeviceType } from "@cllgnotes/lib";
 
 // search bar style for every search bar and works based on height
-const SearchBar = ({ height, options, maxWidth }: SearchBarProps) => {
+// todo add a query parameter that allows us to add query and run by button click. other option is to add send data to usestate of parent component and run query there
+const SearchBar = ({
+  height,
+  options,
+  maxWidth,
+  exploreBtn = false,
+  placeholder,
+}: SearchBarProps) => {
+  const device = useDeviceType();
+  const needSearchButton = height !== 90;
+  const isMobile = device === "mobile";
+  const isDesktop = device === "desktop";
+  // if (height == 90 && isMobile) {
+  //   height = 60;
+  // }
   // * STYLES
   let fontSize = 22;
-  if (height === 60 || height === 50) {
+  const isHeight50 = height === 50;
+  const isHeight60 = height === 60;
+  const isHeight90 = height === 90;
+  if (!isHeight90) {
     fontSize = 16;
   }
-  const isHeight50 = height === 50;
   const commonStyle: React.CSSProperties = {
     fontSize,
     height: "100%",
@@ -26,70 +46,122 @@ const SearchBar = ({ height, options, maxWidth }: SearchBarProps) => {
     borderBottomLeftRadius: 0,
     borderLeft: "1px dashed var(--dark)",
   };
+  const focusdStyle: React.CSSProperties = {
+    boxShadow: "unset",
+    transform: "scale(0.98) translate(3px, 3px)",
+    border: `1.75px solid ${Colors.dark}`,
+  };
   //   * STATES
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [option, setOption] = useState<string>(options?.[0] || "");
   const handleSearch = () => {
     console.log("searching");
   };
   return (
-    <div
-      className="w100 frc"
-      style={{
-        height,
-        maxWidth,
-      }}
-    >
-      {/* dropdown menu */}
-      {!isHeight50 && (
-        <select
-          onChange={(e) => setOption(e.target.value)}
-          className={`priBtn w100 semi caps`}
-          value={option}
-          style={{
-            ...commonStyle,
-            borderTopRightRadius: 0,
-            borderBottomRightRadius: 0,
-            maxWidth: 270,
-            borderRight: "none",
-            backgroundColor: Colors.lGrey2,
-          }}
-        >
-          {options &&
-            options.map((item, index) => (
-              <option key={index} value={item} className={`text-center`}>
-                {item}
-              </option>
-            ))}
-        </select>
-      )}
-      <input
-        className={`priBtn w100 medi`}
-        onChange={(e) => {
-          setSearchText(e.target.value);
-        }}
-        value={searchText}
+    <div className="w100 frc flex-col md:flex-row gap-x-[25px] gap-y-4">
+      <div
+        className="searchBar priBtn frc w100 overflow-hidden"
         style={{
-          ...commonStyle,
-          paddingInlineStart: 30,
-          ...(isHeight50 ? height50Style : otherCommonStyle),
+          height,
+          maxWidth,
+          // minWidth: 490,
+          ...(isFocused
+            ? focusdStyle
+            : !isHeight90 && { boxShadow: ShadowsType.box5 }),
         }}
-        type="text"
-        placeholder="Search for notes, papers, etc."
-      ></input>
-      {isHeight50 && (
-        <button
-          onClick={handleSearch}
-          className="priBtn"
-          style={{
-            ...commonStyle,
-            ...otherCommonStyle,
-            paddingInline: 12,
-            backgroundColor: Colors.lGrey2,
+      >
+        {/* dropdown menu */}
+        {!isHeight50 && (
+          <select
+            onChange={(e) => setOption(e.target.value)}
+            className={` w100 semi caps`}
+            value={option}
+            style={{
+              ...commonStyle,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+              flex: 1,
+              maxWidth: isHeight60 ? 193 : 270,
+              borderRight: "none",
+              backgroundColor: Colors.lGrey2,
+            }}
+          >
+            {options &&
+              options.map((item, index) => (
+                <option key={index} value={item} className={`text-center`}>
+                  {item}
+                </option>
+              ))}
+          </select>
+        )}
+        <input
+          className={`w100 medi`}
+          onChange={(e) => {
+            setSearchText(e.target.value);
           }}
-        >
-          <SearchIcon />
-        </button>
+          onFocus={() => {
+            setIsFocused(true);
+          }}
+          onBlur={() => {
+            setIsFocused(false);
+          }}
+          value={searchText}
+          style={{
+            flex: 3,
+            ...commonStyle,
+            paddingInlineStart: "4%",
+            ...(isHeight50 ? height50Style : otherCommonStyle),
+            ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
+            ...(isHeight60 && { borderRight: "none", borderRadius: 0 }),
+          }}
+          type="text"
+          placeholder={placeholder || "Search for notes, papers, etc."}
+        ></input>
+        {needSearchButton && (
+          <button
+            onClick={handleSearch}
+            className=""
+            style={{
+              ...commonStyle,
+              ...otherCommonStyle,
+              paddingInline: 12,
+              backgroundColor: Colors.lGrey2,
+              ...(!isHeight90 && { boxShadow: ShadowsType.box5 }),
+            }}
+          >
+            <Search />
+          </button>
+        )}
+      </div>
+      {exploreBtn && (
+        <Button
+          buttonClasses="exploreBtn"
+          buttonStyles={{ maxWidth: !isDesktop ? "unset" : 289 }}
+          text="Explore Docs"
+          height={height == 50 ? 60 : height}
+          fontSize={ButtonFontSizes.large}
+          icon={
+            <div className="arrowIcons frc h-[32px] w-[32px] overflow-hidden">
+              <ChevronRightRounded
+                color="inherit"
+                sx={{
+                  fontSize: 32,
+                }}
+                className="mr-[-20px]"
+                style={{ strokeWidth: 5 }}
+              />
+              <ChevronRightRounded
+                color="inherit"
+                sx={{
+                  fontSize: 32,
+                }}
+                style={{ strokeWidth: 5 }}
+                className="transition-all duration-300"
+              />
+            </div>
+          }
+        />
       )}
     </div>
   );

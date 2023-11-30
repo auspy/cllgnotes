@@ -1,78 +1,86 @@
-import { Borders, CardProps, TextProps } from "@cllgnotes/types";
-import Text from "../text/Text";
+import { pathDocId } from "@cllgnotes/lib";
+import { Borders, CardProps } from "@cllgnotes/types";
 import Image from "next/image";
-import Colors from "@cllgnotes/types/colors";
+import { CardDetailsText, CardTextBox, LinkWrapper } from "ui";
 
 export const DocCard = ({
   img,
-  department,
-  course,
-  semester,
   subject,
-  topic,
+  title,
+  testType,
+  subjectCode,
   univ,
   imgHeight = 268,
   minWidth,
+  department,
+  course,
+  year,
   color,
+  type,
+  textType,
+  _id,
+  className,
+  href, // will be used as base. endpoint will remain same
 }: CardProps) => {
-  // COMMON STYLE PROPS
-  const barTextProps: Partial<TextProps> = {
-    type: "semi12",
-  };
-  const detailsTextProps: Partial<TextProps> = {
-    textStyle: { height: 16 },
-    type: "medi12",
-    textTransform: "uppercase",
-  };
-
   return (
     <>
-      <div
-        className="rPosi pl-[7px] pr-[7px] pb-[20px] pt-[7px] border border-black-500 border-solid rounded-md"
-        style={{ maxWidth: 400, minWidth: minWidth || 320 }}
+      <LinkWrapper
+        href={pathDocId(_id, href)}
+        className={
+          "flex max-w-[620px] md:max-w-[460px] xl:max-w-[400px] " + className
+        }
       >
-        <div>
-          {/* IMAGE */}
-          <div
-            className="relative rounded-ss-[5px] rounded-se-[5px]"
-            style={{
-              height: imgHeight,
-              overflow: "hidden",
-            }}
-          >
-            <Image {...img} />
-          </div>
-          {/* INFO CARD */}
-          <div style={{ display: "grid" }}>
+        <div
+          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md "
+          style={{ minWidth: minWidth || 320, border: Borders.dark }}
+        >
+          <div className="w100">
+            {/* IMAGE */}
             <div
-              className="absolute frc"
+              className="relative rounded-ss-[5px] rounded-se-[5px]"
               style={{
-                transform: "translateY(-50%)",
-                padding: "7px 15px",
-                border: Borders.dark,
-                columnGap: 8,
-                borderRadius: 5,
-                backgroundColor: Colors[color || "white"],
-                justifySelf: "center",
+                height: imgHeight || img.height,
+                width: "100%" || img.width,
+                overflow: "hidden",
               }}
             >
-              <Text {...barTextProps}>{department}</Text>
-              <Text {...barTextProps}>{"•"}</Text>
-              <Text {...barTextProps}>{course}</Text>
-              <Text {...barTextProps}>{"•"}</Text>
-              <Text {...barTextProps}>{String(semester)}</Text>
+              <Image
+                {...img}
+                style={{
+                  width: "100%",
+                  height: img.fill ? "100%" : "inherit",
+                  objectFit: "cover",
+                  border: Borders.dark,
+                  borderTopLeftRadius: "5px",
+                  borderTopRightRadius: "5px",
+                }}
+              />
             </div>
+            {/* INFO CARD */}
+            <CardTextBox
+              isAbsolute={true}
+              department={department}
+              course={course}
+              year={year}
+              color={color}
+            />
           </div>
+          {/* DETAILS */}
+          <div className="mt-[25px]"></div>
+          <CardDetailsText
+            _id={_id}
+            textType={textType}
+            subjectCode={subjectCode}
+            subject={subject}
+            title={title}
+            year={year}
+            testType={testType}
+            univ={univ}
+            href={href}
+            type={type}
+          />
         </div>
-        {/* DETAILS */}
-        <div className="space-y-1 mt15">
-          <Text {...detailsTextProps}>{subject}</Text>
-          <Text type="h3">
-            {topic[0].toUpperCase() + topic.slice(1).toLowerCase()}
-          </Text>
-          <Text {...detailsTextProps}>{univ}</Text>
-        </div>
-      </div>
+      </LinkWrapper>
     </>
   );
 };

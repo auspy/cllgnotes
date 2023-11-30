@@ -4,7 +4,7 @@ export enum BannerFontSizeEnum {
   h3e = "h3e",
 }
 type BannerFontSize = "h1e" | "h2e" | "h3e";
-export type BannerProps =
+export type BannerProps = { repeat?: number; isLeft?: boolean } & (
   | {
       text: string;
       textType: BannerFontSize;
@@ -14,4 +14,5 @@ export type BannerProps =
       item: React.ReactNode;
       text?: undefined;
       textType?: undefined;
-    };
+    }
+);

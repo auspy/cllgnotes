@@ -1,0 +1,10 @@
+query($userId:String){
+    getPurchasedDocs(userId:$userId){
+        msg
+        status
+        data{
+            __typename
+            ...DocData
+        }
+    }
+}

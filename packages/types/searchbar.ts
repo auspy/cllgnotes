@@ -3,7 +3,11 @@ export enum HeightSearchBar {
   medium = 60,
   large = 90,
 }
-export type SearchBarProps = { maxWidth?: number } & (
+export type SearchBarProps = {
+  maxWidth?: number;
+  exploreBtn?: boolean;
+  placeholder?: string;
+} & (
   | {
       height: 90 | 60;
       options: string[];

@@ -5,7 +5,16 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "../../apps/web/components/**/*.ts",
-    "./custom.d.ts"
+    "./custom.d.ts",
+    "../lib/hooks/ToastWrapper.tsx",
+    "../../apps/web/components/ToastWrapper.tsx",
+    "../../apps/web/components/buttons/ButtonBuyNow.tsx"
   ],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "ui": ["./index"]
+    }
+  },
   "exclude": ["dist", "build", "node_modules"]
 }

@@ -16,6 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "fs": "0.0.1-security",
     "winston": "^3.10.0"
   },
   "devDependencies": {

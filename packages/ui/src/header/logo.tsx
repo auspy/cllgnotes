@@ -1,4 +1,5 @@
 import Colors from "@cllgnotes/types/colors";
+import Link from "next/link";
 
 const Logo = ({
   fontSize = 24,
@@ -9,9 +10,14 @@ const Logo = ({
 }) => {
   return (
     <>
-      <p style={{ fontSize: fontSize, color: Colors[color] }} id="logo">
+      <Link
+        href={"/"}
+        className="hover"
+        style={{ fontSize: fontSize, color: Colors[color] }}
+        id="logo"
+      >
         Cllgnotes.com
-      </p>
+      </Link>
     </>
   );
 };

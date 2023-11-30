@@ -1,0 +1,6 @@
+#import "./PaperData.graphql"
+#import "./NotesData.graphql"
+fragment DocData on Doc{
+    ...PaperData
+    ...NotesData
+}

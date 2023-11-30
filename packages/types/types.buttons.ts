@@ -1,4 +1,5 @@
 import { ColorsType } from "./colors";
+import ShadowsType from "./shadows";
 import { TextProps } from "./types.text";
 
 export enum ButtonHeights {
@@ -33,11 +34,13 @@ export type ButtonProps = ButtonCommonProps & {
   disabled?: boolean;
   width?: number | "100%" | "inherit";
   padding?: number | string;
+  loading?: boolean;
   icon?: React.ReactNode;
   iconGap?: number;
   iconLeft?: boolean;
   fontSize?: ButtonFontSizesBlack | ButtonFontSizes;
   height?: ButtonHeightsBlackType | ButtonHeights | IconButtonSizesEnum;
+  boxShadow?: ShadowsType;
 };
 
 export type ButtonBlackProps = Omit<ButtonProps, "fontSize" | "height"> & {
@@ -67,4 +70,19 @@ export type IconButtonProps = ButtonCommonProps & {
   icon: React.ReactNode;
   onBlack?: boolean;
   color?: ColorsType;
+  disabled?: boolean;
+};
+
+export type ButtonGridProps = {
+  isGrid: boolean;
+  setIsGrid: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type LinkButtonProps = ButtonProps & {
+  href: string;
+};
+
+export type ButtonDrawerToggle = Partial<IconButtonProps> & {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

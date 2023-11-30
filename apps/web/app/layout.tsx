@@ -1,11 +1,17 @@
-// import "ui/styles/";
+import { AuthWrapper } from "@/api/auth/useLogout";
+import { ApolloWrapper } from "@/api/graphql/ApolloWrapper";
 import "@/styles/globals.scss"; // app specific global css
-
-export default function RootLayout({
+import { DeviceTypeWrapper } from "@cllgnotes/lib/hooks";
+import { ThemeProvider, muiTheme, RecoilWrapper, SessionWrapper } from "ui";
+import ToastWrapper from "@/components/ToastWrapper";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <head>
@@ -24,7 +30,20 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className="fcc">{children}</body>
+      <body className="fcc">
+        <ApolloWrapper>
+          <RecoilWrapper>
+            <DeviceTypeWrapper>
+              <SessionWrapper session={session}>
+                <AuthWrapper>
+                  <ToastWrapper />
+                  <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>
+                </AuthWrapper>
+              </SessionWrapper>
+            </DeviceTypeWrapper>
+          </RecoilWrapper>
+        </ApolloWrapper>
+      </body>
     </html>
   );
 }

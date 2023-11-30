@@ -4,7 +4,7 @@ import ShowMoreBtn from "../buttons/ShowMoreBtn";
 const TestiGrp = ({ data }: TestiCardGrpProps) => {
   return (
     <div
-      className="columns-2 md:columns-3 lg:columns-5 rPosi"
+      className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 rPosi ps-5 pe-5 xl:p-0 "
       style={{
         gap: 20,
         height: "100%",

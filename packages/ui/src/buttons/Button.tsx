@@ -13,6 +13,9 @@ const Button = ({
   width = "100%",
   fontSize = ButtonFontSizes.large,
   textProps,
+  buttonStyles,
+  boxShadow,
+  buttonClasses,
   ...props
 }: ButtonProps) => {
   let fontClass: string = "";
@@ -29,8 +32,12 @@ const Button = ({
       fontSize={fontSize}
       height={height}
       width={width}
+      buttonStyles={{
+        // boxShadow: boxShadow || ShadowsType.box3,
+        ...buttonStyles,
+      }}
       textProps={{ ...textProps }}
-      buttonClasses={`priBtn ${fontClass} ${props.buttonClasses}`}
+      buttonClasses={`priBtn ${fontClass} ${buttonClasses}`}
     />
   );
 };

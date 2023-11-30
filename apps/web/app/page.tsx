@@ -1,11 +1,9 @@
-import Header from "@/components/header/Header";
 import HeroHome from "@/components/home/HeroHome";
 import WhatWeSell from "@/components/home/WhatWeSell";
 import Benefits from "@/components/home/Benefits";
-import { CardGrp, MovingBanner } from "ui";
+import { MovingBanner, Header } from "ui";
 import {
   dummyBenefits,
-  dummyCardsData,
   dummyTestimonials,
   dummyTrusted,
   dummyWhatWeSell,
@@ -13,6 +11,7 @@ import {
 import Testimonial from "@/components/testi/Testimonial";
 import Trusted from "@/components/home/Trusted";
 import Footer from "@/components/footer/Footer";
+import FilterDocs from "@/components/home/FilterDocs";
 
 export default function Page(): JSX.Element {
   return (
@@ -22,27 +21,29 @@ export default function Page(): JSX.Element {
       <div className="my-[60px] w100">
         <MovingBanner
           text={
-            "notes 📖  question papers  📝  presentations  📖  notes 📖  question papers  📝  presentations "
+            "notes 📖  question papers  📝  presentations  📖  notes 📖  question papers  📝  presentations 📖  notes 📖  question papers  📝  presentations "
           }
           textType="h1e"
         />
       </div>
-      <CardGrp id="cardContainer" data={dummyCardsData({ minWidth: 360 })} />
+      <div className="topContainer">
+        <FilterDocs minWidth={305} />
+      </div>
       <div
         className="fcc w100"
         style={{
-          rowGap: 130,
+          rowGap: 100,
           marginTop: 60,
         }}
       >
         <WhatWeSell data={dummyWhatWeSell} />
-        <div className="my-[30px] w100 fcc">
+        <div className="my-[60px] w100 fcc">
           <Benefits data={dummyBenefits} />
         </div>
         <Testimonial data={dummyTestimonials} />
       </div>
-      <div className="my-[80px]">
-        <Trusted data={dummyTrusted} />
+      <div className="my-[60px]">
+        <Trusted data={dummyTrusted(80)} />
       </div>
       <Footer earnMoney={true} />
     </>

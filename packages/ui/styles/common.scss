@@ -360,6 +360,7 @@ input[type="submit"]:hover:enabled,
 .medi13 {
   font-size: 13px;
 }
+.regu14,
 .medi14,
 .semi14,
 .bold14 {
@@ -414,4 +415,69 @@ input[type="submit"]:hover:enabled,
 /* FLEX */
 .fs0 {
   flex-shrink: 0;
+}
+// RESPONSIVE
+.showInDesktop {
+  display: flex;
+}
+.showInTablet {
+  display: none;
+}
+.showInMobile {
+  display: none;
+}
+@media (max-width: 620px) {
+  .showInMobile {
+    display: flex;
+  }
+  .showInTablet {
+    display: flex;
+  }
+  .showInDesktop {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .showInMobile {
+    display: none;
+  }
+  .showInTablet {
+    display: flex;
+  }
+  .showInDesktop {
+    display: none;
+  }
+}
+
+// ANIMATION
+@keyframes moveRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(100px);
+    // opacity: 0.01;
+  }
+  100% {
+    transform: translateY(0);
+    // opacity: 1;
+  }
+}
+.slideIn {
+  animation: slideIn 0.7s cubic-bezier(0, 0, 0.3, 1) both;
 }

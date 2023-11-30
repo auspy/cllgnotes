@@ -1,79 +1,53 @@
 import Colors from "@cllgnotes/types/colors";
 import HeroText from "../home/HeroText";
-import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
-import { Button, TextField, ThemeProvider } from "ui";
-import theme from "../muiTheme";
+import EarnMoneyForm from "./EarnMoneyForm";
+import { AnimateWrapper } from "ui";
 
 const EarnMoneyFooter = ({
   containerStyle,
+  containerClass,
 }: {
   containerStyle?: React.CSSProperties;
+  containerClass?: string;
 }) => {
-  const loggedIn = false;
   return (
-    <div className="topContainer" style={{ ...containerStyle }}>
+    <>
+      <AnimateWrapper elementId="earnFooter" animation="earnFooterAnim" />
       <div
-        className="rPosi"
-        style={{
-          height: 660,
-          display: "flex",
-          backgroundColor: Colors.lGrey2,
-          borderRadius: 20,
-          padding: 30,
-        }}
+        className={`earnFooter topContainer ${containerClass}`}
+        style={{ ...containerStyle }}
       >
-        <HeroText
-          desc="We will allow users to upload their notes and presentations and earn money on them if we reach 1001 votes."
-          text={
-            <>
-              Want to upload
-              <br /> your notes and
-            </>
-          }
-          highlightText="earn money?"
-          element={
-            <>
-              <ThemeProvider theme={theme}>
-                <TextField
-                  className={`priBtn ${textClasses["h3"]} upper`}
-                  label="Email"
-                  sx={{
-                    "& .MuiFormLabel-root": {
-                      top: 12,
-                      left: 10,
-                      "&.Mui-focused": {
-                        top: -2,
-                        left: 2,
-                      },
-                    },
-                  }}
-                  style={{
-                    border: "unset",
-                    width: "100%",
-                  }}
-                  variant="outlined"
-                />
-              </ThemeProvider>
-              <Button
-                width={"100%"}
-                buttonStyles={{ maxWidth: loggedIn ? "none" : 289 }}
-                text="vote for note 😉"
-                fontSize={ButtonFontSizes.large}
-              />
-            </>
-          }
-          img={{
-            src: "/images/earn.png",
-            alt: "earn money",
-            height: 361,
-            width: 579,
+        <div
+          className="rPosi h-auto b lg:h-[660px] p-5 sm:p-7 lineBg"
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            backgroundColor: Colors.lGrey2,
           }}
-          imgStyles={{ bottom: "unset", top: 55, right: 30 }}
-          descMaxWidth={441}
-          color="green"
-        />
+        >
+          <HeroText
+            desc="We will allow users to upload their notes and presentations and earn money on them if we reach 1001 votes."
+            text={
+              <>
+                Want to upload
+                <br /> your notes and
+              </>
+            }
+            highlightText="earn money?"
+            element={<EarnMoneyForm />}
+            img={{
+              src: "/images/earn.png",
+              alt: "earn money",
+              height: 361,
+              width: 579,
+            }}
+            // imgStyles={{ bottom: "unset", top: 55, right: 30 }}
+            descMaxWidth={441}
+            color="green"
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

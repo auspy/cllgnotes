@@ -1,0 +1,10 @@
+query{
+   getDocs{
+        msg
+        status
+        data{
+            __typename
+            ...DocData
+        }
+   }
+}

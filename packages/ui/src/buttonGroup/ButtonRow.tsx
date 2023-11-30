@@ -1,6 +1,5 @@
 import { ButtonRowProps } from "@cllgnotes/types/buttonGrps";
 import Button from "../buttons/Button";
-import ShadowsType from "@cllgnotes/types/shadows";
 import { FontWeightEnum } from "@cllgnotes/types/types.text";
 import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
 
@@ -9,41 +8,48 @@ const ButtonRow = ({
   maxWidth,
   minWidth,
   rowGap = 25,
-  buttonProps,
+  commonButtonProps,
   height = 120,
   columnGap = 30,
+  onClick,
 }: ButtonRowProps) => {
   return (
     <div
-      className={`frc flex-wrap w100`}
+      className={`flex overflow-scroll lg:overflow-visible gap-x-[20px] lg:grid lg:grid-cols-[auto_auto_auto_auto] lg:gap-y-[${columnGap}]  w100`}
       style={{
-        gap: `${rowGap}px ${columnGap}px`,
+        rowGap: rowGap,
+        paddingBottom: 4,
+        paddingRight: 4,
+        // gridTemplateColumns: `repeat(auto-fit, minmax(${minWidth}px, 1fr))`,
       }}
     >
       {data.map((item, index) => (
-        <>
-          <Button
-            key={item.text + index}
-            {...buttonProps}
-            {...item}
-            buttonStyles={{
-              maxWidth: maxWidth,
-              minWidth: minWidth,
-              boxShadow: ShadowsType.box2,
-              ...buttonProps?.buttonStyles,
-              ...item.buttonStyles,
-            }}
-            fontSize={
-              buttonProps?.fontSize || item.fontSize || ButtonFontSizes.small
-            }
-            textProps={{
-              fontWeight: FontWeightEnum.semi,
-            }}
-            iconLeft={true}
-            width={"100%"}
-            height={height}
-          />
-        </>
+        <Button
+          key={item.text + index}
+          {...commonButtonProps}
+          {...item}
+          buttonClasses="shadow-box5"
+          buttonStyles={{
+            maxWidth: maxWidth,
+            minWidth: minWidth,
+            ...commonButtonProps?.buttonStyles,
+            ...item.buttonStyles,
+          }}
+          fontSize={
+            commonButtonProps?.fontSize ||
+            item.fontSize ||
+            ButtonFontSizes.small
+          }
+          textProps={{
+            fontWeight: FontWeightEnum.semi,
+          }}
+          iconLeft={true}
+          width={"100%"}
+          height={height}
+          onClick={(e) => {
+            onClick && onClick(e, { label: item.text, key: item.text });
+          }}
+        />
       ))}
     </div>
   );

@@ -1,7 +1,11 @@
+@import "../../../packages/ui/styles/sharedGlobals.scss";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "../../../packages/ui/styles/sharedGlobals.scss";
+
+:root {
+  --x-buynowcard: 853px;
+}
 
 body {
   background-color: var(--bg);
@@ -23,7 +27,7 @@ a {
 }
 h1 {
   @include fontStyles(89px);
-  font-size: clamp(52px, 6.15vw, 89.5px);
+  font-size: clamp(52px, 6.14vw, 89px);
 }
 
 .h1Highlight {
@@ -42,4 +46,78 @@ h1 {
   max-width: 1440px;
   width: 100%;
   padding-inline: 35px;
+}
+@media (max-width: 640px) {
+  .topContainer {
+    padding-inline: 20px;
+  }
+}
+
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  border-radius: 5px;
+}
+
+// * RESPONSIVE
+@media (max-width: 620px) {
+  .cToFs {
+    align-items: flex-start;
+  }
+}
+
+// HERO
+@media (max-width: 1024px) {
+  #heroHome {
+    height: unset !important;
+  }
+}
+
+// BENEFITS
+.benefitItem {
+  transform: translateY(-150px);
+}
+
+// EARN FOOTER
+.earnFooter {
+  padding-inline: 0%;
+  transition:
+    padding-inline 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+  // transition-delay: 200ms;
+  transform: translateY(40px);
+}
+.earnFooter > div:first-child {
+  transition: border-radius 0.75s ease-in-out;
+  border-radius: 0;
+}
+// @keyframes earnFooterAnim {
+//   0% {
+//     padding-inline: 0px;
+//   }
+//   100% {
+//     padding-inline: 35px;
+//   }
+// }
+
+.earnFooterAnim {
+  padding-inline: 35px;
+  transform: translate(0);
+}
+@media (max-width: 640px) {
+  .earnFooterAnim {
+    padding-inline: 20px;
+  }
+}
+
+.earnFooterAnim > div:first-child {
+  border-radius: 20px;
+}
+
+// BACKGROUND
+.lineBg {
+  @apply w100;
+  @apply fcc;
+  @apply h-full;
+  background: url("../public/images/lines.svg") repeat;
 }

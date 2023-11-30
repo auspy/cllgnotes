@@ -2,10 +2,10 @@ import { ColorsType } from "./colors";
 import { ImgProps } from "./types.img";
 export enum WhatWeSellTitleEnum {
   Notes = "Notes",
-  Prentations = "Prentations",
+  Presentations = "Presentations",
   "Past Papers" = "Past Papers",
 }
-type WhatWeSellTitle = "Notes" | "Prentations" | "Past Papers";
+type WhatWeSellTitle = "Notes" | "Presentations" | "Past Papers";
 export type WhatWeSellItem = {
   title: WhatWeSellTitle;
   desc: string;

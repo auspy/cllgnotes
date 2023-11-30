@@ -1,0 +1,24 @@
+fragment PaperData on Paper{
+    _id
+    img
+    subject
+    type
+    subjectCode
+    course
+    department
+    purchaseCount
+    isPurchased
+    published
+    subject
+    pageCount
+    subjectCode
+    year
+    semester
+    testType
+    tLikes
+    university
+    creator{
+        _id
+        username
+    }
+}

@@ -1,0 +1,12 @@
+mutation($username:ID!,$password:String!,$role:Role!,$email:String!){
+   register(user:{username:$username,password:$password,role:$role,email:$email}){
+       status
+       msg
+       data{
+           id
+           username
+           password
+           email
+       }
+   }
+}

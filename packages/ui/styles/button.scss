@@ -1,16 +1,66 @@
 // BUTTONS
+button.priBtn:hover:enabled {
+  box-shadow: 7px 7px 0px 0px #141414;
+  transform: translate(-2px, -2px);
+}
+button.priBtn.shadow-box1:hover:enabled {
+  box-shadow: 3px 3px 0px 0px #141414;
+  transform: translate(-1px, -1px);
+}
+button.priBtn.shadow-box2:hover:enabled {
+  box-shadow: 6px 6px 0px 0px #141414;
+  transform: translate(-2px, -2px);
+}
+button.priBtn.shadow-box5:hover:enabled {
+  box-shadow: 5px 5px 0px 0px #141414;
+  transform: translate(-2px, -2px);
+}
+
 .priBtn {
   border-radius: 5px;
   border: 1px solid #141414;
   background: #fff;
   box-shadow: 5px 5px 0px 0px #141414;
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
+  &:hover:enabled {
+    opacity: 1 !important;
+  }
+
+  &:active:enabled {
+    box-shadow: unset !important;
+    transform: scale(0.98) translate(3px, 3px) !important;
+  }
 }
 
-.iconBtn:hover {
+.blackBtn {
+  transition: border-radius 0.2s ease-in-out;
+  &:hover:enabled {
+    border-radius: 5px !important;
+    opacity: 1 !important;
+  }
+}
+
+.iconBtn:hover:enabled {
   background-color: #fff !important;
   color: var(--dark) !important;
   opacity: 1 !important;
   path {
     fill: var(--dark);
+  }
+}
+
+.exploreBtn {
+  & > .arrowIcons > * {
+    transform: translateX(-20px);
+  }
+  &:hover {
+    // & > .arrowIcons > :first-child {
+    //   display: block;
+    // }
+    & > .arrowIcons > * {
+      transform: translateX(-2px);
+    }
   }
 }
