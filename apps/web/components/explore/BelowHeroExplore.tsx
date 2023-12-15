@@ -1,9 +1,7 @@
 "use client";
-import { GET_DOCS } from "@/api/graphql/gql";
-import Suggestions from "@/components/explore/suggestions/Suggestions";
 import { useSuspenseQuery } from "@apollo/client";
 import { modifyToCardsData, useDeviceType } from "@cllgnotes/lib";
-import {
+import type {
   CardProps,
   DocsQueryProps,
   FilterChipMap,
@@ -11,6 +9,9 @@ import {
 } from "@cllgnotes/types";
 import { useState } from "react";
 import { BottomDrawer, CardGrp, FilterSidebar, List, ToolBar } from "ui";
+import { GET_DOCS } from "@/api/graphql/gql";
+import Suggestions from "@/components/explore/suggestions/Suggestions";
+
 const BelowHeroExplore = () => {
   const device = useDeviceType();
   // console.log(device);
@@ -25,8 +26,9 @@ const BelowHeroExplore = () => {
     delete obj[chip.key];
     setFilterChips(obj);
   };
-  const addFilter = (chip: FilterChipMap) => {
+  const addFilter = (chip: FilterChipProps) => {
     if (chip.key in filterChips) {
+      removeAFilter(chip);
       return;
     }
     setFilterChips((prev) => {
@@ -49,7 +51,8 @@ const BelowHeroExplore = () => {
   //   networkStatus,
   //   client
   // );
-  const foundCourses = data?.getDocs?.status == "success" && Boolean(cardsData);
+  const foundCourses =
+    data?.getDocs?.status === "success" && Boolean(cardsData);
   const filter = (maxWidth: string | number = 320) => (
     <FilterSidebar
       maxWidth={maxWidth}
@@ -66,7 +69,10 @@ const BelowHeroExplore = () => {
         className="topContainer flex flex-col mt40"
         style={{ rowGap: 60, marginBottom: 100 }}
       >
-        <Suggestions addFilter={addFilter} />
+        <Suggestions
+          addFilter={addFilter}
+          selected={Object.keys(filterChips)}
+        />
         <div className="frfs w100" style={{ gap: 30 }}>
           {!isDesktop ? (
             <BottomDrawer>{filter("unset")}</BottomDrawer>

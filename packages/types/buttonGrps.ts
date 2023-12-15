@@ -8,7 +8,8 @@ export type ButtonRowProps = {
   rowGap?: number;
   onClick: (
     e: React.MouseEvent<HTMLButtonElement>,
-    filterItem: FilterChipProps
+    filterItem: FilterChipProps,
+    index: number
   ) => void;
   columnGap?: number;
   commonButtonProps?: Omit<
