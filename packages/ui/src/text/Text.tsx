@@ -39,7 +39,7 @@ const Text = ({
   }
   return (
     <p className={classs} style={stylee}>
-      {txt?.toString()}
+      {txt}
     </p>
   );
 };

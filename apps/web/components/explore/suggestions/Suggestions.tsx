@@ -52,6 +52,7 @@ const Suggestions = ({ addFilter, selected }: SuggestionsProps) => {
         commonButtonProps={{
           buttonClasses: "filterButton",
         }}
+        select={select}
         data={currentData}
         // maxWidth={318}
         minWidth={220}

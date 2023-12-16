@@ -89,7 +89,8 @@ export const dummyFilterSteps = [
 ];
 
 export const dummyFilterList: FilterCheckboxListProps = {
-  Year: ["Fresher", "Sophomore", "Junior", "Senior"],
-  Years: ["Fresher", "Sophomore", "Junior", "Senior"],
-  Yearss: ["Fresher", "Sophomore", "Junior", "Senior"],
+  Type: dummyFilterGrpsDocType,
+  University: universitysFilter,
+  Year: yearsFilter,
+  Semester: semsFilter,
 };

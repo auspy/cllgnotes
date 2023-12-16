@@ -1,7 +1,8 @@
 import { AddFilterProps, FilterChipProps } from "./buttonGrps";
+import { ButtonProps } from "./types.buttons";
 
 export type FilterCheckboxListProps = {
-  [key: string]: string[];
+  [key: string]: ButtonProps[];
 };
 
 export type FilterSidebarProps = AddFilterProps & {

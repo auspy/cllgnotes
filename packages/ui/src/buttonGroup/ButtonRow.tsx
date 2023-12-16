@@ -14,12 +14,13 @@ const ButtonRow = ({
   height = 120,
   columnGap = 30,
   onClick,
+  select = new Set(),
 }: ButtonRowProps) => {
   const [showMore, setShowMore] = useState(false);
   // console.log("SHOW MORE", showMore);
   return (
     <div
-      className={`flex overflow-scroll lg:overflow-visible gap-x-[20px] lg:grid lg:grid-cols-[auto_auto_auto_auto] lg:gap-y-[${columnGap}]  w100`}
+      className={`flex overflow-scroll flex-row lg:overflow-visible gap-x-[20px] scrollbar lg:grid lg:grid-cols-[auto_auto_auto_auto] lg:gap-y-[${columnGap}]  w100`}
       style={{
         rowGap: rowGap,
         paddingBottom: 4,
@@ -34,9 +35,13 @@ const ButtonRow = ({
             key={item.text + index}
             {...commonButtonProps}
             {...item}
-            buttonClasses={`shadow-box5 hidden ${
-              (data.length > 8 && index >= 7 ? showMore : true) && "md:flex"
-            } ${commonButtonProps?.buttonClasses}`}
+            buttonClasses={`shadow-box5 ${
+              (data.length > 8 && index >= 7 ? showMore : true)
+                ? "flex"
+                : "flex lg:hidden"
+            } ${commonButtonProps?.buttonClasses} ${
+              select.has(item.text) ? "filterButtonDisabled" : ""
+            }`}
             buttonStyles={{
               maxWidth: maxWidth,
               minWidth: minWidth,
@@ -61,13 +66,13 @@ const ButtonRow = ({
             }}
           />
           {/* MORE BUTTON */}
-          {index == 6 && data.length > 8 && (
-            <div className={`frc gap-x-[10px]`}>
+          {index == (showMore ? data.length - 1 : 6) && data.length > 8 && (
+            <div className={`frc hidden lg:flex gap-x-[10px]`}>
               <Button
                 key={item.text + "show" + index}
                 {...commonButtonProps}
                 text={showMore ? "Less" : "More"}
-                buttonClasses={`shadow-box5 hidden md:flex ${commonButtonProps?.buttonClasses}`}
+                buttonClasses={`shadow-box5  ${commonButtonProps?.buttonClasses}`}
                 buttonStyles={{
                   maxWidth: maxWidth / 2,
                   minWidth: minWidth / 2,
