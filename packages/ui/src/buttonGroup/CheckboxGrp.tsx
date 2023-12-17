@@ -9,17 +9,17 @@ const CheckboxGrp = ({ data, addFilter, removeFilter }: FilterSidebarProps) => {
         <div key={index + key}>
           <Text type="semi16">{key}</Text>
           <FormGroup>
-            {data[key].map((item, i) => (
+            {data[key].map(({ text }, i) => (
               <FormControlLabel
                 onChange={(e, checked) => {
                   if (!checked) {
-                    return removeFilter({ key: item, label: item });
+                    return removeFilter({ key: text, label: text });
                   }
-                  addFilter({ key: item, label: item });
+                  addFilter({ key: text, label: text });
                 }}
-                key={i + item}
+                key={i + text}
                 control={<Checkbox defaultChecked={false} />}
-                label={<Text type="medi16">{item}</Text>}
+                label={<Text type="medi16">{text}</Text>}
               />
             ))}
           </FormGroup>

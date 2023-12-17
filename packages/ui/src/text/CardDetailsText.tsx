@@ -26,6 +26,7 @@ const CardDetailsText = ({
   const noWrapStyle: React.CSSProperties = allowWrap
     ? {}
     : { whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" };
+  // console.log("CARD DETAILS TEXT", title, subject, subjectCode, testType);
   return (
     <>
       <div className="space-y-1">

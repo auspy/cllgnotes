@@ -37,6 +37,15 @@ module.exports = {
   ignorePatterns: ["node_modules/", "dist/"],
   // add rules configurations here
   rules: {
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "default",
+        format: ["camelCase", "UPPER_CASE", "PascalCase"],
+        leadingUnderscore: "allow",
+        trailingUnderscore: "allow",
+      },
+    ],
     "import/no-default-export": "off",
   },
 };

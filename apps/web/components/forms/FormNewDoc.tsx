@@ -28,16 +28,14 @@ import {
   TestType,
   TestTypeArr,
   UpdateDocs,
+  Year,
+  Semester,
+  University,
 } from "@cllgnotes/types";
 import { zodUpdateDoc, zodCreateDocClient, getZodErrMsg } from "@cllgnotes/zod";
 import Colors from "@cllgnotes/types/colors";
+import { Years, sems, Universitys } from "@cllgnotes/lib";
 
-type Semester = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-const sems = [1, 2, 3, 4, 5, 6, 7, 8];
-type Year = 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 | 2027 | 2028;
-const Years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028];
-type University = "SRM University";
-const Universitys = ["SRM University"];
 /**
  how much work is done in admin panel?
  need to setup sending pdf to amazon s3 and first page image to 

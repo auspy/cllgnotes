@@ -6,9 +6,11 @@ export type ButtonRowProps = {
   minWidth?: number;
   height?: 90 | 120;
   rowGap?: number;
+  select: Set<any>;
   onClick: (
     e: React.MouseEvent<HTMLButtonElement>,
-    filterItem: FilterChipProps
+    filterItem: FilterChipProps,
+    index: number
   ) => void;
   columnGap?: number;
   commonButtonProps?: Omit<
