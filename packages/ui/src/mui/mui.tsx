@@ -36,6 +36,7 @@ import {
   Skeleton,
   SwipeableDrawer,
   CircularProgress,
+  Slider,
 } from "@mui/material";
 
 export {
@@ -73,4 +74,5 @@ export {
   Skeleton,
   SwipeableDrawer,
   CircularProgress,
+  Slider,
 };

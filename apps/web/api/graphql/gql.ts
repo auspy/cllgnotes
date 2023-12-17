@@ -15,7 +15,7 @@ import LOGIN from "./mutations/login.graphql";
 import REGISTER from "./mutations/register.graphql";
 import LOGOUT from "./mutations/logout.graphql";
 
-const getDocsTmpl = (query) => gql`
+const getDocsTmpl = (query: any) => gql`
   ${query}
   ${DocData + NotesData + PaperData}
 `;

@@ -32,7 +32,7 @@ export type ChipGrpProps = {
 };
 
 export type AddFilterProps = {
-  addFilter: (chip: FilterChipProps) => void;
+  addFilter?: (chip: FilterChipProps, change?: boolean) => void;
 };
 
 export type ManageFiltersProps = AddFilterProps & {

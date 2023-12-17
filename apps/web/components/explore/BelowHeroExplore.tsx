@@ -1,12 +1,11 @@
 "use client";
 import { useSuspenseQuery } from "@apollo/client";
-import { modifyToCardsData, useDeviceType } from "@cllgnotes/lib";
-import type {
-  CardProps,
-  DocsQueryProps,
-  FilterChipMap,
-  FilterChipProps,
-} from "@cllgnotes/types";
+import {
+  modifyToCardsData,
+  useDeviceType,
+  useRecoilFilter,
+} from "@cllgnotes/lib";
+import type { CardProps, DocsQueryProps } from "@cllgnotes/types";
 import { useState } from "react";
 import { BottomDrawer, CardGrp, FilterSidebar, List, ToolBar } from "ui";
 import { GET_DOCS } from "@/api/graphql/gql";
@@ -14,27 +13,15 @@ import Suggestions from "@/components/explore/suggestions/Suggestions";
 
 const BelowHeroExplore = () => {
   const device = useDeviceType();
-  // console.log(device);
+  const {
+    clearFilters,
+    removeFilter,
+    filter: filtr,
+    setFilter: setFiltr,
+    addFilter,
+  } = useRecoilFilter();
   const isDesktop = device == "desktop";
-  const [filterChips, setFilterChips] = useState<FilterChipMap>({});
   const [showGrid, setShowGrid] = useState(true);
-  const clearFilters = () => {
-    setFilterChips({});
-  };
-  const removeAFilter = (chip: FilterChipProps) => {
-    const obj = { ...filterChips };
-    delete obj[chip.key];
-    setFilterChips(obj);
-  };
-  const addFilter = (chip: FilterChipProps) => {
-    if (chip.key in filterChips) {
-      removeAFilter(chip);
-      return;
-    }
-    setFilterChips((prev) => {
-      return { ...prev, [chip.key]: chip.label };
-    });
-  };
   // GRAPHQL QUERY
   const { data } = useSuspenseQuery<DocsQueryProps>(GET_DOCS);
   const docs = data?.getDocs?.data;
@@ -56,7 +43,7 @@ const BelowHeroExplore = () => {
   const filter = (maxWidth: string | number = 320) => (
     <FilterSidebar
       maxWidth={maxWidth}
-      removeFilter={removeAFilter}
+      removeFilter={removeFilter}
       addFilter={addFilter}
     />
   );
@@ -69,10 +56,7 @@ const BelowHeroExplore = () => {
         className="topContainer flex flex-col mt40"
         style={{ rowGap: 60, marginBottom: 100 }}
       >
-        <Suggestions
-          addFilter={addFilter}
-          selected={Object.keys(filterChips)}
-        />
+        <Suggestions addFilter={addFilter} selected={Object.keys(filtr)} />
         <div className="frfs w100" style={{ gap: 30 }}>
           {!isDesktop ? (
             <BottomDrawer>{filter("unset")}</BottomDrawer>
@@ -85,8 +69,8 @@ const BelowHeroExplore = () => {
               setIsGrid={setShowGrid}
               chipGrpProps={{
                 clearFilters: clearFilters,
-                setChipData: setFilterChips,
-                chipData: filterChips,
+                setChipData: setFiltr,
+                chipData: filtr,
               }}
               // clearFilters={clearFilter}
               // chipData={filterChips}
@@ -100,7 +84,7 @@ const BelowHeroExplore = () => {
                 id="nice"
                 style={{ width: "100%" }}
                 data={cardsData.sort(
-                  (a, b) => a.title?.localeCompare(b.title) || 0
+                  (a, b) => a.title?.localeCompare(String(b?.title)) || 0
                 )}
               />
             ) : (

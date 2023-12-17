@@ -74,8 +74,8 @@ const ButtonRow = ({
                 text={showMore ? "Less" : "More"}
                 buttonClasses={`shadow-box5  ${commonButtonProps?.buttonClasses}`}
                 buttonStyles={{
-                  maxWidth: maxWidth / 2,
-                  minWidth: minWidth / 2,
+                  maxWidth: maxWidth && maxWidth / 2,
+                  minWidth: minWidth && minWidth / 2,
                   ...commonButtonProps?.buttonStyles,
                   ...item.buttonStyles,
                 }}

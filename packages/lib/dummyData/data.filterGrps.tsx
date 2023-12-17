@@ -1,4 +1,7 @@
-import { FilterCheckboxListProps } from "@cllgnotes/types";
+import {
+  FilterCheckboxListProps,
+  FilterSidebarGrpProps,
+} from "@cllgnotes/types";
 import { ButtonProps } from "@cllgnotes/types/types.buttons";
 export const dummyFilterGrpsDocType: ButtonProps[] = [
   {
@@ -81,10 +84,30 @@ export const sems = [1, 2, 3, 4, 5, 6, 7, 8];
 export const Years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028];
 export const Universitys = ["SRM University"];
 
-export const dummyFilterSteps = [
+export const dummyFilterSteps: FilterSidebarGrpProps[] = [
   { title: "What are you searching for?", data: dummyFilterGrpsDocType },
-  { title: "Which year?", data: yearsFilter },
-  { title: "Semester?", data: semsFilter },
+  {
+    title: "Which year?",
+    data: yearsFilter,
+    // type: "slider",
+    maxValue: 2028,
+    minValue: 2020,
+    step: 1,
+    marks: true,
+    defaultValue: 2024,
+    heading: "Year",
+  },
+  {
+    title: "Semester?",
+    data: semsFilter,
+    // type: "slider",
+    maxValue: 8,
+    minValue: 1,
+    step: 1,
+    marks: true,
+    defaultValue: 1,
+    heading: "Semester",
+  },
   { title: "University?", data: universitysFilter },
 ];
 
