@@ -54,7 +54,13 @@ export const authOptions: AuthOptions = {
       async profile(profile, tokens) {
         // console.log("profile", profile, tokens);
 
+        const user = await getUser({
+          email: profile.email,
+          username: profile.username,
+        });
         const data = {
+          _id: user?.id || "",
+          role: "USER",
           id: profile.sub,
           name: profile.name,
           email: profile.email,
@@ -63,10 +69,6 @@ export const authOptions: AuthOptions = {
           username: profile.email.split("@")[0],
           provider: "google",
         };
-        const user = await getUser({
-          email: data.email,
-          username: data.username,
-        });
         if (user) {
           data["_id"] = user._id;
           data["username"] = user.username;
@@ -135,7 +137,7 @@ export const authOptions: AuthOptions = {
       return jwt.sign(newToken, secret);
     },
     async decode({ secret, token }) {
-      const data = jwt.verify(token, secret);
+      const data = jwt.verify(token || "", secret);
       // console.log("jwt decode ==>", data);
       return data;
     },
@@ -158,14 +160,20 @@ export const authOptions: AuthOptions = {
     //   return true;
     // },
     session: async ({ session, user, token }) => {
-      const newSession = {
-        ...session,
-        user: {
+      if (token) {
+        session.user = {
           ...session.user,
           ...token,
-        },
-      };
-      return newSession;
+        };
+      }
+      // const newSession = {
+      //   ...session,
+      //   user: {
+      //     ...session.user,
+      //     ...token,
+      //   },
+      // };
+      return session;
     },
   },
 };
