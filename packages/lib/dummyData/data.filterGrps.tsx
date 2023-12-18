@@ -85,7 +85,11 @@ export const Years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028];
 export const Universitys = ["SRM University"];
 
 export const dummyFilterSteps: FilterSidebarGrpProps[] = [
-  { title: "What are you searching for?", data: dummyFilterGrpsDocType },
+  {
+    title: "What are you searching for?",
+    data: dummyFilterGrpsDocType,
+    key: "docType",
+  },
   {
     title: "Which year?",
     data: yearsFilter,
@@ -96,6 +100,7 @@ export const dummyFilterSteps: FilterSidebarGrpProps[] = [
     marks: true,
     defaultValue: 2024,
     heading: "Year",
+    key: "year",
   },
   {
     title: "Semester?",
@@ -107,8 +112,9 @@ export const dummyFilterSteps: FilterSidebarGrpProps[] = [
     marks: true,
     defaultValue: 1,
     heading: "Semester",
+    key: "semester",
   },
-  { title: "University?", data: universitysFilter },
+  { title: "University?", data: universitysFilter, key: "university" },
 ];
 
 export const dummyFilterList: FilterCheckboxListProps = {

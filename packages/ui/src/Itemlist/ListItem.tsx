@@ -64,7 +64,7 @@ const ListItem = ({
           subject={subject}
           title={title}
           univ={univ}
-          subjectCode={subjectCode}
+          subjectCode={subjectCode || ""}
           year={year}
           testType={testType!}
         />

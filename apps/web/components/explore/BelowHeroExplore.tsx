@@ -16,7 +16,7 @@ const BelowHeroExplore = () => {
   const {
     clearFilters,
     removeFilter,
-    filter: filtr,
+    filters: filtr,
     setFilter: setFiltr,
     addFilter,
   } = useRecoilFilter();

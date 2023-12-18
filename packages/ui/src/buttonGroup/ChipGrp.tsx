@@ -1,18 +1,11 @@
+import Link from "next/link";
 import { Chip, Stack, CloseRounded } from "../mui/mui";
-import { ChipGrpProps } from "@cllgnotes/types";
 import Text from "../text/Text";
+import { pathExplore, useRecoilFilter } from "@cllgnotes/lib";
 
-const ChipGrp = ({
-  setChipData,
-  chipData = {},
-  clearFilters,
-}: ChipGrpProps) => {
-  const handleDelete = (chipToDelete: string) => () => {
-    const obj = { ...chipData };
-    delete obj[chipToDelete];
-    setChipData(obj);
-  };
-  const haveFilters = Object.keys(chipData).length > 0;
+const ChipGrp = () => {
+  const { clearFilters, removeFilter, filters, queryMap } = useRecoilFilter();
+  const haveFilters = Object.keys(filters).length > 0;
   return (
     <div className="frc w100" style={{}}>
       <Stack
@@ -23,23 +16,35 @@ const ChipGrp = ({
           gap: 0.7,
         }}
       >
-        {Object.keys(chipData).map((key, index) => {
+        {Object.keys(filters).map((key, index) => {
           return (
-            <Chip
-              key={key + index}
-              deleteIcon={<CloseRounded />}
-              label={chipData[key]}
-              onDelete={handleDelete(key)}
-            />
+            typeof filters[key] == "object" &&
+            Object.keys(filters[key]).map((filter, i) => (
+              <Chip
+                key={filter + index + i}
+                deleteIcon={
+                  <Link
+                    href={{
+                      pathname: "/explore",
+                      query: queryMap({ key, label: filter }),
+                    }}
+                  >
+                    <CloseRounded />
+                  </Link>
+                }
+                label={filter}
+                onDelete={() => removeFilter({ key, label: filter })}
+              />
+            ))
           );
         })}
       </Stack>
       {haveFilters && (
-        <button className="ml10" onClick={clearFilters}>
+        <Link href={pathExplore()} className="ml10" onClick={clearFilters}>
           <Text type="medi16" color="dGrey">
             Clear All
           </Text>
-        </button>
+        </Link>
       )}
     </div>
   );

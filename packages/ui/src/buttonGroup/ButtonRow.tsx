@@ -14,7 +14,7 @@ const ButtonRow = ({
   height = 120,
   columnGap = 30,
   onClick,
-  select = new Set(),
+  select = ["", {}],
 }: ButtonRowProps) => {
   const [showMore, setShowMore] = useState(false);
   // console.log("SHOW MORE", showMore);
@@ -40,7 +40,7 @@ const ButtonRow = ({
                 ? "flex"
                 : "flex lg:hidden"
             } ${commonButtonProps?.buttonClasses} ${
-              select.has(item.text) ? "filterButtonDisabled" : ""
+              select[1] && item.text in select[1] ? "filterButtonDisabled" : ""
             }`}
             buttonStyles={{
               maxWidth: maxWidth,
@@ -62,7 +62,7 @@ const ButtonRow = ({
             onClick={(e) => {
               setShowMore(false);
               onClick &&
-                onClick(e, { label: item.text, key: item.text }, index);
+                onClick(e, { label: item.text, key: select[0] }, index);
             }}
           />
           {/* MORE BUTTON */}

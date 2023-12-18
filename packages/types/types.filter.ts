@@ -10,7 +10,7 @@ export type FilterSidebarProps = AddFilterProps & {
   data: FilterSidebarGrpProps[];
   removeFilter?: (chip: FilterChipProps) => void;
 };
-export type FilterSidebarGrpProps =
+export type FilterSidebarGrpProps = { key: string } & (
   | ({
       title?: string;
       data?: ButtonProps[];
@@ -20,7 +20,8 @@ export type FilterSidebarGrpProps =
       title: string;
       data: ButtonProps[];
       type?: "checkbox";
-    } & Partial<SliderProps>);
+    } & Partial<SliderProps>)
+);
 
 export type Semester = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export type Year = 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 | 2027 | 2028;
