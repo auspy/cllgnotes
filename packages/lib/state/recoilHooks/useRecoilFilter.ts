@@ -34,27 +34,32 @@ const useRecoilFilter = () => {
   };
   // * ADD SINGLE FILTER
   const addFilter = (chip: FilterChipProps, change: boolean = false) => {
-    // check if filter value is already present
-    if (chip.key in filters && chip.label in filters[chip.key]) {
-      removeFilter(chip);
-      if (!change) return;
-    }
-    // setting atom value
-    setFilter((prev) => {
-      const obj = { ...prev };
-      if (chip.key in obj) {
-        // if already present then add to set
-        obj[chip.key] = {
-          ...obj[chip.key],
-          [chip.label]: true,
-        };
-      } else {
-        // if not present then create new set
-        obj[chip.key] = { [chip.label]: true };
+    try {
+      const key = chip.key.toLowerCase();
+      // check if filter value is already present
+      if (key in filters && chip.label in filters[key]) {
+        removeFilter(chip);
+        if (!change) return;
       }
-      // console.log("new filter", obj);
-      return obj;
-    });
+      // setting atom value
+      setFilter((prev) => {
+        const obj = { ...prev };
+        if (key in obj) {
+          // if already present then add to set
+          obj[key] = {
+            ...obj[key],
+            [chip.label]: true,
+          };
+        } else {
+          // if not present then create new set
+          obj[key] = { [chip.label]: true };
+        }
+        // console.log("new filter", obj);
+        return obj;
+      });
+    } catch (error) {
+      console.log("error in add filter", error);
+    }
   };
   // * QUERY MAP
   const queryMap = useCallback(

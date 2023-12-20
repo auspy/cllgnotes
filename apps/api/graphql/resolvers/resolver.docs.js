@@ -6,7 +6,6 @@ import saveImgToCloud from "../../helper/cloudinary/saveImgToCloud.js";
 import deleteImgFromCloud from "../../helper/cloudinary/deleteImgFromCloud.js";
 import redisClient, { getRedisItems } from "../../config/redis.config.js";
 import addToSet from "../../helper/addToSet.js";
-import getPurchasedDocs from "../../mongoose/funcs/getPurchasedDocs.js";
 import {
   getZodErrMsg,
   zodCreateDoc,
@@ -14,6 +13,7 @@ import {
   zodPurchaseDoc,
   zodUpdateDoc,
 } from "@cllgnotes/zod";
+import { getFilterDocs, getPurchasedDocs } from "../../mongoose/funcs/index.js";
 const resolverDocs = {
   getDocs: async (_, __, context) => {
     console.log("--- in get docs ---");
@@ -289,6 +289,7 @@ const resolverDocs = {
       };
     }
   },
+  getFilteredDocs: getFilterDocs,
 };
 
 const resolverMutDocs = {

@@ -9,11 +9,11 @@ export const dummyFilterGrpsDocType: ButtonProps[] = [
     icon: <img src="/icons/notes.png" alt="notes" height={60} width={60} />,
   },
   {
-    text: "Papers",
+    text: "Paper",
     icon: <img src="/icons/papers.png" alt="papers" height={60} width={60} />,
   },
   {
-    text: "Presentations",
+    text: "Presentation",
     icon: (
       <img
         src="/icons/presentation.png"
@@ -88,7 +88,7 @@ export const dummyFilterSteps: FilterSidebarGrpProps[] = [
   {
     title: "What are you searching for?",
     data: dummyFilterGrpsDocType,
-    key: "docType",
+    key: "type",
   },
   {
     title: "Which year?",
