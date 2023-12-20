@@ -19,6 +19,7 @@ const useSearchQuery = () => {
     } catch (error) {
       console.log("error in getFiltersFromQuery", error);
     }
+    console.log("filters from query", obj);
     setFilter(obj);
     return obj;
   };

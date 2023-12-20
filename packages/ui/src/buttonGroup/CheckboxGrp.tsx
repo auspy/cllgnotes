@@ -32,15 +32,16 @@ const CheckboxGrp = ({ data }: FilterSidebarProps) => {
               ) : (
                 data.map(({ text }, i) => {
                   const checkked = Boolean(
-                    filters[key] && text in filters[key]
+                    filters[key?.toLowerCase()] &&
+                      text?.toLowerCase() in filters[key]
                   );
                   const currentFilter = { key, label: text };
-                  console.log("checked", filters[key]);
+                  // console.log("checked", filters[key]);
                   const onChange = (
                     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
                     checked = checkked
                   ) => {
-                    console.log("checked", checked);
+                    // console.log("checked", checked);
                     if (checked) {
                       // if already in filter
                       return removeFilter(currentFilter);

@@ -13,7 +13,7 @@ const getFilterDocs = async (_, args, context) => {
     // get filter by query
     // eg: will get JSON stringified object: '{"type":{"notes":true}}'
     // const rawFilter = JSON.parse(decodeURIComponent(filter));
-    const rawFilter = { type: { paper: true } };
+    const rawFilter = JSON.parse(filter);
     console.log("... filter recieved =>", rawFilter);
     // convert filter to mongo query
     const query = {};

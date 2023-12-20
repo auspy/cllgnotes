@@ -1,10 +1,9 @@
-import BelowHeroExplore from "@/components/explore/BelowHeroExplore";
+import FilteredDocs from "@/components/explore/FilteredDocs";
 
 const page = () => {
   return (
     <>
-      {/* BELOW HERO */}
-      <BelowHeroExplore />
+      <FilteredDocs />
     </>
   );
 };

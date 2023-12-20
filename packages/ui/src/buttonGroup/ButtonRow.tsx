@@ -40,7 +40,9 @@ const ButtonRow = ({
                 ? "flex"
                 : "flex lg:hidden"
             } ${commonButtonProps?.buttonClasses} ${
-              select[1] && item.text in select[1] ? "filterButtonDisabled" : ""
+              select[1] && item.text?.toLowerCase() in select[1]
+                ? "filterButtonDisabled"
+                : ""
             }`}
             buttonStyles={{
               maxWidth: maxWidth,

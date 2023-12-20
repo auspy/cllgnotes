@@ -58,6 +58,7 @@ export type DocsQueryProps = {
   getCreatedDocs?: ResData;
   getDoc?: ResData;
   purchaseDoc?: ResData;
+  getFilteredDocs?: ResData;
 };
 
 export type CreateDocs = (

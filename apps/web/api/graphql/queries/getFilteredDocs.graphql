@@ -1,0 +1,10 @@
+query($filter:String!, $page:Int,$pageSize:Int){
+   getFilteredDocs(filter:$filter,page:$page,pageSize:$pageSize){
+        msg
+        status
+        data{
+            __typename
+            ...DocData
+        }
+   }
+}
