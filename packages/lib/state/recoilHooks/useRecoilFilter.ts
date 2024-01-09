@@ -15,7 +15,7 @@ const useRecoilFilter = () => {
     const obj: FilterChipMap = {};
     try {
       const data = params.get("search") || "";
-      Object.assign(obj, JSON.parse(data));
+      data && Object.assign(obj, JSON.parse(data));
     } catch (error) {
       console.log("error in getFiltersFromQuery", error);
     }

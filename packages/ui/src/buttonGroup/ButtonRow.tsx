@@ -17,15 +17,17 @@ const ButtonRow = ({
   select = ["", {}],
 }: ButtonRowProps) => {
   const [showMore, setShowMore] = useState(false);
+  const width = data.length > 3 ? 318 : 334;
+  const varHeight = data.length > 3 ? height || 90 : 120;
   // console.log("SHOW MORE", showMore);
   return (
     <div
-      className={`flex overflow-scroll flex-row lg:overflow-visible gap-x-[20px] scrollbar lg:grid lg:grid-cols-[auto_auto_auto_auto] lg:gap-y-[${columnGap}]  w100`}
+      className={`flex overflow-scroll flex-row lg:overflow-visible gap-x-[20px] scrollbar lg:grid lg:gap-y-[${columnGap}]  w100`}
       style={{
         rowGap: rowGap,
         paddingBottom: 4,
         paddingRight: 4,
-        // gridTemplateColumns: `repeat(auto-fit, minmax(${minWidth}px, 1fr))`,
+        gridTemplateColumns: `repeat(auto-fit, minmax(${width}px, 1fr))`,
       }}
     >
       {data.map((item, index) => (
@@ -60,7 +62,7 @@ const ButtonRow = ({
             }}
             iconLeft={true}
             width={"100%"}
-            height={height}
+            height={varHeight}
             onClick={(e) => {
               setShowMore(false);
               onClick &&
@@ -91,7 +93,7 @@ const ButtonRow = ({
                 }}
                 iconLeft={true}
                 // width={"100%"}
-                height={height}
+                height={varHeight}
                 onClick={(e) => {
                   setShowMore(!showMore);
                   // onClick && onClick(e, { label: "More", key: "More" }, index);

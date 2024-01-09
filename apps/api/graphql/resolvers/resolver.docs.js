@@ -15,8 +15,8 @@ import {
 } from "@cllgnotes/zod";
 import { getFilterDocs, getPurchasedDocs } from "../../mongoose/funcs/index.js";
 const resolverDocs = {
-  getDocs: async (_, __, context) => {
-    console.log("--- in get docs ---");
+  getDocs: async (parent, __, context) => {
+    console.log("--- in get docs ---", parent);
     const cachedDocs = await redisClient.hgetall("docs");
     const docs =
       Object.values(cachedDocs).map((item) => JSON.parse(item)) || [];

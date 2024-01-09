@@ -5,14 +5,15 @@ const filterArgs = z.object({
   page: z.number().max(100).default(1),
   pageSize: z.number().max(60).default(35),
 });
-const getFilterDocs = async (_, args, context) => {
+const getFilterDocs = async (parent, args, context) => {
   try {
-    console.log("... getting filter docs ...");
+    console.log("... getting filter docs ...", parent);
     const { page, pageSize, filter } = filterArgs.parse(args);
     console.log("... args recieved =>", page, pageSize, filter);
     // get filter by query
     // eg: will get JSON stringified object: '{"type":{"notes":true}}'
     // const rawFilter = JSON.parse(decodeURIComponent(filter));
+    // const rawFilter = { type: { notes: true } };
     const rawFilter = JSON.parse(filter);
     console.log("... filter recieved =>", rawFilter);
     // convert filter to mongo query

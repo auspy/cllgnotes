@@ -75,10 +75,7 @@ export const yearsFilter = [
   { text: "2028" },
 ];
 
-export const universitysFilter = [
-  { text: "SRM University" },
-  // You can add more universities in a similar fashion if needed
-];
+export const universitysFilter = [{ text: "SRM University" }];
 
 export const sems = [1, 2, 3, 4, 5, 6, 7, 8];
 export const Years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028];

@@ -15,8 +15,8 @@ interface DocCommon{
     img: String!
     published: Boolean!
     type: docType!
-    subject: String!
-    subjectCode: String!
+    subject: String
+    subjectCode: String
     pageCount: Int
     createdAt: String
     tLikes: Int
@@ -38,8 +38,8 @@ type Notes implements DocCommon {
     type: docType!
     published: Boolean!
     creator: Creator!
-    subject: String!
-    subjectCode: String!
+    subject: String
+    subjectCode: String
     desc: String
     price: Float
     pageCount: Int
@@ -56,8 +56,8 @@ type Notes implements DocCommon {
     university: String
     topics: [String]
     units: [String]
-    # subjectCode: SubjectCode!
-    # subject: Subjects!
+    # subjectCode: SubjectCode
+    # subject: Subjects
   }
 type Paper implements DocCommon {
     _id: ID!
@@ -68,8 +68,8 @@ type Paper implements DocCommon {
     creator: Creator!
     type: docType!
     testType: TestType!
-    subject: String!
-    subjectCode: String!
+    subject: String
+    subjectCode: String
     tLikes: Int
     rating: Float
     purchaseCount: Int
@@ -110,8 +110,8 @@ input CreateDocInput {
     year: Int
     university: String
     topics: [String]
-    subject: String!
-    subjectCode: String!
+    subject: String
+    subjectCode: String
     units: [String]
     testType: TestType
 }

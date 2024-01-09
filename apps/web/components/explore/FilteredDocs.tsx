@@ -3,7 +3,7 @@ import { GET_FILTERED_DOCS } from "@/api/graphql/gql";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { modifyToCardsData, useRecoilFilter } from "@cllgnotes/lib";
 import { CardProps, DocsQueryProps } from "@cllgnotes/types";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { CardGrp, List, ToolBar } from "ui";
 
 const FilteredDocs = ({}) => {
@@ -43,37 +43,39 @@ const FilteredDocs = ({}) => {
     refetch();
   }, [filters]);
   // * QUERIES END
-  if (!foundCourses) return <></>;
+  //   if (!foundCourses) return <></>;
   return (
     <>
-      <div className="w100 fcc" style={{ gap: 25 }}>
-        <ToolBar
-          isGrid={showGrid}
-          setIsGrid={setShowGrid}
-          chipGrpProps={{
-            clearFilters: clearFilters,
-            setChipData: setFiltr,
-            chipData: filtr,
-          }}
-          // clearFilters={clearFilter}
-          // chipData={filterChips}
-          // setChipData={setFilterChips}
-          found={l > 1000 ? Math.ceil(l / 10) * 10 : l}
-        />
-        {!showGrid ? (
-          <CardGrp
-            needHeading={false}
-            type="grid"
-            id="nice"
-            style={{ width: "100%" }}
-            data={cardsData.sort(
-              (a, b) => a.title?.localeCompare(String(b?.title)) || 0
-            )}
+      <Suspense>
+        <div className="w100 fcc" style={{ gap: 25 }}>
+          <ToolBar
+            isGrid={showGrid}
+            setIsGrid={setShowGrid}
+            chipGrpProps={{
+              clearFilters: clearFilters,
+              setChipData: setFiltr,
+              chipData: filtr,
+            }}
+            // clearFilters={clearFilter}
+            // chipData={filterChips}
+            // setChipData={setFilterChips}
+            found={l > 1000 ? Math.ceil(l / 10) * 10 : l}
           />
-        ) : (
-          <List id="" data={cardsData!} />
-        )}
-      </div>
+          {!showGrid ? (
+            <CardGrp
+              needHeading={false}
+              type="grid"
+              id="nice"
+              style={{ width: "100%" }}
+              data={cardsData.sort(
+                (a, b) => a.title?.localeCompare(String(b?.title)) || 0
+              )}
+            />
+          ) : (
+            <List id="" data={cardsData!} />
+          )}
+        </div>
+      </Suspense>
     </>
   );
 };

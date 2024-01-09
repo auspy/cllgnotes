@@ -137,6 +137,7 @@ const SearchBar = ({
       {exploreBtn && (
         <Button
           buttonClasses="exploreBtn"
+          href="/explore"
           buttonStyles={{ maxWidth: !isDesktop ? "unset" : 289 }}
           text="Explore Docs"
           height={height == 50 ? 60 : height}
