@@ -15,6 +15,7 @@ import resolvers from "./graphql/resolver.js";
 import cookieParser from "cookie-parser";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 import { v2 as cloudinary } from "cloudinary";
+import { connect } from "mongoose";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -23,6 +24,14 @@ cloudinary.config({
 });
 export { cloudinary };
 // SETUP FOR REST AND GRAPHQL
+
+const mongoConnect = connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  autoCreate: true,
+}).then(() => {
+  console.log("Mongoose connected to db");
+});
 
 console.log("NODE_ENV", process.env.TEST, env);
 const app = express();
