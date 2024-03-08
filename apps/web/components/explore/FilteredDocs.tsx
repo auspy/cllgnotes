@@ -61,7 +61,7 @@ const FilteredDocs = ({}) => {
             // setChipData={setFilterChips}
             found={l > 1000 ? Math.ceil(l / 10) * 10 : l}
           />
-          {!showGrid ? (
+          {!showGrid && Array.isArray(cardsData) && cardsData.length > 0 ? (
             <CardGrp
               needHeading={false}
               type="grid"

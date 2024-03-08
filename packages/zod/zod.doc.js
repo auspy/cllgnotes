@@ -1,5 +1,8 @@
 import { z } from "zod";
 export const zodMonogId = z.string().regex(/^[0-9a-fA-F]{24}$/);
+// z.string().refine((val) => {
+//   return mongoose.Types.ObjectId.isValid(val);
+// });
 const commonString = z
   .string()
   .min(3, { message: "Must be 3 or more characters long" })

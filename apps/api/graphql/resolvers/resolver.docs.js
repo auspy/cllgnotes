@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import { z } from "zod";
-import mongoConn from "../../config/mongoose.config.js";
 import { Docs, User } from "../../mongoose/modals/modals.js";
 import saveImgToCloud from "../../helper/cloudinary/saveImgToCloud.js";
 import deleteImgFromCloud from "../../helper/cloudinary/deleteImgFromCloud.js";

@@ -7,7 +7,7 @@ import ButtonArrow from "../buttons/ButtonArrow";
 import { CustomImageLoader } from "ui";
 
 const PreviewPdf = ({
-  notPurchased = true,
+  notPurchased = false,
   img,
   type,
   totalPages: tP,

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 const ButtonLogin = () => {
   // const [loading, setLoading] = useState(false);
-  const session = useSession();
+  const session: any = useSession();
   if (session.status == "authenticated") {
     return (
       <UserAvatarMenu

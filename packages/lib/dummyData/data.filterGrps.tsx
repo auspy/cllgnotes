@@ -111,7 +111,7 @@ export const dummyFilterSteps: FilterSidebarGrpProps[] = [
     heading: "Semester",
     key: "semester",
   },
-  { title: "University?", data: universitysFilter, key: "university" },
+  // { title: "University?", data: universitysFilter, key: "university" },
 ];
 
 export const dummyFilterList: FilterCheckboxListProps = {

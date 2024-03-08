@@ -32,7 +32,7 @@ const ButtonRow = ({
     >
       {data.map((item, index) => (
         // console.log(" MORE", data.length > 8 && index > 7 ? showMore : true),
-        <>
+        <div key={index}>
           <Button
             key={item.text + index}
             {...commonButtonProps}
@@ -128,7 +128,7 @@ const ButtonRow = ({
                   /> */}
             </div>
           )}
-        </>
+        </div>
       ))}
     </div>
   );
