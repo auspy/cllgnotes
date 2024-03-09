@@ -9,24 +9,6 @@ const useRecoilFilter = () => {
   // * FILTERS
   const [filters, setFilter] = useRecoilState<FilterChipMap>(atomFilter);
 
-  // * UPDATE FILTERS ON QUERY CHANGE
-  const searchParams = useSearchParams();
-  const getFiltersFromQuery = (params = searchParams) => {
-    const obj: FilterChipMap = {};
-    try {
-      const data = params.get("search") || "";
-      data && Object.assign(obj, JSON.parse(data));
-    } catch (error) {
-      console.log("error in getFiltersFromQuery", error);
-    }
-    console.log("filters from query", obj);
-    setFilter(obj);
-    return obj;
-  };
-  useEffect(() => {
-    const fltrs = getFiltersFromQuery();
-    // console.log("query", fltrs);
-  }, []);
   // * CLEAR ALL FILTERS
   const clearFilters = () => {
     setFilter({});
@@ -122,7 +104,7 @@ const useRecoilFilter = () => {
       if (query && Object.keys(query).length === 0) {
         return {};
       }
-      return { search: JSON.stringify(query) };
+      return { filters: JSON.stringify(query) };
     },
     [filters]
   );
@@ -138,3 +120,25 @@ const useRecoilFilter = () => {
 };
 
 export default useRecoilFilter;
+export const FilterOnPageLoad = () => {
+  const { setFilter } = useRecoilFilter();
+  // * UPDATE FILTERS ON QUERY CHANGE
+  const searchParams = useSearchParams();
+  const getFiltersFromQuery = (params = searchParams) => {
+    const obj: FilterChipMap = {};
+    try {
+      const data = params.get("filters") || "";
+      data && Object.assign(obj, JSON.parse(data));
+    } catch (error) {
+      console.log("error in getFiltersFromQuery", error);
+    }
+    console.log("filters from query", obj);
+    setFilter(obj);
+    return obj;
+  };
+  useEffect(() => {
+    getFiltersFromQuery();
+    // console.log("query", fltrs);
+  }, [searchParams]);
+  return null;
+};

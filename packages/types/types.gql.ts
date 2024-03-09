@@ -51,6 +51,7 @@ type ResData = {
   data: DocProps[];
   status: string;
   msg: string;
+  count?: number;
 };
 export type DocsQueryProps = {
   getDocs?: ResData;

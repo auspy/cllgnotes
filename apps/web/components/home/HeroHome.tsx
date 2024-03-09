@@ -28,7 +28,7 @@ const HeroHome = () => {
             <>
               <SearchBar
                 height={90}
-                options={["Srm university", "ashoka university"]}
+                // options={["Srm university", "ashoka university"]}
                 exploreBtn={true}
               />
             </>

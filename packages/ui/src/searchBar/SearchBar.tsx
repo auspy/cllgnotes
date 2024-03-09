@@ -6,7 +6,8 @@ import { useState } from "react";
 import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
 import Button from "../buttons/Button";
 import ShadowsType from "@cllgnotes/types/shadows";
-import { useDeviceType } from "@cllgnotes/lib";
+import { useDeviceType, useRecoilFilter } from "@cllgnotes/lib";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // search bar style for every search bar and works based on height
 // todo add a query parameter that allows us to add query and run by button click. other option is to add send data to usestate of parent component and run query there
@@ -44,7 +45,10 @@ const SearchBar = ({
   const otherCommonStyle: React.CSSProperties = {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
-    borderLeft: "1px dashed var(--dark)",
+    borderLeft:
+      Array.isArray(options) && options.length > 0
+        ? "1px dashed var(--dark)"
+        : "unset",
   };
   const focusdStyle: React.CSSProperties = {
     boxShadow: "unset",
@@ -55,8 +59,18 @@ const SearchBar = ({
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [option, setOption] = useState<string>(options?.[0] || "");
+  const { filters, queryMap } = useRecoilFilter();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
+  const searchFunc = (text?: string) => {
+    params.set("search", text || searchText);
+    router.push("/explore?" + params.toString());
+  };
+
   const handleSearch = () => {
     console.log("searching");
+    searchFunc();
   };
   return (
     <div className="w100 frc flex-col md:flex-row gap-x-[25px] gap-y-4">
@@ -72,7 +86,7 @@ const SearchBar = ({
         }}
       >
         {/* dropdown menu */}
-        {!isHeight50 && (
+        {!isHeight50 && Array.isArray(options) && options.length > 0 && (
           <select
             onChange={(e) => setOption(e.target.value)}
             className={` w100 semi caps`}
@@ -99,6 +113,7 @@ const SearchBar = ({
           className={`w100 medi`}
           onChange={(e) => {
             setSearchText(e.target.value);
+            searchFunc(e.target.value);
           }}
           onFocus={() => {
             setIsFocused(true);

@@ -1,5 +1,5 @@
-query($filter:String!, $page:Int,$pageSize:Int){
-   getFilteredDocs(filter:$filter,page:$page,pageSize:$pageSize){
+query($filter:String, $page:Int,$pageSize:Int,$search:String){
+   getFilteredDocs(filter:$filter,page:$page,pageSize:$pageSize,search:$search){
         msg
         status
         data{

@@ -1,1 +1,4 @@
-export { default as useRecoilFilter } from "./useRecoilFilter";
+export {
+  default as useRecoilFilter,
+  FilterOnPageLoad,
+} from "./useRecoilFilter";
