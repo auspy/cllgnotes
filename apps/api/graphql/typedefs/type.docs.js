@@ -139,6 +139,7 @@ type docRes{
     err: String
     status: String!
     data: [DocResData!]
+    count: Int
 }`;
 
 export default typeDocs;

@@ -5,6 +5,6 @@ type Query {
     getDocs: docRes!
     getPurchasedDocs(userId:String): docRes!
     getCreatedDocs: docRes!
-    getFilteredDocs(filter: String!,page:Int,pageSize:Int): docRes!
+    getFilteredDocs(filter: String,page:Int,pageSize:Int,search:String): docRes!
 }`;
 export default typeQuery;
