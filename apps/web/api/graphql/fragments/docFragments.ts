@@ -6,12 +6,16 @@ const NotesData = `fragment NotesData on Notes{
     topics
     subject{
         _id
+        name
+        code
     }
     course {
         _id
+        name
     }
     department{
         _id
+        name
     }
     purchaseCount
     isPurchased
