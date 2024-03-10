@@ -99,13 +99,7 @@ const getFilterDocs = async (parent, args, context) => {
       docsQuery,
     ]);
     console.log("... filtered docs fetched ...");
-    console.log(
-      docs.length,
-      docs[0],
-      "docs fetched from",
-      count,
-      "docs in total"
-    );
+    console.log(docs.length, "docs fetched from", count, "docs in total");
     return {
       status: "success",
       data: docs,

@@ -3,8 +3,8 @@ const typeDocs = `#related to docs
 scalar Upload
 type Creator{
     _id: ID!
-    username: String!
-    createdDocs: [Doc!]!
+    username: String
+    createdDocs: [Doc]
 }
 enum docType{
     notes

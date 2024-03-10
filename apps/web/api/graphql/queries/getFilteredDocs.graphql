@@ -2,6 +2,7 @@ query($filter:String, $page:Int,$pageSize:Int,$search:String){
    getFilteredDocs(filter:$filter,page:$page,pageSize:$pageSize,search:$search){
         msg
         status
+        count
         data{
             __typename
             ...DocData

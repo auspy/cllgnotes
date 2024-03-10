@@ -28,16 +28,14 @@ const FilteredDocs = ({}) => {
   // * VARIABLES END
   // * QUERIES
   // GET DATA
-  const { data, error, refetch } = useSuspenseQuery<DocsQueryProps>(
-    GET_FILTERED_DOCS,
-    {
-      variables: {
-        filter: JSON.stringify(filters),
-        page: Number(page),
-        search,
-      },
-    }
-  );
+  const { data, error } = useSuspenseQuery<DocsQueryProps>(GET_FILTERED_DOCS, {
+    variables: {
+      filter: JSON.stringify(filters),
+      page: Number(page),
+      search,
+    },
+  });
+  console.log("data", Object.keys(data?.getFilteredDocs || {}));
   // MODIFY DATA
   const docs = data?.getFilteredDocs?.data;
   const cardsData = modifyToCardsData(docs, {
@@ -47,13 +45,10 @@ const FilteredDocs = ({}) => {
   const totalDocs = data?.getFilteredDocs?.count || cardsData?.length;
   const foundCourses =
     data?.getFilteredDocs?.status === "success" && Boolean(cardsData);
-  useEffect(() => {
-    console.log("FILTERED DOCS DATA HERE --->", data, error);
-  }, [data]);
-  // REFETCH DATA ON FILTER UPDATE
-  useEffect(() => {
-    refetch();
-  }, [filters]);
+  // // REFETCH DATA ON FILTER UPDATE
+  // useEffect(() => {
+  //   refetch();
+  // }, [filters]);
   // * QUERIES END
   if (!foundCourses || error) return <></>;
   return (
@@ -61,7 +56,7 @@ const FilteredDocs = ({}) => {
       <Suspense>
         <FilterOnPageLoad />
         <div className="w100 fcc" style={{ gap: 25 }}>
-          {/* <ToolBar
+          <ToolBar
             isGrid={showGrid}
             setIsGrid={setShowGrid}
             chipGrpProps={{
@@ -75,8 +70,8 @@ const FilteredDocs = ({}) => {
             found={
               totalDocs > 1000 ? Math.ceil(totalDocs / 10) * 10 : totalDocs
             }
-          /> */}
-          {/* {!showGrid && Array.isArray(cardsData) && cardsData.length > 0 ? (
+          />
+          {!showGrid && Array.isArray(cardsData) && cardsData.length > 0 ? (
             <CardGrp
               needHeading={false}
               type="grid"
@@ -88,7 +83,7 @@ const FilteredDocs = ({}) => {
             />
           ) : (
             <List id="" data={cardsData!} />
-          )} */}
+          )}
         </div>
       </Suspense>
     </>

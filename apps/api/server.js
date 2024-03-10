@@ -73,7 +73,7 @@ app.use(
       try {
         if (!token) return { res };
         const user = await decryptAccessToken(token, res);
-        console.log("User found after decoding", Boolean(user));
+        console.log("User found after decoding", user);
         return { user, res };
       } catch (error) {
         // Handle token verification errors, if any
@@ -84,5 +84,8 @@ app.use(
   })
 );
 
-await new Promise((resolve) => httpServer.listen({ port }, resolve));
+await new Promise((resolve) => {
+  console.log("🚀 Building server at", port);
+  return httpServer.listen({ port }, resolve);
+});
 console.log(`🚀 Server ready at ${port}`);

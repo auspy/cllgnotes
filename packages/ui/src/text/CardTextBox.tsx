@@ -37,17 +37,9 @@ const CardTextBox = ({
           ...style,
         }}
       >
-        {Boolean(department) && (
-          <Text {...barTextProps}>
-            {department.replace("Engineering", "Engg.")}
-          </Text>
-        )}
+        {Boolean(department) && <Text {...barTextProps}>{"department"}</Text>}
         {Boolean(department && course) && <Text {...barTextProps}>{"•"}</Text>}
-        {Boolean(course) && (
-          <Text {...barTextProps}>
-            {course.replace("Engineering", "Engg.")}
-          </Text>
-        )}
+        {Boolean(course) && <Text {...barTextProps}>{"department"}</Text>}
         {Boolean(semester) && (
           <>
             <Text {...barTextProps}>{"•"}</Text>
