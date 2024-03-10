@@ -8,3 +8,9 @@ export const departmentSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// departmentSchema.virtual("coursesData", {
+//   ref: "Course",
+//   localField: "courses",
+//   foreignField: "_id",
+// });

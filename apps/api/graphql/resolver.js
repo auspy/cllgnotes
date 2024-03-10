@@ -18,18 +18,6 @@ const resolvers = {
       return null;
     },
   },
-  Course: {
-    __resolveType(obj) {
-      if (obj.departId?.name) return "CoursePopulated";
-      return "CourseData";
-    },
-  },
-  Subject: {
-    __resolveType(obj) {
-      if (obj.courseId?.name) return "SubjectPopulated";
-      return "SubjectData";
-    },
-  },
   Doc: {
     __resolveType(obj) {
       return docType(obj);

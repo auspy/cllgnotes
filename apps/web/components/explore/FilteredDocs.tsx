@@ -55,13 +55,13 @@ const FilteredDocs = ({}) => {
     refetch();
   }, [filters]);
   // * QUERIES END
-  //   if (!foundCourses) return <></>;
+  if (!foundCourses || error) return <></>;
   return (
     <>
       <Suspense>
         <FilterOnPageLoad />
         <div className="w100 fcc" style={{ gap: 25 }}>
-          <ToolBar
+          {/* <ToolBar
             isGrid={showGrid}
             setIsGrid={setShowGrid}
             chipGrpProps={{
@@ -75,8 +75,8 @@ const FilteredDocs = ({}) => {
             found={
               totalDocs > 1000 ? Math.ceil(totalDocs / 10) * 10 : totalDocs
             }
-          />
-          {!showGrid && Array.isArray(cardsData) && cardsData.length > 0 ? (
+          /> */}
+          {/* {!showGrid && Array.isArray(cardsData) && cardsData.length > 0 ? (
             <CardGrp
               needHeading={false}
               type="grid"
@@ -88,7 +88,7 @@ const FilteredDocs = ({}) => {
             />
           ) : (
             <List id="" data={cardsData!} />
-          )}
+          )} */}
         </div>
       </Suspense>
     </>

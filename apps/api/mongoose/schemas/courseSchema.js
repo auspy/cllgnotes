@@ -19,3 +19,19 @@ export const courseSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// courseSchema.virtual("departIdData", {
+//   ref: "Department",
+//   localField: "departId",
+//   foreignField: "_id",
+//   justOne: true,
+// });
+
+// courseSchema.virtual("subjectsData", {
+//   ref: "Subject",
+//   localField: "subjects",
+//   foreignField: "_id",
+// });
+
+// courseSchema.set("toObject", { virtuals: true });
+// courseSchema.set("toJSON", { virtuals: true });

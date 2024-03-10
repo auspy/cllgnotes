@@ -20,7 +20,6 @@ const SearchBar = ({
 }: SearchBarProps) => {
   const device = useDeviceType();
   const needSearchButton = height !== 90;
-  const isMobile = device === "mobile";
   const isDesktop = device === "desktop";
   // if (height == 90 && isMobile) {
   //   height = 60;
@@ -59,7 +58,6 @@ const SearchBar = ({
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [option, setOption] = useState<string>(options?.[0] || "");
-  const { filters, queryMap } = useRecoilFilter();
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());

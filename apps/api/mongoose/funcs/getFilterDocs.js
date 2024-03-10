@@ -15,16 +15,18 @@ const getFilterDocs = async (parent, args, context) => {
     // eg: will get JSON stringified object: '{"type":{"notes":true}}'
     // const rawFilter = JSON.parse(decodeURIComponent(filter));
     // const rawFilter = { type: { notes: true } };
-    const rawFilter = JSON.parse(filter);
+    const rawFilter = filter && JSON.parse(filter);
     console.log("... filter recieved =>", rawFilter);
     // convert filter to mongo query
     const query = {};
-    for (const key in rawFilter) {
-      if (key == "search") {
-        continue;
+    if (rawFilter) {
+      for (const key in rawFilter) {
+        if (key == "search") {
+          continue;
+        }
+        const value = rawFilter[key];
+        query[key] = { $in: Object.keys(value) };
       }
-      const value = rawFilter[key];
-      query[key] = { $in: Object.keys(value) };
     }
     let regexQuery = null;
     if (search) {
@@ -43,10 +45,10 @@ const getFilterDocs = async (parent, args, context) => {
     // get filtered data from db
     // filter docs needed works based on AND + OR. so we will need to manually filter when getting from cache
     // eg; the MongoDB query will find documents where the type is either "paper" or "book" AND the semester is either 1 or 2. so OR in type ,semester own values but AND in type and semester
-    console.log("searching using query =>", JSON.stringify(query.$or));
+    console.log("searching using query =>", query, JSON.stringify(query.$or));
     const skipVal = (page - 1) * pageSize;
     const simpleQuery = Docs.find(query)
-      .populate("course", "name _id")
+      // .populate("courseData", "name _id")
       .populate("department", "name _id")
       // .populate("creator", "username _id")
       .skip(skipVal)
@@ -70,17 +72,17 @@ const getFilterDocs = async (parent, args, context) => {
             from: "departments",
             localField: "department",
             foreignField: "_id",
-            as: "departments",
+            as: "department",
           },
         },
         {
           $match: {
             $or: [
               {
-                "course_docs.name": regexQuery,
+                "course.name": regexQuery,
               },
               {
-                "departs.name": regexQuery,
+                "department.name": regexQuery,
               },
             ],
           },
@@ -91,17 +93,24 @@ const getFilterDocs = async (parent, args, context) => {
       { maxTimeMS: 60000, allowDiskUse: true }
     );
     const docsQuery = search ? aggregateQuery : simpleQuery;
-    const [count, docs] = Promise.all([
-      await Docs.countDocuments(query),
-      await docsQuery,
+
+    const [count, docs] = await Promise.all([
+      Docs.countDocuments(query),
+      docsQuery,
     ]);
     console.log("... filtered docs fetched ...");
-    console.log(docs.length, "docs fetched from", count, "docs in total");
+    console.log(
+      docs.length,
+      docs[0],
+      "docs fetched from",
+      count,
+      "docs in total"
+    );
     return {
       status: "success",
       data: docs,
       msg: "Docs fetched successfully",
-      count,
+      count: count,
     };
     // modify data according to need
   } catch (error) {

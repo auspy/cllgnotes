@@ -4,22 +4,26 @@ fragment NotesData on Notes{
     title
     type
     topics
-    subject
-    subjectCode
-    course
-    department
+    subject{
+        _id
+    }
+    course {
+        _id
+    }
+    department{
+        _id
+    }
     purchaseCount
     isPurchased
     pageCount
     published
-    subject
-    subjectCode
     year
     semester
     tLikes
-    university
+    university{
+        _id
+    }
     creator{
         _id
-        username
     }
 }

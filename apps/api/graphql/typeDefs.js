@@ -7,6 +7,7 @@ import typeMongodb from "./typedefs/type.mongodb.js";
 import typeMutation from "./typedefs/type.mutation.js";
 import typeQuery from "./typedefs/type.query.js";
 import { typeSubjects } from "./typedefs/type.subjects.js";
+import { typeUniv } from "./typedefs/type.univ.js";
 import typeUser from "./typedefs/type.user.js";
 
 const typeDefs = [
@@ -17,6 +18,7 @@ const typeDefs = [
   typeQuery,
   typeMutation,
   typeEduTypeEnum,
+  typeUniv,
   typeDeparts,
   typeCourses,
   typeSubjects,

@@ -39,6 +39,37 @@ const docSchema = new Schema({
   // subjectCode: { type: String, required: true },
 });
 
+// docSchema.virtual("departmentData", {
+//   ref: "Department",
+//   localField: "department",
+//   foreignField: "_id",
+//   justOne: true,
+// });
+
+// docSchema.virtual("courseData", {
+//   ref: "Course",
+//   localField: "course",
+//   foreignField: "_id",
+//   justOne: true,
+// });
+
+// docSchema.virtual("subjectData", {
+//   ref: "Subject",
+//   localField: "subject",
+//   foreignField: "_id",
+//   justOne: true,
+// });
+
+// docSchema.virtual("universityData", {
+//   ref: "Univ",
+//   localField: "university",
+//   foreignField: "_id",
+//   justOne: true,
+// });
+
+// docSchema.set("toObject", { virtuals: true });
+// docSchema.set("toJSON", { virtuals: true });
+
 export default docSchema;
 
 //? for now we are using likedby to store the liked users

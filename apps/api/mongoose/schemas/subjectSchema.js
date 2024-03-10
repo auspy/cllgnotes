@@ -21,3 +21,20 @@ export const subjectSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// subjectSchema.virtual("departIdData", {
+//   ref: "Department",
+//   localField: "departId",
+//   foreignField: "_id",
+//   justOne: true,
+// });
+
+// subjectSchema.virtual("courseIdData", {
+//   ref: "Course",
+//   localField: "courseId",
+//   foreignField: "_id",
+//   justOne: true,
+// });
+
+// subjectSchema.set("toObject", { virtuals: true });
+// subjectSchema.set("toJSON", { virtuals: true });
