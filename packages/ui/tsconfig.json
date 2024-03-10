@@ -2,6 +2,8 @@
   "extends": "tsconfig/react-library.json",
   "include": [
     ".",
+    "**/*.ts",
+    "**/*.tsx",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "../../apps/web/components/**/*.ts",
@@ -11,9 +13,10 @@
     "../../apps/web/components/buttons/ButtonBuyNow.tsx"
   ],
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "ui": ["./index"]
+      "@/src/*": ["src/*"]
     }
   },
   "exclude": ["dist", "build", "node_modules"]

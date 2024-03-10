@@ -1,6 +1,6 @@
 "use client";
 import { ButtonGridProps } from "@cllgnotes/types";
-import IconButton from "../buttons/IconButton";
+import IconButton from "./IconButton";
 import { ViewListRounded, ViewComfyRounded } from "../mui/mui";
 import { useState } from "react";
 

@@ -1,7 +1,7 @@
 import { dummyNavData } from "@cllgnotes/lib/dummyData";
 import { NavigationProps } from "@cllgnotes/types/types.header";
 import Link from "next/link";
-import { Text } from "ui";
+import Text from "../text/Text";
 const Navigation = ({
   gap = 40,
   data = dummyNavData,

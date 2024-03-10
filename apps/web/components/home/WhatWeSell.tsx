@@ -13,7 +13,7 @@ const WhatWeSell = ({ data }: WhatWeSellProps) => {
   const isMobile = device === "mobile";
   const isTablet = device === "tablet";
   const [active, setActive] = useState(0);
-  const handleClick = (e, i: number) => {
+  const handleClick = (e: React.MouseEvent, i: number) => {
     setActive(i);
   };
   //   STYLES

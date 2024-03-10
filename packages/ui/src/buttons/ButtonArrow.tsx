@@ -1,4 +1,5 @@
-import { IconButton, ChevronLeftRounded, ChevronRightRounded } from "ui";
+import { ChevronLeftRounded, ChevronRightRounded } from "@mui/icons-material";
+import IconButton from "./IconButton";
 
 const ButtonArrow = ({
   isLeft,

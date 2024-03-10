@@ -2,10 +2,12 @@
 import Image from "next/image";
 import { defaultImg, useDeviceType } from "@cllgnotes/lib";
 import { Borders, BuyNowCardProps } from "@cllgnotes/types";
-import { ButtonBuyNow, CustomImageLoader, Text } from "ui";
 // import { useEffect } from "react";
 import ShadowsType from "@cllgnotes/types/shadows";
 import Colors from "@cllgnotes/types/colors";
+import { CustomImageLoader } from "../../loader.config";
+import Text from "../text/Text";
+import ButtonBuyNow from "../../../../apps/web/components/buttons/ButtonBuyNow";
 
 const BuyNowCard = ({
   src,

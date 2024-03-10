@@ -17,7 +17,7 @@ const CardDetailsText = ({
   href,
   textType,
   allowWrap = false,
-}: CardDetailsBoxProps) => {
+}: any) => {
   const detailsTextProps: Partial<TextProps> = {
     textStyle: { height: 16 },
     type: "medi12",

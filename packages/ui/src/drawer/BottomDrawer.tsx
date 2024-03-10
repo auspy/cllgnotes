@@ -4,7 +4,14 @@ import Colors from "@cllgnotes/types/colors";
 import { useState } from "react";
 // import { ShowInDevice } from "@cllgnotes/lib";
 // import { DeviceTypeEnum } from "@cllgnotes/types";
-import { Fab, FilterAltRounded, Box, Skeleton, SwipeableDrawer } from "ui";
+import {
+  Box,
+  Fab,
+  FilterAltRounded,
+  Skeleton,
+  SwipeableDrawer,
+} from "../mui/mui";
+
 const drawerBleeding = 56;
 const BottomDrawer = ({
   icon = <FilterAltRounded />,
@@ -45,6 +52,7 @@ const BottomDrawer = ({
         {icon}
       </Fab>
       {open && (
+        // @ts-ignore
         <SwipeableDrawer
           container={container}
           anchor="bottom"

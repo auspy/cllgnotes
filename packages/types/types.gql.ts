@@ -22,6 +22,7 @@ interface DocCommon {
   university?: string;
   creator?: Creator;
   price?: number;
+  __typename?: string;
 }
 interface Notes extends DocCommon {
   title: string;

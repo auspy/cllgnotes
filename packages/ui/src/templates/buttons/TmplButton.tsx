@@ -1,7 +1,7 @@
 import { ButtonProps } from "@cllgnotes/types/types.buttons";
 import Text from "../../text/Text";
 import { FontSizeEnum } from "@cllgnotes/types/types.text";
-import { CircularProgress } from "ui";
+import { CircularProgress } from "../../mui/mui";
 import Link from "next/link";
 // TemplateButton
 // files needed: common.css

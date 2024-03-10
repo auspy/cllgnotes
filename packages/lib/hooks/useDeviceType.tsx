@@ -29,6 +29,7 @@ export const DeviceTypeWrapper = ({ children }: React.PropsWithChildren) => {
   return (
     <>
       <ContextDeviceType.Provider value={device}>
+        {/* @ts-expect-error Server Component */}
         {children}
       </ContextDeviceType.Provider>
     </>

@@ -1,7 +1,9 @@
 import { pathDocId } from "@cllgnotes/lib";
 import { Borders, CardProps } from "@cllgnotes/types";
 import Image from "next/image";
-import { CardDetailsText, CardTextBox, LinkWrapper } from "ui";
+import LinkWrapper from "../wrappers/LinkWrapper";
+import CardTextBox from "../text/CardTextBox";
+import CardDetailsText from "../text/CardDetailsText";
 
 export const DocCard = ({
   img,

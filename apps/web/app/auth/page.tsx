@@ -119,10 +119,11 @@ export default function Login() {
         password: password.trim(),
         ...(isLoginPage ? {} : { email: email.trim() }),
         role,
+        // callbackUrl:role == "ADMIN" ? "/dashboard" : "/"
       };
-      if (isLoginPage) {
-        params["callbackUrl"] = role == "ADMIN" ? "/dashboard" : "/";
-      }
+      // if (isLoginPage) {
+      //   params["callbackUrl"] = role == "ADMIN" ? "/dashboard" : "/";
+      // }
       const auth = await signIn("credentials", params)
         .then((res) => {
           console.log("res", res);

@@ -1,15 +1,16 @@
 {
-  "name": "ui",
+  "name": "@/components",
   "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
     "generate:component": "turbo gen react-component"
   },
   "exports": {
-    ".": "./index.tsx"
+    ".": "./index.ts",
+    "./components": "./components/index.ts"
   },
   "devDependencies": {
     "@cllgnotes/types": "workspace:*",
@@ -25,7 +26,6 @@
   "peerDependencies": {
     "@cllgnotes/zod": "workspace:*",
     "@cllgnotes/lib": "workspace:*",
-    "@cllgnotes/zod": "workspace:*",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.8",

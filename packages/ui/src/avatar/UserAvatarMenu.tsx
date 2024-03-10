@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
-import { AccountMenu, Text } from "ui";
 import { Avatar, CircularProgress } from "@mui/material";
 import Colors from "@cllgnotes/types/colors";
 import { Session } from "next-auth";
+import Text from "../text/Text";
+import AccountMenu from "../menu/AccountMenu";
 
 type UserAvatarMenuProps = Session & {
   username: string;

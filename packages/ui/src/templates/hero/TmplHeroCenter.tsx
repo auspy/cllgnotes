@@ -1,6 +1,8 @@
 import { ImgProps } from "@cllgnotes/types";
 import Image from "next/image";
-import { Text, TmplHero } from "ui";
+import TmplHero from "./TmplHero";
+import Text from "../../text/Text";
+
 type TmplHeroCenterProps = {
   img: ImgProps;
   heading: string;

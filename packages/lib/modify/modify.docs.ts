@@ -25,10 +25,10 @@ export const modifyToCardsData = (
           type: doc.type || doc.__typename?.toLowerCase(),
           width: 120,
         }),
-        alt: rest._id,
-        width: 120,
-        height: 120,
-        ...(commonData?.img || {}),
+        alt: commonData?.img?.alt || rest._id,
+        width: (commonData?.img ? commonData.img.width : 120) as number,
+        height: (commonData?.img ? commonData.img.height : 120) as number,
+        fill: commonData?.img?.fill || undefined,
       },
     });
   }

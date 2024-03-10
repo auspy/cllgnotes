@@ -1,4 +1,4 @@
-import { Borders, TrustedProps } from "@cllgnotes/types";
+import { Borders, ImgProps, TrustedProps } from "@cllgnotes/types";
 import { Text } from "ui";
 import ImageClient from "./Image";
 
@@ -35,7 +35,7 @@ const Trusted = ({ data }: TrustedProps) => {
               }}
               key={ii}
             >
-              {data.map(({ src, alt, ...rest }, i) => (
+              {data.map(({ src, alt, ...rest }: ImgProps, i: number) => (
                 //   <div
                 //     className="rPosi"
                 //     key={i + alt}

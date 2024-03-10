@@ -1,5 +1,7 @@
-import { Header, MovingBanner } from "ui";
+import MovingBanner from "../../banners/MovingBanner";
 import Colors from "@cllgnotes/types/colors";
+import Header from "../../header/Header";
+
 type TmplHeroProps = React.PropsWithChildren & { height?: number | string } & (
     | {
         centerElement?: undefined;

@@ -20,7 +20,9 @@ const Testimonial = ({ data }: TestiCardGrpProps) => {
       changeActive(activeRef.current + 1);
       activeRef.current === data.length - 1;
     }, 10000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const leftIcon = (

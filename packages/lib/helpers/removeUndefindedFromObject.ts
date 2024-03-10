@@ -1,5 +1,5 @@
 export function removeUndefindedFromObject(obj: any) {
-  const newObj = {};
+  const newObj: any = {};
   for (const key in obj) {
     if (
       obj[key] !== undefined &&

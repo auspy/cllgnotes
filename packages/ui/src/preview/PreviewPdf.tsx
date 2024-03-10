@@ -4,7 +4,7 @@ import Image from "next/image";
 import PurchaseToRead from "../cards/PurchaseToRead";
 import { useState } from "react";
 import ButtonArrow from "../buttons/ButtonArrow";
-import { CustomImageLoader } from "ui";
+import { CustomImageLoader } from "../../loader.config";
 
 const PreviewPdf = ({
   notPurchased = false,

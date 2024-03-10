@@ -20,6 +20,7 @@ const page = () => {
           },
         }}
       />
+      {/* @ts-expect-error Server Component */}
       <LearningsData />
       <Footer />
     </div>

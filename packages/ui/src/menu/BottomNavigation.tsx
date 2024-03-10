@@ -1,4 +1,4 @@
-import { BottomNavigation as BN, BottomNavigationAction } from "ui";
+import { BottomNavigation as BN, BottomNavigationAction } from "../mui/mui";
 import { BottomNavigationProps } from "@cllgnotes/types";
 import { useRouter } from "next/navigation";
 const BottomNavigationMenu = ({

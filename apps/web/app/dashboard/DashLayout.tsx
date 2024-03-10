@@ -11,8 +11,8 @@ interface DashLayoutProps extends React.PropsWithChildren {}
 const DashLayout = ({ children }: DashLayoutProps) => {
   const [active, setActive] = useState<string>("Courses");
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
-  const { data, status } = useSession();
-  const deviceType = useContext(ContextDeviceType);
+  const { data, status }: any = useSession();
+  const deviceType = useContext(ContextDeviceType as any);
   const isDesktop = deviceType === "desktop";
   const menu: LeftMenuItemProps[] = dummyLeftMenuItems as LeftMenuItemProps[];
   const child =

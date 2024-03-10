@@ -47,5 +47,12 @@ module.exports = {
       },
     ],
     "import/no-default-export": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        case: "kebabCase",
+        ignore: ["app/**/*.tsx"],
+      },
+    ],
   },
 };

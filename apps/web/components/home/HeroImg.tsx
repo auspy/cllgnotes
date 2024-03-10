@@ -8,8 +8,8 @@ const HeroImg = ({
   img,
 }: {
   imgStyles?: React.CSSProperties;
-  height?: string | number;
-  width?: string | number;
+  height: number;
+  width: number;
   img: ImgProps;
 }) => {
   return (

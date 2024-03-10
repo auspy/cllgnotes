@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { signOut, useSession } from "next-auth/react";
 
 export const AuthWrapper = ({ children }: React.PropsWithChildren) => {
-  const { data } = useSession();
+  const { data }: any = useSession();
   const isAdmin = data?.user?.role == "ADMIN";
   const router = useRouter();
   const [logout, { client }] = useMutation(LOGOUT);
@@ -29,13 +29,13 @@ export const AuthWrapper = ({ children }: React.PropsWithChildren) => {
     <ContextAuthLogout.Provider
       value={(changePage?: boolean) => logoutFunc(changePage)}
     >
-      {children}
+      {children as any}
     </ContextAuthLogout.Provider>
   );
 };
 
 const useLogout = () => {
-  const logout = useContext(ContextAuthLogout);
+  const logout = useContext(ContextAuthLogout as any);
   return logout;
 };
 

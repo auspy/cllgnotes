@@ -1,7 +1,10 @@
 import Colors, { ColorsType } from "@cllgnotes/types/colors";
-import { ButtonLogin, Logo, Navigation, RightDrawer } from "ui";
 import { ShowInDevice } from "@cllgnotes/lib";
 import { DeviceTypeEnum } from "@cllgnotes/types";
+import Logo from "./logo";
+import Navigation from "./Navigation";
+import RightDrawer from "../drawer/RightDrawer";
+import ButtonLogin from "../buttons/ButtonLogin";
 const Header = ({ color }: { color?: ColorsType }) => {
   return (
     <div

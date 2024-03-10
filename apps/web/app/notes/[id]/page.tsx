@@ -4,10 +4,10 @@ import Footer from "@/components/footer/Footer";
 import useServerSession from "@/components/hooks/useServerSession";
 import NotesBelowHero from "@/components/notes/NotesBelowHero";
 import NotesHero from "@/components/notes/NotesHero";
-import { DetailTabProps, DocsQueryProps } from "@cllgnotes/types";
+import { DetailTabProps, DocProps, DocsQueryProps } from "@cllgnotes/types";
 import { MovingBanner, PreviewPdf } from "ui";
 
-const page = async ({ params }) => {
+const page = async ({ params }: { params: { id: string } }) => {
   // console.log(params, "params", params["id"]);
   const session = (await useServerSession()) as any;
   console.log(session, "in page");
@@ -15,7 +15,7 @@ const page = async ({ params }) => {
     query: GET_DOC,
     variables: { id: String(params["id"]), userId: session?.user?._id },
   });
-  const doc = data?.getDoc?.data?.[0];
+  const doc: DocProps | undefined = data?.getDoc?.data?.[0];
   const status = data?.getDoc?.status;
   const foundCourses = status == "success";
   const isPurchased = data?.getDoc?.data?.[0].isPurchased;
@@ -39,10 +39,13 @@ const page = async ({ params }) => {
     ];
     const arr: DetailTabProps[] = [];
     for (const key in doc) {
-      if (!notNeededLabels.includes(key) && doc[key]) {
-        if (Array.isArray(doc[key])) {
-          if (doc[key].length > 0) {
-            arr.push({ title: key, value: doc[key].join(", ") });
+      if (!notNeededLabels.includes(key) && doc[key as keyof DocProps]) {
+        if (Array.isArray(doc[key as keyof DocProps])) {
+          if ((doc[key as keyof DocProps] as any)?.length > 0) {
+            arr.push({
+              title: key,
+              value: (doc[key as keyof DocProps] as any)?.join(", "),
+            });
           }
           continue;
         }
@@ -50,7 +53,7 @@ const page = async ({ params }) => {
         //   arr.push({ title: key, value: doc[key].username });
         //   continue;
         // }
-        arr.push({ title: key, value: doc[key] });
+        arr.push({ title: key, value: doc[key as keyof DocProps] as any });
       }
     }
     return arr;
