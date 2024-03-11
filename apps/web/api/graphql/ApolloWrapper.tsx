@@ -7,7 +7,7 @@ import {
   NextSSRApolloClient,
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
-import { createUploadLink } from "apollo-upload-client";
+// import { createUploadLink } from "apollo-upload-client";
 import { setContext } from "@apollo/client/link/context";
 import { cacheOptions } from "./cache.config";
 
@@ -37,23 +37,22 @@ const authLink = setContext((_, { headers }) => {
 // have a function to create a client for you
 function makeClient() {
   const httpLink = authLink.concat(
-    createUploadLink({
+    new HttpLink({
+      // this needs to be an absolute url, as relative urls cannot be used in SSR
       uri: urlGql,
       credentials: "include",
-      fetchOptions: {
-        cache: "no-store",
-      },
+      // you can disable result caching here if you want to
+      // (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
+      // fetchOptions: { cache: "no-store" },
     })
   );
-
-  // new HttpLink({
-  //   // this needs to be an absolute url, as relative urls cannot be used in SSR
+  // createUploadLink({
   //   uri: urlGql,
   //   credentials: "include",
-  //   // you can disable result caching here if you want to
-  //   // (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
-  //   // fetchOptions: { cache: "no-store" },
-  // });
+  //   fetchOptions: {
+  //     cache: "no-store",
+  //   },
+  // })
 
   return new NextSSRApolloClient({
     // use the `NextSSRInMemoryCache`, not the normal `InMemoryCache`
