@@ -34,7 +34,9 @@
   "devDependencies": {
     "@cllgnotes/types": "workspace:*",
     "@types/bcrypt": "^5.0.0",
-    "next": "^13.4.19"
+    "next": "^13.4.19",
+    "@types/react": "18.2.45",
+    "@types/react-dom": "18.2.18"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
