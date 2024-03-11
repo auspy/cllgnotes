@@ -14,7 +14,6 @@ const ListItem = ({
   department,
   course,
   semester,
-  subjectCode,
   year,
   color,
   testType,
@@ -64,9 +63,9 @@ const ListItem = ({
           subject={subject}
           title={title}
           univ={univ}
-          subjectCode={subjectCode}
           year={year}
           testType={testType!}
+          allowWrap={true}
         />
       </div>
     </div>

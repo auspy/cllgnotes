@@ -1,5 +1,12 @@
 import Colors, { ColorsType } from "./colors";
-import { DocType, TestType } from "./types.gql";
+import {
+  CourseType,
+  DepartmentType,
+  DocType,
+  SubjectType,
+  TestType,
+  UnivType,
+} from "./types.gql";
 
 export enum HeadingType {
   h1,
@@ -95,9 +102,9 @@ export type TextProps = {
 );
 
 export type CardTextBoxProps = {
-  department: string;
+  department: DepartmentType;
   padding?: string;
-  course: string;
+  course: CourseType;
   semester?: number;
   year: number;
   color?: ColorsType;
@@ -108,7 +115,7 @@ export type CardTextBoxProps = {
 export type CardDetailsBoxProps = {
   _id: string;
   subject: string;
-  univ: string;
+  univ: UnivType;
   href?: string;
   allowWrap?: boolean;
   type?: DocType;
@@ -118,12 +125,12 @@ export type CardDetailsBoxProps = {
       testType?: undefined;
       year?: number;
       title: string;
-      subjectCode?: string;
+      subject?: SubjectType;
     }
   | {
       testType: TestType;
       year: number;
-      subjectCode: string;
+      subject: SubjectType;
       title?: string;
     }
 );

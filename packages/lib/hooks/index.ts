@@ -3,3 +3,4 @@ export {
   DeviceTypeWrapper,
   ShowInDevice,
 } from "./useDeviceType";
+export { default as useSearchQuery } from "./useSearchQuery";

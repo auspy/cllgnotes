@@ -2,10 +2,12 @@
 import Image from "next/image";
 import { defaultImg, useDeviceType } from "@cllgnotes/lib";
 import { Borders, BuyNowCardProps } from "@cllgnotes/types";
-import { ButtonBuyNow, CustomImageLoader, Text } from "ui";
 // import { useEffect } from "react";
 import ShadowsType from "@cllgnotes/types/shadows";
 import Colors from "@cllgnotes/types/colors";
+import { CustomImageLoader } from "../../loader.config";
+import Text from "../text/Text";
+import ButtonBuyNow from "../../../../apps/web/components/buttons/ButtonBuyNow";
 
 const BuyNowCard = ({
   src,
@@ -107,7 +109,7 @@ const BuyNowCard = ({
           <div className="">
             <div className="frc flex-wrap" style={{ gap: 10 }}>
               <Text textClass="fs0" type="h2">
-                {"₹ " + price}
+                {"₹ " + (price || 0)}
               </Text>
               <Text
                 textStyle={{ textDecorationLine: "line-through" }}
@@ -126,7 +128,8 @@ const BuyNowCard = ({
                 textClass="fs0 h1Highlight"
                 type="h2"
                 text={`${
-                  discount || 100 - Number(((price / 3129) * 100).toFixed())
+                  discount ||
+                  100 - Number((((price || 0) / 3129) * 100).toFixed())
                 }%
                 off`}
               ></Text>

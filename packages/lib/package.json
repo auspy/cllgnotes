@@ -33,7 +33,8 @@
   "scripts": {},
   "devDependencies": {
     "@cllgnotes/types": "workspace:*",
-    "@types/bcrypt": "^5.0.0"
+    "@types/bcrypt": "^5.0.0",
+    "next": "^13.4.19"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

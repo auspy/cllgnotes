@@ -1,7 +1,7 @@
 import SearchBar from "../searchBar/SearchBar";
 import Text from "../text/Text";
 import CheckboxGrp from "../buttonGroup/CheckboxGrp";
-import { dummyFilterList } from "@cllgnotes/lib/dummyData";
+import { dummyFilterSteps } from "@cllgnotes/lib/dummyData";
 import { ManageFiltersProps } from "@cllgnotes/types";
 
 const FilterSidebar = ({
@@ -21,7 +21,7 @@ const FilterSidebar = ({
       <CheckboxGrp
         removeFilter={removeFilter}
         addFilter={addFilter}
-        data={dummyFilterList}
+        data={dummyFilterSteps}
       />
     </div>
   );

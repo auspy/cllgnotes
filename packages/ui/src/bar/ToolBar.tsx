@@ -16,12 +16,7 @@ const ToolBar = ({
         <Text textClass="fs0 mr15" type="medi16">
           {String(found) + "+ found"}
         </Text>
-        <ChipGrp
-          {...chipGrpProps}
-          // clearFilters={clearFilters}
-          // setChipData={setChipData}
-          // chipData={chipData}
-        />
+        <ChipGrp />
       </div>
       <div className="frfs ml15" style={{ color: Colors.dark }}>
         {/* will add select dropdown here */}

@@ -1,17 +1,19 @@
 import { pathDocId } from "@cllgnotes/lib";
 import { Borders, CardProps } from "@cllgnotes/types";
 import Image from "next/image";
-import { CardDetailsText, CardTextBox, LinkWrapper } from "ui";
+import LinkWrapper from "../wrappers/LinkWrapper";
+import CardTextBox from "../text/CardTextBox";
+import CardDetailsText from "../text/CardDetailsText";
 
 export const DocCard = ({
   img,
   subject,
   title,
   testType,
-  subjectCode,
   univ,
   imgHeight = 268,
   minWidth,
+  semester,
   department,
   course,
   year,
@@ -63,6 +65,7 @@ export const DocCard = ({
               course={course}
               year={year}
               color={color}
+              semester={semester}
             />
           </div>
           {/* DETAILS */}
@@ -70,7 +73,6 @@ export const DocCard = ({
           <CardDetailsText
             _id={_id}
             textType={textType}
-            subjectCode={subjectCode}
             subject={subject}
             title={title}
             year={year}

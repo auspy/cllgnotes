@@ -1,9 +1,9 @@
 import { CardProps } from "@cllgnotes/types";
 import { defaultImg } from "../constants";
 
-export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
-  data
-) => [
+export const dummyCardsData: (
+  data?: Partial<CardProps>
+) => Partial<CardProps>[] = (data) => [
   {
     img: defaultImg,
     department: "engineering".toUpperCase(),
@@ -12,7 +12,6 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     semester: 3,
     _id: "123",
     subject: "DSA",
-    topic: "Dynamic Programming",
     univ: "IIT Delhi",
     ...(data || {}),
   },
@@ -22,7 +21,6 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     course: "b.tech".toUpperCase(),
     year: 2,
     subject: "DSA",
-    topic: "Dynamic Programming",
     univ: "IIT Delhi",
     ...(data || {}),
   },
@@ -32,7 +30,6 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     course: "b.tech".toUpperCase(),
     year: 2,
     subject: "DSA",
-    topic: "Dynamic Programming",
     univ: "IIT Delhi",
     ...(data || {}),
   },
@@ -42,7 +39,6 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     course: "b.tech".toUpperCase(),
     year: 2,
     subject: "DSA",
-    topic: "Dynamic Programming",
     univ: "IIT Delhi",
     ...(data || {}),
   },
@@ -52,7 +48,6 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     course: "b.tech".toUpperCase(),
     year: 2,
     subject: "DSA",
-    topic: "Dynamic Programming",
     univ: "IIT Delhi",
     ...(data || {}),
   },
@@ -62,7 +57,6 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     course: "b.tech".toUpperCase(),
     year: 2,
     subject: "DSA",
-    topic: "Dynamic Programming",
     univ: "IIT Delhi",
     ...(data || {}),
   },
@@ -72,7 +66,6 @@ export const dummyCardsData: (data?: Partial<CardProps>) => CardProps[] = (
     course: "b.tech".toUpperCase(),
     year: 2,
     subject: "DSA",
-    topic: "Dynamic Programming",
     univ: "IIT Delhi",
     ...(data || {}),
   },

@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["ui", "types", "@cllgnotes/lib"],
+  transpilePackages: ["types", "ui", "@cllgnotes/lib"],
   webpack: (config) => {
     // const aliasPath = path.resolve(__dirname, "./src"); // Get the resolved alias path
 

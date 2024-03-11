@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
-import { AccountMenu, Text } from "ui";
 import { Avatar, CircularProgress } from "@mui/material";
 import Colors from "@cllgnotes/types/colors";
 import { Session } from "next-auth";
+import Text from "../text/Text";
+import AccountMenu from "../menu/AccountMenu";
 
 type UserAvatarMenuProps = Session & {
   username: string;
@@ -42,20 +43,6 @@ const UserAvatarMenu = ({ username, user }: UserAvatarMenuProps) => {
           </Text>
         )}
       </Avatar>
-      {/* <button
-        style={{
-          height: 40,
-          width: 40,
-          backgroundColor: Colors.white,
-          border: "1px solid var(--dark)",
-          borderRadius: "50%",
-          color: "var(--dark)",
-        }}
-        onClick={handleClick}
-        className="upper semi16 gcc"
-      >
-        {clicked ? <CircularProgress color="inherit" size={14} /> : username[0]}
-      </button> */}
       <AccountMenu
         setAnchorEl={setAnchorEl}
         anchorEl={anchorEl}

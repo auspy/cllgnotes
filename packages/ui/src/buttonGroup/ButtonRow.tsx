@@ -14,23 +14,25 @@ const ButtonRow = ({
   height = 120,
   columnGap = 30,
   onClick,
-  select = new Set(),
+  select = ["", {}],
 }: ButtonRowProps) => {
   const [showMore, setShowMore] = useState(false);
+  const width = data.length > 3 ? 318 : 334;
+  const varHeight = data.length > 3 ? height || 90 : 120;
   // console.log("SHOW MORE", showMore);
   return (
     <div
-      className={`flex overflow-scroll flex-row lg:overflow-visible gap-x-[20px] scrollbar lg:grid lg:grid-cols-[auto_auto_auto_auto] lg:gap-y-[${columnGap}]  w100`}
+      className={`flex overflow-scroll flex-row lg:overflow-visible gap-x-[20px] scrollbar lg:grid lg:gap-y-[${columnGap}]  w100`}
       style={{
         rowGap: rowGap,
         paddingBottom: 4,
         paddingRight: 4,
-        // gridTemplateColumns: `repeat(auto-fit, minmax(${minWidth}px, 1fr))`,
+        gridTemplateColumns: `repeat(auto-fit, minmax(${width}px, 1fr))`,
       }}
     >
       {data.map((item, index) => (
         // console.log(" MORE", data.length > 8 && index > 7 ? showMore : true),
-        <>
+        <div key={index}>
           <Button
             key={item.text + index}
             {...commonButtonProps}
@@ -40,7 +42,9 @@ const ButtonRow = ({
                 ? "flex"
                 : "flex lg:hidden"
             } ${commonButtonProps?.buttonClasses} ${
-              select.has(item.text) ? "filterButtonDisabled" : ""
+              select[1] && item.text?.toLowerCase() in select[1]
+                ? "filterButtonDisabled"
+                : ""
             }`}
             buttonStyles={{
               maxWidth: maxWidth,
@@ -58,11 +62,11 @@ const ButtonRow = ({
             }}
             iconLeft={true}
             width={"100%"}
-            height={height}
+            height={varHeight}
             onClick={(e) => {
               setShowMore(false);
               onClick &&
-                onClick(e, { label: item.text, key: item.text }, index);
+                onClick(e, { label: item.text, key: select[0] }, index);
             }}
           />
           {/* MORE BUTTON */}
@@ -74,8 +78,8 @@ const ButtonRow = ({
                 text={showMore ? "Less" : "More"}
                 buttonClasses={`shadow-box5  ${commonButtonProps?.buttonClasses}`}
                 buttonStyles={{
-                  maxWidth: maxWidth / 2,
-                  minWidth: minWidth / 2,
+                  maxWidth: maxWidth && maxWidth / 2,
+                  minWidth: minWidth && minWidth / 2,
                   ...commonButtonProps?.buttonStyles,
                   ...item.buttonStyles,
                 }}
@@ -89,7 +93,7 @@ const ButtonRow = ({
                 }}
                 iconLeft={true}
                 // width={"100%"}
-                height={height}
+                height={varHeight}
                 onClick={(e) => {
                   setShowMore(!showMore);
                   // onClick && onClick(e, { label: "More", key: "More" }, index);
@@ -124,7 +128,7 @@ const ButtonRow = ({
                   /> */}
             </div>
           )}
-        </>
+        </div>
       ))}
     </div>
   );

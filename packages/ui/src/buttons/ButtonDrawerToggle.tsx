@@ -1,5 +1,5 @@
 import { ButtonDrawerToggle } from "@cllgnotes/types";
-import { ArrowLeftRounded, ArrowRightRounded } from "ui";
+import { ArrowLeftRounded, ArrowRightRounded } from "../mui/mui";
 
 const ButtonDrawerToggle = ({
   isOpen,

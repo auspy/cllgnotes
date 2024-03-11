@@ -1,6 +1,6 @@
 "use client";
 import { Text, TestiUserAvatar, TestiGrp, ButtonArrow } from "ui";
-import { TestiCardGrpProps } from "@cllgnotes/types";
+import type { TestiCardGrpProps } from "@cllgnotes/types";
 import { useEffect, useRef, useState } from "react";
 import { useDeviceType } from "@cllgnotes/lib";
 
@@ -20,7 +20,9 @@ const Testimonial = ({ data }: TestiCardGrpProps) => {
       changeActive(activeRef.current + 1);
       activeRef.current === data.length - 1;
     }, 10000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const leftIcon = (

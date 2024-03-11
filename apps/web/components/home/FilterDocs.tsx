@@ -7,7 +7,9 @@ const FilterDocs = ({ minWidth }: { minWidth?: number }) => {
     <>
       <CardGrp
         id="cardContainer"
-        data={dummyCardsData({ className: "min-w-[305px] sm:min-w-[360px]" })}
+        data={
+          dummyCardsData({ className: "min-w-[305px] sm:min-w-[360px]" }) as any
+        }
       />
     </>
   );

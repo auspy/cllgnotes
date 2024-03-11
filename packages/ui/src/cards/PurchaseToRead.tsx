@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ButtonBuyNow } from "ui";
+import ButtonBuyNow from "../../../../apps/web/components/buttons/ButtonBuyNow";
 
 const PurchaseToRead = ({ price, _id }: { price: number; _id: string }) => {
   return (

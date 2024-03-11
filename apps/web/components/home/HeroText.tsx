@@ -21,8 +21,8 @@ const HeroText = ({
   ) => (
     <ShowInDevice devices={[...devices]}>
       <HeroImg
-        width={width}
-        height={height}
+        width={width as number}
+        height={height as number}
         img={restImg as ImgProps}
         imgStyles={{ ...styles, ...imgStyles }}
       />

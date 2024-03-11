@@ -1,46 +1,66 @@
 const NotesData = `fragment NotesData on Notes{
     _id
     img
-    subject
-    subjectCode
-    course
-    department
+    title
+    type
+    topics
+    subject{
+        _id
+        name
+        code
+    }
+    course {
+        _id
+        name
+    }
+    department{
+        _id
+        name
+    }
     purchaseCount
-    published
-    subject
     isPurchased
     pageCount
-    subjectCode
+    published
     year
     semester
     tLikes
-    university
+    university{
+        _id
+    }
     creator{
         _id
-        username
     }
 }`;
 const PaperData = `fragment PaperData on Paper{
     _id
     img
-    subject
-    subjectCode
-    course
-    department
+    type
+    subject{
+        _id
+        name
+        code
+    }
+    course {
+        _id
+        name
+    }
+    department{
+        _id
+        name
+    }
     purchaseCount
     isPurchased
-    pageCount
     published
-    subject
-    subjectCode
+    pageCount
     year
     semester
     testType
     tLikes
-    university
+    university{
+        _id
+    }
     creator{
         _id
-        username
     }
 }`;
 const DocData = `fragment DocData on Doc{

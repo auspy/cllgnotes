@@ -14,7 +14,16 @@ const CardTextBox = ({
 }: CardTextBoxProps) => {
   const barTextProps: Partial<TextProps> = {
     type: "semi12",
+    textStyle: {
+      maxWidth: "100px",
+      textWrap: "nowrap",
+    } as any,
   };
+  // if (isAbsolute) {
+  //   barTextProps.textStyle = {
+  //     maxWidth: "50px",
+  //   };
+  // }
   const absStyles: React.CSSProperties = {
     transform: "translateY(-50%)",
     position: "absolute",
@@ -37,15 +46,15 @@ const CardTextBox = ({
           ...style,
         }}
       >
-        {Boolean(department) && (
+        {Boolean(department) && typeof department != "string" && (
           <Text {...barTextProps}>
-            {department.replace("Engineering", "Engg.")}
+            {department.name?.replace(/department of/i, "")}
           </Text>
         )}
         {Boolean(department && course) && <Text {...barTextProps}>{"•"}</Text>}
-        {Boolean(course) && (
+        {Boolean(course) && typeof course != "string" && (
           <Text {...barTextProps}>
-            {course.replace("Engineering", "Engg.")}
+            {course.name?.replace("Engineering", "Engg.")}
           </Text>
         )}
         {Boolean(semester) && (

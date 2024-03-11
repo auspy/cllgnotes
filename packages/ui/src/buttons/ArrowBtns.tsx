@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import IconButton from "../buttons/IconButton";
+import IconButton from "./IconButton";
 import { ChevronRightRounded, ChevronLeftRounded } from "../mui/mui";
 const ArrowBtns = ({ id }: { id: string }) => {
   const [atEnd, setAtEnd] = useState<"left" | "right" | null>("left");
@@ -9,7 +9,7 @@ const ArrowBtns = ({ id }: { id: string }) => {
   useEffect(() => {
     const ele = document.getElementById(id);
     if (!ele) return;
-    const handleScroll = (e) => {
+    const handleScroll = (e: any) => {
       const el = e.target;
       if (el?.scrollLeft == 0) {
         setAtEnd("left");

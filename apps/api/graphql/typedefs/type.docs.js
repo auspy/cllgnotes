@@ -3,8 +3,8 @@ const typeDocs = `#related to docs
 scalar Upload
 type Creator{
     _id: ID!
-    username: String!
-    createdDocs: [Doc!]!
+    username: String
+    createdDocs: [Doc]
 }
 enum docType{
     notes
@@ -15,18 +15,17 @@ interface DocCommon{
     img: String!
     published: Boolean!
     type: docType!
-    subject: String!
-    subjectCode: String!
+    subject: Subject
     pageCount: Int
     createdAt: String
     tLikes: Int
     rating: Float
     purchaseCount: Int
-    course: String
-    department: String
+    course: Course
+    department: Department
     semester: Int
     year: Int
-    university: String
+    university: Univ
     creator: Creator
     price: Float
     isPurchased: Boolean
@@ -38,8 +37,7 @@ type Notes implements DocCommon {
     type: docType!
     published: Boolean!
     creator: Creator!
-    subject: String!
-    subjectCode: String!
+    subject: Subject
     desc: String
     price: Float
     pageCount: Int
@@ -49,15 +47,14 @@ type Notes implements DocCommon {
     purchaseCount: Int
     isPurchased: Boolean
     # make them mandatory
-    course: String
-    department: String
+    course: Course
+    #courseData: Course
+    department: Department
     year: Int
     semester: Int
-    university: String
+    university: Univ
     topics: [String]
     units: [String]
-    # subjectCode: SubjectCode!
-    # subject: Subjects!
   }
 type Paper implements DocCommon {
     _id: ID!
@@ -68,19 +65,17 @@ type Paper implements DocCommon {
     creator: Creator!
     type: docType!
     testType: TestType!
-    subject: String!
-    subjectCode: String!
+    subject: Subject
     tLikes: Int
     rating: Float
     purchaseCount: Int
     price: Float
     isPurchased: Boolean
-    # make them mandatory
-    course: String
-    department: String
+    course: Course
+    department: Department
     semester: Int
     year: Int
-    university: String
+    university: Univ
 }
 enum TestType{
     mst1
@@ -96,6 +91,7 @@ enum TestType{
     # viva
     other
 }
+
 union Doc = Notes | Paper
 input CreateDocInput {
     title: String
@@ -104,14 +100,13 @@ input CreateDocInput {
     img: Upload!
     type: docType!
     published: Boolean!
-    course: String
-    department: String
+    course: ID
+    department: ID
     semester: Int
     year: Int
-    university: String
+    university: ID
     topics: [String]
-    subject: String!
-    subjectCode: String!
+    subject: ID
     units: [String]
     testType: TestType
 }
@@ -123,14 +118,13 @@ input UpdateDocInput {
     type: docType
     testType: TestType
     published: Boolean
-    course: String
-    department: String
+    course: ID
+    department: ID
     semester: Int
     year: Int
-    university: String
+    university: ID
     topics: [String]
-    subject: String
-    subjectCode: String
+    subject: ID
     units: [String]
 }
 union DocResData = Notes | Paper | updateRes
@@ -139,6 +133,7 @@ type docRes{
     err: String
     status: String!
     data: [DocResData!]
+    count: Int
 }`;
 
 export default typeDocs;

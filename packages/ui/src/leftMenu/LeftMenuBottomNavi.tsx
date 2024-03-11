@@ -1,5 +1,5 @@
 import { LeftMenuBottomNaviProps } from "@cllgnotes/types";
-import { ButtonDrawerToggle } from "ui";
+import ButtonDrawerToggle from "../buttons/ButtonDrawerToggle";
 
 const LeftMenuBottomNavi = ({
   isExpanded,

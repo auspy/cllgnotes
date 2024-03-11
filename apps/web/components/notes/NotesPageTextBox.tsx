@@ -9,10 +9,9 @@ const NotesPageTextBox = ({
   desc,
   testType,
   subject,
-  subjectCode,
   textBoxProps,
   notPurchased = true,
-}: NotesHeroTextProps) => {
+}: NotesHeroTextProps | any) => {
   return (
     <>
       <div style={{ width: "100%", maxWidth: notPurchased ? 915 : "none" }}>
@@ -23,16 +22,23 @@ const NotesPageTextBox = ({
             marginBottom: 15,
           }}
         />
-        <Text type="h2">
+        <Text textClass="mb15" type="h2">
           {title
             ? firstLetterUppercase(title)
-            : `${testType ? `${testType?.toUpperCase()} - ` : ""} ${subject} ${
-                subjectCode ? `- ${subjectCode}` : ""
-              }`}
+            : ` ${subject.name} ${
+                subject?.code &&
+                subject?.code
+                  .substring(0, subject?.name?.length || 0)
+                  ?.toLowerCase() != subject?.name?.toLowerCase()
+                  ? `: ${subject.code}`
+                  : ""
+              } ${testType ? `: ${testType?.toUpperCase()}` : ""}`}
         </Text>
-        <p className="regu16 mt15 mb20" style={{ opacity: 0.8 }}>
-          {firstLetterUppercase(desc)}
-        </p>
+        {desc && (
+          <p className="regu16 mb20" style={{ opacity: 0.8 }}>
+            {firstLetterUppercase(desc)}
+          </p>
+        )}
         <DetailTabGroup data={labels} />
       </div>
     </>

@@ -1,10 +1,11 @@
 "use client";
-import { UserAvatarMenu, LinkButton } from "ui";
 import { useSession } from "next-auth/react";
+import UserAvatarMenu from "../avatar/UserAvatarMenu";
+import LinkButton from "./LinkButton";
 
 const ButtonLogin = () => {
   // const [loading, setLoading] = useState(false);
-  const session = useSession();
+  const session: any = useSession();
   if (session.status == "authenticated") {
     return (
       <UserAvatarMenu

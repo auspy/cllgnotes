@@ -23,7 +23,7 @@ const ExploreHero = ({
           >
             <Text type="h1">{heading}</Text>
             <SearchBar
-              options={["SRM Haryana", "Ashoke University"]}
+              // options={["SRM Haryana", "Ashoke University"]}
               height={60}
             />
           </div>

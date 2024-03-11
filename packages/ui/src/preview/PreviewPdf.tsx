@@ -4,10 +4,10 @@ import Image from "next/image";
 import PurchaseToRead from "../cards/PurchaseToRead";
 import { useState } from "react";
 import ButtonArrow from "../buttons/ButtonArrow";
-import { CustomImageLoader } from "ui";
+import { CustomImageLoader } from "../../loader.config";
 
 const PreviewPdf = ({
-  notPurchased = true,
+  notPurchased = false,
   img,
   type,
   totalPages: tP,
@@ -78,7 +78,7 @@ const PreviewPdf = ({
           style={{
             padding: 2,
             borderRadius: 5,
-            objectFit: "cover",
+            objectFit: "contain",
           }}
           {...img}
           src={img.src}

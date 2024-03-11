@@ -15,6 +15,7 @@ import resolvers from "./graphql/resolver.js";
 import cookieParser from "cookie-parser";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 import { v2 as cloudinary } from "cloudinary";
+import { connect } from "mongoose";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -23,6 +24,14 @@ cloudinary.config({
 });
 export { cloudinary };
 // SETUP FOR REST AND GRAPHQL
+
+const mongoConnect = connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  autoCreate: true,
+}).then(() => {
+  console.log("Mongoose connected to db");
+});
 
 console.log("NODE_ENV", process.env.TEST, env);
 const app = express();
@@ -64,7 +73,7 @@ app.use(
       try {
         if (!token) return { res };
         const user = await decryptAccessToken(token, res);
-        console.log("User found after decoding", user);
+        console.log("User found after decoding", Boolean(user));
         return { user, res };
       } catch (error) {
         // Handle token verification errors, if any
@@ -75,5 +84,8 @@ app.use(
   })
 );
 
-await new Promise((resolve) => httpServer.listen({ port }, resolve));
+await new Promise((resolve) => {
+  console.log("🚀 Building server at", port);
+  return httpServer.listen({ port }, resolve);
+});
 console.log(`🚀 Server ready at ${port}`);

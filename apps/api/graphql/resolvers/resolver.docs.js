@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
-import { z } from "zod";
-import mongoConn from "../../config/mongoose.config.js";
 import { Docs, User } from "../../mongoose/modals/modals.js";
 import saveImgToCloud from "../../helper/cloudinary/saveImgToCloud.js";
 import deleteImgFromCloud from "../../helper/cloudinary/deleteImgFromCloud.js";
 import redisClient, { getRedisItems } from "../../config/redis.config.js";
 import addToSet from "../../helper/addToSet.js";
-import getPurchasedDocs from "../../mongoose/funcs/getPurchasedDocs.js";
 import {
   getZodErrMsg,
   zodCreateDoc,
@@ -14,9 +11,10 @@ import {
   zodPurchaseDoc,
   zodUpdateDoc,
 } from "@cllgnotes/zod";
+import { getFilterDocs, getPurchasedDocs } from "../../mongoose/funcs/index.js";
 const resolverDocs = {
-  getDocs: async (_, __, context) => {
-    console.log("--- in get docs ---");
+  getDocs: async (parent, __, context) => {
+    console.log("--- in get docs ---", parent);
     const cachedDocs = await redisClient.hgetall("docs");
     const docs =
       Object.values(cachedDocs).map((item) => JSON.parse(item)) || [];
@@ -26,8 +24,11 @@ const resolverDocs = {
       console.log("--- getting new docs ---");
       const newDocs = await Docs.find({ published: true })
         .populate("creator")
+        .populate("subject", "name code")
+        .populate("course", "name")
+        .populate("department", "name")
         .limit(100) // just a most easy but bad way to prevent many course get fetched
-        .exec();
+        .lean();
       // SET DOCS
       Array.prototype.push.apply(docs, newDocs);
       // STORE NEW DOCS IN CACHE
@@ -105,7 +106,12 @@ const resolverDocs = {
       console.log("is in cache?", Boolean(data));
       // IF NOT FOUND GET FROM DB
       if (!data)
-        data = await Docs.findById(validDocId).populate("creator").exec();
+        data = await Docs.findById(validDocId)
+          .populate("creator")
+          .populate("subject", "name code")
+          .populate("course", "name")
+          .populate("department", "name")
+          .lean();
       if (!data) {
         console.log("--- Doc not found ---");
         throw new Error("Doc not found");
@@ -187,9 +193,24 @@ const resolverDocs = {
           .select("purchasedDocs")
           .populate({
             path: "purchasedDocs",
-            populate: {
-              path: "creator",
-            },
+            populate: [
+              {
+                path: "creator",
+                select: "name",
+              },
+              {
+                path: "subject",
+                select: "name code",
+              },
+              {
+                path: "course",
+                select: "name",
+              },
+              {
+                path: "department",
+                select: "name",
+              },
+            ],
           })
           .limit(50) // just a most easy but bad way to prevent many course get fetched
           .exec();
@@ -203,7 +224,7 @@ const resolverDocs = {
           }),
           {}
         );
-        redisClient.hset(validUID + ":purchasedDocs", { info: true, ...a });
+        redisClient.hmset(validUID + ":purchasedDocs", { info: true, ...a });
         console.log("-- added purchased docs info in cache --");
       }
       console.log("-- get purchased docs", pDocs.length);
@@ -289,6 +310,7 @@ const resolverDocs = {
       };
     }
   },
+  getFilteredDocs: getFilterDocs,
 };
 
 const resolverMutDocs = {
@@ -535,7 +557,13 @@ const resolverMutDocs = {
             "--- getting data for purchased course for cache info ---"
           );
           // STORE DATA IN CACHE
-          data = await Docs.findById(docId).populate("creator").exec();
+          data = await Docs.findById(docId)
+            .populate("creator")
+            .populate("creator")
+            .populate("subject", "name code")
+            .populate("course", "name")
+            .populate("department", "name")
+            .lean();
         }
         console.log("--- updating purchased courses cache ---");
         await redisClient.hset(validUID + ":purchasedDocs", docId, {

@@ -1,6 +1,6 @@
 "use client";
 import { GET_CREATED_DOCS } from "@/api/graphql/gql";
-import { DocsQueryProps } from "@cllgnotes/types";
+import { CardProps, DocsQueryProps } from "@cllgnotes/types";
 import { modifyToCardsData } from "@cllgnotes/lib";
 import { CardGrp } from "ui";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
@@ -13,10 +13,17 @@ const DashDocs = () => {
   const foundCourses = status == "success";
   const cardsData = modifyToCardsData(courses, {
     href: "dashboard",
-    img: { width: undefined, height: undefined, fill: true },
+    img: { width: undefined, height: undefined, fill: true } as any,
   });
   // console.log("DATA HERE --->", data?.getCreatedDocs, cardsData, error);
-  if (!foundCourses || courses?.length == 0 || error || !data || !courses) {
+  if (
+    !foundCourses ||
+    courses?.length == 0 ||
+    error ||
+    !data ||
+    !courses ||
+    !cardsData
+  ) {
     return <h4>No Docs Found</h4>;
   }
   return (
@@ -26,7 +33,7 @@ const DashDocs = () => {
         type="grid"
         id="dashDocs"
         style={{ width: "100%" }}
-        data={cardsData}
+        data={cardsData as CardProps[]}
       />
     </>
   );

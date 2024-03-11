@@ -18,8 +18,15 @@ const Text = ({
   ...props
 }: TextProps) => {
   const txt = text || children;
-  const classs = `${type && textClasses[type]} ${textClass}`;
-  const stylee = { textAlign, textTransform, ...props, ...textStyle };
+  const classs = ` overflow-hidden overflow-ellipsis  ${
+    type && textClasses[type]
+  } ${textClass}  `;
+  const stylee = {
+    textAlign,
+    textTransform,
+    ...props,
+    ...textStyle,
+  };
   if (color) {
     stylee.color = Colors[color];
   }

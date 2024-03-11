@@ -1,17 +1,21 @@
 // BUTTONS
-button.priBtn:hover:enabled {
+button.priBtn:hover:enabled,
+a.btn:hover {
   box-shadow: 7px 7px 0px 0px #141414;
   transform: translate(-2px, -2px);
 }
-button.priBtn.shadow-box1:hover:enabled {
+button.priBtn.shadow-box1:hover:enabled,
+a.btn.shadow-box1:hover {
   box-shadow: 3px 3px 0px 0px #141414;
   transform: translate(-1px, -1px);
 }
-button.priBtn.shadow-box2:hover:enabled {
+button.priBtn.shadow-box2:hover:enabled,
+a.btn.shadow-box2:hover {
   box-shadow: 6px 6px 0px 0px #141414;
   transform: translate(-2px, -2px);
 }
-button.priBtn.shadow-box5:hover:enabled {
+button.priBtn.shadow-box5:hover:enabled,
+a.btn.shadow-box5:hover {
   box-shadow: 5px 5px 0px 0px #141414;
   transform: translate(-2px, -2px);
 }
@@ -29,6 +33,17 @@ button.priBtn.shadow-box5:hover:enabled {
   }
 
   &:active:enabled {
+    box-shadow: unset !important;
+    transform: scale(0.98) translate(3px, 3px) !important;
+  }
+}
+
+a.btn {
+  &:hover {
+    opacity: 1 !important;
+  }
+
+  &:active {
     box-shadow: unset !important;
     transform: scale(0.98) translate(3px, 3px) !important;
   }

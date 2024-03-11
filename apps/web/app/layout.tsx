@@ -29,6 +29,7 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap"
           rel="stylesheet"
         ></link>
+        <script src="http://localhost:8097"></script>
       </head>
       <body className="fcc">
         <ApolloWrapper>

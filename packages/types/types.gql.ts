@@ -6,8 +6,7 @@ interface DocCommon {
   _id: string;
   img: string;
   published: boolean;
-  subject: string;
-  subjectCode: string;
+  subject: SubjectType;
   type: DocType;
   pageCount?: number;
   createdAt?: string;
@@ -15,14 +14,16 @@ interface DocCommon {
   isPurchased?: boolean;
   rating?: number;
   purchaseCount?: number;
-  course?: string;
-  department?: string;
+  course?: CourseType;
+  department?: DepartmentType;
   semester?: number;
   year?: number;
-  university?: string;
+  university?: UnivType;
   creator?: Creator;
   price?: number;
+  __typename?: string;
 }
+
 interface Notes extends DocCommon {
   title: string;
   creator: Creator;
@@ -36,7 +37,7 @@ interface Notes extends DocCommon {
 interface Paper extends DocCommon {
   title?: undefined;
   desc?: undefined;
-  university: string;
+  university: UnivType;
   testType: TestType;
 }
 
@@ -51,6 +52,7 @@ type ResData = {
   data: DocProps[];
   status: string;
   msg: string;
+  count?: number;
 };
 export type DocsQueryProps = {
   getDocs?: ResData;
@@ -58,6 +60,7 @@ export type DocsQueryProps = {
   getCreatedDocs?: ResData;
   getDoc?: ResData;
   purchaseDoc?: ResData;
+  getFilteredDocs?: ResData;
 };
 
 export type CreateDocs = (
@@ -86,3 +89,55 @@ export type CreateDocs = (
 export type UpdateDocs = Partial<Omit<CreateDocs, "img">> & {
   img?: undefined;
 };
+
+enum EduType {
+  UG = "UG",
+  PG = "PG",
+  PhD = "PhD",
+  Diploma = "Diploma",
+  Certificate = "Certificate",
+  Others = "Other",
+}
+export type Univ = {
+  name: string;
+  _id: string;
+  tags: string[];
+  createdAt: Date | string;
+  updatedAt: Date | string;
+};
+export type Subject = {
+  name: string;
+  _id: string;
+  tags: string[];
+  courseId: CourseType;
+  departId: DepartmentType;
+  sem: number;
+  category: string;
+  code: string;
+  elective: boolean;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+};
+
+export type Course = {
+  name: string;
+  fees: number;
+  _id: string;
+  departId: DepartmentType;
+  tags: string[];
+  subjects: SubjectType[];
+  duration: string;
+  eduType: EduType;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+};
+export type Department = {
+  name: string;
+  _id: string;
+  tags: string[];
+  courses: CourseType[];
+};
+export type SubjectType = Subject | string;
+export type CourseType = Course | string;
+export type DepartmentType = Department | string;
+export type UnivType = Univ | string;

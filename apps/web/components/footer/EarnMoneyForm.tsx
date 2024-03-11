@@ -14,9 +14,9 @@ const EarnMoneyForm = () => {
   const loggedIn = status == "authenticated";
   const device = useDeviceType();
   const isDesktop = device === "desktop";
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const buttonRect = e.target;
-    confettiEffect(buttonRect);
+    confettiEffect(buttonRect as HTMLButtonElement);
   };
   const focusdStyle: React.CSSProperties = {
     boxShadow: "unset",

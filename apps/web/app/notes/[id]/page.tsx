@@ -4,22 +4,21 @@ import Footer from "@/components/footer/Footer";
 import useServerSession from "@/components/hooks/useServerSession";
 import NotesBelowHero from "@/components/notes/NotesBelowHero";
 import NotesHero from "@/components/notes/NotesHero";
-import { DetailTabProps, DocsQueryProps } from "@cllgnotes/types";
+import { DetailTabProps, DocProps, DocsQueryProps } from "@cllgnotes/types";
 import { MovingBanner, PreviewPdf } from "ui";
 
-const page = async ({ params }) => {
+const page = async ({ params }: { params: { id: string } }) => {
   // console.log(params, "params", params["id"]);
   const session = (await useServerSession()) as any;
-  console.log(session, "in page");
+  // console.log(session, "in page");
   const { data } = await getClient().query<DocsQueryProps>({
     query: GET_DOC,
     variables: { id: String(params["id"]), userId: session?.user?._id },
   });
-  const doc = data?.getDoc?.data?.[0];
+  const doc: DocProps | undefined = data?.getDoc?.data?.[0];
   const status = data?.getDoc?.status;
   const foundCourses = status == "success";
   const isPurchased = data?.getDoc?.data?.[0].isPurchased;
-  // log(data);
   if (!doc || !foundCourses) {
     return <h2>no data found</h2>;
   }
@@ -39,10 +38,13 @@ const page = async ({ params }) => {
     ];
     const arr: DetailTabProps[] = [];
     for (const key in doc) {
-      if (!notNeededLabels.includes(key) && doc[key]) {
-        if (Array.isArray(doc[key])) {
-          if (doc[key].length > 0) {
-            arr.push({ title: key, value: doc[key].join(", ") });
+      if (!notNeededLabels.includes(key) && doc[key as keyof DocProps]) {
+        if (Array.isArray(doc[key as keyof DocProps])) {
+          if ((doc[key as keyof DocProps] as any)?.length > 0) {
+            arr.push({
+              title: key,
+              value: (doc[key as keyof DocProps] as any)?.join(", "),
+            });
           }
           continue;
         }
@@ -50,25 +52,30 @@ const page = async ({ params }) => {
         //   arr.push({ title: key, value: doc[key].username });
         //   continue;
         // }
-        arr.push({ title: key, value: doc[key] });
+        const val =
+          typeof doc[key as keyof DocProps] === "string"
+            ? (doc[key as keyof DocProps] as any)
+            : (doc[key as keyof DocProps] as any)?.name;
+        if (val) {
+          arr.push({
+            title: key,
+            value: val,
+          });
+        }
       }
     }
     return arr;
   };
+  const allLabels = labels();
+  // console.log(allLabels, "allLabels");
   return (
     <>
       <NotesHero
+        {...doc}
         _id={params.id}
-        img={{ src: doc.img || "", alt: doc.title || doc.subject, fill: true }}
-        title={doc.title}
-        desc={doc.desc || ""}
-        labels={labels()}
-        subject={doc.subject}
-        subjectCode={doc.subjectCode}
-        testType={doc.testType}
+        img={{ src: doc.img || "", alt: doc.title || "", fill: true }}
+        labels={allLabels}
         notPurchased={!isPurchased}
-        type={doc.type}
-        price={doc.price || 0}
         textBoxProps={{
           department: doc.department!,
           course: doc.course!,

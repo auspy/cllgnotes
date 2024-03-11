@@ -6,7 +6,7 @@ export type ButtonRowProps = {
   minWidth?: number;
   height?: 90 | 120;
   rowGap?: number;
-  select: Set<any>;
+  select: [string, Record<string, boolean>];
   onClick: (
     e: React.MouseEvent<HTMLButtonElement>,
     filterItem: FilterChipProps,
@@ -24,7 +24,7 @@ export type FilterChipProps = {
   key: string;
 };
 
-export type FilterChipMap = { [key: string]: string };
+export type FilterChipMap = { [key: string]: Record<string, boolean> };
 export type ChipGrpProps = {
   setChipData: React.Dispatch<React.SetStateAction<FilterChipMap>>;
   chipData: FilterChipMap;
@@ -32,7 +32,7 @@ export type ChipGrpProps = {
 };
 
 export type AddFilterProps = {
-  addFilter: (chip: FilterChipProps) => void;
+  addFilter?: (chip: FilterChipProps, change?: boolean) => void;
 };
 
 export type ManageFiltersProps = AddFilterProps & {

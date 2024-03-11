@@ -1,4 +1,7 @@
-import { FilterCheckboxListProps } from "@cllgnotes/types";
+import {
+  FilterCheckboxListProps,
+  FilterSidebarGrpProps,
+} from "@cllgnotes/types";
 import { ButtonProps } from "@cllgnotes/types/types.buttons";
 export const dummyFilterGrpsDocType: ButtonProps[] = [
   {
@@ -6,11 +9,11 @@ export const dummyFilterGrpsDocType: ButtonProps[] = [
     icon: <img src="/icons/notes.png" alt="notes" height={60} width={60} />,
   },
   {
-    text: "Papers",
+    text: "Paper",
     icon: <img src="/icons/papers.png" alt="papers" height={60} width={60} />,
   },
   {
-    text: "Presentations",
+    text: "Presentation",
     icon: (
       <img
         src="/icons/presentation.png"
@@ -72,20 +75,43 @@ export const yearsFilter = [
   { text: "2028" },
 ];
 
-export const universitysFilter = [
-  { text: "SRM University" },
-  // You can add more universities in a similar fashion if needed
-];
+export const universitysFilter = [{ text: "SRM University" }];
 
 export const sems = [1, 2, 3, 4, 5, 6, 7, 8];
 export const Years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028];
 export const Universitys = ["SRM University"];
 
-export const dummyFilterSteps = [
-  { title: "What are you searching for?", data: dummyFilterGrpsDocType },
-  { title: "Which year?", data: yearsFilter },
-  { title: "Semester?", data: semsFilter },
-  { title: "University?", data: universitysFilter },
+export const dummyFilterSteps: FilterSidebarGrpProps[] = [
+  {
+    title: "What are you searching for?",
+    data: dummyFilterGrpsDocType,
+    key: "type",
+  },
+  {
+    title: "Which year?",
+    data: yearsFilter,
+    // type: "slider",
+    maxValue: 2028,
+    minValue: 2020,
+    step: 1,
+    marks: true,
+    defaultValue: 2024,
+    heading: "Year",
+    key: "year",
+  },
+  {
+    title: "Semester?",
+    data: semsFilter,
+    // type: "slider",
+    maxValue: 8,
+    minValue: 1,
+    step: 1,
+    marks: true,
+    defaultValue: 1,
+    heading: "Semester",
+    key: "semester",
+  },
+  // { title: "University?", data: universitysFilter, key: "university" },
 ];
 
 export const dummyFilterList: FilterCheckboxListProps = {

@@ -1,7 +1,7 @@
 "use client";
 import { ButtonFontSizes } from "@cllgnotes/types";
 import Button from "./Button";
-import { ChevronRightRounded } from "ui";
+import { ChevronRightRounded } from "../mui/mui";
 
 const ScrollToTopBtn = () => {
   function scrollToTop() {

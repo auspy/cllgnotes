@@ -139,7 +139,7 @@ export const authOptions: AuthOptions = {
     async decode({ secret, token }) {
       const data = jwt.verify(token || "", secret);
       // console.log("jwt decode ==>", data);
-      return data;
+      return data as any;
     },
   },
   pages: {

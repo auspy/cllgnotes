@@ -5,10 +5,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import { Divider, styled } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { ContextAuthLogout } from "@cllgnotes/lib";
 import { Dashboard, MenuBook } from "@mui/icons-material";
-import { useContext } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -64,10 +62,10 @@ export default function AccountMenu({
   clicked: boolean;
 }) {
   const router = useRouter();
-  const { data } = useSession();
+  const { data }: any = useSession();
   // console.log("data", data);
   const open = Boolean(anchorEl);
-  const logout = useContext(ContextAuthLogout);
+  // const logout = useContext(ContextAuthLogout);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -119,7 +117,8 @@ export default function AccountMenu({
         onClick={() => {
           try {
             setClicked(true);
-            logout(true);
+            // logout(true);
+            signOut();
             handleClose();
           } catch (error) {
             console.log("error in logout", error);

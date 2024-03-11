@@ -1,24 +1,32 @@
 fragment PaperData on Paper{
-    _id
+   _id
     img
-    subject
     type
-    subjectCode
-    course
-    department
+    subject{
+        _id
+        name
+        code
+    }
+    course {
+        _id
+        name
+    }
+    department{
+        _id
+        name
+    }
     purchaseCount
     isPurchased
     published
-    subject
     pageCount
-    subjectCode
     year
     semester
     testType
     tLikes
-    university
+    university{
+        _id
+    }
     creator{
         _id
-        username
     }
 }
