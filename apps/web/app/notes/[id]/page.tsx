@@ -19,7 +19,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   const status = data?.getDoc?.status;
   const foundCourses = status == "success";
   const isPurchased = data?.getDoc?.data?.[0].isPurchased;
-  // log(data);
+  console.log(doc?.subject);
   if (!doc || !foundCourses) {
     return <h2>no data found</h2>;
   }
@@ -53,7 +53,13 @@ const page = async ({ params }: { params: { id: string } }) => {
         //   arr.push({ title: key, value: doc[key].username });
         //   continue;
         // }
-        arr.push({ title: key, value: doc[key as keyof DocProps] as any });
+        arr.push({
+          title: key,
+          value:
+            typeof doc[key as keyof DocProps] == "string"
+              ? (doc[key as keyof DocProps] as any)
+              : doc[key as keyof DocProps]?.name,
+        });
       }
     }
     return arr;
@@ -61,17 +67,11 @@ const page = async ({ params }: { params: { id: string } }) => {
   return (
     <>
       <NotesHero
+        {...doc}
         _id={params.id}
-        img={{ src: doc.img || "", alt: doc.title || doc.subject, fill: true }}
-        title={doc.title}
-        desc={doc.desc || ""}
+        img={{ src: doc.img || "", alt: doc.title || "", fill: true }}
         labels={labels()}
-        subject={doc.subject}
-        subjectCode={doc.subjectCode}
-        testType={doc.testType}
         notPurchased={!isPurchased}
-        type={doc.type}
-        price={doc.price || 0}
         textBoxProps={{
           department: doc.department!,
           course: doc.course!,

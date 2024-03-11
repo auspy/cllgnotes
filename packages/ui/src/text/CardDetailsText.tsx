@@ -1,5 +1,5 @@
 import { firstLetterUppercase } from "@cllgnotes/lib";
-import { CardDetailsBoxProps, TextProps } from "@cllgnotes/types";
+import { TextProps } from "@cllgnotes/types";
 import Text from "./Text";
 import Link from "next/link";
 import { pathDocId } from "@cllgnotes/lib";
@@ -7,7 +7,6 @@ import { memo } from "react";
 
 const CardDetailsText = ({
   subject,
-  subjectCode,
   year,
   title,
   univ,
@@ -18,6 +17,7 @@ const CardDetailsText = ({
   textType,
   allowWrap = false,
 }: any) => {
+  // console.log("CARD DETAILS TEXT", title, subject, testType);
   const detailsTextProps: Partial<TextProps> = {
     textStyle: { height: 16 },
     type: "medi12",
@@ -25,7 +25,12 @@ const CardDetailsText = ({
   };
   const noWrapStyle: React.CSSProperties = allowWrap
     ? {}
-    : { whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" };
+    : {
+        // whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        maxWidth: "400px",
+      };
   // console.log("CARD DETAILS TEXT", title, subject, subjectCode, testType);
   return (
     <>
@@ -38,14 +43,17 @@ const CardDetailsText = ({
           <Link className="mt5" href={pathDocId(_id, href)}>
             {title
               ? firstLetterUppercase(title)
-              : `${
-                  testType ? `${testType?.toUpperCase()} - ` : ""
-                } ${subject} ${subjectCode ? `- ${subjectCode}` : ""}`}
+              : ` ${subject.name} ${
+                  subject?.code &&
+                  subject?.code?.toLowerCase() != subject?.name?.toLowerCase()
+                    ? `: ${subject.code}`
+                    : ""
+                } ${testType ? `: ${testType?.toUpperCase()} : ` : ""}`}
           </Link>
         </Text>
         <div className="frcsb w100">
           <Text {...detailsTextProps}>
-            {(univ || "SRM University") + (year ? ", " + year : "")}
+            {(univ?.name || "SRM University") + (year ? ", " + year : "")}
           </Text>
         </div>
       </div>

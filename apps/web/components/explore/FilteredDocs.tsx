@@ -15,7 +15,7 @@ const FilteredDocs = ({}) => {
   // * VARIABLES
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
-  console.log("search in filteredDocs", search);
+  console.log("search in filteredDo", search);
   const page = searchParams.get("page") || 1;
   // const filter = searchParams.get("filter") || "";
   const [showGrid, setShowGrid] = useState(true);

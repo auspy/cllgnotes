@@ -201,7 +201,7 @@ const resolverDocs = {
           }),
           {}
         );
-        redisClient.hset(validUID + ":purchasedDocs", { info: true, ...a });
+        redisClient.hmset(validUID + ":purchasedDocs", { info: true, ...a });
         console.log("-- added purchased docs info in cache --");
       }
       console.log("-- get purchased docs", pDocs.length);

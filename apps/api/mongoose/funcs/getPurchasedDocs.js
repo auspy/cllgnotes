@@ -14,11 +14,15 @@ const getPurchasedDocs = async (userId) => {
   // SET PURCHASED DOCS
   const pDocs = newDocs.purchasedDocs;
   // STORE NEW DOCS IN CACHE
-  redisClient.hset(
-    userId + ":purchasedDocs",
-    pDocs.reduce((prev, curr) => ({ ...prev, [curr]: true }), {})
+  const pDocsObj = pDocs.reduce(
+    (prev, curr) => ({ ...prev, [curr]: true }),
+    {}
   );
-  redisClient.expire(userId + ":purchasedDocs", 60 * 60 * 24 * 7); // expires in a week
+  console.log(pDocsObj, "object");
+  if (Object.keys(pDocsObj).length > 0) {
+    redisClient.hmset(userId + ":purchasedDocs", pDocsObj);
+    redisClient.expire(userId + ":purchasedDocs", 60 * 60 * 24 * 7); // expires in a week
+  }
   console.log("- added new docs in cache -");
   return pDocs;
 };

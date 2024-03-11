@@ -9,10 +9,9 @@ const NotesPageTextBox = ({
   desc,
   testType,
   subject,
-  subjectCode,
   textBoxProps,
   notPurchased = true,
-}: NotesHeroTextProps) => {
+}: NotesHeroTextProps | any) => {
   return (
     <>
       <div style={{ width: "100%", maxWidth: notPurchased ? 915 : "none" }}>
@@ -26,9 +25,14 @@ const NotesPageTextBox = ({
         <Text type="h2">
           {title
             ? firstLetterUppercase(title)
-            : `${testType ? `${testType?.toUpperCase()} - ` : ""} ${subject} ${
-                subjectCode ? `- ${subjectCode}` : ""
-              }`}
+            : typeof subject !== "string" &&
+              subject &&
+              ` ${subject.name} ${
+                subject?.code &&
+                subject?.code?.toLowerCase() !== subject?.name?.toLowerCase()
+                  ? `: ${subject.code}`
+                  : ""
+              } ${testType ? `: ${testType?.toUpperCase()} : ` : ""}`}
         </Text>
         <p className="regu16 mt15 mb20" style={{ opacity: 0.8 }}>
           {firstLetterUppercase(desc)}

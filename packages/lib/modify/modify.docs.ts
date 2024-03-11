@@ -17,7 +17,7 @@ export const modifyToCardsData = (
     //   return;
     // }
     arr.push({
-      ...rest,
+      ...(rest as any),
       ...commonData,
       img: {
         src: CustomImageLoader({

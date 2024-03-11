@@ -37,12 +37,16 @@ const PaperData = `fragment PaperData on Paper{
     type
     subject{
         _id
+        name
+        code
     }
     course {
         _id
+        name
     }
     department{
         _id
+        name
     }
     purchaseCount
     isPurchased

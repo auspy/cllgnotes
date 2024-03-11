@@ -10,10 +10,10 @@ export const DocCard = ({
   subject,
   title,
   testType,
-  subjectCode,
   univ,
   imgHeight = 268,
   minWidth,
+  semester,
   department,
   course,
   year,
@@ -65,6 +65,7 @@ export const DocCard = ({
               course={course}
               year={year}
               color={color}
+              semester={semester}
             />
           </div>
           {/* DETAILS */}
@@ -72,7 +73,6 @@ export const DocCard = ({
           <CardDetailsText
             _id={_id}
             textType={textType}
-            subjectCode={subjectCode}
             subject={subject}
             title={title}
             year={year}
