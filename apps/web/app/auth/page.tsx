@@ -114,16 +114,16 @@ export default function Login() {
       (isLoginPage ? true : email?.length > 13)
     ) {
       // console.log("clicked");
-      const params = {
+      const params: any = {
         username: username.trim(),
         password: password.trim(),
         ...(isLoginPage ? {} : { email: email.trim() }),
         role,
         // callbackUrl:role == "ADMIN" ? "/dashboard" : "/"
       };
-      // if (isLoginPage) {
-      //   params["callbackUrl"] = role == "ADMIN" ? "/dashboard" : "/";
-      // }
+      if (isLoginPage) {
+        params["callbackUrl"] = role == "ADMIN" ? "/dashboard" : "/";
+      }
       const auth = await signIn("credentials", params)
         .then((res) => {
           console.log("res", res);
