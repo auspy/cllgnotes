@@ -262,6 +262,10 @@ importers:
       logger:
         specifier: workspace:*
         version: link:../logger
+    devDependencies:
+      typescript:
+        specifier: ^4.5.3
+        version: 4.9.5
 
   packages/ui:
     dependencies:
