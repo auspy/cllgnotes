@@ -16,7 +16,8 @@ const CardTextBox = ({
     type: "semi12",
     textStyle: {
       maxWidth: "100px",
-    },
+      textWrap: "nowrap",
+    } as any,
   };
   // if (isAbsolute) {
   //   barTextProps.textStyle = {

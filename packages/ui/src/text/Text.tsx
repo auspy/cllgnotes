@@ -24,7 +24,6 @@ const Text = ({
   const stylee = {
     textAlign,
     textTransform,
-    textWrap: "nowrap",
     ...props,
     ...textStyle,
   };

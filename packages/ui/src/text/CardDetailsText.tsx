@@ -23,23 +23,27 @@ const CardDetailsText = ({
     type: "medi12",
     textTransform: "uppercase",
   };
-  const noWrapStyle: React.CSSProperties = allowWrap
+  const noWrapStyle = allowWrap
     ? {}
     : {
         // whiteSpace: "nowrap",
         textOverflow: "ellipsis",
         overflow: "hidden",
-        maxWidth: "400px",
+        textWrap: "nowrap",
       };
   // console.log("CARD DETAILS TEXT", title, subject, subjectCode, testType);
   return (
     <>
-      <div className="space-y-1">
+      <div className="space-y-1 w100">
         {title && <Text {...detailsTextProps}>{subject}</Text>}
         <Text {...detailsTextProps} textTransform="capitalize">
           {type == "notes" ? "📓 Notes" : "📝 Paper"}
         </Text>
-        <Text textStyle={{ ...noWrapStyle }} type={textType || "h3"}>
+        <Text
+          textStyle={{ ...noWrapStyle }}
+          textClass="w100"
+          type={textType || "h3"}
+        >
           <Link className="mt5" href={pathDocId(_id, href)}>
             {title
               ? firstLetterUppercase(title)
@@ -50,7 +54,7 @@ const CardDetailsText = ({
                     ?.toLowerCase() != subject?.name?.toLowerCase()
                     ? `: ${subject.code}`
                     : ""
-                } ${testType ? `: ${testType?.toUpperCase()} : ` : ""}`}
+                } ${testType ? `: ${testType?.toUpperCase()}` : ""}`}
           </Link>
         </Text>
         <div className="frcsb w100">

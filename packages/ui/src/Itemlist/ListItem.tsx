@@ -65,6 +65,7 @@ const ListItem = ({
           univ={univ}
           year={year}
           testType={testType!}
+          allowWrap={true}
         />
       </div>
     </div>
