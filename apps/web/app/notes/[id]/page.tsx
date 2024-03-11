@@ -10,7 +10,7 @@ import { MovingBanner, PreviewPdf } from "ui";
 const page = async ({ params }: { params: { id: string } }) => {
   // console.log(params, "params", params["id"]);
   const session = (await useServerSession()) as any;
-  console.log(session, "in page");
+  // console.log(session, "in page");
   const { data } = await getClient().query<DocsQueryProps>({
     query: GET_DOC,
     variables: { id: String(params["id"]), userId: session?.user?._id },
@@ -19,7 +19,6 @@ const page = async ({ params }: { params: { id: string } }) => {
   const status = data?.getDoc?.status;
   const foundCourses = status == "success";
   const isPurchased = data?.getDoc?.data?.[0].isPurchased;
-  console.log(doc?.subject);
   if (!doc || !foundCourses) {
     return <h2>no data found</h2>;
   }
@@ -53,24 +52,29 @@ const page = async ({ params }: { params: { id: string } }) => {
         //   arr.push({ title: key, value: doc[key].username });
         //   continue;
         // }
-        arr.push({
-          title: key,
-          value:
-            typeof doc[key as keyof DocProps] == "string"
-              ? (doc[key as keyof DocProps] as any)
-              : doc[key as keyof DocProps]?.name,
-        });
+        const val =
+          typeof doc[key as keyof DocProps] === "string"
+            ? (doc[key as keyof DocProps] as any)
+            : (doc[key as keyof DocProps] as any)?.name;
+        if (val) {
+          arr.push({
+            title: key,
+            value: val,
+          });
+        }
       }
     }
     return arr;
   };
+  const allLabels = labels();
+  // console.log(allLabels, "allLabels");
   return (
     <>
       <NotesHero
         {...doc}
         _id={params.id}
         img={{ src: doc.img || "", alt: doc.title || "", fill: true }}
-        labels={labels()}
+        labels={allLabels}
         notPurchased={!isPurchased}
         textBoxProps={{
           department: doc.department!,

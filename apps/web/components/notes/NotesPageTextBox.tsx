@@ -22,21 +22,23 @@ const NotesPageTextBox = ({
             marginBottom: 15,
           }}
         />
-        <Text type="h2">
+        <Text textClass="mb15" type="h2">
           {title
             ? firstLetterUppercase(title)
-            : typeof subject !== "string" &&
-              subject &&
-              ` ${subject.name} ${
+            : ` ${subject.name} ${
                 subject?.code &&
-                subject?.code?.toLowerCase() !== subject?.name?.toLowerCase()
+                subject?.code
+                  .substring(0, subject?.name?.length || 0)
+                  ?.toLowerCase() != subject?.name?.toLowerCase()
                   ? `: ${subject.code}`
                   : ""
-              } ${testType ? `: ${testType?.toUpperCase()} : ` : ""}`}
+              } ${testType ? `: ${testType?.toUpperCase()}` : ""}`}
         </Text>
-        <p className="regu16 mt15 mb20" style={{ opacity: 0.8 }}>
-          {firstLetterUppercase(desc)}
-        </p>
+        {desc && (
+          <p className="regu16 mb20" style={{ opacity: 0.8 }}>
+            {firstLetterUppercase(desc)}
+          </p>
+        )}
         <DetailTabGroup data={labels} />
       </div>
     </>

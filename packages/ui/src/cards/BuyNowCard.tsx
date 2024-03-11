@@ -109,7 +109,7 @@ const BuyNowCard = ({
           <div className="">
             <div className="frc flex-wrap" style={{ gap: 10 }}>
               <Text textClass="fs0" type="h2">
-                {"₹ " + price}
+                {"₹ " + (price || 0)}
               </Text>
               <Text
                 textStyle={{ textDecorationLine: "line-through" }}
@@ -128,7 +128,8 @@ const BuyNowCard = ({
                 textClass="fs0 h1Highlight"
                 type="h2"
                 text={`${
-                  discount || 100 - Number(((price / 3129) * 100).toFixed())
+                  discount ||
+                  100 - Number((((price || 0) / 3129) * 100).toFixed())
                 }%
                 off`}
               ></Text>

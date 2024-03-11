@@ -11,7 +11,7 @@ const NotesHero = ({
   img,
   notPurchased = true,
   ...props
-}: NotesHeroTextProps) => {
+}: NotesHeroTextProps | any) => {
   // const deviceType = useContext(ContextDeviceType);
   // const sticky = useContext(ContextHeaderSticky);
   // const sticky = false;

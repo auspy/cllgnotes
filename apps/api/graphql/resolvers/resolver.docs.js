@@ -24,8 +24,11 @@ const resolverDocs = {
       console.log("--- getting new docs ---");
       const newDocs = await Docs.find({ published: true })
         .populate("creator")
+        .populate("subject", "name code")
+        .populate("course", "name")
+        .populate("department", "name")
         .limit(100) // just a most easy but bad way to prevent many course get fetched
-        .exec();
+        .lean();
       // SET DOCS
       Array.prototype.push.apply(docs, newDocs);
       // STORE NEW DOCS IN CACHE
@@ -103,7 +106,12 @@ const resolverDocs = {
       console.log("is in cache?", Boolean(data));
       // IF NOT FOUND GET FROM DB
       if (!data)
-        data = await Docs.findById(validDocId).populate("creator").exec();
+        data = await Docs.findById(validDocId)
+          .populate("creator")
+          .populate("subject", "name code")
+          .populate("course", "name")
+          .populate("department", "name")
+          .lean();
       if (!data) {
         console.log("--- Doc not found ---");
         throw new Error("Doc not found");
@@ -185,9 +193,24 @@ const resolverDocs = {
           .select("purchasedDocs")
           .populate({
             path: "purchasedDocs",
-            populate: {
-              path: "creator",
-            },
+            populate: [
+              {
+                path: "creator",
+                select: "name",
+              },
+              {
+                path: "subject",
+                select: "name code",
+              },
+              {
+                path: "course",
+                select: "name",
+              },
+              {
+                path: "department",
+                select: "name",
+              },
+            ],
           })
           .limit(50) // just a most easy but bad way to prevent many course get fetched
           .exec();
@@ -534,7 +557,13 @@ const resolverMutDocs = {
             "--- getting data for purchased course for cache info ---"
           );
           // STORE DATA IN CACHE
-          data = await Docs.findById(docId).populate("creator").exec();
+          data = await Docs.findById(docId)
+            .populate("creator")
+            .populate("creator")
+            .populate("subject", "name code")
+            .populate("course", "name")
+            .populate("department", "name")
+            .lean();
         }
         console.log("--- updating purchased courses cache ---");
         await redisClient.hset(validUID + ":purchasedDocs", docId, {

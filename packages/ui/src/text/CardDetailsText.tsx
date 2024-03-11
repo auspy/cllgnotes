@@ -45,7 +45,9 @@ const CardDetailsText = ({
               ? firstLetterUppercase(title)
               : ` ${subject.name} ${
                   subject?.code &&
-                  subject?.code?.toLowerCase() != subject?.name?.toLowerCase()
+                  subject?.code
+                    .substring(0, subject?.name?.length || 0)
+                    ?.toLowerCase() != subject?.name?.toLowerCase()
                     ? `: ${subject.code}`
                     : ""
                 } ${testType ? `: ${testType?.toUpperCase()} : ` : ""}`}
