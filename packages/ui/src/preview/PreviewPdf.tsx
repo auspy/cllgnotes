@@ -78,7 +78,7 @@ const PreviewPdf = ({
           style={{
             padding: 2,
             borderRadius: 5,
-            objectFit: "cover",
+            objectFit: "contain",
           }}
           {...img}
           src={img.src}

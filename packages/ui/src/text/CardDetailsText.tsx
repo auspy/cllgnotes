@@ -47,7 +47,7 @@ const CardDetailsText = ({
           <Link className="mt5" href={pathDocId(_id, href)}>
             {title
               ? firstLetterUppercase(title)
-              : ` ${subject.name} ${
+              : ` ${firstLetterUppercase(subject?.name || "")} ${
                   subject?.code &&
                   subject?.code
                     .substring(0, subject?.name?.length || 0)
