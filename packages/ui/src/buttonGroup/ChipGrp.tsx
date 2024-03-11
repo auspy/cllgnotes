@@ -12,9 +12,6 @@ const ChipGrp = () => {
   const search = searchParams.get("search") || "";
   const router = useRouter();
   const chips = Object.keys(filters);
-  if (search) {
-    chips.push("search");
-  }
   return (
     <div className="frc w100" style={{}}>
       <Stack
@@ -25,45 +22,43 @@ const ChipGrp = () => {
           gap: 0.7,
         }}
       >
+        {search && (
+          <Chip
+            deleteIcon={
+              <Link
+                href={{
+                  pathname: "/explore",
+                  query: queryMap(),
+                }}
+              >
+                <CloseRounded />
+              </Link>
+            }
+            label={"search: " + search}
+            onDelete={() => router.push("/explore?" + queryMap().toString())}
+          />
+        )}
         {chips.map((key, index) => {
+          console.log(Object.keys(filters[key]), key, filters[key]);
           return (
             typeof filters[key] == "object" &&
-              Object.keys(filters[key]).map((filter, i) => (
-                <Chip
-                  key={filter + index + i}
-                  deleteIcon={
-                    <Link
-                      href={{
-                        pathname: "/explore",
-                        query: queryMap({ key, label: filter }),
-                      }}
-                    >
-                      <CloseRounded />
-                    </Link>
-                  }
-                  label={filter}
-                  onDelete={() => removeFilter({ key, label: filter })}
-                />
-              )),
-            key == "search" && (
+            Object.keys(filters[key]).map((filterVal, i) => (
               <Chip
-                key={index}
+                key={filterVal + index + i}
                 deleteIcon={
                   <Link
                     href={{
                       pathname: "/explore",
-                      query: queryMap(),
+                      query: queryMap({ key, label: filterVal }),
                     }}
                   >
                     <CloseRounded />
                   </Link>
                 }
-                label={search}
-                onDelete={() =>
-                  router.push("/explore?" + queryMap().toString())
-                }
+                label={filterVal}
+                onDelete={() => removeFilter({ key, label: filterVal })}
               />
-            )
+            ))
           );
         })}
       </Stack>

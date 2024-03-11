@@ -1,12 +1,16 @@
+"use client";
 import Text from "../text/Text";
 import { Checkbox, FormGroup, FormControlLabel } from "../mui/mui";
 import { FilterSidebarProps, SliderProps } from "@cllgnotes/types";
 import SliderInputBar from "../sliders/SliderInputBar";
 import { useRecoilFilter } from "@cllgnotes/lib";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const CheckboxGrp = ({ data }: FilterSidebarProps) => {
   const { addFilter, removeFilter, filters, queryMap } = useRecoilFilter();
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search") || "";
   return (
     <div className="flex flex-col" style={{ rowGap: 30 }}>
       {data.map(
@@ -49,6 +53,13 @@ const CheckboxGrp = ({ data }: FilterSidebarProps) => {
 
                     addFilter(currentFilter);
                   };
+
+                  const searchQuery: any = queryMap(currentFilter) || {};
+                  if (search) {
+                    searchQuery["search"] = search;
+                  } else {
+                    delete searchQuery["search"];
+                  }
                   return (
                     <FormControlLabel
                       // onChange={onChange}
@@ -64,7 +75,7 @@ const CheckboxGrp = ({ data }: FilterSidebarProps) => {
                           // href={searchQuery}
                           href={{
                             pathname: "/explore",
-                            query: queryMap(currentFilter),
+                            query: searchQuery,
                           }}
                           // passHref
                         >

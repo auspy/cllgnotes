@@ -50,7 +50,7 @@ const getFilterDocs = async (parent, args, context) => {
     // eg; the MongoDB query will find documents where the type is either "paper" or "book" AND the semester is either 1 or 2. so OR in type ,semester own values but AND in type and semester
     // console.log("searching using query =>", query, JSON.stringify(query.$or));
     const skipVal = (page - 1) * pageSize;
-    const simpleQuery = Docs.find({})
+    const simpleQuery = Docs.find(query)
       .populate("course", "name _id")
       .populate("subject", "code name _id")
       .populate("department", "name _id")
