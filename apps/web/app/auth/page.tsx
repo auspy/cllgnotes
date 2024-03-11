@@ -121,9 +121,9 @@ export default function Login() {
         role,
         // callbackUrl:role == "ADMIN" ? "/dashboard" : "/"
       };
-      // if (isLoginPage) {
-      //   params["callbackUrl"] = role == "ADMIN" ? "/dashboard" : "/";
-      // }
+      if (isLoginPage) {
+        params["callbackUrl"] = role == "ADMIN" ? "/dashboard" : "/";
+      }
       const auth = await signIn("credentials", params)
         .then((res) => {
           console.log("res", res);
