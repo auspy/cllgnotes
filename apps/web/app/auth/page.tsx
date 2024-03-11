@@ -114,7 +114,7 @@ export default function Login() {
       (isLoginPage ? true : email?.length > 13)
     ) {
       // console.log("clicked");
-      const params = {
+      const params: any = {
         username: username.trim(),
         password: password.trim(),
         ...(isLoginPage ? {} : { email: email.trim() }),

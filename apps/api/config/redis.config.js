@@ -1,5 +1,11 @@
+import { env } from "node:process";
 import { Redis } from "ioredis";
-const redisClient = new Redis();
+console.log("process.env.ENV", process.env.NODE_ENV);
+const redisClient = new Redis(
+  process.env.NODE_ENV == "development" || env.NODE_ENV == "development"
+    ? "redis://localhost:6379"
+    : process.env.KV_URL || env.KV_URL
+);
 redisClient.on("connect", () => {
   console.log("Redis connected", process.env.PORT);
 });

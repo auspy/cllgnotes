@@ -274,22 +274,39 @@ const resolverDocs = {
           .select("createdDocs")
           .populate({
             path: "createdDocs",
-            populate: {
-              path: "creator",
-            },
+            populate: [
+              {
+                path: "creator",
+                select: "name",
+              },
+              {
+                path: "subject",
+                select: "name code",
+              },
+              {
+                path: "course",
+                select: "name",
+              },
+              {
+                path: "department",
+                select: "name",
+              },
+            ],
           })
-          .exec();
+          .lean();
 
         console.log("got docs from db, adding to cache", docs);
         cDocs = docs.createdDocs;
         // STORE NEW DOCS IN CACHE
-        redisClient.hset(
-          validUID + ":createdDocs",
-          cDocs.reduce(
-            (prev, curr) => ({ ...prev, [curr._id]: JSON.stringify(curr) }),
-            {}
-          )
-        );
+        if (Array.isArray(cDocs) && cDocs.length) {
+          redisClient.hmset(
+            validUID + ":createdDocs",
+            cDocs.reduce(
+              (prev, curr) => ({ ...prev, [curr._id]: JSON.stringify(curr) }),
+              {}
+            )
+          );
+        }
         redisClient.expire(validUID + ":createdDocs", 60 * 60 * 24 * 7); // expires in a week
       } else {
         console.log("parsing data from cache");
