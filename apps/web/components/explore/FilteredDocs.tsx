@@ -8,14 +8,14 @@ import {
 } from "@cllgnotes/lib";
 import { CardProps, DocsQueryProps } from "@cllgnotes/types";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { CardGrp, List, ToolBar } from "ui";
 
 const FilteredDocs = ({}) => {
   // * VARIABLES
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
-  console.log("search", search);
+  console.log("search in filteredDocs", search);
   const page = searchParams.get("page") || 1;
   // const filter = searchParams.get("filter") || "";
   const [showGrid, setShowGrid] = useState(true);

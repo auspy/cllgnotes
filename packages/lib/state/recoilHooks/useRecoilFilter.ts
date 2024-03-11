@@ -71,16 +71,22 @@ const useRecoilFilter = () => {
   // * QUERY MAP
   const queryMap = useCallback(
     (newFilter?: FilterChipProps) => {
+      const query: FilterChipMap = { ...filters };
+      const returnFunc = () => {
+        if (Object.keys(query).length === 0) {
+          return "";
+        }
+        return { filters: JSON.stringify(query) };
+      };
       if (!newFilter) {
         console.log("missing filter in queryMap");
-        return {};
+        return returnFunc();
       }
       const type = newFilter.key;
-      const query: FilterChipMap = { ...filters };
       const newFltr = newFilter.label?.toLowerCase();
       if (!newFltr) {
         console.log("missing label in queryMap");
-        return {};
+        return returnFunc();
       }
       const filterMap = { ...filters[type] }; // copy of single filter types {docType: {Notes: true, Books: true}}
       if (filterMap && Object.keys(filterMap).length > 0) {
@@ -102,9 +108,9 @@ const useRecoilFilter = () => {
         delete query[type];
       // console.log("new link query", query);
       if (query && Object.keys(query).length === 0) {
-        return {};
+        return returnFunc();
       }
-      return { filters: JSON.stringify(query) };
+      return returnFunc();
     },
     [filters]
   );

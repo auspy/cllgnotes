@@ -106,7 +106,7 @@ const getFilterDocs = async (parent, args, context) => {
       });
     }
     aggregatePipeline.push({ $skip: skipVal }, { $limit: pageSize });
-    console.log("aggregate pipeline =>", aggregatePipeline);
+    // console.log("aggregate pipeline =>", aggregatePipeline);
     const aggregateQuery = Docs.aggregate(aggregatePipeline, {
       maxTimeMS: 60000,
       allowDiskUse: true,

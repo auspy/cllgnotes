@@ -73,7 +73,7 @@ app.use(
       try {
         if (!token) return { res };
         const user = await decryptAccessToken(token, res);
-        console.log("User found after decoding", user);
+        console.log("User found after decoding", Boolean(user));
         return { user, res };
       } catch (error) {
         // Handle token verification errors, if any
