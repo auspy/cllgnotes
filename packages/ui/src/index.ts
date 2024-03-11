@@ -33,7 +33,7 @@ export { default as LinkButton } from "./buttons/LinkButton";
 export { default as ButtonLogin } from "./buttons/ButtonLogin";
 export { default as ButtonDrawerToggle } from "./buttons/ButtonDrawerToggle";
 // AVATARS
-export { default as TestiUserAvatar } from "./Avatar/TestiUserAvatar";
+export { default as TestiUserAvatar } from "./avatar/TestiUserAvatar";
 export { default as UserAvatarMenu } from "./avatar/UserAvatarMenu";
 // WRAPPERS
 export { default as RecoilWrapper } from "./wrappers/RecoilWrapper";
