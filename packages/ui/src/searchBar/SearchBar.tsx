@@ -1,11 +1,11 @@
 "use client";
 import Colors from "@cllgnotes/types/colors";
-import { SearchBarProps } from "@cllgnotes/types/searchBar";
+import { SearchBarProps } from "@cllgnotes/types";
 import { Search, ChevronRightRounded } from "../mui/mui";
 import { useState } from "react";
-import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
+import { ButtonFontSizes } from "@cllgnotes/types";
 import Button from "../buttons/Button";
-import ShadowsType from "@cllgnotes/types/shadows";
+import { ShadowsType } from "@cllgnotes/types";
 import { debounce, useDeviceType } from "@cllgnotes/lib";
 import { useRouter, useSearchParams } from "next/navigation";
 

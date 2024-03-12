@@ -1,8 +1,4 @@
-import {
-  HeadingType,
-  TextProps,
-  textClasses,
-} from "@cllgnotes/types/types.text";
+import { HeadingType, TextProps, textClasses } from "@cllgnotes/types";
 import Heading from "./Heading";
 import Colors from "@cllgnotes/types/colors";
 

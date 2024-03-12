@@ -1,4 +1,4 @@
-import { typeNavigationItem } from "@cllgnotes/types/types.header";
+import { typeNavigationItem } from "@cllgnotes/types";
 export const dummyNavData: typeNavigationItem[] = [
   {
     text: "Explore",

@@ -3,7 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
+  "exports": {
+    ".": {
+      "import": "./index.ts"
+    },
+    "./colors": {
+      "import": "./colors.ts"
+    }
+  },
   "dependencies": {
     "logger": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.3"
   }
 }

@@ -1,4 +1,4 @@
-import { ButtonProps } from "@cllgnotes/types/types.buttons";
+import { ButtonProps } from "@cllgnotes/types";
 import Button from "./Button";
 
 const ButtonSuggest = (props: ButtonProps) => {

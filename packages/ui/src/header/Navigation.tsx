@@ -1,5 +1,5 @@
 import { dummyNavData } from "@cllgnotes/lib/dummyData";
-import { NavigationProps } from "@cllgnotes/types/types.header";
+import { NavigationProps } from "@cllgnotes/types";
 import Link from "next/link";
 import Text from "../text/Text";
 const Navigation = ({

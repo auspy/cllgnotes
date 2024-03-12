@@ -3,7 +3,7 @@ import Image from "next/image";
 import { defaultImg, useDeviceType } from "@cllgnotes/lib";
 import { Borders, BuyNowCardProps } from "@cllgnotes/types";
 // import { useEffect } from "react";
-import ShadowsType from "@cllgnotes/types/shadows";
+import { ShadowsType } from "@cllgnotes/types";
 import Colors from "@cllgnotes/types/colors";
 import { CustomImageLoader } from "../../loader.config";
 import Text from "../text/Text";

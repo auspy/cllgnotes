@@ -1,5 +1,5 @@
 "use client";
-import { IconButtonProps } from "@cllgnotes/types/types.buttons";
+import { IconButtonProps } from "@cllgnotes/types";
 import Button from "./Button";
 import { ChevronRightRounded } from "@mui/icons-material";
 import Colors from "@cllgnotes/types/colors";

@@ -7,4 +7,4 @@ enum ShadowsType {
   text = "0px 4px 0px #141414",
   lText = "0px 4px 0px #D9D9D9",
 }
-export default ShadowsType;
+export { ShadowsType };
