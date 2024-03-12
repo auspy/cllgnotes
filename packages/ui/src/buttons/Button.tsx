@@ -1,10 +1,6 @@
-import {
-  ButtonProps,
-  ButtonHeights,
-  ButtonFontSizes,
-} from "@cllgnotes/types/types.buttons";
+import { ButtonProps, ButtonHeights, ButtonFontSizes } from "@cllgnotes/types";
 import TmplButton from "../templates/buttons/TmplButton";
-import { FontWeightEnum } from "@cllgnotes/types/types.text";
+import { FontWeightEnum } from "@cllgnotes/types";
 
 // this is wrpaper using template button. any changes to button should be done here.
 // template button is just to setup the structure of the button.

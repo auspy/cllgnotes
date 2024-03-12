@@ -2,7 +2,7 @@ import {
   FilterCheckboxListProps,
   FilterSidebarGrpProps,
 } from "@cllgnotes/types";
-import { ButtonProps } from "@cllgnotes/types/types.buttons";
+import { ButtonProps } from "@cllgnotes/types";
 export const dummyFilterGrpsDocType: ButtonProps[] = [
   {
     text: "Notes",

@@ -2,10 +2,10 @@ import {
   ButtonFontSizesBlack,
   ButtonHeightsBlackType,
   ButtonBlackProps,
-} from "@cllgnotes/types/types.buttons";
+} from "@cllgnotes/types";
 import TmplButton from "../templates/buttons/TmplButton";
 import Colors from "@cllgnotes/types/colors";
-import { FontWeightEnum } from "@cllgnotes/types/types.text";
+import { FontWeightEnum } from "@cllgnotes/types";
 
 const ButtonBlack = ({
   fontSize = ButtonFontSizesBlack.large,

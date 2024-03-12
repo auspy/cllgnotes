@@ -1,4 +1,4 @@
-import { HeadingProps, HeadingType } from "@cllgnotes/types/types.text";
+import { HeadingProps, HeadingType } from "@cllgnotes/types";
 import { memo } from "react";
 
 const Heading = ({

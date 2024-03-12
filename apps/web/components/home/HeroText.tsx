@@ -1,5 +1,5 @@
 import { Heading, Text } from "ui";
-import { HeadingType } from "@cllgnotes/types/types.text";
+import { HeadingType } from "@cllgnotes/types";
 import { DeviceTypeEnum, HomeHeroTextProps, ImgProps } from "@cllgnotes/types";
 import Colors from "@cllgnotes/types/colors";
 import HeroImg from "./HeroImg";

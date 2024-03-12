@@ -1,6 +1,6 @@
-import { ButtonProps } from "@cllgnotes/types/types.buttons";
+import { ButtonProps } from "@cllgnotes/types";
 import Text from "../../text/Text";
-import { FontSizeEnum } from "@cllgnotes/types/types.text";
+import { FontSizeEnum } from "@cllgnotes/types";
 import { CircularProgress } from "../../mui/mui";
 import Link from "next/link";
 // TemplateButton

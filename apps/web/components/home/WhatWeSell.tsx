@@ -2,7 +2,7 @@
 import { useDeviceType } from "@cllgnotes/lib";
 import { WhatWeSellProps } from "@cllgnotes/types";
 import Colors from "@cllgnotes/types/colors";
-import ShadowsType from "@cllgnotes/types/shadows";
+import { ShadowsType } from "@cllgnotes/types";
 import Image from "next/image";
 import { useState } from "react";
 import { Text } from "ui";

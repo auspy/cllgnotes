@@ -1,8 +1,8 @@
 "use client";
-import { ButtonRowProps } from "@cllgnotes/types/buttonGrps";
+import { ButtonRowProps } from "@cllgnotes/types";
 import Button from "../buttons/Button";
-import { FontWeightEnum } from "@cllgnotes/types/types.text";
-import { ButtonFontSizes } from "@cllgnotes/types/types.buttons";
+import { FontWeightEnum } from "@cllgnotes/types";
+import { ButtonFontSizes } from "@cllgnotes/types";
 import { useState } from "react";
 
 const ButtonRow = ({
