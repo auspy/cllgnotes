@@ -1,5 +1,5 @@
 import { ColorsType } from "./colors";
-import ShadowsType from "./shadows";
+import { ShadowsType } from "./shadows";
 import { TextProps } from "./types.text";
 
 export enum ButtonHeights {
