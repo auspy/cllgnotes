@@ -1,3 +1,5 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { AuthWrapper } from "@/api/auth/useLogout";
 import { ApolloWrapper } from "@/api/graphql/ApolloWrapper";
 import "@/styles/globals.scss"; // app specific global css
@@ -44,6 +46,8 @@ export default async function RootLayout({
             </DeviceTypeWrapper>
           </RecoilWrapper>
         </ApolloWrapper>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
