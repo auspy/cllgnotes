@@ -10,7 +10,7 @@ WORKDIR /app
 RUN --mount=type=cache,target=/root/.npm \
     npm install -g pnpm@${PNPM_VERSION}
 
-RUN npm i -g turbo
+RUN yarn global add turbo
 COPY . .
 RUN turbo prune api --docker
 
