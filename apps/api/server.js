@@ -84,6 +84,11 @@ app.use(
   })
 );
 
+app.get("/health", (req, res) => {
+  console.log("Health check");
+  res.send("Server is running");
+});
+
 await new Promise((resolve) => {
   console.log("🚀 Building server at", port);
   return httpServer.listen({ port }, resolve);
