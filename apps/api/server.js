@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 const env = process.env.NODE_ENV || "development";
-dotenv.config({ path: `.env.${env}` });
+console.log("ENV", env);
 
 import express from "express";
 import { decryptAccessToken } from "./helper/jwtToken.js";

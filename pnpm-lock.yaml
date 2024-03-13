@@ -21,7 +21,7 @@ importers:
         specifier: workspace:*
         version: link:packages/tsconfig
       turbo:
-        specifier: latest
+        specifier: ^1.10.13
         version: 1.10.13
 
   apps/api:
@@ -32,6 +32,9 @@ importers:
       '@cllgnotes/zod':
         specifier: workspace:*
         version: link:../../packages/zod
+      '@upstash/redis':
+        specifier: ^1.28.4
+        version: 1.28.4
       body-parser:
         specifier: ^1.20.2
         version: 1.20.2

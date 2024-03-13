@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  api:
+    container_name: api
+    env_file:
+      - ./.env
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - 3002:3002
+
+

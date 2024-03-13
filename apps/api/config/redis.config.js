@@ -1,17 +1,21 @@
 import { env } from "node:process";
-import { Redis } from "ioredis";
+// import { Redis } from "ioredis";
+import { Redis } from "@upstash/redis";
 console.log("process.env.ENV", process.env.NODE_ENV);
-const redisClient = new Redis(
-  process.env.NODE_ENV == "development" || env.NODE_ENV == "development"
-    ? "redis://localhost:6379"
-    : process.env.KV_URL || env.KV_URL
-);
-redisClient.on("connect", () => {
-  console.log("Redis connected", process.env.PORT);
+const redisClient = new Redis({
+  url: process.env.KV_URL,
+  token: process.env.KV_REST_API_TOKEN,
 });
-redisClient.on("error", (err) => {
-  console.error("Redis error: ", err);
-});
+
+// process.env.NODE_ENV == "development" || env.NODE_ENV == "development"
+//   ? "redis://localhost:6379"
+//   : process.env.KV_URL || env.KV_URL
+// redisClient.on("connect", () => {
+//   console.log("Redis connected", process.env.PORT);
+// });
+// redisClient.on("error", (err) => {
+//   console.error("Redis error: ", err);
+// });
 
 export const getRedisItems = async (key, fieldName) => {
   const getKey = (key, fieldName) =>
