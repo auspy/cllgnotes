@@ -3,17 +3,13 @@ version: "3"
 services:
   api:
     container_name: api
+    env_file:
+      - ./.env
     build:
       context: .
-      dockerfile: ./apps/api/Dockerfile
+      dockerfile: ./Dockerfile
     restart: always
     ports:
       - 3002:3002
-    networks:
-      - app_network
 
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-networks:
-  app_network:
-    external: true
+
