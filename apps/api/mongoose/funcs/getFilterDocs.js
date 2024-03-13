@@ -13,6 +13,25 @@ const getFilterDocs = async (parent, args, context) => {
     console.log("... getting filter docs ...", args);
     const { page, pageSize, filter, search } = filterArgs.parse(args);
     console.log("... args recieved =>", page, pageSize, filter, search);
+    const isTrending = search == "trending";
+    const baseQuery = (qry) =>
+      Docs.find(qry)
+        .populate("course", "name _id")
+        .populate("subject", "code name _id")
+        .populate("department", "name _id");
+    if (isTrending) {
+      const trendingQuery = await baseQuery({})
+        .sort({ tLikes: -1, purchaseCount: -1 })
+        .limit(10)
+        .lean();
+      console.log("... trending docs fetched ...");
+      return {
+        status: "success",
+        data: trendingQuery,
+        msg: "Trending Docs fetched successfully",
+        count: trendingQuery.length,
+      };
+    }
     // get filter by query
     // eg: will get JSON stringified object: '{"type":{"notes":true}}'
     // const rawFilter = JSON.parse(decodeURIComponent(filter));
@@ -31,11 +50,12 @@ const getFilterDocs = async (parent, args, context) => {
       }
     }
     let regexQuery = null;
+    const orQuery = [];
     if (search) {
       const pattern = new RegExp(search.split(" ").join("|"), "i");
       console.log("... pattern =>", pattern);
       regexQuery = { $regex: pattern };
-      query["$or"] = [
+      Array.prototype.push.apply(orQuery, [
         { "questions.partA.question": regexQuery },
         { "questions.partB.question": regexQuery },
         { "questions.partA.option1": regexQuery },
@@ -43,28 +63,17 @@ const getFilterDocs = async (parent, args, context) => {
         { "questions.partB.option1": regexQuery },
         { "questions.partB.option2": regexQuery },
         { title: regexQuery },
-      ];
+      ]);
     }
-    // get filtered data from db
-    // filter docs needed works based on AND + OR. so we will need to manually filter when getting from cache
-    // eg; the MongoDB query will find documents where the type is either "paper" or "book" AND the semester is either 1 or 2. so OR in type ,semester own values but AND in type and semester
-    // console.log("searching using query =>", query, JSON.stringify(query.$or));
     const skipVal = (page - 1) * pageSize;
-    const simpleQuery = Docs.find(query)
-      .populate("course", "name _id")
-      .populate("subject", "code name _id")
-      .populate("department", "name _id")
-      // .populate("creator", "username _id")
+    const simpleQuery = baseQuery(query)
       .skip(skipVal)
+      .sort({ tLikes: -1, createdAt: -1 })
       .limit(pageSize)
       .lean();
 
     const aggregatePipeline = [];
-    if (search) {
-      aggregatePipeline.push({
-        $match: query,
-      });
-    }
+
     aggregatePipeline.push(
       {
         $lookup: {
@@ -101,6 +110,7 @@ const getFilterDocs = async (parent, args, context) => {
             {
               "department.name": regexQuery,
             },
+            ...orQuery,
           ],
         },
       });
