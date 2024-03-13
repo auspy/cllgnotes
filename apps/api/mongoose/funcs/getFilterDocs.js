@@ -133,7 +133,7 @@ const getFilterDocs = async (parent, args, context) => {
       status: "success",
       data: docs,
       msg: "Docs fetched successfully",
-      count: count,
+      count: search ? docs.length : count,
     };
     // modify data according to need
   } catch (error) {
