@@ -3,8 +3,8 @@ import { env } from "node:process";
 import { Redis } from "@upstash/redis";
 console.log("process.env.ENV", process.env.NODE_ENV);
 const redisClient = new Redis({
-  url: process.env.KV_URL,
-  token: process.env.KV_REST_API_TOKEN,
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
 // process.env.NODE_ENV == "development" || env.NODE_ENV == "development"

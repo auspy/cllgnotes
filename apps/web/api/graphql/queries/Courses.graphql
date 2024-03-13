@@ -1,0 +1,6 @@
+query{
+    Courses{
+        name
+        _id
+    }
+}

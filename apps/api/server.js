@@ -35,7 +35,7 @@ const mongoConnect = connect(process.env.MONGO_URI, {
 
 console.log("NODE_ENV", process.env.TEST, env);
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 3003 || process.env.PORT || 4000;
 const httpServer = http.createServer(app);
 const server = new ApolloServer({
   typeDefs,

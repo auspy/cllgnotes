@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
-import { Docs, User } from "../../mongoose/modals/modals.js";
+import {
+  Course,
+  Department,
+  Docs,
+  Subject,
+  User,
+} from "../../mongoose/modals/modals.js";
 import saveImgToCloud from "../../helper/cloudinary/saveImgToCloud.js";
 import deleteImgFromCloud from "../../helper/cloudinary/deleteImgFromCloud.js";
 import redisClient, { getRedisItems } from "../../config/redis.config.js";
@@ -12,7 +18,49 @@ import {
   zodUpdateDoc,
 } from "@cllgnotes/zod";
 import { getFilterDocs, getPurchasedDocs } from "../../mongoose/funcs/index.js";
+import { redisGet, redisSet } from "../../redis/basicRedis.js";
+
+const getData = async (option) => {
+  const options = {
+    courses: Course,
+    departments: Department,
+    subjects: Subject,
+  };
+  try {
+    if (!options[option]) throw new Error("Invalid option");
+    const Modal = options[option];
+    // check in cache
+    console.log(`--- in get ${option} ---`);
+    let data = redisGet("filter", option);
+    // if not found, get from db
+    if (!(Array.isArray(data) && data.length)) {
+      console.log("cache miss for courses, getting from db");
+      data = await Modal.find({}).lean();
+      console.log("courses found in db?", Array.isArray(data) && data.length);
+      if (Array.isArray(data) && data.length) {
+        console.log("setting data in cache");
+        await redisSet("filter", option, data, 60 * 60 * 24 * 30);
+      }
+    }
+    // set in cache
+    console.log(`--- ${option} fetched successfully ---`);
+    return data;
+  } catch (error) {
+    console.log(`Error in getData ${option}: ${error.message}`);
+    return null;
+  }
+};
+
 const resolverDocs = {
+  Courses: async () => {
+    return await getData("courses");
+  },
+  Departments: async () => {
+    return await getData("courses");
+  },
+  Subjects: async () => {
+    return await getData("courses");
+  },
   getDocs: async (parent, __, context) => {
     console.log("--- in get docs ---", parent);
     const cachedDocs = await redisClient.hgetall("docs");

@@ -1,0 +1,6 @@
+query{
+    Subjects{
+        name
+        _id
+    }
+}
