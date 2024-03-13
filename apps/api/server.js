@@ -46,9 +46,13 @@ await server.start();
 
 // PATHS
 // to bypass cors error, accept json data
+const corsPass = ["https://cllgnotes.onrender.com", "https://cllgnotes.com"];
+if (env === "development") {
+  corsPass.push("http://localhost:3000");
+}
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: corsPass,
     credentials: true,
   }),
   bodyParser.json(),
