@@ -46,7 +46,7 @@ await server.start();
 
 // PATHS
 // to bypass cors error, accept json data
-const corsPass = ["https://cllgnotes.onrender.com", "https://cllgnotes.com"];
+const corsPass = ["https://cllgnotes.vercel.app", "https://cllgnotes.com"];
 if (env === "development") {
   corsPass.push("http://localhost:3000");
 }
