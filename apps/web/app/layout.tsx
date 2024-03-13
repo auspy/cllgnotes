@@ -8,6 +8,14 @@ import { ThemeProvider, muiTheme, RecoilWrapper, SessionWrapper } from "ui";
 import ToastWrapper from "@/components/ToastWrapper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Metadata } from "next";
+import Head from "next/head";
+
+export const metadata: Metadata = {
+  title: "Cllgnotes.com",
+  description: "Cllgnotes.com",
+};
+
 export default async function RootLayout({
   children,
 }: {
@@ -16,11 +24,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <title>Cllgnotes.com</title>
-        <meta name="description" content="Cllgnotes.com" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -31,8 +35,7 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap"
           rel="stylesheet"
         ></link>
-        <script src="http://localhost:8097"></script>
-      </head>
+      </Head>
       <body className="fcc">
         <ApolloWrapper>
           <RecoilWrapper>
@@ -40,13 +43,15 @@ export default async function RootLayout({
               <SessionWrapper session={session}>
                 <AuthWrapper>
                   <ToastWrapper />
-                  <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>
+                  <ThemeProvider theme={muiTheme}>
+                    {children}
+                    <Analytics />
+                  </ThemeProvider>
                 </AuthWrapper>
               </SessionWrapper>
             </DeviceTypeWrapper>
           </RecoilWrapper>
         </ApolloWrapper>
-        <Analytics />
         <SpeedInsights />
       </body>
     </html>
