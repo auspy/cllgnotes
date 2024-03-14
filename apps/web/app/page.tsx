@@ -27,6 +27,7 @@ export default function Page(): JSX.Element {
         />
       </div>
       <div className="topContainer">
+        {/* @ts-expect-error Server Component */}
         <TrendingDocs />
       </div>
       <div
