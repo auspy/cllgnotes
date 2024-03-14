@@ -1,0 +1,6 @@
+query{
+    Departments{
+        name
+        _id
+    }
+}

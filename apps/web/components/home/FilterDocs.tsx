@@ -1,16 +1,18 @@
 import { dummyCardsData } from "@cllgnotes/lib/dummyData";
+import { CardProps } from "@cllgnotes/types";
 import { CardGrp } from "ui";
 
 // this will be a ssr comp that gets the docs from the db based on filters
-const FilterDocs = ({ minWidth }: { minWidth?: number }) => {
+const FilterDocs = ({
+  minWidth,
+  data,
+}: {
+  minWidth?: number;
+  data?: CardProps[];
+}) => {
   return (
     <>
-      <CardGrp
-        id="cardContainer"
-        data={
-          dummyCardsData({ className: "min-w-[305px] sm:min-w-[360px]" }) as any
-        }
-      />
+      <CardGrp id="cardContainer" data={data as any} />
     </>
   );
 };

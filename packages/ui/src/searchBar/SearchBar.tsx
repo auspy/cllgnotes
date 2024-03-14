@@ -63,7 +63,7 @@ const SearchBar = ({
   const searchFunc = (text: string) => {
     console.log("text in searchFunc", text);
     setSearchText(text);
-    link(text);
+    !isHeight90 && link(text);
   };
   const link = (text?: string) => {
     if (!text) {
@@ -164,7 +164,7 @@ const SearchBar = ({
       {exploreBtn && (
         <Button
           buttonClasses="exploreBtn"
-          href="/explore"
+          onClick={handleSearch}
           buttonStyles={{ maxWidth: !isDesktop ? "unset" : 289 }}
           text="Explore Docs"
           height={height == 50 ? 60 : height}

@@ -2,7 +2,7 @@
 const typeDocs = `#related to docs
 scalar Upload
 type Creator{
-    _id: ID!
+    _id: ID
     username: String
     createdDocs: [Doc]
 }
@@ -36,7 +36,7 @@ type Notes implements DocCommon {
     img: String!
     type: docType!
     published: Boolean!
-    creator: Creator!
+    creator: Creator
     subject: Subject
     desc: String
     price: Float
@@ -62,7 +62,7 @@ type Paper implements DocCommon {
     pageCount: Int
     published: Boolean!
     createdAt: String
-    creator: Creator!
+    creator: Creator
     type: docType!
     testType: TestType!
     subject: Subject
