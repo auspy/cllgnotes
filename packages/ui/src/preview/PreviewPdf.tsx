@@ -73,6 +73,7 @@ const PreviewPdf = ({
               type: type,
               src,
               width,
+              isThumbnail: false,
             })
           }
           style={{
