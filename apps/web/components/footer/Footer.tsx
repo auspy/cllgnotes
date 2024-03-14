@@ -8,7 +8,7 @@ const Footer = ({ earnMoney = false }: { earnMoney?: boolean }) => {
     <div
       className={`w100 rPosi fcc p-5 sm:p-7 ${
         earnMoney
-          ? "mt-[350px] pt-[682px] sm:mt-[280px] sm:pt-[632px] lg:mt-[185px] lg:pt-[532px]"
+          ? "mt-[200px] pt-[800px] sm:mt-[280px] sm:pt-[632px] lg:mt-[185px] lg:pt-[532px]"
           : "pt-[40px]"
       }`}
       style={{
@@ -17,7 +17,7 @@ const Footer = ({ earnMoney = false }: { earnMoney?: boolean }) => {
     >
       {earnMoney && (
         <EarnMoneyFooter
-          containerClass={`bottom-[500px] sm:bottom-[185px]`}
+          containerClass={`bottom-[300px] sm:bottom-[185px]`}
           containerStyle={{
             position: "absolute",
           }}
