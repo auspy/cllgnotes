@@ -11,7 +11,7 @@ import {
 import Testimonial from "@/components/testi/Testimonial";
 import Trusted from "@/components/home/Trusted";
 import Footer from "@/components/footer/Footer";
-import FilterDocs from "@/components/home/FilterDocs";
+import TrendingDocs from "@/components/docs/TrendingDocs";
 
 export default function Page(): JSX.Element {
   return (
@@ -27,7 +27,7 @@ export default function Page(): JSX.Element {
         />
       </div>
       <div className="topContainer">
-        <FilterDocs minWidth={305} />
+        <TrendingDocs />
       </div>
       <div
         className="fcc w100"

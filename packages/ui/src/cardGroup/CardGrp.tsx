@@ -15,6 +15,9 @@ const CardGrp = ({
   heading,
   style,
 }: CardGrpProps) => {
+  if (!data || !Array.isArray(data)) {
+    return null;
+  }
   const isRow = type === "row";
   const containerClasses: string = isRow
     ? ` overflow-scroll overflow-y-hidden`

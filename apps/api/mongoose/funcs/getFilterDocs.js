@@ -20,16 +20,17 @@ const getFilterDocs = async (parent, args, context) => {
         .populate("subject", "code name _id")
         .populate("department", "name _id");
     if (isTrending) {
-      const trendingQuery = await baseQuery({})
+      console.log("... fetching trending docs ...");
+      const trendingDocs = await baseQuery({})
         .sort({ tLikes: -1, purchaseCount: -1 })
         .limit(10)
         .lean();
-      console.log("... trending docs fetched ...");
+      console.log("... trending docs fetched ...", trendingDocs.length);
       return {
         status: "success",
-        data: trendingQuery,
+        data: trendingDocs,
         msg: "Trending Docs fetched successfully",
-        count: trendingQuery.length,
+        count: trendingDocs.length,
       };
     }
     // get filter by query
