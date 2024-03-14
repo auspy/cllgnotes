@@ -11,7 +11,7 @@ const RightDrawer = () => {
   return (
     <>
       <IconButton
-        className="flex md:hidden"
+        className="flex md:!hidden"
         aria-label="menu"
         color="inherit"
         onClick={toggleDrawer}
