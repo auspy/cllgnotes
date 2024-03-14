@@ -1,6 +1,4 @@
-import { dummyCardsData } from "@cllgnotes/lib/dummyData";
-import { CardGrp } from "ui";
-import FilterDocs from "../home/FilterDocs";
+import TrendingDocs from "../docs/TrendingDocs";
 
 const NotesBelowHero = () => {
   //   const { data } = useSuspenseQuery<DocsQueryProps>(GET_DOCS);
@@ -8,14 +6,8 @@ const NotesBelowHero = () => {
   //   log(data);
   return (
     <div className="flex flex-col" style={{ gap: 30 }}>
-      <CardGrp
-        heading="Related"
-        id="idcards"
-        data={
-          dummyCardsData({ className: "min-w-[305px] sm:min-w-[360px]" }) as any
-        }
-      />
-      <FilterDocs />
+      {/* @ts-expect-error Server Component */}
+      <TrendingDocs />
     </div>
   );
 };

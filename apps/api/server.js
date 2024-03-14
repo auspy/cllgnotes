@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 const env = process.env.NODE_ENV || "development";
+// const isDev = env === "development";
 console.log("ENV", env);
 
 import express from "express";
@@ -16,6 +17,7 @@ import cookieParser from "cookie-parser";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 import { v2 as cloudinary } from "cloudinary";
 import { connect } from "mongoose";
+import checkRateLimit from "./ratelimit.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -35,7 +37,7 @@ const mongoConnect = connect(process.env.MONGO_URI, {
 
 console.log("NODE_ENV", process.env.TEST, env);
 const app = express();
-const port = 3003 || process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 const httpServer = http.createServer(app);
 const server = new ApolloServer({
   typeDefs,
@@ -59,6 +61,8 @@ app.use(
   cookieParser(),
   graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 1 })
 );
+// Apply middleware
+app.use("/graphql", checkRateLimit);
 
 // ATTACHING GRAPHQL MIDDLEWARE TO EXPRESS
 app.use(
