@@ -27,9 +27,6 @@ const NotesData = `fragment NotesData on Notes{
     university{
         _id
     }
-    creator{
-        _id
-    }
 }`;
 const PaperData = `fragment PaperData on Paper{
     _id
@@ -57,9 +54,6 @@ const PaperData = `fragment PaperData on Paper{
     testType
     tLikes
     university{
-        _id
-    }
-    creator{
         _id
     }
 }`;
