@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 const env = process.env.NODE_ENV || "development";
+// const isDev = env === "development";
 console.log("ENV", env);
 
 import express from "express";
@@ -16,6 +17,7 @@ import cookieParser from "cookie-parser";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 import { v2 as cloudinary } from "cloudinary";
 import { connect } from "mongoose";
+import checkRateLimit from "./ratelimit.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -59,6 +61,8 @@ app.use(
   cookieParser(),
   graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 1 })
 );
+// Apply middleware
+app.use("/graphql", checkRateLimit);
 
 // ATTACHING GRAPHQL MIDDLEWARE TO EXPRESS
 app.use(

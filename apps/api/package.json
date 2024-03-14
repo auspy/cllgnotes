@@ -16,6 +16,7 @@
   "dependencies": {
     "@apollo/server": "^4.7.5",
     "@cllgnotes/zod": "workspace:*",
+    "@upstash/ratelimit": "^1.0.1",
     "@upstash/redis": "^1.28.4",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.40.0",
