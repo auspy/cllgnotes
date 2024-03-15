@@ -1,4 +1,5 @@
 // component exports
+export { default as SessionWrapper } from "./wrappers/SessionWrapper";
 export { default as Button } from "./buttons/Button";
 export { default as ButtonBlack } from "./buttons/ButtonBlack";
 export { default as ButtonRow } from "./buttonGroup/ButtonRow";
@@ -39,7 +40,6 @@ export { default as UserAvatarMenu } from "./avatar/UserAvatarMenu";
 export { default as RecoilWrapper } from "./wrappers/RecoilWrapper";
 export { default as LinkWrapper } from "./wrappers/LinkWrapper";
 export { default as AnimateWrapper } from "./wrappers/AnimateWrapper";
-export { default as SessionWrapper } from "./wrappers/SessionWrapper";
 // LEFT MENU
 export { default as LeftMenu } from "./leftMenu/LeftMenu";
 export { default as LeftMenuBottomNavi } from "./leftMenu/LeftMenuBottomNavi";

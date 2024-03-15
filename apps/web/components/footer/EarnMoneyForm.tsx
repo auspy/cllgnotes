@@ -4,11 +4,16 @@ import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Button, TextField } from "ui";
-
+import voteForNote from "@/api/voteForNote";
+// @ts-ignore
+import { zodContactForm } from "@cllgnotes/zod";
 // will send mails to us using user mails
 const EarnMoneyForm = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
   const { data, status } = useSession();
+  const [clicked, setClicked] = useState<boolean>(false);
+  const user: any = data?.user;
   // todo add role here if needed
   // const loggedIn = atomUserNme.role === "USER" && atomUserNme.username;
   const loggedIn = status == "authenticated";
@@ -16,7 +21,17 @@ const EarnMoneyForm = () => {
   const isDesktop = device === "desktop";
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const buttonRect = e.target;
-    confettiEffect(buttonRect as HTMLButtonElement);
+    const data = {
+      email: user?.email || email,
+      name: user?.name || user?.username,
+      message: "vote for note",
+    };
+    const send = zodContactForm.safeParse(data);
+    if (send.success) {
+      confettiEffect(buttonRect as HTMLButtonElement);
+      voteForNote(send.data);
+      setClicked(true);
+    }
   };
   const focusdStyle: React.CSSProperties = {
     boxShadow: "unset",
@@ -26,10 +41,11 @@ const EarnMoneyForm = () => {
   return (
     <>
       <div className="w100 flex flex-col lg:flex-row gap-x-[25px] gap-y-4">
-        {!loggedIn && (
+        {!loggedIn && !clicked && (
           <TextField
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
+            onChange={(e) => setEmail(e.target.value)}
             className={`priBtn ${textClasses["h3"]} upper`}
             label="Email"
             sx={{
@@ -58,8 +74,11 @@ const EarnMoneyForm = () => {
         {
           <Button
             width={"100%"}
-            buttonStyles={{ maxWidth: loggedIn || !isDesktop ? "none" : 289 }}
-            text="vote for note 😉"
+            disabled={clicked}
+            buttonStyles={{
+              maxWidth: clicked || loggedIn || !isDesktop ? "none" : 289,
+            }}
+            text={clicked ? "Thank you for vote 🚀" : "vote for note 😉"}
             onClick={handleClick}
             fontSize={ButtonFontSizes.large}
           />
