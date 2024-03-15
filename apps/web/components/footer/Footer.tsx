@@ -24,10 +24,28 @@ const Footer = ({ earnMoney = false }: { earnMoney?: boolean }) => {
         />
       )}
       <div className="frfesb topContainer gap-5 flex-wrap justify-center sm:justify-between ">
-        <Logo fontSize={36} color="white" />
+        <div className="fcfs">
+          <Logo fontSize={36} color="white" />
+          <div className="frc gap-1">
+            <Text color="dGrey" type="regu14" textClass="mt-1">
+              Email:
+            </Text>
+            <Text color="grey" type="medi14" textClass="mt-1">
+              kshetez.vinayak@gmail.com
+            </Text>
+          </div>
+        </div>
         <div className="frc" style={{ gap: 30 }}>
-          <IconButton onBlack={true} icon={IconInsta("white")} />
-          <IconButton onBlack={true} icon={IconTwitter("white")} />
+          <IconButton
+            href={"https://devclans.com/kshetezvinayak"}
+            onBlack={true}
+            icon={IconInsta("white")}
+          />
+          <IconButton
+            href={"https://x.com/kshetezvinayak"}
+            onBlack={true}
+            icon={IconTwitter("white")}
+          />
         </div>
       </div>
       <div className="flex-col-reverse gap-5 items-center sm:flex-row frcsb topContainer mt30">

@@ -15,7 +15,7 @@ export const cacheOptions = {
     Query: {
       fields: {
         getFilteredDocs: {
-          keyArgs: false,
+          keyArgs: false as false,
           merge(
             existing = { data: [] },
             incoming: DocsQueryProps["getFilteredDocs"]

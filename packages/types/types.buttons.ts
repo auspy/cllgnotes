@@ -27,6 +27,7 @@ export type ButtonCommonProps = {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   buttonStyles?: React.CSSProperties;
   buttonClasses?: string;
+  href?: string;
 };
 export type ButtonProps = ButtonCommonProps & {
   text: string;
