@@ -66,14 +66,14 @@ const PreviewPdf = ({
         <Image
           className="h-full"
           placeholder="blur"
-          blurDataURL="/images/blur.png"
+          blurDataURL="/images/blur.jpg"
           loader={({ width, src }) =>
             CustomImageLoader({
               page: page,
               type: type,
               src,
               width,
-              isThumbnail: false,
+              imgType: notPurchased ? "notPurchased" : "purchased",
             })
           }
           style={{
