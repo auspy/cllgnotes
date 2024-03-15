@@ -23,7 +23,7 @@ const PreviewPdf = ({
   };
   return (
     <div
-      className="w100 rPosi grid h-fit"
+      className="w100 rPosi grid h-fit bg-white"
       style={{
         maxWidth: 955,
       }}
@@ -45,7 +45,7 @@ const PreviewPdf = ({
           />
         </div>
       )}
-      {notPurchased && <PurchaseToRead {...props} />}
+      {/* {notPurchased && <PurchaseToRead {...props} />} */}
       <div
         className="w100 fcc"
         style={{
@@ -56,12 +56,12 @@ const PreviewPdf = ({
         }}
       >
         {/* gradient to hide */}
-        {notPurchased && (
+        {/* {notPurchased && (
           <div
             className="w-[99.6%] h-[99.8%] aPosi b-0 l-0"
             style={{ background: GradientColors.pdf, zIndex: 1 }}
           ></div>
-        )}
+        )} */}
 
         <Image
           className="h-full"
