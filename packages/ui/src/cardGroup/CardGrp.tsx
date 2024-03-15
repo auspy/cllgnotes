@@ -3,6 +3,7 @@ import DocCard from "../cards/DocCard";
 import Text from "../text/Text";
 import ArrowBtns from "../buttons/ArrowBtns";
 import { ShowInDevice } from "@cllgnotes/lib";
+import { CircularProgress } from "@mui/material";
 
 // this will be used to arrange cards in a group and will allow both scroll and even a grid like structure
 const CardGrp = ({
@@ -14,6 +15,8 @@ const CardGrp = ({
   needHeading = true,
   heading,
   style,
+  lastRef,
+  loadingMore,
 }: CardGrpProps) => {
   if (!data || !Array.isArray(data)) {
     return null;
@@ -51,8 +54,10 @@ const CardGrp = ({
               <DocCard
                 key={i + (cardData.title ? cardData.title : "0")}
                 {...cardData}
+                lastRef={i === data.length - 1 ? lastRef : undefined}
               />
             ))}
+            {loadingMore && <CircularProgress size={14} />}
           </div>
         </div>
       </div>

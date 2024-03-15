@@ -23,6 +23,7 @@ export const DocCard = ({
   textType,
   _id,
   className,
+  lastRef,
   href, // will be used as base. endpoint will remain same
 }: CardProps) => {
   const imgProps: ImgProps | {} = {};
@@ -54,6 +55,7 @@ export const DocCard = ({
         }
       >
         <div
+          ref={lastRef}
           className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md "
           style={{ minWidth: minWidth || 320, border: Borders.dark }}
         >
