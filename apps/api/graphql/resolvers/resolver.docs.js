@@ -31,7 +31,8 @@ const getData = async (option) => {
     const Modal = options[option];
     // check in cache
     console.log(`--- in get ${option} ---`);
-    let data = redisGet("filter", option);
+    let data = await redisGet("filter", option);
+    console.log("is in cache?", Array.isArray(data) && data.length);
     // if not found, get from db
     if (!(Array.isArray(data) && data.length)) {
       console.log("cache miss for courses, getting from db");
@@ -56,10 +57,10 @@ const resolverDocs = {
     return await getData("courses");
   },
   Departments: async () => {
-    return await getData("courses");
+    return await getData("departments");
   },
   Subjects: async () => {
-    return await getData("courses");
+    return await getData("subjects");
   },
   getDocs: async (parent, __, context) => {
     console.log("--- in get docs ---", parent);

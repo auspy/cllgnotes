@@ -63,17 +63,10 @@ export const semsFilter = [
   { text: "8" },
 ];
 
-export const yearsFilter = [
-  { text: "2020" },
-  { text: "2021" },
-  { text: "2022" },
-  { text: "2023" },
-  { text: "2024" },
-  { text: "2025" },
-  { text: "2026" },
-  { text: "2027" },
-  { text: "2028" },
-];
+export const yearsFilter = Array.from({ length: 10 }, (_, index) => {
+  const year = 2015 + index;
+  return { text: year.toString() };
+});
 
 export const universitysFilter = [{ text: "SRM University" }];
 
@@ -91,8 +84,8 @@ export const dummyFilterSteps: FilterSidebarGrpProps[] = [
     title: "Which year?",
     data: yearsFilter,
     // type: "slider",
-    maxValue: 2028,
-    minValue: 2020,
+    maxValue: 2024,
+    minValue: 2015,
     step: 1,
     marks: true,
     defaultValue: 2024,

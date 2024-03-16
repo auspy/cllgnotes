@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import IconButton from "./IconButton";
 import { ChevronRightRounded, ChevronLeftRounded } from "../mui/mui";
+import { throttle } from "@cllgnotes/lib";
 const ArrowBtns = ({ id }: { id: string }) => {
   const [atEnd, setAtEnd] = useState<"left" | "right" | null>("left");
   const isAtLeftEnd = atEnd == "left";
@@ -9,7 +10,7 @@ const ArrowBtns = ({ id }: { id: string }) => {
   useEffect(() => {
     const ele = document.getElementById(id);
     if (!ele) return;
-    const handleScroll = (e: any) => {
+    const handleScroll = throttle((e: any) => {
       const el = e.target;
       if (el?.scrollLeft == 0) {
         setAtEnd("left");
@@ -21,7 +22,7 @@ const ArrowBtns = ({ id }: { id: string }) => {
       } else {
         setAtEnd(null);
       }
-    };
+    }, 300);
     ele.addEventListener("scroll", handleScroll);
 
     return () => {

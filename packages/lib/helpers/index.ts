@@ -4,3 +4,4 @@ export * from "./confetti";
 export * from "./animateInViewPort";
 export * from "./firstLetterUppercase";
 export * from "./debounce";
+export * from "./throttle";

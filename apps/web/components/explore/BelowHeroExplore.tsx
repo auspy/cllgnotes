@@ -3,7 +3,10 @@ import { useDeviceType, useRecoilFilter } from "@cllgnotes/lib";
 import { BottomDrawer, FilterSidebar } from "ui";
 import Suggestions from "@/components/explore/suggestions/Suggestions";
 
-const BelowHeroExplore = ({ children }: React.PropsWithChildren) => {
+const BelowHeroExplore = ({
+  children,
+  Filters,
+}: React.PropsWithChildren & { Filters: React.ReactNode }) => {
   const device = useDeviceType();
   const { removeFilter, filters: filtr, addFilter } = useRecoilFilter();
   const isDesktop = device == "desktop";
@@ -12,7 +15,9 @@ const BelowHeroExplore = ({ children }: React.PropsWithChildren) => {
       maxWidth={maxWidth}
       removeFilter={removeFilter}
       addFilter={addFilter}
-    />
+    >
+      {Filters}
+    </FilterSidebar>
   );
   return (
     <>

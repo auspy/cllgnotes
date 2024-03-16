@@ -18,11 +18,13 @@ const ListItem = ({
   color,
   testType,
   _id,
+  lastRef,
   likes = 56,
 }: CardProps) => {
   const like = <ButtonLike likes={likes} />;
   return (
     <div
+      ref={lastRef}
       className="frfs w100 pb-[10px] sm:pb-[15px]"
       style={{
         borderBottom: Borders.darkDash,

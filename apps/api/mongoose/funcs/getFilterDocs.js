@@ -50,6 +50,7 @@ const getFilterDocs = async (parent, args, context) => {
         query[key] = { $in: Object.keys(value) };
       }
     }
+    console.log("... query after adding filters =>", query);
     let regexQuery = null;
     const orQuery = [];
     if (search) {

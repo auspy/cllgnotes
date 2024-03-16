@@ -1,13 +1,13 @@
+import SessionProvider from "@/components/SessionProvider";
+import { ThemeProvider, muiTheme, RecoilWrapper, SessionWrapper } from "ui";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { AuthWrapper } from "@/api/auth/useLogout";
 import { ApolloWrapper } from "@/api/graphql/ApolloWrapper";
 import "@/styles/globals.scss"; // app specific global css
 import { DeviceTypeWrapper } from "@cllgnotes/lib/hooks";
-import { ThemeProvider, muiTheme, RecoilWrapper, SessionWrapper } from "ui";
 import ToastWrapper from "@/components/ToastWrapper";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import { Metadata } from "next";
 import Head from "next/head";
 
@@ -38,19 +38,17 @@ export default async function RootLayout({
       </Head>
       <body className="fcc">
         <ApolloWrapper>
-          <RecoilWrapper>
-            <DeviceTypeWrapper>
-              <SessionWrapper session={session}>
-                <AuthWrapper>
-                  <ToastWrapper />
-                  <ThemeProvider theme={muiTheme}>
-                    {children}
-                    <Analytics />
-                  </ThemeProvider>
-                </AuthWrapper>
-              </SessionWrapper>
-            </DeviceTypeWrapper>
-          </RecoilWrapper>
+          <SessionWrapper session={session}>
+            <RecoilWrapper>
+              <DeviceTypeWrapper>
+                <ToastWrapper />
+                <ThemeProvider theme={muiTheme}>
+                  {children}
+                  <Analytics />
+                </ThemeProvider>
+              </DeviceTypeWrapper>
+            </RecoilWrapper>
+          </SessionWrapper>
         </ApolloWrapper>
         <SpeedInsights />
       </body>

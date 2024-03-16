@@ -1,0 +1,18 @@
+.card,
+.card2 {
+  border: 1px solid var(--grey);
+  background: var(--bg);
+  box-shadow:
+    0px 4px 5.3px 0px rgba(20, 26, 37, 0.05) inset,
+    0px -4px 3px 0px rgba(6, 12, 24, 0.05) inset;
+}
+.card2 {
+  @apply bg-white;
+  border-radius: 5px;
+}
+
+.card3 {
+  @apply card card2;
+  padding: 20px;
+  border-radius: 5px;
+}

@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+dotenv.config();
 const env = process.env.NODE_ENV || "development";
 // const isDev = env === "development";
 console.log("ENV", env);

@@ -39,26 +39,30 @@ const ChipGrp = () => {
           />
         )}
         {chips.map((key, index) => {
-          console.log(Object.keys(filters[key]), key, filters[key]);
+          // console.log(Object.keys(filters[key]), key, filters[key]);
           return (
             typeof filters[key] == "object" &&
-            Object.keys(filters[key]).map((filterVal, i) => (
-              <Chip
-                key={filterVal + index + i}
-                deleteIcon={
-                  <Link
-                    href={{
-                      pathname: "/explore",
-                      query: queryMap({ key, label: filterVal }),
-                    }}
-                  >
-                    <CloseRounded />
-                  </Link>
-                }
-                label={filterVal}
-                onDelete={() => removeFilter({ key, label: filterVal })}
-              />
-            ))
+            Object.keys(filters[key]).map((filterKey, i) => {
+              const val = filters[key][filterKey];
+              const isStr = typeof val == "string";
+              return (
+                <Chip
+                  key={filterKey + index + i}
+                  deleteIcon={
+                    <Link
+                      href={{
+                        pathname: "/explore",
+                        query: queryMap({ key, label: filterKey }),
+                      }}
+                    >
+                      <CloseRounded />
+                    </Link>
+                  }
+                  label={isStr ? val : filterKey}
+                  onDelete={() => removeFilter({ key, label: filterKey })}
+                />
+              );
+            })
           );
         })}
       </Stack>

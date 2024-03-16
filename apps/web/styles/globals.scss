@@ -1,7 +1,7 @@
-@import "../../../packages/ui/styles/sharedGlobals.scss";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "../../../packages/ui/styles/_sharedGlobals.scss";
 
 :root {
   --x-buynowcard: 853px;

@@ -57,7 +57,8 @@ a.btn {
   }
 }
 
-.iconBtn:hover:enabled {
+.iconBtn:hover:enabled,
+a.iconBtn:hover {
   background-color: #fff !important;
   color: var(--dark) !important;
   opacity: 1 !important;

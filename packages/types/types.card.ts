@@ -18,6 +18,7 @@ export type CardProps = Omit<CardTextBoxProps, "isAbsolute"> &
     likes?: number;
     href?: string;
     className?: string;
+    lastRef?: React.MutableRefObject<HTMLDivElement | null>;
   };
 
 export type CardStyleProps = {
@@ -38,6 +39,8 @@ export type CardGrpProps = {
   needHeading?: boolean;
   heading?: string;
   style?: React.CSSProperties;
+  lastRef?: React.MutableRefObject<HTMLDivElement | null>;
+  loadingMore?: boolean;
 };
 
 export type BuyNowCardProps = CardStyleProps &

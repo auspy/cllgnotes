@@ -85,7 +85,7 @@ const BuyNowCard = ({
           }}
         >
           <Image
-            src={CustomImageLoader({ src, page: 1, type })}
+            src={CustomImageLoader({ src, type })}
             alt={alt || defaultImg.alt}
             fill
             style={{

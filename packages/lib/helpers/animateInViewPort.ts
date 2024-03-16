@@ -1,4 +1,5 @@
 import { AnimateElementProps } from "@cllgnotes/types";
+import { throttle } from "./throttle";
 
 export const animateInViewPort = ({
   elementId,
@@ -11,7 +12,7 @@ export const animateInViewPort = ({
 
   const elementsArray = Array.from(elements); // Convert HTMLCollection to an array
 
-  const scrollHandler = () => {
+  const scrollHandler = throttle(() => {
     for (const element of elementsArray) {
       if (element instanceof HTMLElement) {
         const elementTop = element.getBoundingClientRect().top;
@@ -31,7 +32,7 @@ export const animateInViewPort = ({
         }
       }
     }
-  };
+  }, 300);
 
   window.addEventListener("scroll", scrollHandler);
 

@@ -3,6 +3,7 @@ import { IconButtonProps } from "@cllgnotes/types";
 import Button from "./Button";
 import { ChevronRightRounded } from "@mui/icons-material";
 import Colors from "@cllgnotes/types/colors";
+import Link from "next/link";
 
 const IconButton = ({
   size = 60,
@@ -12,27 +13,36 @@ const IconButton = ({
   onClick,
   buttonClasses,
   disabled,
+  href,
 }: IconButtonProps) => {
   const btnStyles: React.CSSProperties = {};
   const shadowClass = size == 40 ? "shadow-box1" : "shadow-box2";
   if (color) {
     btnStyles.backgroundColor = Colors[color];
   }
+  const buttonProps = {
+    disabled: disabled,
+
+    className: `${onBlack && `iconBtn`} fccc ${buttonClasses}`,
+    style: {
+      width: size,
+      height: size,
+      backgroundColor: (color && Colors[color]) || "none",
+      border: "1px solid white",
+      borderRadius: 5,
+      color: "white",
+    },
+  };
   if (onBlack) {
+    if (href) {
+      return (
+        <Link href={href} {...buttonProps}>
+          {icon}
+        </Link>
+      );
+    }
     return (
-      <button
-        disabled={disabled}
-        onClick={onClick}
-        className={`${onBlack && `iconBtn`} ${buttonClasses}`}
-        style={{
-          width: size,
-          height: size,
-          backgroundColor: (color && Colors[color]) || "none",
-          border: "1px solid white",
-          borderRadius: 5,
-          color: "white",
-        }}
-      >
+      <button {...buttonProps} onClick={onClick}>
         {icon}
       </button>
     );

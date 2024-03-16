@@ -97,3 +97,9 @@ export const zodCreateDoc = z.object({
 //     units: [String]
 //     testType: TestType
 // }
+
+export const zodContactForm = z.object({
+  email: z.string().email().max(100).optional(),
+  name: z.string().max(50).optional(),
+  message: z.string().min(3).max(2000),
+});
