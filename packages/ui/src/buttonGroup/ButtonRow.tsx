@@ -32,74 +32,67 @@ const ButtonRow = ({
     >
       {data.map((item, index) => (
         // console.log(" MORE", data.length > 8 && index > 7 ? showMore : true),
-        <div key={index}>
+        <Button
+          key={item.text + index}
+          {...commonButtonProps}
+          {...item}
+          buttonClasses={`shadow-box5 ${
+            (data.length > 8 && index >= 7 ? showMore : true)
+              ? "flex"
+              : "flex lg:hidden"
+          } ${commonButtonProps?.buttonClasses} ${
+            select[1] && item.text?.toLowerCase() in select[1]
+              ? "filterButtonDisabled"
+              : ""
+          }`}
+          buttonStyles={{
+            maxWidth: maxWidth,
+            minWidth: minWidth,
+            ...commonButtonProps?.buttonStyles,
+            ...item.buttonStyles,
+          }}
+          fontSize={
+            commonButtonProps?.fontSize ||
+            item.fontSize ||
+            ButtonFontSizes.small
+          }
+          textProps={{
+            fontWeight: FontWeightEnum.semi,
+          }}
+          iconLeft={true}
+          width={"100%"}
+          height={varHeight}
+          onClick={(e) => {
+            setShowMore(false);
+            onClick && onClick(e, { label: item.text, key: select[0] }, index);
+          }}
+        />
+      ))}
+      {data.length > 8 && (
+        <div className={`frc !hidden lg:!flex gap-x-[10px]`}>
           <Button
-            key={item.text + index}
+            key={"show"}
             {...commonButtonProps}
-            {...item}
-            buttonClasses={`shadow-box5 ${
-              (data.length > 8 && index >= 7 ? showMore : true)
-                ? "flex"
-                : "flex lg:hidden"
-            } ${commonButtonProps?.buttonClasses} ${
-              select[1] && item.text?.toLowerCase() in select[1]
-                ? "filterButtonDisabled"
-                : ""
-            }`}
+            text={showMore ? "Less" : "More"}
+            buttonClasses={`shadow-box5  ${commonButtonProps?.buttonClasses}`}
             buttonStyles={{
-              maxWidth: maxWidth,
-              minWidth: minWidth,
+              maxWidth: maxWidth && maxWidth / 2,
+              minWidth: minWidth && minWidth / 2,
               ...commonButtonProps?.buttonStyles,
-              ...item.buttonStyles,
             }}
-            fontSize={
-              commonButtonProps?.fontSize ||
-              item.fontSize ||
-              ButtonFontSizes.small
-            }
+            fontSize={commonButtonProps?.fontSize || ButtonFontSizes.small}
             textProps={{
               fontWeight: FontWeightEnum.semi,
             }}
             iconLeft={true}
-            width={"100%"}
+            // width={"100%"}
             height={varHeight}
             onClick={(e) => {
-              setShowMore(false);
-              onClick &&
-                onClick(e, { label: item.text, key: select[0] }, index);
+              setShowMore(!showMore);
+              // onClick && onClick(e, { label: "More", key: "More" }, index);
             }}
           />
-          {/* MORE BUTTON */}
-          {index == (showMore ? data.length - 1 : 6) && data.length > 8 && (
-            <div className={`frc hidden lg:flex gap-x-[10px]`}>
-              <Button
-                key={item.text + "show" + index}
-                {...commonButtonProps}
-                text={showMore ? "Less" : "More"}
-                buttonClasses={`shadow-box5  ${commonButtonProps?.buttonClasses}`}
-                buttonStyles={{
-                  maxWidth: maxWidth && maxWidth / 2,
-                  minWidth: minWidth && minWidth / 2,
-                  ...commonButtonProps?.buttonStyles,
-                  ...item.buttonStyles,
-                }}
-                fontSize={
-                  commonButtonProps?.fontSize ||
-                  item.fontSize ||
-                  ButtonFontSizes.small
-                }
-                textProps={{
-                  fontWeight: FontWeightEnum.semi,
-                }}
-                iconLeft={true}
-                // width={"100%"}
-                height={varHeight}
-                onClick={(e) => {
-                  setShowMore(!showMore);
-                  // onClick && onClick(e, { label: "More", key: "More" }, index);
-                }}
-              />
-              {/* <Button
+          {/* <Button
                     key={item.text + "show" + index}
                     {...commonButtonProps}
                     text={"Next"}
@@ -126,10 +119,8 @@ const ButtonRow = ({
                         onClick(e, { label: "Next", key: "Next" }, index);
                     }}
                   /> */}
-            </div>
-          )}
         </div>
-      ))}
+      )}
     </div>
   );
 };

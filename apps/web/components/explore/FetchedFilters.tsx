@@ -1,7 +1,9 @@
 import { getFilterValues } from "@/api/getFilterValues";
-import { CheckboxGrpNew, FilterSidebar } from "ui";
+import { CheckboxGrpNew } from "ui";
 
 const FetchedFilters = async () => {
+  // ? for now getting all filters together. this can be improved by getting only the required filters
+  // ? other improvement that can be done is removing the filters that dont belong to that department or subject or course
   const data = await getFilterValues();
   console.log(data.Courses?.length, "course values");
   return (

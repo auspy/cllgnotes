@@ -7,108 +7,38 @@ body {
   -ms-text-size-adjust: none;
   -webkit-text-size-adjust: none;
 }
-@tailwind components;
-@layer components {
-  .fcc {
-    @apply flex flex-col items-center;
-  }
-  .fccc {
-    @apply fcc justify-center;
-  }
-  .gcc {
-    @apply grid items-center justify-center;
-  }
-  .frc {
-    @apply flex flex-row items-center;
-  }
-  .frcsb {
-    @apply frc justify-between;
-  }
-  .frfssb {
-    @apply flex flex-row items-start justify-between;
-  }
-  .fcfssb {
-    @apply flex flex-col items-start justify-between;
-  }
-  .fcfs {
-    @apply flex flex-col items-start;
-  }
-  .w100 {
-    width: 100%;
-  }
-  .container {
-    max-width: 1440px;
-    padding-inline: 30px;
-    width: 100%;
-  }
-  @media screen and (max-width: 768px) {
-    .container {
-      padding-inline: 10px;
-    }
-  }
 
-  textarea::placeholder,
-  input::placeholder {
-    opacity: 0.4;
-  }
+// SCROLLBAR
+.scrollbar {
+  overflow-y: hidden;
+}
 
-  .fs0 {
-    flex-shrink: 0;
-  }
-  button {
-    @apply fccc;
-    text-align: center;
-  }
-  // RESPONSIVE BUTTON GROUP
-  .btnRow {
-    @apply frcsb overflow-visible w100;
-  }
-  @media screen and (max-width: 768px) {
-    .btnRow {
-      @apply frc gap-3 overflow-x-scroll scrollbar;
-    }
-  }
-  // SCROLLBAR
-  .scrollbar {
-    overflow-y: hidden;
-  }
+.scrollbar-x {
+  overflow-x: hidden;
+}
 
-  .scrollbar-x {
-    overflow-x: hidden;
-  }
+.scrollbar-hide::-webkit-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 0;
+  width: 0;
+}
+.scrollbar::-webkit-scrollbar,
+.scrollbar-x::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
 
-  .scrollbar-hide::-webkit-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    height: 0;
-    width: 0;
-  }
-  .scrollbar::-webkit-scrollbar,
-  .scrollbar-x::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
-  }
+.scrollbar:hover::-webkit-scrollbar,
+.scrollbar-x:hover::-webkit-scrollbar {
+  transition: heigth 2s ease;
+  height: 5px;
+  width: 5px;
+}
 
-  .scrollbar:hover::-webkit-scrollbar,
-  .scrollbar-x:hover::-webkit-scrollbar {
-    transition: heigth 2s ease;
-    height: 5px;
-    width: 5px;
-  }
-
-  .scrollbar::-webkit-scrollbar-thumb,
-  .scrollbar-x::-webkit-scrollbar-thumb {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-  }
-  .hover:hover,
-  a:hover {
-    cursor: pointer;
-    opacity: 0.85;
-    transition: opacity 0.3s ease-in-out;
-  }
-  p {
-    white-space: normal;
-  }
+.scrollbar::-webkit-scrollbar-thumb,
+.scrollbar-x::-webkit-scrollbar-thumb {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
 }

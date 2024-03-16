@@ -64,7 +64,7 @@ export const semsFilter = [
 ];
 
 export const yearsFilter = Array.from({ length: 10 }, (_, index) => {
-  const year = 2015 + index;
+  const year = 2024 - index;
   return { text: year.toString() };
 });
 

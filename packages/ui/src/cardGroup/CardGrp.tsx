@@ -41,7 +41,7 @@ const CardGrp = ({
           )}
           <div
             id={id}
-            className={`w100 frc  ${containerClasses}`}
+            className={`w100   ${containerClasses || "frc"}`}
             style={{
               columnGap: colGap,
               rowGap: isRow ? 0 : rowGap,
