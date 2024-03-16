@@ -22,11 +22,12 @@ const FilteredDocs = ({}) => {
   const [page, setPage] = useState(searchParams.get("page") || 1);
   const [showGrid, setShowGrid] = useState(true);
   const {
-    filters,
     filters: filtr,
     setFilter: setFiltr,
     clearFilters,
   } = useRecoilFilter();
+  const filtersParams = JSON.stringify(filtr) || searchParams.get("filters");
+  // console.log("filtersParams", filtersParams);
   // * VARIABLES END
   // * QUERIES
   // GET DATA
@@ -35,19 +36,22 @@ const FilteredDocs = ({}) => {
     useSuspenseQuery<DocsQueryProps>(GET_FILTERED_DOCS, {
       queryKey: "getFilteredDocs",
       variables: {
-        filter: JSON.stringify(filters),
+        filter: filtersParams,
         page: Number(page),
         search,
         pageSize,
       },
       context: {
         debounceKey: "getFilteredDocs",
-        debounceTime: 1000,
+        debounceTime: 500,
       },
     });
   const isFetchingMore = networkStatus === 3;
   console.log("network status", networkStatus);
-
+  useEffect(() => {
+    console.log("refetching");
+    refetch();
+  }, [filtersParams]);
   // console.log("data", Object.keys(data?.getFilteredDocs || {}));
   // MODIFY DATA
   const docs = data?.getFilteredDocs?.data;
@@ -57,18 +61,18 @@ const FilteredDocs = ({}) => {
   }) as CardProps[];
   const totalDocs = data?.getFilteredDocs?.count || cardsData?.length;
   const canFetchMore = docs && docs.length < totalDocs;
-  console.log(
-    docs?.length,
-    "in view from page",
-    page,
-    totalDocs,
-    "canFetchMore",
-    canFetchMore
-  );
+  // console.log(
+  //   docs?.length,
+  //   "in view from page",
+  //   page,
+  //   totalDocs,
+  //   "canFetchMore",
+  //   canFetchMore
+  // );
   const foundCourses =
     data?.getFilteredDocs?.status === "success" && Boolean(cardsData);
 
-  function handleRefetch() {
+  function handleFetchMore() {
     if (!canFetchMore) {
       console.log("no more data");
       return;
@@ -105,7 +109,7 @@ const FilteredDocs = ({}) => {
       canFetchMore
     ) {
       console.log("Last item in view, fetching more data...");
-      handleRefetch();
+      handleFetchMore();
     }
   };
 

@@ -1,0 +1,27 @@
+@import "./_auspy.scss";
+@import "./_colors.scss";
+@import "./_common.scss";
+@import "./_animations.scss";
+@import "./_mixins.scss";
+@import "./_fonts.scss";
+@import "./_border.scss";
+@import "./_button.scss";
+@import "./_shadows.scss";
+@import "./_dashboard.scss";
+@import "./_cards.scss";
+@import "./_forms.scss";
+
+.test {
+  background-color: white;
+}
+
+.generalSans {
+  font-family: "GeneralSans-Variable";
+}
+.expose {
+  font-family: "Expose-Black";
+}
+body {
+  font-family: "GeneralSans-Variable";
+  @apply generalSans;
+}

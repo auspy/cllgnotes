@@ -13,12 +13,12 @@ export type FilterSidebarProps = AddFilterProps & {
 export type FilterSidebarGrpProps = { key: string } & (
   | ({
       title?: string;
-      data?: ButtonProps[];
+      data?: ButtonProps[] | Record<string, string>[];
       type: "slider";
     } & SliderProps)
   | ({
       title: string;
-      data: ButtonProps[];
+      data: ButtonProps[] | Record<string, string>[];
       type?: "checkbox";
     } & Partial<SliderProps>)
 );

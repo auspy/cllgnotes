@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { DeviceTypeEnum } from "@cllgnotes/types";
 import { createContext } from "react";
+import { throttle } from "../helpers";
 
 const ContextDeviceType = createContext<DeviceTypeEnum>(DeviceTypeEnum.desktop);
 
@@ -11,7 +12,7 @@ export const DeviceTypeWrapper = ({ children }: React.PropsWithChildren) => {
     DeviceTypeEnum.desktop
   );
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = throttle(() => {
       if (window.innerWidth < 640) {
         setDeviceType(DeviceTypeEnum.mobile);
       } else if (window.innerWidth < 1024) {
@@ -19,7 +20,7 @@ export const DeviceTypeWrapper = ({ children }: React.PropsWithChildren) => {
       } else {
         setDeviceType(DeviceTypeEnum.desktop);
       }
-    };
+    }, 300);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => {

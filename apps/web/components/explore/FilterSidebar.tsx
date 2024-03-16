@@ -1,14 +1,15 @@
-import SearchBar from "../searchBar/SearchBar";
-import Text from "../text/Text";
-import CheckboxGrp from "../buttonGroup/CheckboxGrp";
 import { dummyFilterSteps } from "@cllgnotes/lib/dummyData";
 import { ManageFiltersProps } from "@cllgnotes/types";
+import { SearchBar, Text, CheckboxGrp } from "ui";
+import FetchedFilters from "./FetchedFilters";
 
 const FilterSidebar = ({
   addFilter,
   removeFilter,
   maxWidth,
-}: ManageFiltersProps) => {
+  data,
+  children,
+}: ManageFiltersProps & React.PropsWithChildren) => {
   return (
     <div className="w100" style={{ maxWidth: maxWidth }}>
       <div>
@@ -18,6 +19,8 @@ const FilterSidebar = ({
         </Text>
       </div>
       <div className="mt30" />
+      {/* <FetchedFilters /> */}
+      {children}
       <CheckboxGrp
         removeFilter={removeFilter}
         addFilter={addFilter}

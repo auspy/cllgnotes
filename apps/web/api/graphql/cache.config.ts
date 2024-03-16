@@ -21,17 +21,17 @@ export const cacheOptions = {
             incoming: DocsQueryProps["getFilteredDocs"]
           ) {
             if (incoming === undefined) {
-              console.log("incoming is undefined");
+              // console.log("incoming is undefined");
               return existing;
             }
             const count = incoming.count;
             const totalDocsAfterMerge =
               existing.data.length + incoming.data.length;
             if (typeof count == "number" && totalDocsAfterMerge > count) {
-              console.log("totalDocsAfterMerge", totalDocsAfterMerge);
+              // console.log("totalDocsAfterMerge", totalDocsAfterMerge);
               return existing;
             }
-            console.log("adding fetched to existing");
+            // console.log("adding fetched to existing");
             return {
               ...incoming,
               data: [...existing.data, ...incoming.data],

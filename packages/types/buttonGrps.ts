@@ -1,4 +1,5 @@
 import { ButtonProps } from "./types.buttons";
+import { FilterSidebarGrpProps } from "./types.filter";
 
 export type ButtonRowProps = {
   data: ButtonProps[];
@@ -22,9 +23,10 @@ export type ButtonRowProps = {
 export type FilterChipProps = {
   label: string;
   key: string;
+  value?: string;
 };
 
-export type FilterChipMap = { [key: string]: Record<string, boolean> };
+export type FilterChipMap = { [key: string]: Record<string, boolean | string> };
 export type ChipGrpProps = {
   setChipData: React.Dispatch<React.SetStateAction<FilterChipMap>>;
   chipData: FilterChipMap;
@@ -36,6 +38,7 @@ export type AddFilterProps = {
 };
 
 export type ManageFiltersProps = AddFilterProps & {
-  removeFilter: (chip: FilterChipProps) => void;
+  removeFilter?: (chip: FilterChipProps) => void;
   maxWidth?: number | string;
+  data?: FilterSidebarGrpProps[];
 };

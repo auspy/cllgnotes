@@ -84,6 +84,7 @@ const useRecoilFilter = () => {
       }
       const type = newFilter.key;
       const newFltr = newFilter.label?.toLowerCase();
+      const value = newFilter.value || true;
       if (!newFltr) {
         console.log("missing label in queryMap");
         return returnFunc();
@@ -94,11 +95,11 @@ const useRecoilFilter = () => {
         if (newFltr in filterMap) {
           delete filterMap[newFltr];
         } else {
-          filterMap[newFltr] = true;
+          filterMap[newFltr] = value;
         }
         Object.assign(query, { [type]: filterMap });
       } else {
-        Object.assign(query, { [type]: { [newFltr]: true } });
+        Object.assign(query, { [type]: { [newFltr]: value } });
       }
       // to remove empty key
       if (

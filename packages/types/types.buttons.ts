@@ -31,6 +31,8 @@ export type ButtonCommonProps = {
 };
 export type ButtonProps = ButtonCommonProps & {
   text: string;
+  active?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   textProps?: Omit<TextProps, "text" | "fontSize">;
   disabled?: boolean;
   width?: number | "100%" | "inherit";

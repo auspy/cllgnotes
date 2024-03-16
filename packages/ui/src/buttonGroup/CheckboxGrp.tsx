@@ -12,7 +12,7 @@ const CheckboxGrp = ({ data }: FilterSidebarProps) => {
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
   return (
-    <div className="flex flex-col" style={{ rowGap: 30 }}>
+    <div className="flex flex-col" style={{ rowGap: 20 }}>
       {data.map(
         ({ heading, key, title, type, data, ...sliderProps }, index) => (
           <div key={index}>

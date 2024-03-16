@@ -1,0 +1,15 @@
+query{
+    Courses{
+        name
+        _id
+    }
+    Departments{
+        name
+        _id
+    }
+    Subjects{
+        name
+        code
+        _id
+    }
+}

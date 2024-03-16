@@ -11,6 +11,7 @@ import GET_FILTERED_DOCS from "./queries/getFilteredDocs.graphql";
 import GET_COURSES from "./queries/Courses.graphql";
 import GET_DEPARTMENTS from "./queries/Departments.graphql";
 import GET_SUBJECTS from "./queries/Subjects.graphql";
+import GET_ALL_FILTERS from "./queries/Filters.graphql";
 // mutations
 import CREATE_DOC from "./mutations/addDoc.graphql";
 import UPDATE_DOC from "./mutations/updateDoc.graphql";
@@ -33,6 +34,7 @@ export {
   GET_COURSES,
   GET_DEPARTMENTS,
   GET_SUBJECTS,
+  GET_ALL_FILTERS,
   CREATE_DOC,
   UPDATE_DOC,
   PURCHASE_DOC,
