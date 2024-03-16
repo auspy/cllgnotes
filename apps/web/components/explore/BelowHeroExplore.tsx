@@ -2,7 +2,6 @@
 import { useDeviceType, useRecoilFilter } from "@cllgnotes/lib";
 import { BottomDrawer, FilterSidebar } from "ui";
 import Suggestions from "@/components/explore/suggestions/Suggestions";
-import FetchedFilters from "./FetchedFilters";
 
 const BelowHeroExplore = ({
   children,

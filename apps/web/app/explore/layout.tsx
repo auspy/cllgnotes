@@ -13,7 +13,12 @@ const layout = ({ children }: React.PropsWithChildren) => {
           repeat={6}
           textType="h3e"
         />
-        <BelowHeroExplore Filters={<FetchedFilters />}>
+        <BelowHeroExplore
+          Filters={
+            // @ts-expect-error Server Component
+            <FetchedFilters />
+          }
+        >
           {children}
         </BelowHeroExplore>
         <Footer />
