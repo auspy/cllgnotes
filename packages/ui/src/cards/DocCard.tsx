@@ -24,8 +24,9 @@ export const DocCard = ({
   _id,
   className,
   lastRef,
+  isGrid = false,
   href, // will be used as base. endpoint will remain same
-}: CardProps) => {
+}: CardProps & { isGrid?: boolean }) => {
   const imgProps: ImgProps | {} = {};
   const imgStyle: React.CSSProperties = {
     width: "100%",
@@ -51,12 +52,16 @@ export const DocCard = ({
       <LinkWrapper
         href={pathDocId(_id, href)}
         className={
-          "flex max-w-[620px] md:max-w-[460px] xl:max-w-[400px] " + className
+          `flex ${
+            isGrid
+              ? "max-w-[620px] md:max-w-[460px] xl:max-w-[400px]"
+              : "w-[340px]  md:w-[400px] xl:w-[360px]"
+          }  ` + className
         }
       >
         <div
           ref={lastRef}
-          className="w100 rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md "
+          className="w-screen rPosi pl-[5px] pr-[5px] pb-[20px] pt-[5px] rounded-md "
           style={{ minWidth: minWidth || 320, border: Borders.dark }}
         >
           <div className="w100">
@@ -91,7 +96,6 @@ export const DocCard = ({
             univ={univ}
             year={year}
             // testType={testType!}
-            allowWrap={true}
             href={href}
             type={type}
           />
