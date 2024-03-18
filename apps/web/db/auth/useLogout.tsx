@@ -1,9 +1,9 @@
 "use client";
-import { authLogout } from "@/api/auth/auth";
+import { authLogout } from "@/db/auth/auth";
 import { useRouter } from "next/navigation";
 import { ContextAuthLogout } from "@cllgnotes/lib";
 import { useMutation } from "@apollo/client";
-import { LOGOUT } from "@/api/graphql/gql";
+import { LOGOUT } from "@/db/graphql/gql";
 import { useContext } from "react";
 import { signOut, useSession } from "next-auth/react";
 

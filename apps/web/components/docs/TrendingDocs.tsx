@@ -1,4 +1,4 @@
-import { getTrendingDocs } from "@/api/getTrendingDocs";
+import { getTrendingDocs } from "@/db/getTrendingDocs";
 import FilterDocs from "../home/FilterDocs";
 
 const TrendingDocs = async () => {

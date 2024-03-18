@@ -17,7 +17,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { signIn, useSession } from "next-auth/react";
 // gql imports
-import { LOGIN, REGISTER } from "@/api/graphql/gql";
+import { LOGIN, REGISTER } from "@/db/graphql/gql";
 import { atomToast } from "@cllgnotes/lib";
 import Image from "next/image";
 import { BannerFontSizeEnum } from "@cllgnotes/types";

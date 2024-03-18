@@ -1,5 +1,5 @@
-import { getFilterValues } from "@/api/getFilterValues";
-import { getTrendingDocs } from "@/api/getTrendingDocs";
+import { getFilterValues } from "@/db/getFilterValues";
+import { getTrendingDocs } from "@/db/getTrendingDocs";
 
 const page = async () => {
   const data = await getTrendingDocs();

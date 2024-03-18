@@ -1,5 +1,5 @@
 "use client";
-import { PURCHASE_DOC } from "@/api/graphql/gql";
+import { PURCHASE_DOC } from "@/db/graphql/gql";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { atomToast } from "@cllgnotes/lib";

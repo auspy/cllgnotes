@@ -4,7 +4,7 @@ import { ButtonFontSizes, textClasses } from "@cllgnotes/types";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Button, TextField } from "ui";
-import voteForNote from "@/api/voteForNote";
+import voteForNote from "@/db/voteForNote";
 // @ts-ignore
 import { zodContactForm } from "@cllgnotes/zod";
 // will send mails to us using user mails

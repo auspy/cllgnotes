@@ -11,7 +11,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "api/**/*.ts",
+    "db/**/*.ts",
     ".next/types/**/*.ts",
     "components/**/*.ts",
     "components/**/*.tsx",

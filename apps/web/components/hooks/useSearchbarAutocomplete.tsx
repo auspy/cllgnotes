@@ -1,5 +1,5 @@
 "use client";
-import { AUTOCOMPLETE } from "@/api/graphql/gql";
+import { AUTOCOMPLETE } from "@/db/graphql/gql";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { DocsQueryProps } from "@cllgnotes/types";
 import { useSearchParams } from "next/navigation";

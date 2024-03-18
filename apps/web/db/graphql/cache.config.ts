@@ -1,4 +1,4 @@
-import { DocsQueryProps } from "./../../../../packages/types/types.gql";
+import { DocsQueryProps } from "@cllgnotes/types/types.gql";
 import { NotesData, PaperData, DocData } from "./fragments/docFragments";
 import { gql } from "@apollo/client";
 import { createFragmentRegistry } from "@apollo/client/cache";

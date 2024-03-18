@@ -1,10 +1,9 @@
-import SessionProvider from "@/components/SessionProvider";
 import { ThemeProvider, muiTheme, RecoilWrapper, SessionWrapper } from "ui";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { ApolloWrapper } from "@/api/graphql/ApolloWrapper";
+import { ApolloWrapper } from "@/db/graphql/ApolloWrapper";
 import "@/styles/globals.scss"; // app specific global css
 import { DeviceTypeWrapper } from "@cllgnotes/lib/hooks";
 import ToastWrapper from "@/components/ToastWrapper";
