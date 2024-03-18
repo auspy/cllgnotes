@@ -52,6 +52,7 @@ const CardGrp = ({
           >
             {data.map((cardData, i) => (
               <DocCard
+                isGrid={true}
                 key={i + (cardData.title ? cardData.title : "0")}
                 {...cardData}
                 lastRef={i === data.length - 1 ? lastRef : undefined}
