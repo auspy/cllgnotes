@@ -167,24 +167,25 @@ const resolverDocs = {
         throw new Error("Doc not found");
       }
       // IF USER EXISTS
-      if (validUserId) {
-        let isPurchased = false;
-        // CHECK IF DOC IS PURCHASED IN CACHE
-        console.log("--- getting purchased doc from cache ---");
-        isPurchased = await redisClient.hexists(
-          uid + ":purchasedDocs",
-          validDocId
-        );
-        console.log("is in cahce?", isPurchased);
-        // IF NOT FOUND CHECK IF PURCHASED CACHE EXISTS
-        const keyExists = await redisClient.exists(uid + ":purchasedDocs");
-        // IF NOT FOUND GET FROM DB
-        if (!isPurchased && !keyExists) {
-          isPurchased = await getPurchasedDocs(uid);
-          isPurchased = isPurchased?.includes(validDocId);
-        }
-        data.isPurchased = Boolean(isPurchased);
-      }
+      // if (validUserId) {
+      //   // not needed for now
+      //   let isPurchased = false;
+      //   // CHECK IF DOC IS PURCHASED IN CACHE
+      //   console.log("--- getting purchased doc from cache ---");
+      //   isPurchased = await redisClient.hexists(
+      //     uid + ":purchasedDocs",
+      //     validDocId
+      //   );
+      //   console.log("is in cahce?", isPurchased);
+      //   // IF NOT FOUND CHECK IF PURCHASED CACHE EXISTS
+      //   const keyExists = await redisClient.exists(uid + ":purchasedDocs");
+      //   // IF NOT FOUND GET FROM DB
+      //   if (!isPurchased && !keyExists) {
+      //     isPurchased = await getPurchasedDocs(uid);
+      //     isPurchased = isPurchased?.includes(validDocId);
+      //   }
+      //   data.isPurchased = Boolean(isPurchased);
+      // }
       console.log("--- doc fetched successfully ---");
       return {
         msg: "Doc fetched successfully",

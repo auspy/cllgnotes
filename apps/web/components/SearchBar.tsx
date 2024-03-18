@@ -107,19 +107,21 @@ const SearchBar = ({
       }}
       className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4"
     >
-      <Dialog
-        style={{
-          maxHeight: height * 4,
-          top: height,
-        }}
-        className="!p-4 fcfs gap-y-4"
-        show={showDialog}
-        setShow={setShowDialog}
-      >
-        {autocomplete?.map((item, index) => (
-          <SearchBarDropdownItem index={index} key={index} {...item} />
-        ))}
-      </Dialog>
+      {Array.isArray(autocomplete) && autocomplete.length > 0 && (
+        <Dialog
+          style={{
+            maxHeight: height * 4,
+            top: height,
+          }}
+          className="!p-4 fcfs gap-y-4"
+          show={showDialog}
+          setShow={setShowDialog}
+        >
+          {autocomplete?.map((item, index) => (
+            <SearchBarDropdownItem index={index} key={index} {...item} />
+          ))}
+        </Dialog>
+      )}
       <form
         autoComplete="off"
         className="searchBar  priBtn frc w100 overflow-hidden"

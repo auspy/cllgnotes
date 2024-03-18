@@ -6,10 +6,11 @@ import NotesBelowHero from "@/components/notes/NotesBelowHero";
 import NotesHero from "@/components/notes/NotesHero";
 import { DetailTabProps, DocProps, DocsQueryProps } from "@cllgnotes/types";
 import { MovingBanner, PreviewPdf } from "ui";
+import Link from "next/link";
 
 const page = async ({ params }: { params: { id: string } }) => {
   // console.log(params, "params", params["id"]);
-  const session = (await useServerSession()) as any;
+  const session: any = await useServerSession();
   // console.log(session, "in page");
   const { data } = await getClient().query<DocsQueryProps>({
     query: GET_DOC,
@@ -18,9 +19,9 @@ const page = async ({ params }: { params: { id: string } }) => {
   const doc: DocProps | undefined = data?.getDoc?.data?.[0];
   const status = data?.getDoc?.status;
   const foundCourses = status == "success";
-  const isPurchased = data?.getDoc?.data?.[0].isPurchased;
+  const isPurchased = Boolean(session?.user?.name);
   if (!doc || !foundCourses) {
-    return <h2>no data found</h2>;
+    return <Link href="/auth">Login to continue</Link>;
   }
   const labels = () => {
     const notNeededLabels = [
