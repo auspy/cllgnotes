@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Button, Dialog, Search, ChevronRightRounded } from "ui";
 import { debounce, useDeviceType } from "@cllgnotes/lib";
 import { useRouter, useSearchParams } from "next/navigation";
+import SearchBarDropdownItem from "./SearchBarDropdownItem";
 
 // search bar style for every search bar and works based on height
 const SearchBar = ({
@@ -116,15 +117,7 @@ const SearchBar = ({
         setShow={setShowDialog}
       >
         {autocomplete?.map((item, index) => (
-          <div key={index}>
-            <div className="frc gap-y-4">
-              {item.course.name +
-                item.department.name +
-                item.subject.name +
-                item._id}
-            </div>
-            <hr />
-          </div>
+          <SearchBarDropdownItem index={index} key={index} {...item} />
         ))}
       </Dialog>
       <form

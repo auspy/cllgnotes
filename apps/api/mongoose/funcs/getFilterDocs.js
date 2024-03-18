@@ -117,8 +117,11 @@ const getFilterDocs = async (parent, args, context, someData) => {
             course: 1,
             department: 1,
             subject: 1,
+            testType: 1,
             questions: 1,
             _id: 1,
+            year: 1,
+            semester: 1,
             highlights: {
               $meta: "searchHighlights",
             },

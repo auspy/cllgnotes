@@ -20,6 +20,7 @@ const ListItem = ({
   _id,
   lastRef,
   likes = 56,
+  type,
 }: CardProps) => {
   const like = <ButtonLike likes={likes} />;
   return (
@@ -48,7 +49,7 @@ const ListItem = ({
         <div className="frfssb w100">
           <CardTextBox
             department={department}
-            course={course}
+            course={{ name: testType } as any}
             semester={semester}
             color={color}
             year={year}
@@ -61,12 +62,14 @@ const ListItem = ({
           </ShowInDevice>
         </div>
         <CardDetailsText
+          course={course}
           _id={_id}
           subject={subject}
           title={title}
           univ={univ}
           year={year}
-          testType={testType!}
+          // testType={testType!}
+          type={type}
           allowWrap={true}
         />
       </div>

@@ -75,7 +75,7 @@ export const DocCard = ({
             <CardTextBox
               isAbsolute={true}
               department={department}
-              course={course}
+              course={{ name: testType } as any}
               year={year}
               color={color}
               semester={semester}
@@ -84,13 +84,14 @@ export const DocCard = ({
           {/* DETAILS */}
           <div className="mt-[25px]"></div>
           <CardDetailsText
+            course={course}
             _id={_id}
-            textType={textType}
             subject={subject}
             title={title}
-            year={year}
-            testType={testType}
             univ={univ}
+            year={year}
+            // testType={testType!}
+            allowWrap={true}
             href={href}
             type={type}
           />

@@ -1,6 +1,9 @@
 query($search: String, $filter: String){
     Autocomplete(search: $search, filter: $filter) {
         _id
+        year
+        testType
+        semester
         course {
             _id
             name
