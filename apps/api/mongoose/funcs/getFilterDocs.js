@@ -276,10 +276,21 @@ const getFilterDocs = async (parent, args, context, someData) => {
           },
         },
         {
-          $skip: skipVal,
-        },
-        {
-          $limit: pageSize,
+          $facet: {
+            totalCount: [
+              {
+                $count: "count",
+              },
+            ],
+            limitedDocuments: [
+              {
+                $skip: skipVal,
+              },
+              {
+                $limit: pageSize,
+              },
+            ],
+          },
         },
       ];
 
@@ -299,11 +310,13 @@ const getFilterDocs = async (parent, args, context, someData) => {
           return results;
         });
       console.log("... searchedDocs pipeline =>", searchedDocs);
+      const data = searchedDocs[0].limitedDocuments;
+      const count = searchedDocs[0].totalCount[0].count;
       return {
         status: "success",
-        data: searchedDocs,
+        data: data,
         msg: "Searched Docs fetched successfully",
-        count: searchedDocs.length,
+        count: count,
       };
     } else {
       // * JUST FILTER AND NO SEARCH QUERY
