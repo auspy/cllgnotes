@@ -24,7 +24,10 @@ const ButtonBuyNow = ({
   const [clicked, setClicked] = useState<boolean>(false);
   const { data, status } = useSession();
   const [, setToast] = useRecoilState(atomToast);
+
   const handleClick = () => {
+    router.push("/auth");
+    return;
     if (clicked) {
       return;
     }

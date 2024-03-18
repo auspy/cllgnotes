@@ -108,7 +108,7 @@ const BuyNowCard = ({
 
           <div className="">
             <div className="frc flex-wrap" style={{ gap: 10 }}>
-              <Text textClass="fs0" type="h2">
+              {/* <Text textClass="fs0" type="h2">
                 {"₹ " + (price || 0)}
               </Text>
               <Text
@@ -132,6 +132,17 @@ const BuyNowCard = ({
                   100 - Number((((price || 0) / 3129) * 100).toFixed())
                 }%
                 off`}
+              ></Text> */}
+              <Text
+                textStyle={{
+                  color: Colors[color],
+                  WebkitTextFillColor: Colors[color],
+                  fontSize: 36,
+                }}
+                textTransform="uppercase"
+                textClass="fs0 h1Highlight"
+                type="h2"
+                text={`Free for now!`}
               ></Text>
             </div>
             {/* SALE ALARM */}
@@ -140,7 +151,12 @@ const BuyNowCard = ({
               </p> */}
           </div>
           {/* BUTTON */}
-          <ButtonBuyNow amount={price} _id={_id} buttonClass="mt20" />
+          <ButtonBuyNow
+            amount={price}
+            _id={_id}
+            text="Login to View"
+            buttonClass="mt20"
+          />
         </div>
       </div>
     </>
