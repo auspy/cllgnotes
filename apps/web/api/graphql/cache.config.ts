@@ -26,15 +26,21 @@ export const cacheOptions = {
             }
             const count = incoming.count;
             const totalDocsAfterMerge =
+              Array.isArray(existing.data) &&
+              Array.isArray(incoming.data) &&
               existing.data.length + incoming.data.length;
-            if (typeof count == "number" && totalDocsAfterMerge > count) {
+            if (
+              typeof totalDocsAfterMerge == "number" &&
+              typeof count == "number" &&
+              totalDocsAfterMerge > count
+            ) {
               // console.log("totalDocsAfterMerge", totalDocsAfterMerge);
               return existing;
             }
             // console.log("adding fetched to existing");
             return {
               ...incoming,
-              data: [...existing.data, ...incoming.data],
+              data: [...existing.data, ...(incoming?.data || [])],
             };
           },
         },

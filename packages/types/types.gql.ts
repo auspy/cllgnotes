@@ -61,6 +61,7 @@ export type DocsQueryProps = {
   getDoc?: ResData;
   purchaseDoc?: ResData;
   getFilteredDocs?: ResData;
+  Autocomplete: DocAutoComplete[];
 };
 
 export type CreateDocs = (
@@ -137,6 +138,30 @@ export type Department = {
   tags: string[];
   courses: CourseType[];
 };
+export type DocQuestions = {
+  partA: {
+    question: string;
+  }[];
+  partB: {
+    option1: string;
+    option2: string;
+  }[];
+};
+export type DocAutoComplete = {
+  course: Course;
+  department: Department;
+  subject: Subject;
+  highlights: {
+    path: string;
+    texts: {
+      value: string;
+      type: string;
+    }[];
+  }[];
+  _id: string;
+  questions: DocQuestions[];
+};
+
 export type SubjectType = Subject | string;
 export type CourseType = Course | string;
 export type DepartmentType = Department | string;

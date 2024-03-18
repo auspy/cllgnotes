@@ -1,6 +1,6 @@
-input,
-select,
-textarea {
+#filters input,
+#filters select,
+#filters textarea {
   border-radius: 5px;
   @apply card2 p-3 focus:border-dark focus:rounded-lg;
   outline: none; // Remove outline on focus

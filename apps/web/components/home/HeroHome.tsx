@@ -1,4 +1,4 @@
-import { SearchBar } from "ui";
+import SearchBar from "@/components/SearchBar";
 import HeroText from "./HeroText";
 
 const HeroHome = () => {

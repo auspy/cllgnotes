@@ -1,13 +1,16 @@
 "use client";
 import Colors from "@cllgnotes/types/colors";
-import { SearchBarProps } from "@cllgnotes/types";
-import { Search, ChevronRightRounded } from "../mui/mui";
-import { useState } from "react";
-import { ButtonFontSizes } from "@cllgnotes/types";
-import Button from "../buttons/Button";
-import { ShadowsType } from "@cllgnotes/types";
+import {
+  SearchBarProps,
+  ShadowsType,
+  ButtonFontSizes,
+  DocProps,
+} from "@cllgnotes/types";
+import { useEffect, useState } from "react";
+import { Button, Dialog, Search, ChevronRightRounded } from "ui";
 import { debounce, useDeviceType } from "@cllgnotes/lib";
 import { useRouter, useSearchParams } from "next/navigation";
+import SearchBarDropdownItem from "./SearchBarDropdownItem";
 
 // search bar style for every search bar and works based on height
 const SearchBar = ({
@@ -16,10 +19,17 @@ const SearchBar = ({
   maxWidth,
   exploreBtn = false,
   placeholder,
-}: SearchBarProps) => {
+  setSearchText: setText,
+  autocomplete,
+}: SearchBarProps & {
+  searchText?: string;
+  setSearchText?: React.Dispatch<React.SetStateAction<string>>;
+  autocomplete?: any[] | null;
+}) => {
   const device = useDeviceType();
   const needSearchButton = height !== 90;
   const isDesktop = device === "desktop";
+  const [showDialog, setShowDialog] = useState(false);
   // if (height == 90 && isMobile) {
   //   height = 60;
   // }
@@ -63,7 +73,8 @@ const SearchBar = ({
   const searchFunc = (text: string) => {
     console.log("text in searchFunc", text);
     setSearchText(text);
-    !isHeight90 && link(text);
+    setText && setText(text);
+    // !isHeight90 && link(text);
   };
   const link = (text?: string) => {
     if (!text) {
@@ -80,10 +91,38 @@ const SearchBar = ({
     console.log("searching");
     link(searchText);
   };
+  useEffect(() => {
+    if (searchText) {
+      setShowDialog(true);
+    } else {
+      setShowDialog(false);
+    }
+  }, [searchText]);
+
+  // * FETCHING SUGGESTIONS AND AUTOCOMPLETE
   return (
-    <div className="w100 frc flex-col md:flex-row gap-x-[25px] gap-y-4">
+    <div
+      onBlur={() => {
+        // setShowDialog(false);
+      }}
+      className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4"
+    >
+      <Dialog
+        style={{
+          maxHeight: height * 4,
+          top: height,
+        }}
+        className="!p-4 fcfs gap-y-4"
+        show={showDialog}
+        setShow={setShowDialog}
+      >
+        {autocomplete?.map((item, index) => (
+          <SearchBarDropdownItem index={index} key={index} {...item} />
+        ))}
+      </Dialog>
       <form
-        className="searchBar priBtn frc w100 overflow-hidden"
+        autoComplete="off"
+        className="searchBar  priBtn frc w100 overflow-hidden"
         style={{
           height,
           maxWidth,

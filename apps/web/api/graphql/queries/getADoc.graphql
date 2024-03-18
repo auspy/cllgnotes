@@ -1,4 +1,3 @@
-#import "../fragments/DocData.graphql"
 query($id:ID!,$userId:String) {
     getDoc(id:$id,userId:$userId){
         msg

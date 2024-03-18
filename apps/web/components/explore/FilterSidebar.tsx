@@ -1,7 +1,7 @@
 import { dummyFilterSteps } from "@cllgnotes/lib/dummyData";
 import { ManageFiltersProps } from "@cllgnotes/types";
-import { SearchBar, Text, CheckboxGrp } from "ui";
-import FetchedFilters from "./FetchedFilters";
+import { Text, CheckboxGrp } from "ui";
+import SearchBar from "@/components/SearchBar";
 
 const FilterSidebar = ({
   addFilter,
@@ -13,7 +13,7 @@ const FilterSidebar = ({
   return (
     <div className="w100" style={{ maxWidth: maxWidth }}>
       <div>
-        <SearchBar placeholder="Search for keywords" height={50} />
+        <SearchBar placeholder="Search from results" height={50} />
         <Text textClass="mt10" type="medi12" color="dGrey">
           Eg: coa, maths
         </Text>

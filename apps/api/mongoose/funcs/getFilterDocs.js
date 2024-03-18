@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Docs } from "../modals/modals.js";
+import mongoose from "mongoose";
 const filterArgs = z.object({
   filter: z.string().optional().nullable(),
   page: z.number().max(100).default(1),
@@ -8,11 +9,21 @@ const filterArgs = z.object({
 });
 
 // ? for now using both lookup and populate. will later remove based on research.
-const getFilterDocs = async (parent, args, context) => {
+const getFilterDocs = async (parent, args, context, someData) => {
   try {
     console.log("... getting filter docs ...", args);
     const { page, pageSize, filter, search } = filterArgs.parse(args);
-    console.log("... args recieved =>", page, pageSize, filter, search);
+    console.log(
+      "... args recieved =>",
+      page,
+      pageSize,
+      filter,
+      search,
+      someData.fieldName
+    );
+    const skipVal = (page - 1) * pageSize;
+
+    // * TRENDING DOCS
     const isTrending = search == "trending";
     const baseQuery = (qry) =>
       Docs.find(qry)
@@ -33,14 +44,13 @@ const getFilterDocs = async (parent, args, context) => {
         count: trendingDocs.length,
       };
     }
-    // get filter by query
-    // eg: will get JSON stringified object: '{"type":{"notes":true}}'
-    // const rawFilter = JSON.parse(decodeURIComponent(filter));
-    // const rawFilter = { type: { notes: true } };
+
+    // PARSING FILTERS
     const rawFilter = filter && JSON.parse(filter);
     console.log("... filter recieved =>", rawFilter);
-    // convert filter to mongo query
+    // ADDING FILTERS TO QUERY
     const query = {};
+    const searchFilterQuery = [];
     if (rawFilter) {
       for (const key in rawFilter) {
         if (key == "search") {
@@ -48,106 +58,290 @@ const getFilterDocs = async (parent, args, context) => {
         }
         const value = rawFilter[key];
         query[key] = { $in: Object.keys(value) };
+        // can convert values to required types here by checking the keys
+        const numberFields = new Set(["semester", "year"]);
+        let convertedValue = Object.keys(value);
+        if (numberFields.has(key)) {
+          convertedValue = convertedValue.map((item) => parseInt(item));
+        }
+        searchFilterQuery.push({
+          in: { path: key, value: convertedValue },
+        });
       }
     }
     console.log("... query after adding filters =>", query);
-    let regexQuery = null;
-    const orQuery = [];
-    if (search) {
-      const pattern = new RegExp(search.split(" ").join("|"), "i");
-      console.log("... pattern =>", pattern);
-      regexQuery = { $regex: pattern };
-      Array.prototype.push.apply(orQuery, [
-        { "questions.partA.question": regexQuery },
-        { "questions.partB.question": regexQuery },
-        { "questions.partA.option1": regexQuery },
-        { "questions.partA.option2": regexQuery },
-        { "questions.partB.option1": regexQuery },
-        { "questions.partB.option2": regexQuery },
-        { title: regexQuery },
-      ]);
+    const compoundQuery = {};
+    if (searchFilterQuery.length > 0 && filter) {
+      compoundQuery["must"] = searchFilterQuery;
     }
-    const skipVal = (page - 1) * pageSize;
-    const simpleQuery = baseQuery(query)
-      .skip(skipVal)
-      .sort({ tLikes: -1, createdAt: -1 })
-      .limit(pageSize)
-      .lean();
-
-    const aggregatePipeline = [];
-
-    aggregatePipeline.push(
-      {
-        $lookup: {
-          from: "courses",
-          localField: "course",
-          foreignField: "_id",
-          as: "course",
-        },
-      },
-      {
-        $lookup: {
-          from: "subjects",
-          localField: "subject",
-          foreignField: "_id",
-          as: "subject",
-        },
-      },
-      {
-        $lookup: {
-          from: "departments",
-          localField: "department",
-          foreignField: "_id",
-          as: "department",
-        },
+    // * AUTOCOMPLETE SEARCH BAR
+    if (someData?.fieldName?.toLowerCase() == "autocomplete") {
+      if (!search) {
+        return {
+          status: "error",
+          msg: "Search query is required for autocomplete",
+        };
       }
-    );
-    if (search) {
-      aggregatePipeline.push({
-        $match: {
-          $or: [
-            {
-              "course.name": regexQuery,
+      console.log("... running search autocomplete ...");
+      // run auto complete search
+      // create a filter based search
+      compoundQuery["should"] = [
+        {
+          autocomplete: {
+            query: search,
+            path: "course.name",
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 1,
+              // maxExpansions: 256,
             },
-            {
-              "department.name": regexQuery,
-            },
-            ...orQuery,
-          ],
+          },
         },
-      });
+        {
+          autocomplete: {
+            query: search,
+            path: "department.name",
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 1,
+              // maxExpansions: 256,
+            },
+          },
+        },
+        {
+          autocomplete: {
+            query: "math",
+            path: "subject.name",
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 1,
+              // maxExpansions: 256,
+            },
+          },
+        },
+        {
+          autocomplete: {
+            query: search,
+            path: "questions.partA.question",
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 1,
+              // maxExpansions: 256,
+            },
+          },
+        },
+        {
+          autocomplete: {
+            query: search,
+            path: "questions.partB.option1",
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 1,
+              // maxExpansions: 256,
+            },
+          },
+        },
+        {
+          autocomplete: {
+            query: search,
+            path: "questions.partB.option2",
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 1,
+              // maxExpansions: 256,
+            },
+          },
+        },
+      ];
+      // // can add filters here
+      // if (filter) {
+
+      // }
+      const autocompletePipeline = [
+        {
+          $search: {
+            index: "searchDocs",
+            compound: compoundQuery,
+            highlight: {
+              path: [
+                "course.name",
+                "department.name",
+                "subject.name",
+                "questions.partA.question",
+                "questions.partB.option1",
+                "questions.partB.option2",
+              ],
+              maxCharsToExamine: 1000,
+            },
+          },
+        },
+        {
+          $project: {
+            course: 1,
+            department: 1,
+            subject: 1,
+            testType: 1,
+            questions: 1,
+            _id: 1,
+            year: 1,
+            semester: 1,
+            highlights: {
+              $meta: "searchHighlights",
+            },
+          },
+        },
+        {
+          $limit: 5,
+        },
+      ];
+
+      const autocomplete = await mongoose.connection.db
+        .collection("searchDocs")
+        .aggregate(autocompletePipeline, {
+          maxTimeMS: 60000,
+          allowDiskUse: true,
+        })
+        .toArray((err, results) => {
+          if (err) {
+            console.error("Error fetching autocomplete data:", err);
+            return [];
+          }
+          console.log("Autocomplete results:", results);
+          // Handle the autocomplete results here
+          return results;
+        });
+      console.log("... autocomplete pipeline =>", autocomplete);
+      return autocomplete;
     }
-    aggregatePipeline.push({ $skip: skipVal }, { $limit: pageSize });
-    // console.log("aggregate pipeline =>", aggregatePipeline);
-    const aggregateQuery = Docs.aggregate(aggregatePipeline, {
-      maxTimeMS: 60000,
-      allowDiskUse: true,
-    });
-    const docsQuery = search ? aggregateQuery : simpleQuery;
 
-    let [count, docs] = await Promise.all([
-      Docs.countDocuments(query),
-      docsQuery,
-    ]);
-
-    console.log("... filtered docs fetched ...");
-    console.log(docs.length, "docs fetched from", count, "docs in total");
     if (search) {
-      docs = docs.map((doc) => {
-        // unwrap populated fields
-        doc.course = doc.course?.[0];
-        doc.subject = doc.subject?.[0];
-        doc.department = doc.department?.[0];
-        return doc;
-      });
+      // * SEARCH DOCS
+      compoundQuery["should"] = [
+        {
+          text: {
+            query: search,
+            path: ["course.name", "department.name", "subject.name"],
+            fuzzy: {
+              prefixLength: 1,
+            },
+          },
+        },
+        {
+          text: {
+            query: search,
+            path: {
+              wildcard: "questions.part*",
+            },
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 1,
+            },
+          },
+        },
+      ];
+      const searchPipeline = [
+        {
+          $search: {
+            index: "searchDocs",
+            compound: compoundQuery,
+            highlight: {
+              path: [
+                "course.name",
+                "department.name",
+                "subject.name",
+                "questions.partA.question",
+                "questions.partB.option1",
+                "questions.partB.option2",
+              ],
+              maxCharsToExamine: 1000,
+            },
+          },
+        },
+        {
+          $project: {
+            highlights: {
+              $meta: "searchHighlights",
+            },
+            _id: 1,
+            course: 1,
+            department: 1,
+            subject: 1,
+            questions: 1,
+            year: 1,
+            semester: 1,
+            questions: 1,
+            testType: 1,
+            type: 1,
+            img: 1,
+          },
+        },
+        {
+          $facet: {
+            totalCount: [
+              {
+                $count: "count",
+              },
+            ],
+            limitedDocuments: [
+              {
+                $skip: skipVal,
+              },
+              {
+                $limit: pageSize,
+              },
+            ],
+          },
+        },
+      ];
+
+      const searchedDocs = await mongoose.connection.db
+        .collection("searchDocs")
+        .aggregate(searchPipeline, {
+          maxTimeMS: 60000,
+          allowDiskUse: true,
+        })
+        .toArray((err, results) => {
+          if (err) {
+            console.error("Error fetching searchedDocs data:", err);
+            return [];
+          }
+          console.log("searchedDocs results:", results);
+          // Handle the autocomplete results here
+          return results;
+        });
+      console.log("... searchedDocs pipeline =>", searchedDocs);
+      const data = searchedDocs[0].limitedDocuments;
+      const count = searchedDocs[0].totalCount[0].count;
+      return {
+        status: "success",
+        data: data,
+        msg: "Searched Docs fetched successfully",
+        count: count,
+      };
+    } else {
+      // * JUST FILTER AND NO SEARCH QUERY
+      const simpleQuery = baseQuery(query)
+        .skip(skipVal)
+        .sort({ tLikes: -1, createdAt: -1 })
+        .limit(pageSize)
+        .lean();
+      const docsQuery = simpleQuery;
+
+      const [count, docs] = await Promise.all([
+        Docs.countDocuments(query),
+        docsQuery,
+      ]);
+
+      console.log("... filtered docs fetched ...");
+      console.log(docs.length, "docs fetched from", count, "docs in total");
+      return {
+        status: "success",
+        data: docs,
+        msg: "Docs fetched successfully",
+        count: count,
+      };
     }
-    return {
-      status: "success",
-      data: docs,
-      msg: "Docs fetched successfully",
-      count: search ? docs.length : count,
-    };
-    // modify data according to need
+    return "test"; // to test if flow is mssing return
   } catch (error) {
     console.log(error, "error in getFilterDocs");
     return { status: "error", error, msg: error.message };

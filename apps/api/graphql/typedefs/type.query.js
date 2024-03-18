@@ -9,5 +9,6 @@ type Query {
     Courses: [Course] 
     Departments: [Department] 
     Subjects: [Subject] 
+    Autocomplete(search:String,filter: String): [Autocomplete]
 }`;
 export default typeQuery;

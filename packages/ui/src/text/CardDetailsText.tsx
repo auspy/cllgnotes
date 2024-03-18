@@ -15,13 +15,14 @@ const CardDetailsText = ({
   type,
   href,
   textType,
+  course,
   allowWrap = false,
 }: any) => {
   // console.log("CARD DETAILS TEXT", title, subject, testType);
   const detailsTextProps: Partial<TextProps> = {
     textStyle: { height: 16 },
     type: "medi12",
-    textTransform: "uppercase",
+    // textTransform: "uppercase",
   };
   const noWrapStyle = allowWrap
     ? {}
@@ -41,7 +42,7 @@ const CardDetailsText = ({
         </Text>
         <Text
           textStyle={{ ...noWrapStyle }}
-          textClass="w100"
+          textClass="w100 leading-7"
           type={textType || "h3"}
         >
           <Link className="mt5" href={pathDocId(_id, href)}>
@@ -57,10 +58,14 @@ const CardDetailsText = ({
                 } ${testType ? `: ${testType?.toUpperCase()}` : ""}`}
           </Link>
         </Text>
-        <div className="frcsb w100">
-          <Text {...detailsTextProps}>
-            {(univ?.name || "SRM University") + (year ? ", " + year : "")}
+        <div className="frc w100 gap-1">
+          <Text
+            {...detailsTextProps}
+            textClass="max-w-[85%] text-ellipsis overflow-hidden whitespace-nowrap "
+          >
+            {univ?.name || course?.name || "SRM University"}
           </Text>
+          <Text {...detailsTextProps}>{year ? " - " + year : ""}</Text>
         </div>
       </div>
     </>

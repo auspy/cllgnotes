@@ -374,25 +374,25 @@ input[type="submit"]:hover:enabled,
 }
 
 /* SCROLLBAR */
-.scrollbar {
-  overflow-x: hidden;
-}
+// .scrollbar {
+//   overflow-x: hidden;
+// }
 
-.scrollbar::-webkit-scrollbar,
-.scrollbarHidden::-webkit-scrollbar {
-  height: 0px;
-}
+// .scrollbar::-webkit-scrollbar,
+// .scrollbarHidden::-webkit-scrollbar {
+//   height: 0px;
+// }
 
-.scrollbar:hover::-webkit-scrollbar {
-  transition: heigth 2s ease;
-  height: 5px;
-}
+// .scrollbar:hover::-webkit-scrollbar {
+//   transition: heigth 2s ease;
+//   height: 5px;
+// }
 
-.scrollbar::-webkit-scrollbar-thumb {
-  background: var(--bg);
-  border: 1px solid var(--light-bg);
-  border-radius: 5px;
-}
+// .scrollbar::-webkit-scrollbar-thumb {
+//   background: var(--bg);
+//   border: 1px solid var(--light-bg);
+//   border-radius: 5px;
+// }
 
 /* STICKY HEADER */
 #header {

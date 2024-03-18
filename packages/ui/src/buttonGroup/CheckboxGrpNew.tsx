@@ -4,7 +4,7 @@ import Text from "../text/Text";
 
 const CheckboxGrpNew = ({ data }: Partial<FilterSidebarProps>) => {
   return (
-    <div className="flex flex-col w100 gap-4 mb-4">
+    <div id="filters" className="flex flex-col w100 gap-4 mb-4">
       {data?.map(
         ({ heading, key, title, type, data, ...sliderProps }, index) => (
           <div key={index} className="w100">

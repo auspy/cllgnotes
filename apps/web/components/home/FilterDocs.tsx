@@ -1,4 +1,3 @@
-import { dummyCardsData } from "@cllgnotes/lib/dummyData";
 import { CardProps } from "@cllgnotes/types";
 import { CardGrp } from "ui";
 

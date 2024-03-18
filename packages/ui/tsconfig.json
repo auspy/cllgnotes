@@ -11,7 +11,8 @@
     "../lib/hooks/ToastWrapper.tsx",
     "../../apps/web/components/ToastWrapper.tsx",
     "../../apps/web/components/buttons/ButtonBuyNow.tsx",
-    "../../apps/web/components/explore/FilterSidebar.tsx"
+    "../../apps/web/components/explore/FilterSidebar.tsx",
+    "../../apps/web/components/SearchBar.tsx"
   ],
   "compilerOptions": {
     "baseUrl": ".",
