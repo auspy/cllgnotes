@@ -13,7 +13,7 @@ enum docType{
 interface DocCommon{
     _id: ID!
     img: String!
-    published: Boolean!
+    published: Boolean
     type: docType!
     subject: Subject
     pageCount: Int
@@ -36,7 +36,7 @@ type Notes implements DocCommon {
     title: String!
     img: String!
     type: docType!
-    published: Boolean!
+    published: Boolean
     creator: Creator
     subject: Subject
     desc: String
@@ -62,7 +62,7 @@ type Paper implements DocCommon {
     _id: ID!
     img: String!
     pageCount: Int
-    published: Boolean!
+    published: Boolean
     createdAt: String
     creator: Creator
     type: docType!

@@ -89,7 +89,7 @@ const SearchBar = ({
   const debouncedSearch = debounce(searchFunc, 300);
   const handleSearch = () => {
     console.log("searching");
-    // link(searchText);
+    link(searchText);
   };
   useEffect(() => {
     if (searchText) {
