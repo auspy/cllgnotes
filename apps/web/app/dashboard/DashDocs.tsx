@@ -1,5 +1,5 @@
 "use client";
-import { GET_CREATED_DOCS } from "@/api/graphql/gql";
+import { GET_CREATED_DOCS } from "@/db/graphql/gql";
 import { CardProps, DocsQueryProps } from "@cllgnotes/types";
 import { modifyToCardsData } from "@cllgnotes/lib";
 import { CardGrp } from "ui";

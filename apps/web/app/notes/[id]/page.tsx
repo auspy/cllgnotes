@@ -1,5 +1,5 @@
-import { getClient } from "@/api/graphql/ApolloClient";
-import { GET_DOC } from "@/api/graphql/gql";
+import { getClient } from "@/db/graphql/ApolloClient";
+import { GET_DOC } from "@/db/graphql/gql";
 import Footer from "@/components/footer/Footer";
 import useServerSession from "@/components/hooks/useServerSession";
 import NotesBelowHero from "@/components/notes/NotesBelowHero";

@@ -1,4 +1,4 @@
-import { getFilterValues } from "@/api/getFilterValues";
+import { getFilterValues } from "@/db/getFilterValues";
 import { CheckboxGrpNew } from "ui";
 
 const FetchedFilters = async () => {

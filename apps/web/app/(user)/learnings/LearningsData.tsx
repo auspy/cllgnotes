@@ -1,5 +1,5 @@
-import { getClient } from "@/api/graphql/ApolloClient";
-import { GET_PURCHASED_DOCS } from "@/api/graphql/gql";
+import { getClient } from "@/db/graphql/ApolloClient";
+import { GET_PURCHASED_DOCS } from "@/db/graphql/gql";
 import useServerSession from "@/components/hooks/useServerSession";
 import { dummyCardsData, modifyToCardsData } from "@cllgnotes/lib";
 import { CardProps, DocsQueryProps } from "@cllgnotes/types";

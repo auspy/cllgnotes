@@ -1,5 +1,5 @@
 "use client";
-import { GET_FILTERED_DOCS } from "@/api/graphql/gql";
+import { GET_FILTERED_DOCS } from "@/db/graphql/gql";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import {
   modifyToCardsData,

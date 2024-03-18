@@ -1,5 +1,5 @@
-import { getClient } from "@/api/graphql/ApolloClient";
-import { GET_DOC } from "@/api/graphql/gql";
+import { getClient } from "@/db/graphql/ApolloClient";
+import { GET_DOC } from "@/db/graphql/gql";
 // import FormNewDoc from "@/components/forms/FormNewDoc";
 import { Heading, Text } from "ui";
 import { DocsQueryProps, FormTypeEnum } from "@cllgnotes/types";

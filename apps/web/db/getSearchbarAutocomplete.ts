@@ -1,5 +1,5 @@
-import { getClient } from "@/api/graphql/ApolloClient";
-import { GET_FILTERED_DOCS } from "@/api/graphql/gql";
+import { getClient } from "@/db/graphql/ApolloClient";
+import { GET_FILTERED_DOCS } from "@/db/graphql/gql";
 import { DocsQueryProps } from "@cllgnotes/types";
 import { useSearchParams } from "next/navigation";
 const getSearchbarAutocomplete = async ({
