@@ -296,12 +296,6 @@ importers:
 
   packages/ui:
     dependencies:
-      '@apollo/client':
-        specifier: ^3.9.7
-        version: 3.9.7(@types/react@18.2.45)(graphql@16.8.0)(react-dom@18.2.0)(react@18.2.0)
-      '@apollo/experimental-nextjs-app-support':
-        specifier: ^0.4.2
-        version: 0.4.2(@apollo/client@3.9.7)(next@13.4.19)(react@18.2.0)
       '@cllgnotes/lib':
         specifier: workspace:*
         version: link:../lib
@@ -468,6 +462,7 @@ packages:
       zen-observable-ts: 1.2.5
     transitivePeerDependencies:
       - '@types/react'
+    dev: true
 
   /@apollo/experimental-nextjs-app-support@0.4.2(@apollo/client@3.8.3)(next@13.4.19)(react@18.2.0):
     resolution: {integrity: sha512-7NBsicjlTwKUferqz7oLPZ4XqoYwuxKZqKO8xTcbryBzWwt/Ehj8MIhMzzR/V5rzeE6BmYEtxijtQsueWPWxKw==}
@@ -477,21 +472,6 @@ packages:
       react: ^18
     dependencies:
       '@apollo/client': 3.8.3(graphql@16.8.0)(react-dom@18.2.0)(react@18.2.0)
-      next: 13.4.19(react-dom@18.2.0)(react@18.2.0)(sass@1.66.1)
-      react: 18.2.0
-      server-only: 0.0.1
-      superjson: 1.13.1
-      ts-invariant: 0.10.3
-    dev: false
-
-  /@apollo/experimental-nextjs-app-support@0.4.2(@apollo/client@3.9.7)(next@13.4.19)(react@18.2.0):
-    resolution: {integrity: sha512-7NBsicjlTwKUferqz7oLPZ4XqoYwuxKZqKO8xTcbryBzWwt/Ehj8MIhMzzR/V5rzeE6BmYEtxijtQsueWPWxKw==}
-    peerDependencies:
-      '@apollo/client': '>=3.8.0-rc || ^3.8.0'
-      next: ^13.4.1
-      react: ^18
-    dependencies:
-      '@apollo/client': 3.9.7(@types/react@18.2.45)(graphql@16.8.0)(react-dom@18.2.0)(react@18.2.0)
       next: 13.4.19(react-dom@18.2.0)(react@18.2.0)(sass@1.66.1)
       react: 18.2.0
       server-only: 0.0.1
@@ -2210,6 +2190,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       tslib: 2.5.0
+    dev: true
 
   /@wry/context@0.7.3:
     resolution: {integrity: sha512-Nl8WTesHp89RF803Se9X3IiHjdmLBrIvPMaJkl+rKVJAYyPsz1TEUbu89943HpvujtSJgDUx9W4vZw3K1Mr3sA==}
@@ -2234,6 +2215,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       tslib: 2.5.0
+    dev: true
 
   /abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -5786,6 +5768,7 @@ packages:
       '@wry/context': 0.7.3
       '@wry/trie': 0.4.3
       tslib: 2.5.0
+    dev: true
 
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
@@ -6448,6 +6431,7 @@ packages:
     dependencies:
       '@types/react': 18.2.45
       react: 18.2.0
+    dev: true
 
   /resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
