@@ -23,7 +23,7 @@ const CardGrp = ({
   }
   const isRow = type === "row";
   const containerClasses: string = isRow
-    ? ` overflow-scroll overflow-y-hidden`
+    ? ` overflow-scroll overflow-y-hidden frc`
     : `grid`;
   return (
     <>
@@ -41,7 +41,7 @@ const CardGrp = ({
           )}
           <div
             id={id}
-            className={`w100   ${containerClasses || "frc"}`}
+            className={`w100   ${containerClasses}`}
             style={{
               columnGap: colGap,
               rowGap: isRow ? 0 : rowGap,

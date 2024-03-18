@@ -27,6 +27,13 @@ const NotesData = `fragment NotesData on Notes{
     university{
         _id
     }
+    highlights{
+        path
+        texts{
+            value
+            type
+        }
+    }
 }`;
 const PaperData = `fragment PaperData on Paper{
     _id
@@ -55,6 +62,22 @@ const PaperData = `fragment PaperData on Paper{
     tLikes
     university{
         _id
+    }
+    highlights{
+        path
+        texts{
+            value
+            type
+        }
+    }
+    questions{
+        partA{
+            question
+        }
+        partB{
+            option1
+            option2
+        }
     }
 }`;
 const DocData = `fragment DocData on Doc{

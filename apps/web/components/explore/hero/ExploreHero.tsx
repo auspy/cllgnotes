@@ -1,6 +1,8 @@
 import Colors from "@cllgnotes/types/colors";
 import Image from "next/image";
-import { SearchBar, Text, Header } from "ui";
+import { Text, Header } from "ui";
+import SearchBar from "@/components/SearchBar";
+import AutocompleteSearchBar from "@/components/AutocompleteSearchBar";
 const ExploreHero = ({
   heading = "Explore documents",
 }: {
@@ -22,10 +24,7 @@ const ExploreHero = ({
             style={{ gap: 30, paddingBottom: 43 }}
           >
             <Text type="h1">{heading}</Text>
-            <SearchBar
-              // options={["SRM Haryana", "Ashoke University"]}
-              height={60}
-            />
+            <AutocompleteSearchBar />
           </div>
           <div
             className="w100 hidden lg:grid "

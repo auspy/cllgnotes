@@ -29,6 +29,7 @@ interface DocCommon{
     creator: Creator
     price: Float
     isPurchased: Boolean
+    highlights: [Highlights]
 }
 type Notes implements DocCommon {
     _id: ID!
@@ -55,6 +56,7 @@ type Notes implements DocCommon {
     university: Univ
     topics: [String]
     units: [String]
+    highlights: [Highlights]
   }
 type Paper implements DocCommon {
     _id: ID!
@@ -76,6 +78,8 @@ type Paper implements DocCommon {
     semester: Int
     year: Int
     university: Univ
+    highlights: [Highlights]
+    questions: Questions
 }
 enum TestType{
     mst1

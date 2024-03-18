@@ -53,6 +53,7 @@ const getData = async (option) => {
 };
 
 const resolverDocs = {
+  Autocomplete: getFilterDocs,
   Courses: async () => {
     return await getData("courses");
   },

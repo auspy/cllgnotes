@@ -1,0 +1,35 @@
+query($search: String, $filter: String){
+    Autocomplete(search: $search, filter: $filter) {
+        _id
+        course {
+            _id
+            name
+        }
+        department {
+            _id
+            name
+        }
+        subject {
+            name
+            _id
+            code
+        }
+        questions {
+            partA {
+                question
+            }
+            partB {
+                option1
+                option2
+            }
+        }
+        highlights {
+            path
+            score
+            texts {
+                value
+                type
+            }
+        }
+    }
+}

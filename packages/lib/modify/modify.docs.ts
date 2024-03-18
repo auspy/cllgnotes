@@ -16,10 +16,12 @@ export const modifyToCardsData = (
     // ) {
     //   return;
     // }
-    arr.push({
+    const obj: Partial<CardProps> = {
       ...(rest as any),
       ...commonData,
-      img: {
+    };
+    if (img) {
+      obj["img"] = {
         src: CustomImageLoader({
           src: img,
           type: doc.type || doc.__typename?.toLowerCase(),
@@ -29,8 +31,9 @@ export const modifyToCardsData = (
         width: (commonData?.img ? commonData.img.width : 120) as number,
         height: (commonData?.img ? commonData.img.height : 120) as number,
         fill: commonData?.img?.fill || undefined,
-      },
-    });
+      };
+    }
+    arr.push(obj);
   }
   return arr;
 };

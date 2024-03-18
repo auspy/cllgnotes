@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Docs } from "../modals/modals.js";
+import mongoose from "mongoose";
 const filterArgs = z.object({
   filter: z.string().optional().nullable(),
   page: z.number().max(100).default(1),
@@ -8,11 +9,144 @@ const filterArgs = z.object({
 });
 
 // ? for now using both lookup and populate. will later remove based on research.
-const getFilterDocs = async (parent, args, context) => {
+const getFilterDocs = async (parent, args, context, someData) => {
   try {
     console.log("... getting filter docs ...", args);
     const { page, pageSize, filter, search } = filterArgs.parse(args);
-    console.log("... args recieved =>", page, pageSize, filter, search);
+    console.log(
+      "... args recieved =>",
+      page,
+      pageSize,
+      filter,
+      search,
+      someData.fieldName
+    );
+    if (someData?.fieldName?.toLowerCase() == "autocomplete") {
+      console.log("... page is 0, returning empty array ...");
+      // run auto complete search
+      // create a filter based search
+      const autocompletePipeline = [
+        {
+          $search: {
+            index: "searchDocs",
+            compound: {
+              should: [
+                {
+                  autocomplete: {
+                    query: "btech",
+                    path: "course.name",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      // maxExpansions: 256,
+                    },
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: "btech",
+                    path: "department.name",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      // maxExpansions: 256,
+                    },
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: "math",
+                    path: "subject.name",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      // maxExpansions: 256,
+                    },
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: "btech",
+                    path: "questions.partA.question",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      // maxExpansions: 256,
+                    },
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: "btech",
+                    path: "questions.partB.option1",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      // maxExpansions: 256,
+                    },
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: "btech",
+                    path: "questions.partB.option2",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      // maxExpansions: 256,
+                    },
+                  },
+                },
+              ],
+            },
+            highlight: {
+              path: [
+                "course.name",
+                "department.name",
+                "subject.name",
+                "questions.partA.question",
+                "questions.partB.option1",
+                "questions.partB.option2",
+              ],
+              maxCharsToExamine: 1000,
+            },
+          },
+        },
+        {
+          $project: {
+            course: 1,
+            department: 1,
+            subject: 1,
+            questions: 1,
+            _id: 1,
+            highlights: {
+              $meta: "searchHighlights",
+            },
+          },
+        },
+        {
+          $limit: 5,
+        },
+      ];
+
+      const autocomplete = await mongoose.connection.db
+        .collection("searchDocs")
+        .aggregate(autocompletePipeline, {
+          maxTimeMS: 60000,
+          allowDiskUse: true,
+        })
+        .toArray((err, results) => {
+          if (err) {
+            console.error("Error fetching autocomplete data:", err);
+            return [];
+          }
+          console.log("Autocomplete results:", results);
+          // Handle the autocomplete results here
+          return results;
+        });
+      console.log("... autocomplete pipeline =>", autocomplete);
+      return autocomplete;
+    }
     const isTrending = search == "trending";
     const baseQuery = (qry) =>
       Docs.find(qry)

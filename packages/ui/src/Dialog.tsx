@@ -1,13 +1,25 @@
 const Dialog = ({
   children,
   setShow,
-}: React.PropsWithChildren & { setShow: any }) => {
+  show,
+  className,
+  style,
+}: React.PropsWithChildren & {
+  setShow: any;
+  show?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+}) => {
+  if (typeof show == "boolean" && !show) return null;
   return (
     <div
       // onBlur={() => {
       //   setShow(false);
       // }}
-      className="card3 absolute w100 !p-1 scrollbar-x max-h-[200px] z-10"
+      style={style}
+      className={
+        "card3 absolute w100 !p-1 scrollbar-x max-h-[200px] z-10 " + className
+      }
     >
       {children}
     </div>

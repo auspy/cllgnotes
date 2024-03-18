@@ -122,3 +122,8 @@ h1 {
   @apply h-full;
   background: url("../public/images/lines.svg") repeat;
 }
+
+hr {
+  width: 100%;
+  border: 0.25px dashed var(--grey);
+}

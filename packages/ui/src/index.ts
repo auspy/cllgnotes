@@ -5,7 +5,6 @@ export { default as ButtonBlack } from "./buttons/ButtonBlack";
 export { default as ButtonRow } from "./buttonGroup/ButtonRow";
 export { default as Heading } from "./text/Heading";
 export { default as Text } from "./text/Text";
-export { default as SearchBar } from "./searchBar/SearchBar";
 export { default as IconButton } from "./buttons/IconButton";
 export { default as Logo } from "./header/logo";
 export { default as Navigation } from "./header/Navigation";
