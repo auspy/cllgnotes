@@ -52,8 +52,7 @@ export const authOptions: AuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       async profile(profile, tokens) {
-        // console.log("profile", profile, tokens);
-
+        console.log("profile", Boolean(profile));
         //   aud: string
         // azp: string
         // email: string
@@ -69,18 +68,12 @@ export const authOptions: AuthOptions = {
         // nbf: number
         // picture: string
         // sub: string
-        const data = {
-          role: "USER",
+        return {
+          ...profile,
           id: profile.sub,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-          emailVerified: profile.email_verified,
-          username: profile.email.split("@")[0],
-          provider: "google",
+          username: profile.email?.split("@")?.[0] || profile.name,
+          role: "USER",
         };
-        // console.log("GOOGLE PROFILE", data);
-        return data;
       },
     }),
     CredentialsProvider({
