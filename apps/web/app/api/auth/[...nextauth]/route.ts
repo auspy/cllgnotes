@@ -54,12 +54,22 @@ export const authOptions: AuthOptions = {
       async profile(profile, tokens) {
         // console.log("profile", profile, tokens);
 
-        const user = await getUser({
-          email: profile.email,
-          username: profile.username,
-        });
+        //   aud: string
+        // azp: string
+        // email: string
+        // email_verified: boolean
+        // exp: number
+        // family_name: string
+        // given_name: string
+        // hd: string
+        // iat: number
+        // iss: string
+        // jti: string
+        // name: string
+        // nbf: number
+        // picture: string
+        // sub: string
         const data = {
-          _id: user?.id || "",
           role: "USER",
           id: profile.sub,
           name: profile.name,
@@ -69,11 +79,6 @@ export const authOptions: AuthOptions = {
           username: profile.email.split("@")[0],
           provider: "google",
         };
-        if (user) {
-          data["_id"] = user._id;
-          data["username"] = user.username;
-          data["role"] = user.role || "USER";
-        }
         // console.log("GOOGLE PROFILE", data);
         return data;
       },
