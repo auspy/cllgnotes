@@ -1,17 +1,17 @@
 "use client";
 import { Logo, Button, MovingBanner, Text } from "ui";
 import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
+  // FormControl,
+  // IconButton,
+  // InputAdornment,
+  // InputLabel,
+  // OutlinedInput,
   SxProps,
-  TextField,
+  // TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+// import Visibility from "@mui/icons-material/Visibility";
+// import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useMutation } from "@apollo/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
@@ -113,7 +113,7 @@ export default function Login() {
       password?.length > 3 &&
       (isLoginPage ? true : email?.length > 13)
     ) {
-      // console.log("clicked");
+      console.log("clicked");
       const params: any = {
         username: username.trim(),
         password: password.trim(),
@@ -210,11 +210,11 @@ export default function Login() {
 
           {/* Login form */}
           <div className="bg-white w-full lg:w-[400px] flex flex-col items-center p-6 sm:ml-0 md:ml-32 border border-black border-solid rounded-md">
-            <div className="font-[600] font-generalsans text-2xl text-[#141414] mb-3">
+            {/* <div className="font-[600] font-generalsans text-2xl text-[#141414] mb-3">
               {isLoginPage ? "Login" : "Register"}
-            </div>
+            </div> */}
             {/* email field */}
-            {!isLoginPage && (
+            {/* {!isLoginPage && (
               <TextField
                 sx={textFieldSx}
                 style={{
@@ -234,9 +234,9 @@ export default function Login() {
                   setEmail(e.target.value);
                 }}
               />
-            )}
+            )} */}
             {/* username field */}
-            <TextField
+            {/* <TextField
               sx={textFieldSx}
               style={{
                 ...textFieldStyle,
@@ -294,7 +294,7 @@ export default function Login() {
                   setPassword(e.target.value);
                 }}
               />
-            </FormControl>
+            </FormControl> */}
             {/* <ToggleButtonGroup
               sx={textFieldSx}
               color="primary"
@@ -319,7 +319,7 @@ export default function Login() {
                 Creator
               </ToggleButton>
             </ToggleButtonGroup> */}
-            <Button
+            {/* <Button
               buttonClasses="btn-click mt10 shadow-box2"
               text={isLoginPage ? "Login" : "Register"}
               height={70}
@@ -327,12 +327,12 @@ export default function Login() {
               disabled={clicked}
               loading={loading || clicked}
               onClick={handleButtonClick}
-            />
+            /> */}
             {role == "USER" && (
               <Button
                 disabled={clicked}
                 loading={loading || clicked}
-                buttonClasses="btn-click mt10 shadow-box2"
+                buttonClasses="btn-click shadow-box2"
                 text={"Login with Google"}
                 height={70}
                 width={"100%"}
@@ -353,7 +353,7 @@ export default function Login() {
               buttonStyle={{ boxShadow: "none" }}
               onClick={handleButtonClick}
             /> */}
-            <SwitchPageType isLogin={isLoginPage} setIsLogin={setIsLogin} />
+            {/* <SwitchPageType isLogin={isLoginPage} setIsLogin={setIsLogin} /> */}
           </div>
         </div>
       </div>
