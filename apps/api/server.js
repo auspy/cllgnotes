@@ -52,7 +52,7 @@ await server.start();
 const corsPass = [
   "https://cllgnotes.vercel.app",
   "https://cllgnotes.com",
-  "https://www.‸cllgnotes.com",
+  "https://www.cllgnotes.com",
 ];
 if (env === "development") {
   corsPass.push("http://localhost:3000");
