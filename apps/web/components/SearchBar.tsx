@@ -7,7 +7,13 @@ import {
   DocProps,
 } from "@cllgnotes/types";
 import { useEffect, useState } from "react";
-import { Button, Dialog, Search, ChevronRightRounded } from "ui";
+import {
+  Button,
+  Dialog,
+  Search,
+  ChevronRightRounded,
+  CircularProgress,
+} from "ui";
 import { debounce, useDeviceType } from "@cllgnotes/lib";
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchBarDropdownItem from "./SearchBarDropdownItem";
@@ -107,7 +113,7 @@ const SearchBar = ({
       }}
       className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4"
     >
-      {Array.isArray(autocomplete) && autocomplete.length > 0 && (
+      {searchText && (
         <Dialog
           style={{
             maxHeight: height * 4,
@@ -117,9 +123,15 @@ const SearchBar = ({
           show={showDialog}
           setShow={setShowDialog}
         >
-          {autocomplete?.map((item, index) => (
-            <SearchBarDropdownItem index={index} key={index} {...item} />
-          ))}
+          {!(Array.isArray(autocomplete) && autocomplete.length > 0) ? (
+            <div className="fcc w100">
+              <CircularProgress size={14} />
+            </div>
+          ) : (
+            autocomplete?.map((item, index) => (
+              <SearchBarDropdownItem index={index} key={index} {...item} />
+            ))
+          )}
         </Dialog>
       )}
       <form
