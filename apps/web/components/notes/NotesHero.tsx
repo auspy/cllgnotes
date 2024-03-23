@@ -34,11 +34,18 @@ const NotesHero = ({
       {...props}
     />
   );
+  const devices = [
+    DeviceTypeEnum.desktop,
+    DeviceTypeEnum.tablet,
+    DeviceTypeEnum.mobile,
+  ];
   return (
     <>
       <TmplHero
         leftElement={
-          <ShowInDevice devices={[DeviceTypeEnum.desktop]}>
+          <ShowInDevice
+            devices={notPurchased ? [DeviceTypeEnum.desktop] : devices}
+          >
             {textbox}
           </ShowInDevice>
         }

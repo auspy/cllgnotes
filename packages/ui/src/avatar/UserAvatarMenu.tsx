@@ -33,6 +33,7 @@ const UserAvatarMenu = ({ username, user }: UserAvatarMenuProps) => {
           borderRadius: "50%",
           color: "var(--dark)",
         }}
+        alt={username}
         src={(!clicked && user?.image) || ""}
       >
         {clicked ? (

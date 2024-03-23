@@ -337,9 +337,7 @@ export default function Login() {
                 height={70}
                 width={"100%"}
                 onClick={async () => {
-                  const data = await signIn("google", {
-                    callbackUrl: "/",
-                  });
+                  const data = await signIn("google");
                   console.log("signin data ====>", data);
                 }}
               />
