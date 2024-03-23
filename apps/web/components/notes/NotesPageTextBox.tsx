@@ -1,7 +1,7 @@
 import { firstLetterUppercase } from "@cllgnotes/lib";
 import { NotesHeroTextProps } from "@cllgnotes/types";
 import { memo } from "react";
-import { CardTextBox, DetailTabGroup, Text } from "ui";
+import { CardTextBox, DetailTabGroup, Text, CardDetialsHeading } from "ui";
 
 const NotesPageTextBox = ({
   title,
@@ -23,16 +23,11 @@ const NotesPageTextBox = ({
           }}
         />
         <Text textClass="mb15" type="h2">
-          {title
-            ? firstLetterUppercase(title)
-            : ` ${subject.name} ${
-                subject?.code &&
-                subject?.code
-                  .substring(0, subject?.name?.length || 0)
-                  ?.toLowerCase() != subject?.name?.toLowerCase()
-                  ? `: ${subject.code}`
-                  : ""
-              } ${testType ? `: ${testType?.toUpperCase()}` : ""}`}
+          <CardDetialsHeading
+            title={title}
+            subject={subject}
+            testType={testType}
+          />
         </Text>
         {desc && (
           <p className="regu16 mb20" style={{ opacity: 0.8 }}>

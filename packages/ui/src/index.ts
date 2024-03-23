@@ -64,3 +64,6 @@ export { default as SearchBox } from "./SearchBox";
 export { default as FilterAutocomplete } from "./FilterAutocomplete";
 export { default as CheckboxGrpNew } from "./buttonGroup/CheckboxGrpNew";
 export { default as CheckboxGrp } from "./buttonGroup/CheckboxGrp";
+export { default as QuestionHighlight } from "./QuestionHighlight";
+export { default as CardDetialsHeading } from "./text/CardDetailsHeading";
+export { default as HighlightText } from "./HighlightText";

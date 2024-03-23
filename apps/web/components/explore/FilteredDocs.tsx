@@ -51,7 +51,7 @@ const FilteredDocs = ({}) => {
   useEffect(() => {
     console.log("refetching");
     refetch();
-  }, [filtersParams]);
+  }, [filtersParams, search]);
   // console.log("data", Object.keys(data?.getFilteredDocs || {}));
   // MODIFY DATA
   const docs = data?.getFilteredDocs?.data;

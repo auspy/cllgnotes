@@ -109,7 +109,10 @@ const SearchBar = ({
   return (
     <div
       onBlur={() => {
-        // setShowDialog(false);
+        setShowDialog(false);
+      }}
+      onFocus={() => {
+        setShowDialog(true);
       }}
       className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4"
     >
@@ -119,7 +122,7 @@ const SearchBar = ({
             maxHeight: height * 4,
             top: height,
           }}
-          className="!p-4 fcfs gap-y-4"
+          className="!px-4 fcfs"
           show={showDialog}
           setShow={setShowDialog}
         >

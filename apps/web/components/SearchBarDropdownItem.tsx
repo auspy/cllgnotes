@@ -1,5 +1,5 @@
-import { TestType } from "@cllgnotes/types";
-import { CardDetailsText, LinkWrapper } from "ui";
+import { Highlight, TestType } from "@cllgnotes/types";
+import { CardDetailsText, LinkWrapper, QuestionHighlight } from "ui";
 
 const SearchBarDropdownItem = ({
   course,
@@ -9,6 +9,7 @@ const SearchBarDropdownItem = ({
   year,
   testType,
   index,
+  highlights,
 }: {
   course: { name: string };
   department: { name: string };
@@ -17,22 +18,27 @@ const SearchBarDropdownItem = ({
   year: number;
   testType: TestType;
   index: number;
+  highlights: Highlight[];
 }) => {
   return (
     <LinkWrapper
       href={`/notes/${_id}`}
-      className=" hover:!opacity-100  gap-y-4 flex flex-col w100"
+      className=" hover:!opacity-100     flex flex-col w100"
     >
       {index != 0 && <hr />}
-      <div className="hover:bg-lGrey2 rounded-lg p-1">
-        <CardDetailsText
-          _id={_id}
-          course={course}
-          subject={subject}
-          year={year}
-          testType={testType}
-          allowWrap={true}
-        />
+      <div className="rounded-lg p-1 my-4 hover:bg-lGrey2 flex flex-col gap-y-2">
+        <div className=" ">
+          <CardDetailsText
+            _id={_id}
+            // highlights={highlights}
+            course={course}
+            subject={subject}
+            year={year}
+            testType={testType}
+            allowWrap={true}
+          />
+        </div>
+        <QuestionHighlight highlights={highlights} questionsCount={3} />
       </div>
     </LinkWrapper>
   );

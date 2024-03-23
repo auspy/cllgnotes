@@ -147,17 +147,18 @@ export type DocQuestions = {
     option2: string;
   }[];
 };
+export type Highlight = {
+  path: string;
+  texts: {
+    value: string;
+    type: "hit" | "value";
+  }[];
+};
 export type DocAutoComplete = {
   course: Course;
   department: Department;
   subject: Subject;
-  highlights: {
-    path: string;
-    texts: {
-      value: string;
-      type: string;
-    }[];
-  }[];
+  highlights: Highlight[];
   _id: string;
   questions: DocQuestions[];
 };
