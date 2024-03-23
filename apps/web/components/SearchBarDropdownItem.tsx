@@ -1,6 +1,5 @@
 import { TestType } from "@cllgnotes/types";
-import Link from "next/link";
-import { CardDetailsText, Text } from "ui";
+import { CardDetailsText, LinkWrapper } from "ui";
 
 const SearchBarDropdownItem = ({
   course,
@@ -20,7 +19,7 @@ const SearchBarDropdownItem = ({
   index: number;
 }) => {
   return (
-    <Link
+    <LinkWrapper
       href={`/notes/${_id}`}
       className=" hover:!opacity-100  gap-y-4 flex flex-col w100"
     >
@@ -35,7 +34,7 @@ const SearchBarDropdownItem = ({
           allowWrap={true}
         />
       </div>
-    </Link>
+    </LinkWrapper>
   );
 };
 
