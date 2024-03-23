@@ -24,7 +24,7 @@ const CardDetailsHeading = ({
     subjectCode = [{ value: subject?.code, type: "value" }];
   }
   return title ? (
-    firstLetterUppercase(title)
+    <>{firstLetterUppercase(title)}</>
   ) : (
     <>
       <HighlightText texts={subjectName} />
