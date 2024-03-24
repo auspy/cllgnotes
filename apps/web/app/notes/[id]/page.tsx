@@ -7,8 +7,15 @@ import NotesHero from "@/components/notes/NotesHero";
 import { DetailTabProps, DocProps, DocsQueryProps } from "@cllgnotes/types";
 import { MovingBanner, PreviewPdf } from "ui";
 import Link from "next/link";
+import PurchasedNotesPage from "@/components/notes/PurchasedNotesPage";
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { search: string };
+}) => {
   // console.log(params, "params", params["id"]);
   const session: any = await useServerSession();
   // console.log(session, "in page");
@@ -34,10 +41,10 @@ const page = async ({ params }: { params: { id: string } }) => {
       "year",
       "testtype",
       "type",
-      "course",
-      "department",
-      "creator",
-      "ispurchased",
+      // "course",
+      // "department",
+      // "creator",
+      // "ispurchased",
     ];
     if (doc.type == "paper") {
       notNeededLabels.push("subject");
@@ -75,6 +82,16 @@ const page = async ({ params }: { params: { id: string } }) => {
   };
   const allLabels = labels();
   // console.log(allLabels, "allLabels");
+  if (isPurchased) {
+    return (
+      <PurchasedNotesPage
+        searchParams={searchParams}
+        doc={doc}
+        labels={allLabels}
+        isPurchased
+      />
+    );
+  }
   return (
     <>
       <NotesHero

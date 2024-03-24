@@ -1,10 +1,5 @@
-"use client";
-import { Borders, GradientColors, PreviewPdfProps } from "@cllgnotes/types";
-import Image from "next/image";
-import PurchaseToRead from "../cards/PurchaseToRead";
-import { useState } from "react";
-import ButtonArrow from "../buttons/ButtonArrow";
-import { CustomImageLoader } from "../../loader.config";
+import { Borders, PreviewPdfProps } from "@cllgnotes/types";
+import PdfImage from "./PdfImage";
 
 const PreviewPdf = ({
   notPurchased = false,
@@ -13,78 +8,35 @@ const PreviewPdf = ({
   totalPages: tP,
   ...props
 }: PreviewPdfProps) => {
-  const [page, setPage] = useState(1);
   const totalPages = tP || 1;
-  const handlePageChange = (increment: number) => {
-    let nextIndex = page + increment;
-    if (nextIndex < 1) nextIndex = 1;
-    else if (nextIndex > totalPages) nextIndex = totalPages;
-    setPage(nextIndex);
-  };
   return (
     <div
-      className="w100 rPosi grid h-fit bg-white"
+      className="w100 fcc rPosi pr-[300px] gap-4 h-fit"
       style={{
-        maxWidth: 955,
+        // maxWidth: 955,
+        width: "80vw",
       }}
     >
-      {!notPurchased && totalPages > 1 && (
-        <div className="frcsb mb20">
-          <ButtonArrow
-            disabled={page === 1}
-            isLeft={true}
-            onClick={() => {
-              handlePageChange(-1);
-            }}
-          />
-          <ButtonArrow
-            disabled={page === totalPages}
-            onClick={() => {
-              handlePageChange(1);
-            }}
+      {Array.from({ length: notPurchased ? 1 : totalPages }).map((_, index) => (
+        <div
+          key={index}
+          className="w100 fcc bg-white overflow-hidden"
+          style={{
+            border: Borders.dark,
+            maxHeight: 1348,
+            maxWidth: 955,
+            aspectRatio: "955/1348",
+            borderRadius: 5,
+          }}
+        >
+          <PdfImage
+            index={index + 1}
+            notPurchased={notPurchased}
+            img={img}
+            type={type}
           />
         </div>
-      )}
-      {/* {notPurchased && <PurchaseToRead {...props} />} */}
-      <div
-        className="w100 fcc"
-        style={{
-          border: Borders.dark,
-          maxHeight: 1348,
-          aspectRatio: "955/1348",
-          borderRadius: 5,
-        }}
-      >
-        {/* gradient to hide */}
-        {/* {notPurchased && (
-          <div
-            className="w-[99.6%] h-[99.8%] aPosi b-0 l-0"
-            style={{ background: GradientColors.pdf, zIndex: 1 }}
-          ></div>
-        )} */}
-
-        <Image
-          className="h-full"
-          placeholder="blur"
-          blurDataURL="/images/blur.jpg"
-          loader={({ width, src }) =>
-            CustomImageLoader({
-              page: page,
-              type: type,
-              src,
-              width,
-              imgType: notPurchased ? "notPurchased" : "purchased",
-            })
-          }
-          style={{
-            padding: 2,
-            borderRadius: 5,
-            objectFit: "contain",
-          }}
-          {...img}
-          src={img.src}
-        />
-      </div>
+      ))}
     </div>
   );
 };

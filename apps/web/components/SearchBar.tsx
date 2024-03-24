@@ -1,11 +1,6 @@
 "use client";
 import Colors from "@cllgnotes/types/colors";
-import {
-  SearchBarProps,
-  ShadowsType,
-  ButtonFontSizes,
-  DocProps,
-} from "@cllgnotes/types";
+import { SearchBarProps, ShadowsType, ButtonFontSizes } from "@cllgnotes/types";
 import { useEffect, useState } from "react";
 import {
   Button,
@@ -41,10 +36,13 @@ const SearchBar = ({
   // }
   // * STYLES
   let fontSize = 22;
+  const isHeight40 = height === 40;
   const isHeight50 = height === 50;
   const isHeight60 = height === 60;
   const isHeight90 = height === 90;
-  if (!isHeight90) {
+  if (isHeight40) {
+    fontSize = 14;
+  } else if (!isHeight90) {
     fontSize = 16;
   }
   const commonStyle: React.CSSProperties = {
@@ -79,17 +77,24 @@ const SearchBar = ({
   const searchFunc = (text: string) => {
     console.log("text in searchFunc", text);
     setSearchText(text);
-    setText && setText(text);
-    // !isHeight90 && link(text);
+    if (setText) {
+      setText(text);
+    } else {
+      isHeight40 && link(text);
+    }
   };
   const link = (text?: string) => {
+    if (isHeight40 && !setText) {
+      return;
+    }
+    const baseUrl = !isHeight40 ? "/explore?" : "?";
     if (!text) {
       params.delete("search");
-      router.push("/explore?" + params.toString());
+      router.push(baseUrl + params.toString());
       return text;
     }
     params.set("search", text);
-    router.push("/explore?" + params.toString());
+    router.push(baseUrl + params.toString());
     return text;
   };
   const debouncedSearch = debounce(searchFunc, 300);
@@ -116,7 +121,7 @@ const SearchBar = ({
       }}
       className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4"
     >
-      {searchText && (
+      {searchText && isHeight60 && (
         <Dialog
           style={{
             maxHeight: height * 4,
@@ -146,7 +151,12 @@ const SearchBar = ({
           // minWidth: 490,
           ...(isFocused
             ? focusdStyle
-            : !isHeight90 && { boxShadow: ShadowsType.box5 }),
+            : !isHeight90 && {
+                boxShadow: isHeight40 ? ShadowsType.box1 : ShadowsType.box5,
+              }),
+        }}
+        onSubmit={(e) => {
+          isHeight40 && !setText && e.preventDefault();
         }}
       >
         {/* dropdown menu */}

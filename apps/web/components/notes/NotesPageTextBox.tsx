@@ -1,7 +1,13 @@
 import { firstLetterUppercase } from "@cllgnotes/lib";
 import { NotesHeroTextProps } from "@cllgnotes/types";
 import { memo } from "react";
-import { CardTextBox, DetailTabGroup, Text, CardDetialsHeading } from "ui";
+import {
+  CardTextBox,
+  DetailTabGroup,
+  Text,
+  CardDetialsHeading,
+  SidebarDetailsBox,
+} from "ui";
 
 const NotesPageTextBox = ({
   title,
@@ -14,7 +20,10 @@ const NotesPageTextBox = ({
 }: NotesHeroTextProps | any) => {
   return (
     <>
-      <div style={{ width: "100%", maxWidth: notPurchased ? 915 : "none" }}>
+      <div
+        className={notPurchased ? "" : "p-5"}
+        style={{ width: "100%", maxWidth: notPurchased ? 915 : "none" }}
+      >
         <CardTextBox
           {...textBoxProps}
           style={{
@@ -22,7 +31,15 @@ const NotesPageTextBox = ({
             marginBottom: 15,
           }}
         />
-        <Text textClass="mb15" type="h2">
+        <Text
+          textClass="mb15 leading-[1.2]"
+          type={notPurchased ? "h2" : "h3"}
+          textStyle={
+            {
+              // lineHeight: "1.5",
+            }
+          }
+        >
           <CardDetialsHeading
             title={title}
             subject={subject}
@@ -34,7 +51,11 @@ const NotesPageTextBox = ({
             {firstLetterUppercase(desc)}
           </p>
         )}
-        <DetailTabGroup data={labels} />
+        {notPurchased ? (
+          <DetailTabGroup data={labels} />
+        ) : (
+          <SidebarDetailsBox labels={labels} />
+        )}
       </div>
     </>
   );

@@ -7,6 +7,6 @@ export type SearchBarProps = {
   maxWidth?: number;
   exploreBtn?: boolean;
   placeholder?: string;
-  height: 90 | 60 | 50;
+  height: 90 | 60 | 50 | 40;
   options?: string[];
 };
