@@ -11,11 +11,16 @@ const PreviewPdf = ({
   const totalPages = tP || 1;
   return (
     <div
-      className="w100 fcc rPosi pr-[300px] gap-4 h-fit"
-      style={{
-        // maxWidth: 955,
-        width: "80vw",
-      }}
+      id="previewPdf"
+      className={
+        `flex flex-col  rPosi w-full lg:w-[80vw]   gap-4 h-fit` +
+        (notPurchased ? "" : " pr-[300px] fcc")
+      }
+      style={
+        {
+          // maxWidth: 955,
+        }
+      }
     >
       {Array.from({ length: notPurchased ? 1 : totalPages }).map((_, index) => (
         <div

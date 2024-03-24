@@ -8,7 +8,7 @@ const DetailTabGroup = ({
   // console.log("detailTabGroup is ssr");
   return (
     <div
-      className={`flex  gap-3 sm:flex-wrap flex-row item-center overflow-scroll md:overflow-auto sm:gap-x-10 sm:gap-y-3 lg:mt60 ${className} `}
+      className={`flex flex-col items-start gap-3 lg:flex-wrap lg:flex-row lg:item-center lg:gap-x-10 lg:gap-y-3 lg:mt60 ${className} `}
     >
       {Array.isArray(data) &&
         data.map((dt, i) => (
