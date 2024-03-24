@@ -13,8 +13,8 @@ const PreviewPdf = ({
     <div
       id="previewPdf"
       className={
-        `flex flex-col  rPosi w-full lg:w-[80vw]   gap-4 h-fit` +
-        (notPurchased ? "" : " pr-[300px] fcc")
+        `flex flex-col   rPosi w-full lg:w-[80vw]   gap-4 h-fit` +
+        (notPurchased ? "" : " lg:pr-[300px] fcc")
       }
       style={
         {

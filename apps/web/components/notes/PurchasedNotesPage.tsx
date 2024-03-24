@@ -19,11 +19,11 @@ const PurchasedNotesPage = ({
   }
   return (
     <>
-      <div className=" w-10/12 fixed top-[10px] z-10 pr-[300px] frcsb">
+      <div className=" w-full px-5 lg:pl-0 lg:w-10/12 fixed top-[10px] z-10 lg:pr-[300px] frcsb">
         <Logo />
         <NotesToolbar />
       </div>
-      <div className="  mt-[80px] mb-[100px] frfs">
+      <div className="  mt-[80px] lg:mb-[100px] flex flex-col w-full items-center gap-10">
         <PreviewPdf
           type={doc.type}
           notPurchased={!isPurchased}
