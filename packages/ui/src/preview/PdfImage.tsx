@@ -5,6 +5,7 @@ import { DocType, ImgProps } from "@cllgnotes/types";
 import { atomPdf, throttle } from "@cllgnotes/lib";
 // import { useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
+import { default as NextImage } from "next/image";
 
 const PdfImage = ({
   index,
@@ -17,6 +18,33 @@ const PdfImage = ({
   type?: DocType;
   notPurchased: boolean;
 }) => {
+  if (notPurchased) {
+    // load optimized image for not purchased
+    return (
+      <NextImage
+        className="h-full"
+        id={"pdf-image-" + index}
+        placeholder="blur"
+        blurDataURL="/images/blur.jpg"
+        loader={({ width, src }) =>
+          CustomImageLoader({
+            page: index,
+            type: type,
+            src,
+            width,
+            imgType: notPurchased ? "notPurchased" : "purchased",
+          })
+        }
+        style={{
+          padding: 2,
+          borderRadius: 5,
+          objectFit: "contain",
+        }}
+        {...img}
+        src={img.src}
+      />
+    );
+  }
   // const searchParams = useSearchParams();
   const id = "page_" + index;
   const canvasRef = useRef<HTMLCanvasElement | null>(null); // using useRef instead of document.getById as it helps in reducing reloads as we dont have to add in dependency of useEffect
