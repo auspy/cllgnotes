@@ -6,7 +6,7 @@ import { atomToast } from "@cllgnotes/lib";
 import { useRecoilState } from "recoil";
 import { Button } from "ui";
 import { DocsQueryProps } from "@cllgnotes/types";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 const ButtonBuyNow = ({
   amount,
@@ -26,7 +26,8 @@ const ButtonBuyNow = ({
   const [, setToast] = useRecoilState(atomToast);
 
   const handleClick = () => {
-    router.push("/auth");
+    // router.push("/auth");
+    signIn("google");
     return;
     if (clicked) {
       return;
