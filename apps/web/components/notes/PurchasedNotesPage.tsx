@@ -43,13 +43,13 @@ const PurchasedNotesPage = ({
             labels={labels}
             {...doc}
           />
-          <MovingBanner
+          {/* <MovingBanner
             textType="h3e"
             text="✍️ comments ✏️ comments"
             repeat={3}
-          />
+          /> */}
           {/* @ts-expect-error Server Component */}
-          <Comments projectId={doc?._id} searchParams={searchParams} />
+          {/* <Comments projectId={doc?._id} searchParams={searchParams} /> */}
         </RightSidebar>
       </div>
     </>
