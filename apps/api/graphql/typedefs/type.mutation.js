@@ -10,6 +10,11 @@ type Mutation {
     updateDoc(input: UpdateDocInput!, id: ID!): docRes!
     purchaseDoc(docId: ID! ,amount: Float! ,payMethod: String!): docRes!
     # deleteDoc(id: ID!): docRes! # this is not needed as on deleting course, users with that course will still have that course in their purchased courses and cant be refunded
+
+    # COMMENTS
+    addComment(input: CommentInput!): commentRes!
+    updateComment(input: CommentUpdateInput!, id: ID!): commentRes!
+    deleteComment(id: ID!): commentRes!
 }`;
 
 export default typeMutation;

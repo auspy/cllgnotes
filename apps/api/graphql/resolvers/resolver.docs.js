@@ -13,7 +13,7 @@ import addToSet from "../../helper/addToSet.js";
 import {
   getZodErrMsg,
   zodCreateDoc,
-  zodMonogId,
+  zodMongoId,
   zodPurchaseDoc,
   zodUpdateDoc,
 } from "@cllgnotes/zod";
@@ -94,7 +94,7 @@ const resolverDocs = {
     }
     // START: GETTING PURCHASE DOCS
     const { user } = context;
-    const validUID = zodMonogId.safeParse(user?._id).data;
+    const validUID = zodMongoId.safeParse(user?._id).data;
     console.log("user in gerDocs", validUID, user);
     let pDocs = [];
     if (validUID) {
@@ -133,7 +133,7 @@ const resolverDocs = {
       const { user } = context;
       const uid = (Boolean(user) && user._id) || userId;
       // ZOD CHECK FOR INPUTS
-      const validDocId = zodMonogId.parse(id, {
+      const validDocId = zodMongoId.parse(id, {
         errorMap: (error) => {
           return {
             message: "This document does not exist.",
@@ -141,7 +141,7 @@ const resolverDocs = {
           };
         },
       });
-      const validUserId = zodMonogId.safeParse(uid).data;
+      const validUserId = zodMongoId.safeParse(uid).data;
       console.log(
         user,
         "--- in get course ---",
@@ -206,7 +206,7 @@ const resolverDocs = {
       const { userId } = args;
       const { user } = context;
       const uid = (Boolean(user) && user._id) || userId;
-      const validUID = zodMonogId.safeParse(uid).data;
+      const validUID = zodMongoId.safeParse(uid).data;
       console.log(validUID, "in get purchased docs");
       if (!validUID)
         return {
@@ -306,7 +306,7 @@ const resolverDocs = {
       console.log("in get created courses");
       const { user } = context;
       console.log("validating user", user);
-      const validUID = zodMonogId.safeParse(user?._id).data;
+      const validUID = zodMongoId.safeParse(user?._id).data;
       if (!validUID) {
         console.log("user not validated");
         return {
@@ -390,7 +390,7 @@ const resolverMutDocs = {
       console.log("--- in add course ---");
       // console.log("in add cousrse", args,args.input.img);
       console.log("validating user");
-      const validUID = zodMonogId.safeParse(user?._id).data;
+      const validUID = zodMongoId.safeParse(user?._id).data;
       if (!validUID)
         return {
           msg: "Login to continue. If already logged in, please relogin.",
@@ -478,7 +478,7 @@ const resolverMutDocs = {
       // CHECKING USER
       const { user } = context;
       console.log("in update course");
-      const validUID = zodMonogId.safeParse(user?._id).data;
+      const validUID = zodMongoId.safeParse(user?._id).data;
       if (!validUID)
         return {
           msg: "Login to continue. If already logged in, please relogin.",
@@ -558,7 +558,7 @@ const resolverMutDocs = {
     // await session.startTransaction();
     try {
       const { user } = context;
-      const validUID = zodMonogId.safeParse(user?._id).data;
+      const validUID = zodMongoId.safeParse(user?._id).data;
       if (!validUID) throw new Error("Invalid user, please login to purchase!");
       const validArgs = zodPurchaseDoc.parse(args);
       console.log("args in ", validArgs, "in purchase course");

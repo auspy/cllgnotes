@@ -1,5 +1,6 @@
 import typeAuth from "./typedefs/type.auth.js";
 import { typeAutocomplete } from "./typedefs/type.autocomplete.js";
+import { typeComments } from "./typedefs/type.comments.js";
 import { typeCourses } from "./typedefs/type.courses.js";
 import { typeDeparts } from "./typedefs/type.department.js";
 import typeDocs from "./typedefs/type.docs.js";
@@ -21,6 +22,7 @@ const typeDefs = [
   typeUser,
   typeAuth,
   typeMongodb,
+  typeComments,
   typeQuery,
   typeMutation,
   typeEduTypeEnum,
