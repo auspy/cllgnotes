@@ -28,6 +28,7 @@ export type ButtonCommonProps = {
   buttonStyles?: React.CSSProperties;
   buttonClasses?: string;
   href?: string;
+  title?: string;
 };
 export type ButtonProps = ButtonCommonProps & {
   text: string;

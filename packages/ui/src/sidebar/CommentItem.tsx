@@ -1,7 +1,10 @@
 import { CommentType } from "@cllgnotes/types";
 import Text from "../text/Text";
 
-const CommentItem = ({ page, comment, createdAt }: CommentType) => {
+const CommentItem = ({ page, text, createdAt }: CommentType) => {
+  if (!page || !text) {
+    return null;
+  }
   return (
     <div className="border-b w100 border-dashed border-dark pb-[15px]  ">
       <div className="frcsb">
@@ -13,7 +16,7 @@ const CommentItem = ({ page, comment, createdAt }: CommentType) => {
         </Text>
       </div>
       <Text type="medi14" color="dark">
-        {comment}
+        {text}
       </Text>
     </div>
   );

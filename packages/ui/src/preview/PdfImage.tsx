@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { CustomImageLoader } from "../../loader.config";
-import { DocType, ImgProps } from "@cllgnotes/types";
+import { DocType, ImgProps, PdfState } from "@cllgnotes/types";
 import { atomPdf, throttle } from "@cllgnotes/lib";
 // import { useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { default as NextImage } from "next/image";
+import AddComment from "./AddComment";
+import LoadComments from "./LoadComments";
 
 const PdfImage = ({
   index,
@@ -78,29 +80,55 @@ const PdfImage = ({
       image.onload = () => {
         console.log("Image loaded");
         const canvas = canvasRef.current!;
-        const parentDiv = canvas.parentElement;
+        const parentDiv = canvas.parentElement?.parentElement;
+        const multiple = (scale * 10 * 3) / 100;
         if (parentDiv) {
-          canvas.width =
-            parentDiv.offsetWidth +
-            ((scale * 10) / 100) * parentDiv.offsetWidth;
-          canvas.height =
-            parentDiv.offsetHeight +
-            ((scale * 10) / 100) * parentDiv.offsetWidth;
+          const isRotated = rotate % 180 === 90;
+          const parentWidth =
+            parentDiv.offsetWidth + multiple * parentDiv.offsetWidth;
+          const parentHeight =
+            parentDiv.offsetHeight + multiple * parentDiv.offsetHeight;
+          // canvas.width =
+          //   parentDiv.offsetWidth + multiple * parentDiv.offsetWidth;
+          // canvas.height =
+          //   parentDiv.offsetHeight + multiple * parentDiv.offsetWidth;
+          const aspectRatio = image.width / image.height;
+          if (isRotated) {
+            canvas.height = parentHeight;
+            canvas.width = (parentWidth * 1) / aspectRatio;
+          } else {
+            canvas.width = parentWidth;
+            canvas.height = parentHeight;
+          }
           ctx.resetTransform();
           ctx.translate(canvas.width / 2, canvas.height / 2);
           ctx.rotate((Math.PI / 180) * rotate);
+
           ctx.translate(-canvas.width / 2, -canvas.height / 2);
           ctx.drawImage(
             image,
             0,
             0,
-            image.width, // size of image recieved
+            image.width,
+            // + ((scale * 10 * 3) / 100) * image.width,
+            // size of image recieved
             image.height,
+            // + ((scale * 10 * 3) / 100) * image.height,
             0,
             0,
             canvas.width, // size of container where it will be placed. automatically scaled based on this
             canvas.height
           );
+          ctx.fillStyle = "red";
+          const comments = Object.values(pdfState.comments[index] || {});
+          comments.forEach((comment) => {
+            ctx.fillRect(
+              comment.x + multiple * comment.x,
+              comment.y + multiple * comment.y,
+              20,
+              20
+            );
+          });
         }
       };
 
@@ -116,16 +144,21 @@ const PdfImage = ({
       window.removeEventListener("resize", createCanvasImage);
     };
   }, [index, notPurchased, img.src, scale, rotate]);
-  const handleScale = (increment: number) => {
-    setPdfState((prev) => ({ ...prev, scale: prev.scale + increment }));
-  };
+  if (!(typeof index == "number" && index > 0)) {
+    console.error("Invalid index");
+    return null;
+  }
   return (
-    <canvas
-      className={`p-1 ${rotate}`}
-      id={id}
-      ref={canvasRef}
-      style={{ objectFit: "cover", objectPosition: "center" }}
-    />
+    <>
+      <LoadComments index={index} />
+      <AddComment index={index} />
+      <canvas
+        className={`p-1 ${rotate} border border-solid border-red`}
+        id={id}
+        ref={canvasRef}
+        style={{ objectFit: "cover", objectPosition: "center" }}
+      />
+    </>
   );
 };
 

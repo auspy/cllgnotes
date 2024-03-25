@@ -56,6 +56,7 @@ const ButtonRotate = ({
         onClick={() => {
           handleRotateChnage();
         }}
+        title="Rotate Right"
         size={40}
         icon={
           <RotateRightIcon

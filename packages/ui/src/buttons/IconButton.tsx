@@ -14,6 +14,7 @@ const IconButton = ({
   buttonClasses,
   disabled,
   href,
+  ...props
 }: IconButtonProps) => {
   const btnStyles: React.CSSProperties = {};
   const shadowClass = size == 40 ? "shadow-box1" : "shadow-box2";
@@ -32,6 +33,7 @@ const IconButton = ({
       borderRadius: 5,
       color: "white",
     },
+    ...props,
   };
   if (onBlack) {
     if (href) {

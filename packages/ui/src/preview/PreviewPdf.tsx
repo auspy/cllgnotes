@@ -25,23 +25,25 @@ const PreviewPdf = ({
       }
     >
       {Array.from({ length: notPurchased ? 1 : totalPages }).map((_, index) => (
-        <div
-          key={index}
-          className="w100 fcc bg-white overflow-hidden"
-          style={{
-            border: Borders.dark,
-            maxHeight: 1348,
-            maxWidth: 955,
-            aspectRatio: "955/1348",
-            borderRadius: 5,
-          }}
-        >
-          <PdfImage
-            index={index + 1}
-            notPurchased={notPurchased}
-            img={img}
-            type={type}
-          />
+        <div className="relative w100">
+          <div
+            key={index}
+            className="w100 h-full fcc bg-white overflow-scroll scrollbar-hide"
+            style={{
+              border: Borders.dark,
+              maxHeight: 1348,
+              maxWidth: 955,
+              aspectRatio: "955/1348",
+              borderRadius: 5,
+            }}
+          >
+            <PdfImage
+              index={index + 1}
+              notPurchased={notPurchased}
+              img={img}
+              type={type}
+            />
+          </div>
         </div>
       ))}
     </div>

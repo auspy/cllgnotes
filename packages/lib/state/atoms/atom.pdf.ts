@@ -1,6 +1,7 @@
+import { CommentType, PdfState } from "@cllgnotes/types";
 import { atom } from "recoil";
 
-export const atomPdf = atom({
+export const atomPdf = atom<PdfState>({
   key: "pdfState",
   default: {
     scale: 0,
@@ -8,5 +9,6 @@ export const atomPdf = atom({
     search: "",
     rotate: 0,
     fullscreen: false,
+    comments: {},
   },
 });
