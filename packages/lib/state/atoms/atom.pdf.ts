@@ -7,5 +7,6 @@ export const atomPdf = atom({
     sort: "page asc",
     search: "",
     rotate: 0,
+    fullscreen: false,
   },
 });

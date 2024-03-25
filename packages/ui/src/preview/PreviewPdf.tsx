@@ -14,7 +14,9 @@ const PreviewPdf = ({
       id="previewPdf"
       className={
         `flex flex-col   rPosi w-full lg:w-[80vw]   gap-4 h-fit` +
-        (notPurchased ? "" : " lg:pr-[300px] fcc")
+        (notPurchased
+          ? ""
+          : " lg:group-data-[fullscreen=false]/pdf:pr-[300px] fcc")
       }
       style={
         {

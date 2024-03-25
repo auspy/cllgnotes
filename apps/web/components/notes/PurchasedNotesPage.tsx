@@ -1,5 +1,5 @@
 import { DetailTabProps, DocProps } from "@cllgnotes/types";
-import { Logo, MovingBanner, PreviewPdf, RightSidebar } from "ui";
+import { Logo, MovingBanner, PdfSidebar, PreviewPdf, RightSidebar } from "ui";
 import NotesPageTextBox from "./NotesPageTextBox";
 import Comments from "../Comments";
 import { NotesToolbar } from "ui";
@@ -19,11 +19,19 @@ const PurchasedNotesPage = ({
   }
   return (
     <>
-      <div className=" w-full px-5 lg:pl-0 lg:w-10/12 fixed top-[10px] z-10 lg:pr-[300px] frcsb">
+      <div
+        id="toolbarContainer"
+        className=" w-full lg:pr-[300px] px-5 lg:pl-0 lg:w-10/12 fixed top-[10px] z-10
+       frcsb"
+      >
         <Logo />
         <NotesToolbar />
       </div>
-      <div className="  mt-[80px] lg:mb-[100px] flex flex-col w-full items-center gap-10">
+      <div
+        id="pdfContainer"
+        data-fullscreen="false"
+        className=" group/pdf  mt-[80px] lg:mb-[100px] flex flex-col w-full items-center gap-10"
+      >
         <PreviewPdf
           type={doc.type}
           notPurchased={!isPurchased}

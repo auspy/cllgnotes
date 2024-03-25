@@ -73,3 +73,4 @@ export { default as SidebarDetailsBoxItem } from "./sidebar/SidebarDetailsBoxIte
 export { default as ButtonDropdown } from "./buttons/ButtonDropdown";
 export { default as CommentItem } from "./sidebar/CommentItem";
 export { default as NotesToolbar } from "./preview/NotesToolbar";
+export { default as PdfSidebar } from "./sidebar/PdfSidebar";
