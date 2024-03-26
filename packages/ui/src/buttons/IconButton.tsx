@@ -21,6 +21,9 @@ const IconButton = ({
   if (color) {
     btnStyles.backgroundColor = Colors[color];
   }
+  if (disabled) {
+    btnStyles.backgroundColor = Colors["lGrey"];
+  }
   const buttonProps = {
     disabled: disabled,
 

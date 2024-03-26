@@ -45,12 +45,20 @@ const NotesToolbar = () => {
       return;
     }
     console.log("comment tool on", pdfState.editTool);
-    setPdfState((prev) => ({ ...prev, editTool: "comment" }));
+    setPdfState((prev) => ({
+      ...prev,
+      editTool: "comment",
+      showComments: true,
+    }));
+  };
+  const handleCommentVisibility = () => {
+    setPdfState((prev) => ({ ...prev, showComments: !prev.showComments }));
   };
   const kepPress = useKeyPress({
     dependencies: [pdfState.editTool, pdfState.scale],
     key: {
-      C: { func: handleComment, shiftKey: true },
+      c: { func: handleComment },
+      C: { func: handleCommentVisibility, shiftKey: true },
       Z: { func: handleScale, shiftKey: true },
       X: { func: () => handleScale(-1), shiftKey: true },
     },

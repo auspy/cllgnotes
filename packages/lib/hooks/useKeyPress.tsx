@@ -17,7 +17,9 @@ const useKeyPress = ({
       const selectedKey = key[e.key];
       if (
         selectedKey &&
-        (selectedKey.shiftKey ? e.shiftKey : true) &&
+        (selectedKey.shiftKey ? e.shiftKey : !e.shiftKey) &&
+        !e.ctrlKey &&
+        !e.altKey &&
         e.target instanceof HTMLElement &&
         e.target.tagName !== "INPUT"
       ) {

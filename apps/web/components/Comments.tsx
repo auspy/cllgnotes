@@ -3,9 +3,11 @@ import { CommentType } from "@cllgnotes/types";
 import { ButtonDropdown, CommentItem } from "ui";
 import CommentsSearchBar from "./CommentsSearchBar";
 import Link from "next/link";
-import { useRecoilValue } from "recoil";
-import { atomPdf } from "@cllgnotes/lib";
+import { useRecoilState } from "recoil";
+import { atomPdf, createCommentKey } from "@cllgnotes/lib";
 import { useSession } from "next-auth/react";
+import getComments from "@/db/getComments";
+import { useEffect } from "react";
 
 const Comments = ({
   projectId,
@@ -14,10 +16,40 @@ const Comments = ({
   projectId: string;
   searchParams: any;
 }) => {
-  const pdfState = useRecoilValue(atomPdf);
+  const [pdfState, setPdfState] = useRecoilState(atomPdf);
   // const comments: CommentType[] = pdfState.comments;
   // load initial comments using api in separate component
   const comments = pdfState.comments;
+  const { data }: any = getComments({
+    projectId,
+    skip: Array.isArray(comments),
+  });
+  const commentsFromApi = data?.Comments;
+  useEffect(() => {
+    if (Array.isArray(commentsFromApi)) {
+      console.log("Comments from api", commentsFromApi);
+      const convertedComments = (commentsFromApi as CommentType[]).reduce(
+        (acc: any, comment: CommentType) => {
+          console.log("Comment", comment);
+          const key = createCommentKey(comment);
+          if (key) {
+            return {
+              ...acc,
+              [comment.page]: {
+                ...acc[comment.page],
+                [key]: comment,
+              },
+            };
+          }
+        },
+        {}
+      );
+      setPdfState((prev) => ({ ...prev, comments: convertedComments }));
+    }
+  }, [commentsFromApi]);
+  const handleActiveComment = (id: string) => {
+    setPdfState((prev) => ({ ...prev, activeComment: id }));
+  };
   const session: any = useSession();
   const sort = pdfState.sort;
   const search = pdfState.search;
@@ -66,7 +98,13 @@ const Comments = ({
                 }
                 return Number(a.page) - Number(b.page);
               })
-              .map((commentKey, i) => <CommentItem key={i} {...commentKey} />)
+              .map((commentKey, i) => (
+                <CommentItem
+                  setActive={handleActiveComment}
+                  key={i}
+                  {...commentKey}
+                />
+              ))
           )}
         </div>
       </div>

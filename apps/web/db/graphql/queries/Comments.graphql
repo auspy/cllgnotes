@@ -1,5 +1,5 @@
-query {
-    Comments {
+query($projectId: ID!,$userId: ID!){
+    Comments(projectId:$projectId,userId:$userId) {
         _id
         x
         y

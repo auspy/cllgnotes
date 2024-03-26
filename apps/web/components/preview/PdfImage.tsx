@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import { CustomImageLoader } from "ui";
 import { DocType, ImgProps, PdfState } from "@cllgnotes/types";
-import { atomPdf, throttle } from "@cllgnotes/lib";
+import { atomPdf, throttle, useCustomCursor } from "@cllgnotes/lib";
 // import { useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { default as NextImage } from "next/image";
@@ -55,6 +55,14 @@ const PdfImage = ({
   const [pdfState, setPdfState] = useRecoilState(atomPdf);
   const scale = Number(pdfState.scale) || 0;
   const rotate = Number(pdfState.rotate) || 0;
+  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const isCommentToolActive = pdfState.editTool === "comment";
+  const customCursor = useCustomCursor({
+    dependencies: [pdfState.editTool, cursorRef.current, canvasRef.current],
+    show: isCommentToolActive,
+    container: canvasRef,
+    cursorId: cursorRef,
+  });
   // parseInt(searchParams.get("scale") || "") || 0;
   useEffect(() => {
     const createCanvasImage = throttle(() => {
@@ -121,16 +129,17 @@ const PdfImage = ({
             canvas.width, // size of container where it will be placed. automatically scaled based on this
             canvas.height
           );
-          ctx.fillStyle = "red";
-          const comments = Object.values(pdfState.comments[index] || {});
-          comments.forEach((comment) => {
-            ctx.fillRect(
-              comment.x + multiple * comment.x,
-              comment.y + multiple * comment.y,
-              20,
-              20
-            );
-          });
+          // * example for drawings
+          // ctx.fillStyle = "red";
+          // const comments = Object.values(pdfState.comments[index] || {});
+          // comments.forEach((comment) => {
+          //   ctx.fillRect(
+          //     comment.x + multiple * comment.x,
+          //     comment.y + multiple * comment.y,
+          //     20,
+          //     20
+          //   );
+          // });
         }
       };
 
@@ -152,13 +161,24 @@ const PdfImage = ({
   }
   return (
     <>
+      {isCommentToolActive && (
+        <div
+          ref={cursorRef}
+          className="hidden h-[15px]   w-[15px] rounded-ss-full rounded-e-full bg-dark border-[2px] shadow-md border-bg border-solid absolute z-10"
+          id="commentCursor"
+        ></div>
+      )}
       <LoadComments index={index} />
       <AddComment projectId={projectId} index={index} />
       <canvas
-        className={`p-1 ${rotate} border border-solid border-red`}
+        className={`p-1 peer ${rotate} border border-solid border-red`}
         id={id}
         ref={canvasRef}
-        style={{ objectFit: "cover", objectPosition: "center" }}
+        style={{
+          objectFit: "cover",
+          objectPosition: "center",
+          cursor: isCommentToolActive ? "none" : "auto",
+        }}
       />
     </>
   );

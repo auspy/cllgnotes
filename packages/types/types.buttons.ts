@@ -46,6 +46,8 @@ export type ButtonProps = ButtonCommonProps & {
   height?: ButtonHeightsBlackType | ButtonHeights | IconButtonSizesEnum;
   boxShadow?: ShadowsType;
   href?: string;
+  form?: string;
+  type?: "button" | "submit" | "reset";
 };
 
 export type ButtonBlackProps = Omit<ButtonProps, "fontSize" | "height"> & {

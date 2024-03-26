@@ -2,15 +2,24 @@
 
 import { atomPdf } from "@cllgnotes/lib";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import CommentFloating from "./CommentFloating";
 
 const LoadComments = ({ index }: { index: number }) => {
-  const pdfState = useRecoilValue(atomPdf);
+  const [pdfState, setPdfState] = useRecoilState(atomPdf);
   const comments = pdfState.comments;
-  const [active, setActive] = useState("");
-  if (typeof index != "number" || index < 0 || !comments[index]) {
-    console.error("Invalid index");
+  const activeComment = pdfState.activeComment;
+  const handleActiveComment = (id: string) => {
+    setPdfState((prev) => ({ ...prev, activeComment: id }));
+  };
+  const showComments = pdfState.showComments;
+  if (
+    typeof index != "number" ||
+    index < 0 ||
+    !comments[index] ||
+    !showComments
+  ) {
+    // console.error("Invalid index");
     return null;
   }
   console.log("Comments in load", comments[index], index);
@@ -18,8 +27,8 @@ const LoadComments = ({ index }: { index: number }) => {
     <>
       {Object.keys(comments[index]).map((commentKey: string, i) => (
         <CommentFloating
-          active={active}
-          setActive={setActive}
+          active={activeComment}
+          setActive={handleActiveComment}
           key={i}
           {...comments[index][commentKey]}
         />

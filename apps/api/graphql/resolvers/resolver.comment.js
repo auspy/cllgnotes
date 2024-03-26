@@ -1,9 +1,33 @@
 import { zodMongoId } from "@cllgnotes/zod";
 import { Comment } from "../../mongoose/modals/modals.js";
 import { zodCommentInput } from "@cllgnotes/zod/zod.comments.js";
+
 export const resolverComments = {
-  Comments: async (parent, args) => {
-    return await Comment.find({});
+  Comments: async (parent, args, context) => {
+    try {
+      const { user } = context;
+      console.log("--- in get comments ---");
+      const { projectId, userId } = args;
+      console.log("validating user", user);
+      const uid = user?._id || userId;
+      const userID = zodMongoId.parse(uid);
+      console.log("validating porject id");
+      const projectIdParsed = zodMongoId.parse(projectId);
+      console.log("validated id, fetching comments...", projectId);
+      const comments = await Comment.find({
+        doc: projectIdParsed,
+        user: userID,
+      })
+        .sort({
+          createdAt: -1,
+        })
+        .limit(50)
+        .lean();
+      return comments;
+    } catch (error) {
+      console.log("error in get comments", error);
+      return null;
+    }
   },
 };
 

@@ -21,6 +21,10 @@ const TmplButton = ({
   loading,
   disabled,
   href,
+  boxShadow,
+  active,
+  onChange,
+  ...prop
 }: ButtonProps) => {
   const props = {
     disabled: disabled || loading,
@@ -51,6 +55,7 @@ const TmplButton = ({
   if (href) {
     return (
       <Link
+        {...prop}
         key={text}
         {...props}
         className={props.className + " btn"}
@@ -61,7 +66,7 @@ const TmplButton = ({
     );
   }
   return (
-    <button key={text} {...props} onClick={onClick}>
+    <button key={text} {...prop} {...props} onClick={onClick}>
       {innerHtml}
     </button>
   );

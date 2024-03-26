@@ -17,6 +17,9 @@ export type PdfState = {
   rotate: number;
   fullscreen: boolean;
   comments: { [key: number]: { [key: string]: CommentType } };
+  editTool: "comment" | null;
+  showComments: boolean;
+  activeComment?: string;
 };
 
 export type CommentRes = {

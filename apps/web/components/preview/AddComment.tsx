@@ -1,15 +1,16 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { CustomImageLoader } from "ui";
+import { Button, ButtonBlack, CustomImageLoader } from "ui";
 import { CommentType, DocType, ImgProps, PdfState } from "@cllgnotes/types";
 import { atomPdf, atomToast, createCommentKey, throttle } from "@cllgnotes/lib";
 // import { useSearchParams } from "next/navigation";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { default as NextImage } from "next/image";
-import useAddComment from "./useAddComment";
+import useAddComment from "@/db/useAddComment";
 import { useSession } from "next-auth/react";
 // @ts-ignore
 import { zodCommentInput } from "@cllgnotes/zod";
+import { Close } from "@mui/icons-material";
 
 const AddComment = ({
   index,
@@ -20,10 +21,12 @@ const AddComment = ({
 }) => {
   // COMMENT TOOL CODE
   const [pdfState, setPdfState] = useRecoilState(atomPdf);
-  const [canAddComment, setCanAddComment] = useState(false);
+  const canAddComment = pdfState.editTool === "comment";
   const [commentPos, setCommentPos] = useState<{ x: number; y: number }>();
   const [comment, setComment] = useState<string>("");
   const { addComment, error } = useAddComment();
+  const divRef = useRef<HTMLDivElement | null>(null);
+
   const setToast = useSetRecoilState(atomToast);
   const session: any = useSession();
   const userId = session.data?.user?._id;
@@ -36,8 +39,10 @@ const AddComment = ({
     //   return;
     // }
     // ctx.clearRect(commentPos.x, commentPos.y, 20, 20);
+    // setPdfState((prev: PdfState) => ({ ...prev, editTool: null }));
     setCommentPos(undefined);
   };
+
   console.log("Comment pos", commentPos);
   const handleCreateComment = async () => {
     let commentKey: string | null = null;
@@ -110,6 +115,9 @@ const AddComment = ({
     }
   };
   useEffect(() => {
+    if (!canAddComment) {
+      return;
+    }
     const canvas = document.getElementById(id) as HTMLCanvasElement;
     const handleMousedown = throttle((e: MouseEvent) => {
       if (commentPos) {
@@ -149,39 +157,62 @@ const AddComment = ({
     return () => {
       canvas?.removeEventListener("mousedown", handleMousedown);
     };
-  }, [commentPos]);
-  if (!commentPos) {
-    console.log("No comment pos");
+  }, [commentPos, canAddComment]);
+  if (!commentPos || !canAddComment) {
+    console.log("cant add comment");
     return null;
   }
   return (
     <div
+      ref={divRef}
       style={{
         position: "absolute",
         top: commentPos?.y || 0,
         left: commentPos?.x || 0,
-        width: "400px",
-        height: "200px",
+        // width: "400px",
+        // height: "200px",
       }}
-      className="bg-blue z-40"
+      className=" z-40"
     >
+      <button
+        onClick={clearUnwanted}
+        className="p-2 rounded-ss-full rounded-e-full "
+      >
+        <div className=" h-[25px] fccc  w-[25px] rounded-ss-full rounded-e-full bg-dark border-[2px] shadow-md border-bg border-solid z-10">
+          <Close
+            style={{
+              height: 12,
+              width: 12,
+              color: "white",
+            }}
+          />
+        </div>
+      </button>
       <form
         id="comment-form"
-        className=""
+        className="relative flex flex-col gap-2 top-0 left-4 bg-bg p-2 border border-dark border-solid z-10 shadow-lg rounded-[5px]"
         onSubmit={(e) => {
           handleCreateComment();
           e.preventDefault();
         }}
       >
-        <input
-          className="border border-solid border-black"
-          type="text"
+        <textarea
+          className="border max-h-[300px] priBtn p-2 text-sm font-medium shadow-box1 border-solid border-black"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <button form="comment-form" type="submit">
-          submit
-        </button>
+        <ButtonBlack
+          buttonStyles={{
+            padding: 7,
+            height: "auto",
+            width: "100%",
+            borderRadius: 5,
+          }}
+          fontSize={14}
+          type="submit"
+          form="comment-form"
+          text="submit"
+        />
       </form>
     </div>
   );

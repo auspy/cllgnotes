@@ -10,5 +10,8 @@ export const atomPdf = atom<PdfState>({
     rotate: 0,
     fullscreen: false,
     comments: {},
+    editTool: null,
+    showComments: true,
+    activeComment: "",
   },
 });
