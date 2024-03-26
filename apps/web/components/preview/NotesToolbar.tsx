@@ -2,11 +2,13 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import { IconButton } from "ui";
-import { atomPdf } from "@cllgnotes/lib";
+import { atomPdf, debounce, useKeyPress } from "@cllgnotes/lib";
 import { useRecoilState } from "recoil";
 import ButtonRotate from "./ButtonRotate";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import MapsUgcRoundedIcon from "@mui/icons-material/MapsUgcRounded";
+import { useEffect } from "react";
 const NotesToolbar = () => {
   // ? this has state management using search params and recoil
   // const router = useRouter();
@@ -36,25 +38,55 @@ const NotesToolbar = () => {
     }
     setPdfState((prev) => ({ ...prev, fullscreen: !prev.fullscreen }));
   };
+  const handleComment = () => {
+    if (pdfState.editTool === "comment") {
+      console.log("comment tool off");
+      setPdfState((prev) => ({ ...prev, editTool: null }));
+      return;
+    }
+    console.log("comment tool on", pdfState.editTool);
+    setPdfState((prev) => ({ ...prev, editTool: "comment" }));
+  };
+  const kepPress = useKeyPress({
+    dependencies: [pdfState.editTool, pdfState.scale],
+    key: {
+      C: { func: handleComment, shiftKey: true },
+      Z: { func: handleScale, shiftKey: true },
+      X: { func: () => handleScale(-1), shiftKey: true },
+    },
+  });
+  const size = 40;
   return (
     <div className="frc gap-3">
       <IconButton
-        size={40}
+        title="Zoom Out"
+        size={size}
+        disabled={pdfState.scale <= -2}
         icon={<ZoomOutIcon />}
         onClick={() => handleScale(-1)}
       />
       <IconButton
-        size={40}
+        title="Zoom In"
+        size={size}
+        disabled={pdfState.scale >= 5}
         icon={<ZoomInIcon />}
         onClick={() => handleScale()}
       />
       <ButtonRotate />
       <IconButton
-        size={40}
+        title={isFullScreen ? "Exit Fullscreen" : "Fullscreen"}
+        size={size}
         icon={!isFullScreen ? <FullscreenIcon /> : <FullscreenExitIcon />}
         onClick={() => {
           handleFullscreen();
         }}
+      />
+      <IconButton
+        title="Add Comment"
+        disabled={pdfState.editTool === "comment"}
+        size={size}
+        icon={<MapsUgcRoundedIcon />}
+        onClick={handleComment}
       />
     </div>
   );
