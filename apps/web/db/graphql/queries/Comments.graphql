@@ -1,0 +1,11 @@
+query {
+    Comments {
+        _id
+        x
+        y
+        page
+        text
+        createdAt
+        updatedAt
+    }
+}

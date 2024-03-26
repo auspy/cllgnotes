@@ -21,6 +21,8 @@ input CommentInput{
 }
 input CommentUpdateInput{
     text: String
+    x: Int
+    y: Int
 }
 type commentRes{
     msg: String

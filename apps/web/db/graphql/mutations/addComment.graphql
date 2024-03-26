@@ -1,0 +1,12 @@
+mutation($input: CommentInput!){
+    addComment(
+        input: $input
+    ) {
+        msg
+        err
+        status
+        data{
+            _id
+        }
+    }
+}

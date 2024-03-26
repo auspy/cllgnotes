@@ -1,6 +1,6 @@
 "use client";
 import { atomPdf } from "@cllgnotes/lib";
-import IconButton from "../buttons/IconButton";
+import { IconButton } from "ui";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import { useSetRecoilState } from "recoil";
 const ButtonRotate = ({

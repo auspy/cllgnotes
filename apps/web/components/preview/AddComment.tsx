@@ -1,18 +1,33 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { CustomImageLoader } from "../../loader.config";
+import { CustomImageLoader } from "ui";
 import { CommentType, DocType, ImgProps, PdfState } from "@cllgnotes/types";
-import { atomPdf, createCommentKey, throttle } from "@cllgnotes/lib";
+import { atomPdf, atomToast, createCommentKey, throttle } from "@cllgnotes/lib";
 // import { useSearchParams } from "next/navigation";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { default as NextImage } from "next/image";
+import useAddComment from "./useAddComment";
+import { useSession } from "next-auth/react";
+// @ts-ignore
+import { zodCommentInput } from "@cllgnotes/zod";
 
-const AddComment = ({ index }: { index: number }) => {
+const AddComment = ({
+  index,
+  projectId,
+}: {
+  index: number;
+  projectId: string;
+}) => {
   // COMMENT TOOL CODE
   const [pdfState, setPdfState] = useRecoilState(atomPdf);
   const [canAddComment, setCanAddComment] = useState(false);
   const [commentPos, setCommentPos] = useState<{ x: number; y: number }>();
   const [comment, setComment] = useState<string>("");
+  const { addComment, error } = useAddComment();
+  const setToast = useSetRecoilState(atomToast);
+  const session: any = useSession();
+  const userId = session.data?.user?._id;
+
   const id = "page_" + index;
   const clearUnwanted = () => {
     // const canvas = document.getElementById(id) as HTMLCanvasElement;
@@ -24,7 +39,8 @@ const AddComment = ({ index }: { index: number }) => {
     setCommentPos(undefined);
   };
   console.log("Comment pos", commentPos);
-  const handleCreateComment = () => {
+  const handleCreateComment = async () => {
+    let commentKey: string | null = null;
     try {
       if (!commentPos || !comment) {
         console.error("Comment or comment pos not found");
@@ -37,8 +53,8 @@ const AddComment = ({ index }: { index: number }) => {
         page: index,
         createdAt: new Date(),
       };
-      const commentKey = createCommentKey({ comment: newComment });
-      if (!commentKey) {
+      commentKey = createCommentKey({ comment: newComment });
+      if (!commentKey || commentKey == null) {
         console.error("Error creating comment key");
         return;
       }
@@ -48,17 +64,49 @@ const AddComment = ({ index }: { index: number }) => {
           ...prev,
           comments: {
             ...prev.comments,
-            [index]: { ...prev.comments[index], [commentKey]: newComment },
+            [index]: {
+              ...prev.comments[index],
+              [commentKey as string]: newComment,
+            },
           },
         };
       });
       console.log("Comment created", newComment);
-      // send the comment to the server
       //   reset the comment
       setCommentPos(undefined);
       setComment("");
+      // send the comment to the server
+      const data = zodCommentInput.parse({
+        ...newComment,
+        doc: projectId,
+        user: userId,
+      });
+      console.log("Data for addComment", data);
+      const res = await addComment(data);
+      if (!res || res.errors || error) {
+        console.error("Error creating comment in backend", error, res.errors);
+        throw new Error("Error creating comment");
+      }
+      console.log("Comment created", res);
     } catch (error) {
       console.error("Error creating comment", error);
+      // remove the comment from the state
+      setPdfState((prev: PdfState) => {
+        const newComments = { ...prev.comments[index] };
+        if (commentKey != null) {
+          delete newComments[commentKey];
+        }
+        return {
+          ...prev,
+          comments: { ...prev.comments, [index]: newComments },
+        };
+      });
+      setToast({
+        text: "Error creating comment, Try again",
+        type: "error",
+        secs: 5000,
+      });
+      return;
     }
   };
   useEffect(() => {

@@ -5,7 +5,8 @@ import useServerSession from "@/components/hooks/useServerSession";
 import NotesBelowHero from "@/components/notes/NotesBelowHero";
 import NotesHero from "@/components/notes/NotesHero";
 import { DetailTabProps, DocProps, DocsQueryProps } from "@cllgnotes/types";
-import { MovingBanner, PreviewPdf } from "ui";
+import { MovingBanner } from "ui";
+import PreviewPdf from "@/components/preview/PreviewPdf";
 import Link from "next/link";
 import PurchasedNotesPage from "@/components/notes/PurchasedNotesPage";
 

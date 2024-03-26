@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { CustomImageLoader } from "../../loader.config";
+import { CustomImageLoader } from "ui";
 import { DocType, ImgProps, PdfState } from "@cllgnotes/types";
 import { atomPdf, throttle } from "@cllgnotes/lib";
 // import { useSearchParams } from "next/navigation";
@@ -14,11 +14,13 @@ const PdfImage = ({
   notPurchased,
   type,
   img,
+  projectId,
 }: {
   img: ImgProps;
   index: number;
   type?: DocType;
   notPurchased: boolean;
+  projectId: string;
 }) => {
   if (notPurchased) {
     // load optimized image for not purchased
@@ -151,7 +153,7 @@ const PdfImage = ({
   return (
     <>
       <LoadComments index={index} />
-      <AddComment index={index} />
+      <AddComment projectId={projectId} index={index} />
       <canvas
         className={`p-1 ${rotate} border border-solid border-red`}
         id={id}

@@ -6,6 +6,7 @@ const PreviewPdf = ({
   img,
   type,
   totalPages: tP,
+  _id,
   ...props
 }: PreviewPdfProps) => {
   const totalPages = tP || 1;
@@ -38,6 +39,7 @@ const PreviewPdf = ({
             }}
           >
             <PdfImage
+              projectId={_id}
               index={index + 1}
               notPurchased={notPurchased}
               img={img}

@@ -18,3 +18,10 @@ export type PdfState = {
   fullscreen: boolean;
   comments: { [key: number]: { [key: string]: CommentType } };
 };
+
+export type CommentRes = {
+  data?: CommentType[];
+  msg: string;
+  status: string;
+  error?: any;
+};

@@ -1,8 +1,10 @@
 import { DetailTabProps, DocProps } from "@cllgnotes/types";
-import { Logo, MovingBanner, PdfSidebar, PreviewPdf, RightSidebar } from "ui";
+import { Logo, MovingBanner, PdfSidebar, RightSidebar } from "ui";
 import NotesPageTextBox from "./NotesPageTextBox";
 import Comments from "../Comments";
-import { NotesToolbar } from "ui";
+import NotesToolbar from "../preview/NotesToolbar";
+import PreviewPdf from "../preview/PreviewPdf";
+
 const PurchasedNotesPage = ({
   doc,
   labels,
