@@ -4,7 +4,10 @@ import { env } from "node:process";
 import { Redis } from "ioredis";
 // import { Redis } from "@upstash/redis";
 console.log("process.env.ENV", process.env.TEST);
-const redisClient = new Redis();
+const redisClient = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 // process.env.NODE_ENV == "development" || env.NODE_ENV == "development"
 //   ? "redis://localhost:6379"
