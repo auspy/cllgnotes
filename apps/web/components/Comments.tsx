@@ -1,6 +1,6 @@
 "use client";
 import { CommentType } from "@cllgnotes/types";
-import { ButtonDropdown, CommentItem } from "ui";
+import { ButtonDropdown, CommentItem, Text } from "ui";
 import CommentsSearchBar from "./CommentsSearchBar";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
@@ -66,61 +66,67 @@ const Comments = ({
       </div>
       <div className="px-5 flex flex-col ">
         <div className="flex  flex-col gap-[30px]">
-          {Object.keys(comments).map((pageNum, index) =>
-            Object.values(comments[pageNum as unknown as number])
-              .filter((comment: CommentType) => {
-                if (search) {
-                  return (
-                    typeof comment == "object" &&
-                    comment?.text?.match(
-                      new RegExp(search.split(" ").join("|"), "i")
-                    )
-                  );
-                }
-                return true;
-              })
-              .sort((a, b) => {
-                // if (!(a && b)) {
-                //   return 0;
-                // }
-                if (sort == "page dsc") {
-                  return Number(b.page) - Number(a.page);
-                } else if (sort == "date asc") {
-                  return (
-                    new Date(
-                      typeof a.createdAt == "string"
-                        ? parseInt(a.createdAt)
-                        : a.createdAt
-                    ).getTime() -
-                    new Date(
-                      typeof b.createdAt == "string"
-                        ? parseInt(b.createdAt)
-                        : b.createdAt
-                    ).getTime()
-                  );
-                } else if (sort == "date dsc") {
-                  return (
-                    new Date(
-                      typeof b.createdAt == "string"
-                        ? parseInt(b.createdAt)
-                        : b.createdAt
-                    ).getTime() -
-                    new Date(
-                      typeof a.createdAt == "string"
-                        ? parseInt(a.createdAt)
-                        : a.createdAt
-                    ).getTime()
-                  );
-                }
-                return Number(a.page) - Number(b.page);
-              })
-              .map((commentKey, i) => (
-                <CommentItem
-                  setActive={handleActiveComment}
-                  key={i}
-                  {...commentKey}
-                />
-              ))
+          {Object.keys(comments).length === 0 ? (
+            <Text type="medi14" color="lGrey" textAlign="left">
+              Your comments will be shown here
+            </Text>
+          ) : (
+            Object.keys(comments).map((pageNum, index) =>
+              Object.values(comments[pageNum as unknown as number])
+                .filter((comment: CommentType) => {
+                  if (search) {
+                    return (
+                      typeof comment == "object" &&
+                      comment?.text?.match(
+                        new RegExp(search.split(" ").join("|"), "i")
+                      )
+                    );
+                  }
+                  return true;
+                })
+                .sort((a, b) => {
+                  // if (!(a && b)) {
+                  //   return 0;
+                  // }
+                  if (sort == "page dsc") {
+                    return Number(b.page) - Number(a.page);
+                  } else if (sort == "date asc") {
+                    return (
+                      new Date(
+                        typeof a.createdAt == "string"
+                          ? parseInt(a.createdAt)
+                          : a.createdAt
+                      ).getTime() -
+                      new Date(
+                        typeof b.createdAt == "string"
+                          ? parseInt(b.createdAt)
+                          : b.createdAt
+                      ).getTime()
+                    );
+                  } else if (sort == "date dsc") {
+                    return (
+                      new Date(
+                        typeof b.createdAt == "string"
+                          ? parseInt(b.createdAt)
+                          : b.createdAt
+                      ).getTime() -
+                      new Date(
+                        typeof a.createdAt == "string"
+                          ? parseInt(a.createdAt)
+                          : a.createdAt
+                      ).getTime()
+                    );
+                  }
+                  return Number(a.page) - Number(b.page);
+                })
+                .map((commentKey, i) => (
+                  <CommentItem
+                    setActive={handleActiveComment}
+                    key={i}
+                    {...commentKey}
+                  />
+                ))
+            )
           )}
         </div>
       </div>
