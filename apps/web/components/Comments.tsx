@@ -80,20 +80,36 @@ const Comments = ({
                 return true;
               })
               .sort((a, b) => {
-                if (!(a && b && typeof a == "object" && typeof b == "object")) {
-                  return 0;
-                }
+                // if (!(a && b)) {
+                //   return 0;
+                // }
                 if (sort == "page dsc") {
                   return Number(b.page) - Number(a.page);
                 } else if (sort == "date asc") {
                   return (
-                    new Date(a.createdAt).getTime() -
-                    new Date(b.createdAt).getTime()
+                    new Date(
+                      typeof a.createdAt == "string"
+                        ? parseInt(a.createdAt)
+                        : a.createdAt
+                    ).getTime() -
+                    new Date(
+                      typeof b.createdAt == "string"
+                        ? parseInt(b.createdAt)
+                        : b.createdAt
+                    ).getTime()
                   );
                 } else if (sort == "date dsc") {
                   return (
-                    new Date(b.createdAt).getTime() -
-                    new Date(a.createdAt).getTime()
+                    new Date(
+                      typeof b.createdAt == "string"
+                        ? parseInt(b.createdAt)
+                        : b.createdAt
+                    ).getTime() -
+                    new Date(
+                      typeof a.createdAt == "string"
+                        ? parseInt(a.createdAt)
+                        : a.createdAt
+                    ).getTime()
                   );
                 }
                 return Number(a.page) - Number(b.page);
