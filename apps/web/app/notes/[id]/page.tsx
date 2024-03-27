@@ -5,10 +5,18 @@ import useServerSession from "@/components/hooks/useServerSession";
 import NotesBelowHero from "@/components/notes/NotesBelowHero";
 import NotesHero from "@/components/notes/NotesHero";
 import { DetailTabProps, DocProps, DocsQueryProps } from "@cllgnotes/types";
-import { MovingBanner, PreviewPdf } from "ui";
+import { MovingBanner } from "ui";
+import PreviewPdf from "@/components/preview/PreviewPdf";
 import Link from "next/link";
+import PurchasedNotesPage from "@/components/notes/PurchasedNotesPage";
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { search: string };
+}) => {
   // console.log(params, "params", params["id"]);
   const session: any = await useServerSession();
   // console.log(session, "in page");
@@ -32,13 +40,19 @@ const page = async ({ params }: { params: { id: string } }) => {
       "__typename",
       "published",
       "year",
-      "course",
-      "department",
-      "creator",
-      "isPurchased",
+      "testtype",
+      "type",
+      // "course",
+      // "department",
+      // "creator",
+      // "ispurchased",
     ];
+    if (doc.type == "paper") {
+      notNeededLabels.push("subject");
+    }
     const arr: DetailTabProps[] = [];
-    for (const key in doc) {
+    for (const k in doc) {
+      const key = k.toLowerCase();
       if (!notNeededLabels.includes(key) && doc[key as keyof DocProps]) {
         if (Array.isArray(doc[key as keyof DocProps])) {
           if ((doc[key as keyof DocProps] as any)?.length > 0) {
@@ -69,6 +83,16 @@ const page = async ({ params }: { params: { id: string } }) => {
   };
   const allLabels = labels();
   // console.log(allLabels, "allLabels");
+  if (isPurchased) {
+    return (
+      <PurchasedNotesPage
+        searchParams={searchParams}
+        doc={doc}
+        labels={allLabels}
+        isPurchased
+      />
+    );
+  }
   return (
     <>
       <NotesHero
@@ -83,7 +107,7 @@ const page = async ({ params }: { params: { id: string } }) => {
           year: doc.year!,
         }}
       />
-      <div className="topContainer mt-[350px] sm:mt-[200px] lg:mt-[40px] mb-[100px] fcfs">
+      <div className="topContainer  mt-[40px] mb-[100px] fcfs">
         <PreviewPdf
           type={doc.type}
           notPurchased={!isPurchased}

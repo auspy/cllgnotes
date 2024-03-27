@@ -3,6 +3,7 @@ import {
   CourseType,
   DepartmentType,
   DocType,
+  Highlight,
   SubjectType,
   TestType,
   UnivType,
@@ -119,6 +120,7 @@ export type CardDetailsBoxProps = {
   href?: string;
   allowWrap?: boolean;
   type?: DocType;
+  highlights: Highlight[];
   textType?: "semi16" | "h3";
 } & (
   | {

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Text, Header } from "ui";
 import SearchBar from "@/components/SearchBar";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar";
+import { Suspense } from "react";
 const ExploreHero = ({
   heading = "Explore documents",
 }: {
@@ -24,7 +25,15 @@ const ExploreHero = ({
             style={{ gap: 30, paddingBottom: 43 }}
           >
             <Text type="h1">{heading}</Text>
-            <AutocompleteSearchBar />
+            <Suspense
+              fallback={
+                <>
+                  <SearchBar height={60} />
+                </>
+              }
+            >
+              <AutocompleteSearchBar />
+            </Suspense>
           </div>
           <div
             className="w100 hidden lg:grid "

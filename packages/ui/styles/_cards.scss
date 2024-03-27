@@ -16,3 +16,12 @@
   padding: 20px;
   border-radius: 5px;
 }
+
+.cardCommon {
+  @apply priBtn;
+  @apply shadow-box1 semi12;
+  // text-transform: capitalize;
+  // border: 1px solid var(--dark);
+  // border-radius: 5px;
+  padding: 10px 7px;
+}

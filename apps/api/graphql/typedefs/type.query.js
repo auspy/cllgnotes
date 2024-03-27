@@ -10,5 +10,6 @@ type Query {
     Departments: [Department] 
     Subjects: [Subject] 
     Autocomplete(search:String,filter: String): [Autocomplete]
+    Comments(projectId:ID!,userId:ID!): [Comment]
 }`;
 export default typeQuery;

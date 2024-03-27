@@ -13,9 +13,9 @@ const FilterSidebar = ({
   return (
     <div className="w100" style={{ maxWidth: maxWidth }}>
       <div>
-        <SearchBar placeholder="Search from results" height={50} />
+        <SearchBar placeholder="Search" height={50} />
         <Text textClass="mt10" type="medi12" color="dGrey">
-          Eg: coa, maths
+          Eg: coa, maths, what is xyz?
         </Text>
       </div>
       <div className="mt30" />

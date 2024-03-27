@@ -14,16 +14,22 @@ const IconButton = ({
   buttonClasses,
   disabled,
   href,
+  ...props
 }: IconButtonProps) => {
   const btnStyles: React.CSSProperties = {};
   const shadowClass = size == 40 ? "shadow-box1" : "shadow-box2";
   if (color) {
     btnStyles.backgroundColor = Colors[color];
   }
+  if (disabled) {
+    btnStyles.backgroundColor = Colors["lGrey"];
+  }
   const buttonProps = {
     disabled: disabled,
 
-    className: `${onBlack && `iconBtn`} fccc ${buttonClasses}`,
+    className: `${
+      onBlack && `iconBtn`
+    } flex flex-col items-center justify-center ${buttonClasses}`,
     style: {
       width: size,
       height: size,
@@ -32,6 +38,7 @@ const IconButton = ({
       borderRadius: 5,
       color: "white",
     },
+    ...props,
   };
   if (onBlack) {
     if (href) {

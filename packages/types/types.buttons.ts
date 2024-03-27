@@ -28,6 +28,7 @@ export type ButtonCommonProps = {
   buttonStyles?: React.CSSProperties;
   buttonClasses?: string;
   href?: string;
+  title?: string;
 };
 export type ButtonProps = ButtonCommonProps & {
   text: string;
@@ -45,6 +46,8 @@ export type ButtonProps = ButtonCommonProps & {
   height?: ButtonHeightsBlackType | ButtonHeights | IconButtonSizesEnum;
   boxShadow?: ShadowsType;
   href?: string;
+  form?: string;
+  type?: "button" | "submit" | "reset";
 };
 
 export type ButtonBlackProps = Omit<ButtonProps, "fontSize" | "height"> & {

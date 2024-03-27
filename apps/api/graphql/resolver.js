@@ -1,4 +1,8 @@
 import { resolverDocs, resolverMutDocs } from "./resolvers/resolver.docs.js";
+import {
+  resolverComments,
+  resolverMutComments,
+} from "./resolvers/resolver.comment.js";
 
 const docType = (obj) => {
   // console.log(obj, "doc type");
@@ -24,9 +28,11 @@ const resolvers = {
   },
   Query: {
     ...resolverDocs,
+    ...resolverComments,
   },
   Mutation: {
     ...resolverMutDocs,
+    ...resolverMutComments,
     // ...resolverAuth,
   },
 };

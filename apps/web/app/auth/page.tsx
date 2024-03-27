@@ -340,7 +340,7 @@ export default function Login() {
                   const data = await signIn("google", {
                     callbackUrl: "/",
                   });
-                  console.log("signin data ====>", data);
+                  // console.log("signin data ====>", data);
                 }}
               />
             )}

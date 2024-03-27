@@ -5,7 +5,8 @@ a.btn:hover {
   transform: translate(-2px, -2px);
 }
 button.priBtn.shadow-box1:hover:enabled,
-a.btn.shadow-box1:hover {
+a.btn.shadow-box1:hover,
+select.cardCommon:hover {
   box-shadow: 3px 3px 0px 0px #141414;
   transform: translate(-1px, -1px);
 }
@@ -38,7 +39,8 @@ a.btn.shadow-box5:hover {
   }
 }
 
-a.btn {
+a.btn,
+select.cardCommon {
   &:hover {
     opacity: 1 !important;
   }

@@ -13,6 +13,7 @@ import GET_DEPARTMENTS from "./queries/Departments.graphql";
 import GET_SUBJECTS from "./queries/Subjects.graphql";
 import GET_ALL_FILTERS from "./queries/Filters.graphql";
 import AUTOCOMPLETE from "./queries/Autocomplete.graphql";
+import COMMENTS from "./queries/Comments.graphql";
 // mutations
 import CREATE_DOC from "./mutations/addDoc.graphql";
 import UPDATE_DOC from "./mutations/updateDoc.graphql";
@@ -20,6 +21,9 @@ import PURCHASE_DOC from "./mutations/purchaseDoc.graphql";
 import LOGIN from "./mutations/login.graphql";
 import REGISTER from "./mutations/register.graphql";
 import LOGOUT from "./mutations/logout.graphql";
+import ADD_COMMENT from "./mutations/addComment.graphql";
+// import DELETE_COMMENT from "./mutations/deleteComment.graphql";
+import UPDATE_COMMENT from "./mutations/updateComment.graphql";
 
 const getDocsTmpl = (query: any) => gql`
   ${query}
@@ -27,6 +31,7 @@ const getDocsTmpl = (query: any) => gql`
 `;
 
 export {
+  // query
   GET_DOCS,
   GET_DOC,
   GET_PURCHASED_DOCS,
@@ -37,10 +42,14 @@ export {
   GET_SUBJECTS,
   GET_ALL_FILTERS,
   AUTOCOMPLETE,
+  COMMENTS,
+  // mutations
   CREATE_DOC,
   UPDATE_DOC,
   PURCHASE_DOC,
   LOGIN,
   REGISTER,
   LOGOUT,
+  ADD_COMMENT,
+  UPDATE_COMMENT,
 };

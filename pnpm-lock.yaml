@@ -71,6 +71,9 @@ importers:
       mongoose:
         specifier: ^7.3.2
         version: 7.3.2
+      next-auth:
+        specifier: ^4.23.1
+        version: 4.23.1(next@13.4.19)(nodemailer@6.9.12)(react-dom@18.2.0)(react@18.2.0)
       nodemon:
         specifier: ^3.1.0
         version: 3.1.0
@@ -357,6 +360,9 @@ importers:
 
   packages/zod:
     dependencies:
+      mongoose:
+        specifier: ^7.3.2
+        version: 7.3.2
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -5162,6 +5168,7 @@ packages:
 
   /memory-pager@1.5.0:
     resolution: {integrity: sha512-ZS4Bp4r/Zoeq6+NLJpP+0Zzm0pR8whtGPf1XExKLJBAczGMnSi3It14OiNCStjQjM6NU1okjQGSxgEZN8eBYKg==}
+    requiresBuild: true
     dev: false
 
   /merge-descriptors@1.0.1:

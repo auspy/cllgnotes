@@ -6,11 +6,13 @@ const ButtonArrow = ({
   onClick,
   style,
   disabled,
+  size = 40,
 }: {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   isLeft?: boolean;
   style?: React.CSSProperties;
   disabled?: boolean;
+  size?: 40 | 60;
 }) => {
   const iconStyle: React.CSSProperties = {
     height: 30,
@@ -19,6 +21,7 @@ const ButtonArrow = ({
   };
   const leftIcon = (
     <IconButton
+      size={size}
       disabled={disabled}
       color={`${disabled ? "grey" : "white"}`}
       onClick={onClick}
@@ -27,6 +30,7 @@ const ButtonArrow = ({
   );
   const rightIcon = (
     <IconButton
+      size={size}
       disabled={disabled}
       color={`${disabled ? "grey" : "white"}`}
       onClick={onClick}

@@ -40,7 +40,7 @@ export const DocCard = ({
   } else {
     Object.assign(imgProps, {
       src: CustomImageLoader({ src: img, type }),
-      alt: title,
+      alt: title || (subject as any)?.name || "doc",
       fill: true,
     });
   }

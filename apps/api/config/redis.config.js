@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 import { env } from "node:process";
-// import { Redis } from "ioredis";
-import { Redis } from "@upstash/redis";
+import { Redis } from "ioredis";
+// import { Redis } from "@upstash/redis";
 console.log("process.env.ENV", process.env.TEST);
 const redisClient = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL,

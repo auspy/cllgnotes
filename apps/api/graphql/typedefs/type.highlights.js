@@ -9,6 +9,6 @@ type Texts {
 }
 type Highlights {
     path: String
-    texts: Texts
+    texts: [Texts]
     score: Float
 }`;

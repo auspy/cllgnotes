@@ -1,0 +1,7 @@
+mutation($input: CommentUpdateInput!, $id: ID!) {
+    updateComment(input: $input, id: $id) {
+        msg
+        err
+        status
+    }
+}

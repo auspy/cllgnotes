@@ -1,0 +1,11 @@
+query($projectId: ID!,$userId: ID!){
+    Comments(projectId:$projectId,userId:$userId) {
+        _id
+        x
+        y
+        page
+        text
+        createdAt
+        updatedAt
+    }
+}

@@ -1,5 +1,12 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-export const zodMonogId = z.string().regex(/^[0-9a-fA-F]{24}$/);
+
+export const zodMongoId = z.union([
+  z.string().refine((value) => Types.ObjectId.isValid(value), {
+    message: "something worong with object id",
+  }),
+  z.instanceof(Types.ObjectId).transform((id) => id.toString()),
+]);
 // z.string().refine((val) => {
 //   return mongoose.Types.ObjectId.isValid(val);
 // });
@@ -33,12 +40,12 @@ export const optionalProps = z
   })
   .partial();
 export const zodPurchaseDoc = z.object({
-  docId: zodMonogId,
+  docId: zodMongoId,
   amount: commonNumber,
   payMethod: z.string().min(2).max(20),
 });
 export const zodUpdateDoc = z.object({
-  id: zodMonogId,
+  id: zodMongoId,
   input: z.object({ ...commonDoc.shape, ...optionalProps.shape }).partial(),
 });
 export const zodFileUpload = z.object({

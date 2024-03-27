@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { defaultImg, useDeviceType } from "@cllgnotes/lib";
+import { defaultImg, throttle, useDeviceType } from "@cllgnotes/lib";
 import { Borders, BuyNowCardProps } from "@cllgnotes/types";
 // import { useEffect } from "react";
 import { ShadowsType } from "@cllgnotes/types";
@@ -8,6 +8,7 @@ import Colors from "@cllgnotes/types/colors";
 import { CustomImageLoader } from "../../loader.config";
 import Text from "../text/Text";
 import ButtonBuyNow from "../../../../apps/web/components/buttons/ButtonBuyNow";
+import { useEffect, useRef } from "react";
 
 const BuyNowCard = ({
   src,
@@ -43,6 +44,7 @@ const BuyNowCard = ({
   //   };
   // }, []);
   const device = useDeviceType();
+  const ref = useRef<HTMLDivElement | null>(null);
   const isDesktop = device == "desktop";
   const isTablet = device == "tablet";
   const isMobile = device == "mobile";
@@ -59,9 +61,27 @@ const BuyNowCard = ({
     width: isMobile ? "calc(100% - 40px)" : "calc(100% - 70px)",
     right: isMobile ? 20 : 35,
   };
+  useEffect(() => {
+    const handlePadding = () => {
+      const pdf = document.getElementById("previewPdf");
+      const buynowCard = ref.current;
+      if (buynowCard && pdf) {
+        const height = buynowCard.offsetHeight - 380;
+        pdf.style.paddingTop = `${height}px`;
+      }
+    };
+    const handleResize = throttle(() => {
+      handlePadding();
+    }, 300);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <>
       <div
+        ref={ref}
         id="buynowcard"
         className={`fcc ${className}`}
         style={{

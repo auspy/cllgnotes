@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {},
   "dependencies": {
+    "mongoose": "^7.3.2",
     "zod": "^3.22.4"
   }
 }

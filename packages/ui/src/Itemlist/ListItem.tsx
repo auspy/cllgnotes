@@ -5,6 +5,7 @@ import Image from "next/image";
 import ButtonLike from "../buttons/ButtonLike";
 import { memo } from "react";
 import { ShowInDevice } from "@cllgnotes/lib";
+import QuestionHighlight from "../QuestionHighlight";
 
 const ListItem = ({
   img,
@@ -21,6 +22,7 @@ const ListItem = ({
   lastRef,
   likes = 56,
   type,
+  highlights,
 }: CardProps) => {
   const like = <ButtonLike likes={likes} />;
   return (
@@ -44,34 +46,37 @@ const ListItem = ({
         </div>
         <ShowInDevice devices={[DeviceTypeEnum.mobile]}>{like}</ShowInDevice>
       </div>
-
-      <div className="w100 flex flex-col gap-2 sm:gap-0">
-        <div className="frfssb w100">
-          <CardTextBox
-            department={department}
-            course={{ name: testType } as any}
-            semester={semester}
-            color={color}
+      <div className="w100 flex flex-col gap-4">
+        <div className="w100 flex flex-col gap-2 sm:gap-0">
+          <div className="frfssb w100">
+            <CardTextBox
+              department={department}
+              course={{ name: testType } as any}
+              semester={semester}
+              color={color}
+              year={year}
+              padding="4px 9px"
+            />
+            <ShowInDevice
+              devices={[DeviceTypeEnum.tablet, DeviceTypeEnum.desktop]}
+            >
+              {like}
+            </ShowInDevice>
+          </div>
+          <CardDetailsText
+            course={course}
+            _id={_id}
+            subject={subject}
+            title={title}
+            univ={univ}
             year={year}
-            padding="4px 9px"
+            highlights={highlights}
+            // testType={testType!}
+            type={type}
+            allowWrap={true}
           />
-          <ShowInDevice
-            devices={[DeviceTypeEnum.tablet, DeviceTypeEnum.desktop]}
-          >
-            {like}
-          </ShowInDevice>
         </div>
-        <CardDetailsText
-          course={course}
-          _id={_id}
-          subject={subject}
-          title={title}
-          univ={univ}
-          year={year}
-          // testType={testType!}
-          type={type}
-          allowWrap={true}
-        />
+        <QuestionHighlight highlights={highlights} questionsCount={2} />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ dotenv.config();
 const env = process.env.NODE_ENV || "development";
 // const isDev = env === "development";
 console.log("ENV", env);
-
+import { getToken } from "next-auth/jwt";
 import express from "express";
 import { decryptAccessToken } from "./helper/jwtToken.js";
 import cors from "cors";
@@ -68,7 +68,6 @@ app.use(
 );
 // Apply middleware
 app.use("/graphql", checkRateLimit);
-
 // ATTACHING GRAPHQL MIDDLEWARE TO EXPRESS
 app.use(
   "/graphql",
@@ -80,13 +79,31 @@ app.use(
       // const token = req.headers.authorization;
       // let token = req.cookies.authToken;
       // if (!token) token = req.cookies["next-auth.session-token"];
-      // console.log("Token found in request", token);
-
       const token = req.cookies["next-auth.session-token"];
+      let user = null;
       try {
-        if (!token) return { res };
-        const user = await decryptAccessToken(token, res);
-        console.log("User found after decoding", Boolean(user));
+        if (Boolean(token)) {
+          console.log("Token found in request", Boolean(token));
+          user = await decryptAccessToken(token, res).catch((err) => {
+            console.log("Error in decrypting token", err);
+            return null;
+          });
+        }
+        if (user) {
+          console.log("User found after decoding", Boolean(user));
+          return { user, res };
+        }
+        // try nextjs token
+        console.log("have secret key", Boolean(process.env.NEXTAUTH_SECRET));
+        const nexttoken = await getToken({
+          req,
+        });
+        user = nexttoken?.user;
+        console.log(
+          "User found after decoding nextjs",
+          Boolean(user),
+          nexttoken
+        );
         return { user, res };
       } catch (error) {
         // Handle token verification errors, if any

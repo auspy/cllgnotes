@@ -20,6 +20,7 @@ const ButtonBlack = ({
         backgroundColor: Colors.dark,
         color: Colors.white,
         borderRadius: 20,
+        ...props.buttonStyles,
       }}
       buttonClasses={`blackBtn ${buttonClasses}`}
       fontSize={fontSize}

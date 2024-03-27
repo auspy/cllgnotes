@@ -42,7 +42,7 @@ const TmplHero = ({
               {centerElement || (
                 <>
                   <div
-                    className="fcfs w-0 lg:w-full xl:w-auto rPosi "
+                    className="fcfs w-full xl:w-auto rPosi "
                     style={{ gap: 30, paddingBottom: 43 }}
                   >
                     {leftElement}
