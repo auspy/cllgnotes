@@ -26,10 +26,10 @@ const PreviewPdf = ({
       }
     >
       {Array.from({ length: notPurchased ? 1 : totalPages }).map((_, index) => (
-        <div className="relative w100">
+        <div className="relative w100 fcc">
           <div
             key={index}
-            className="w100 h-full fcc bg-white overflow-scroll scrollbar-hide"
+            className="w100 h-full bg-white overflow-scroll scrollbar-hide"
             style={{
               border: Borders.dark,
               maxHeight: 1348,

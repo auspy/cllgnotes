@@ -90,7 +90,7 @@ const PdfImage = ({
       image.onload = () => {
         console.log("Image loaded");
         const canvas = canvasRef.current!;
-        const parentDiv = canvas.parentElement?.parentElement;
+        const parentDiv = canvas.parentElement;
         const multiple = (scale * 10 * 3) / 100;
         if (parentDiv) {
           const isRotated = rotate % 180 === 90;
