@@ -27,7 +27,9 @@ const PurchasedNotesPage = ({
        frcsb"
       >
         <Logo />
-        <NotesToolbar />
+        <div className="">
+          <NotesToolbar />
+        </div>
       </div>
       <div
         id="pdfContainer"

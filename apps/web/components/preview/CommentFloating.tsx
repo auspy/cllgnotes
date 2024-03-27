@@ -1,6 +1,7 @@
 "use client";
 import { createCommentKey, UseOutsideClick } from "@cllgnotes/lib";
 import { CommentType } from "@cllgnotes/types";
+import { useEffect, useState } from "react";
 import { Text } from "ui";
 
 const CommentFloating = ({
@@ -15,13 +16,38 @@ const CommentFloating = ({
   setActive: (id: string) => void;
 }) => {
   const key = createCommentKey({ x, y, page });
+  const pdfId = "page_" + page;
+  const [calcX, setX] = useState(x || 0);
+  const [calcY, setY] = useState(y || 0);
+  useEffect(() => {
+    const pdfPage = document.getElementById(pdfId);
+    console.log("PdfPage", pdfPage);
+    const handleResize = () => {
+      if (!pdfPage) {
+        console.error("PdfPage not found");
+        return;
+      }
+      console.log("Resize", pdfPage.clientWidth);
+      // 100% should be at 813 and above
+      const scale = pdfPage.clientWidth >= 950 ? 1 : pdfPage.clientWidth / 950;
+      const x1 = x * scale;
+      const y1 = y * scale;
+      setX(x1);
+      setY(y1);
+      console.log("Resize", x1, y1);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [pdfId, x, y]);
   const isActive = active === key;
   if (!isActive) {
     return (
       <button
         style={{
-          top: y || 0,
-          left: x || 0,
+          top: calcY,
+          left: calcX,
         }}
         className="p-2 absolute hover:!opacity-100 rounded-full"
         onClick={() => {
@@ -49,8 +75,8 @@ const CommentFloating = ({
     <div
       style={{
         position: "absolute",
-        top: y || 0,
-        left: x || 0,
+        top: calcY,
+        left: calcX,
       }}
       className="z-30 max-w-[200px] max-h-[300px] overflow-y-scroll scrollbar-hide bg-white p-2 border border-dark border-solid  shadow-lg rounded-[5px]"
     >

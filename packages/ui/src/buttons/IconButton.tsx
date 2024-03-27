@@ -27,7 +27,9 @@ const IconButton = ({
   const buttonProps = {
     disabled: disabled,
 
-    className: `${onBlack && `iconBtn`} fccc ${buttonClasses}`,
+    className: `${
+      onBlack && `iconBtn`
+    } flex flex-col items-center justify-center ${buttonClasses}`,
     style: {
       width: size,
       height: size,

@@ -2,13 +2,12 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import { IconButton } from "ui";
-import { atomPdf, debounce, useKeyPress } from "@cllgnotes/lib";
+import { atomPdf, useKeyPress } from "@cllgnotes/lib";
 import { useRecoilState } from "recoil";
 import ButtonRotate from "./ButtonRotate";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import MapsUgcRoundedIcon from "@mui/icons-material/MapsUgcRounded";
-import { useEffect } from "react";
 const NotesToolbar = () => {
   // ? this has state management using search params and recoil
   // const router = useRouter();
@@ -82,6 +81,7 @@ const NotesToolbar = () => {
       />
       <ButtonRotate />
       <IconButton
+        buttonClasses="!hidden md:!flex"
         title={isFullScreen ? "Exit Fullscreen" : "Fullscreen"}
         size={size}
         icon={!isFullScreen ? <FullscreenIcon /> : <FullscreenExitIcon />}
@@ -90,6 +90,7 @@ const NotesToolbar = () => {
         }}
       />
       <IconButton
+        buttonClasses="!hidden md:!flex"
         title="Add Comment"
         disabled={pdfState.editTool === "comment"}
         size={size}
