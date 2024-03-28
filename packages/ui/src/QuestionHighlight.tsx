@@ -26,7 +26,6 @@ const QuestionHighlight = ({
     return questions;
   };
   const questions = getQuestions(highlights);
-  console.log("questions", questions);
   return (
     <div className="flex flex-col gap-1">
       {questions.map((question, index) => (

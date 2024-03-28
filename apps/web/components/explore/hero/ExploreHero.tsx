@@ -25,15 +25,15 @@ const ExploreHero = ({
             style={{ gap: 30, paddingBottom: 43 }}
           >
             <Text type="h1">{heading}</Text>
-            <Suspense
+            {/* <Suspense
               fallback={
                 <>
                   <SearchBar height={60} />
                 </>
               }
-            >
-              <AutocompleteSearchBar />
-            </Suspense>
+            > */}
+            <AutocompleteSearchBar />
+            {/* </Suspense> */}
           </div>
           <div
             className="w100 hidden lg:grid "
