@@ -171,7 +171,7 @@ const PdfImage = ({
       <LoadComments index={index} />
       <AddComment projectId={projectId} index={index} />
       <canvas
-        className={`p-1 peer ${rotate} border border-solid border-red`}
+        className={`p-1 peer ${rotate}`}
         id={id}
         ref={canvasRef}
         style={{

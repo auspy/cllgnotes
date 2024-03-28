@@ -26,7 +26,11 @@ const PreviewPdf = ({
       }
     >
       {Array.from({ length: notPurchased ? 1 : totalPages }).map((_, index) => (
-        <div className="relative w100 fcc">
+        <div
+          className={`relative w100 flex flex-col ${
+            !notPurchased && "items-center"
+          }`}
+        >
           <div
             key={index}
             className="w100 h-full bg-white overflow-scroll scrollbar-hide"
