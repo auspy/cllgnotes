@@ -12,7 +12,7 @@ const AutocompleteSearchBar = () => {
   return (
     <>
       <SearchBar
-        autocomplete={data}
+        autocomplete={data || []}
         setSearchText={setSearchText}
         height={60}
       />

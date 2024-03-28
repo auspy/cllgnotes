@@ -121,27 +121,31 @@ const SearchBar = ({
       }}
       className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4"
     >
-      {searchText && isHeight60 && (
-        <Dialog
-          style={{
-            maxHeight: height * 4,
-            top: height,
-          }}
-          className="!px-4 fcfs"
-          show={showDialog}
-          setShow={setShowDialog}
-        >
-          {!(Array.isArray(autocomplete) && autocomplete.length > 0) ? (
-            <div className="fcc w100">
-              <CircularProgress size={14} />
-            </div>
-          ) : (
-            autocomplete?.map((item, index) => (
-              <SearchBarDropdownItem index={index} key={index} {...item} />
-            ))
-          )}
-        </Dialog>
-      )}
+      {searchText &&
+        isHeight60 &&
+        (!autocomplete ||
+          (Array.isArray(autocomplete) && autocomplete.length > 0)) && (
+          <Dialog
+            style={{
+              maxHeight: height * 4,
+              top: height,
+            }}
+            className="!px-4 fcfs"
+            show={showDialog}
+            setShow={setShowDialog}
+          >
+            {!autocomplete ? (
+              <div className="fcc w100">
+                <CircularProgress size={14} />
+              </div>
+            ) : (
+              Array.isArray(autocomplete) &&
+              autocomplete.map((item, index) => (
+                <SearchBarDropdownItem index={index} key={index} {...item} />
+              ))
+            )}
+          </Dialog>
+        )}
       <form
         autoComplete="off"
         className="searchBar  priBtn frc w100 overflow-hidden"

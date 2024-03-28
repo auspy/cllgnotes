@@ -3,7 +3,6 @@ import { AUTOCOMPLETE } from "@/db/graphql/gql";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { DocsQueryProps } from "@cllgnotes/types";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 const useSearchbarAutocomplete = ({ searchText }: { searchText: string }) => {
   const pageSize = 10;
@@ -23,14 +22,15 @@ const useSearchbarAutocomplete = ({ searchText }: { searchText: string }) => {
         debounceKey: "autocomplete",
         debounceTime: 300,
       },
-      skip: !searchText,
+      skip: !Boolean(searchText),
     });
-  useEffect(() => {
-    if (searchText) {
-      refetch();
-    }
-  }, [searchText]);
-  if (!searchText) return null;
+  // ? was causing error
+  // useEffect(() => {
+  //   if (searchText) {
+  //     refetch();
+  //   }
+  // }, [searchText]);
+
   if (data?.Autocomplete) {
     return data?.Autocomplete;
   } else {
