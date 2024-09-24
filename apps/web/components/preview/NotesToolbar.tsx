@@ -66,7 +66,7 @@ const NotesToolbar = () => {
     });
   }, []);
   const kepPress = useKeyPress({
-    dependencies: [pdfState.editTool, pdfState.scale],
+    dependencies: [pdfState.editTool, pdfState.scale, pdfState.fullscreen],
     key: {
       c: { func: handleComment },
       C: { func: handleCommentVisibility, shiftKey: true },
@@ -76,6 +76,7 @@ const NotesToolbar = () => {
         shiftKey: true,
         func: handleRotateChnage,
       },
+      F: { func: () => handleFullscreen(), shiftKey: true },
     },
   });
 
@@ -122,7 +123,7 @@ const NotesToolbar = () => {
             handleFullscreen();
           }}
         />
-        <h4 style={commonShortcutStyle}>{"F11"}</h4>
+        <h4 style={commonShortcutStyle}>{"Shift + F"}</h4>
       </div>
       <div className="fcc">
         <IconButton
