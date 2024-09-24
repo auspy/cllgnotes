@@ -1,6 +1,6 @@
 "use client";
 import { AUTOCOMPLETE } from "@/db/graphql/gql";
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { useQuery } from "@apollo/client";
 import { DocsQueryProps } from "@cllgnotes/types";
 import { useSearchParams } from "next/navigation";
 
@@ -9,33 +9,24 @@ const useSearchbarAutocomplete = ({ searchText }: { searchText: string }) => {
   const searchParams = useSearchParams();
   const filtersParams = searchParams.get("filters");
 
-  const { data, error, fetchMore, refetch, networkStatus } =
-    useSuspenseQuery<DocsQueryProps>(AUTOCOMPLETE, {
-      queryKey: "autocomplete",
-      variables: {
-        filter: filtersParams,
-        search: searchText,
-        pageSize,
-        page: 0,
-      },
-      context: {
-        debounceKey: "autocomplete",
-        debounceTime: 300,
-      },
-      skip: !Boolean(searchText),
-    });
-  // ? was causing error
-  // useEffect(() => {
-  //   if (searchText) {
-  //     refetch();
-  //   }
-  // }, [searchText]);
+  const { data, loading, error } = useQuery<DocsQueryProps>(AUTOCOMPLETE, {
+    variables: {
+      filter: filtersParams,
+      search: searchText,
+      pageSize,
+      page: 0,
+    },
+    skip: !Boolean(searchText),
+    fetchPolicy: "network-only", // This ensures we always fetch fresh data
+  });
 
-  if (data?.Autocomplete) {
-    return data?.Autocomplete;
-  } else {
-    return null;
-  }
+  const autocompleteData = data?.Autocomplete || [];
+
+  return {
+    data: Array.isArray(autocompleteData) ? autocompleteData : [],
+    loading,
+    error,
+  };
 };
 
 export default useSearchbarAutocomplete;

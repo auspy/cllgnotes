@@ -51,23 +51,15 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      async profile(profile, tokens) {
+      authorization: {
+        params: {
+          scope: "openid email profile",
+          access_type: "online",
+          prompt: "consent",
+        },
+      },
+      async profile(profile: any, tokens: any) {
         console.log("profile", Boolean(profile));
-        //   aud: string
-        // azp: string
-        // email: string
-        // email_verified: boolean
-        // exp: number
-        // family_name: string
-        // given_name: string
-        // hd: string
-        // iat: number
-        // iss: string
-        // jti: string
-        // name: string
-        // nbf: number
-        // picture: string
-        // sub: string
         return {
           ...profile,
           id: profile.sub,
@@ -84,7 +76,7 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "email" },
         role: { label: "Role", type: "select", options: ["USER", "ADMIN"] },
       },
-      authorize: async (credentials, req) => {
+      authorize: async (credentials: any, req: any) => {
         if (!credentials) return null;
         const { username, email, password, role } = credentials;
         const user = await getUser({ username: username, needPass: true });
@@ -125,8 +117,7 @@ export const authOptions: AuthOptions = {
   ],
   session: { strategy: "jwt" },
   jwt: {
-    async encode({ secret, token }) {
-      // console.log("jwt encode ==>", token);
+    async encode({ secret, token }: { secret: string; token: any }) {
       const newToken = {
         ...token,
         _id: token?._id || token?.id,
@@ -134,9 +125,8 @@ export const authOptions: AuthOptions = {
       };
       return jwt.sign(newToken, secret);
     },
-    async decode({ secret, token }) {
+    async decode({ secret, token }: { secret: string; token: any }) {
       const data = jwt.verify(token || "", secret);
-      // console.log("jwt decode ==>", data);
       return data as any;
     },
   },
@@ -145,32 +135,41 @@ export const authOptions: AuthOptions = {
     error: "/auth",
   },
   callbacks: {
-    jwt: async ({ token, user, account, profile, session, trigger }) => {
-      const newToken = {
-        ...token,
-        ...user,
-      };
-      // console.log("jwt callback ==>", newToken);
-      return newToken;
-    },
-    // signIn: async ({ user }) => {
-    //   if (user.status == "failed") return false;
-    //   return true;
-    // },
-    session: async ({ session, user, token }) => {
-      if (token) {
-        session.user = {
-          ...session.user,
-          ...token,
-        };
+    jwt: async ({
+      token,
+      user,
+      account,
+      profile,
+      session,
+      trigger,
+    }: {
+      token: any;
+      user: any;
+      account: any;
+      profile: any;
+      session: any;
+      trigger: any;
+    }) => {
+      if (account && account.provider === "google") {
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+        token.accessTokenExpires = account.expires_at * 1000;
       }
-      // const newSession = {
-      //   ...session,
-      //   user: {
-      //     ...session.user,
-      //     ...token,
-      //   },
-      // };
+      return token;
+    },
+    session: async ({
+      session,
+      user,
+      token,
+    }: {
+      session: any;
+      user: any;
+      token: any;
+    }) => {
+      session.user = {
+        ...session.user,
+        ...token,
+      };
       return session;
     },
   },

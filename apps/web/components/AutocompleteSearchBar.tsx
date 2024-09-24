@@ -1,22 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import useSearchbarAutocomplete from "./hooks/useSearchbarAutocomplete";
 import SearchBar from "./SearchBar";
+import { DocAutoComplete } from "@cllgnotes/types";
+import { debounce } from "@cllgnotes/lib";
 
 const AutocompleteSearchBar = () => {
   const [searchText, setSearchText] = useState("");
-  console.log("searchText", searchText);
-  const data = useSearchbarAutocomplete({ searchText });
-  console.log("data", data);
+  const { data, loading, error } = useSearchbarAutocomplete({ searchText });
+
+  const debouncedSetSearchText = useCallback(
+    debounce((text: string) => {
+      setSearchText(text);
+    }, 300),
+    []
+  );
+
+  if (error) {
+    console.error("Autocomplete error:", error);
+    return <div>Error loading autocomplete suggestions</div>;
+  }
+
   return (
-    <>
-      <SearchBar
-        autocomplete={data || []}
-        setSearchText={setSearchText}
-        height={60}
-      />
-    </>
+    <SearchBar
+      autocomplete={data || []}
+      setSearchText={debouncedSetSearchText}
+      height={60}
+      isLoading={loading}
+    />
   );
 };
 

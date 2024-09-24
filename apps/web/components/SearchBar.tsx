@@ -22,10 +22,12 @@ const SearchBar = ({
   placeholder,
   setSearchText: setText,
   autocomplete,
+  isLoading,
 }: SearchBarProps & {
   searchText?: string;
-  setSearchText?: React.Dispatch<React.SetStateAction<string>>;
+  setSearchText?: any;
   autocomplete?: any[] | null;
+  isLoading?: boolean;
 }) => {
   const device = useDeviceType();
   const needSearchButton = height !== 90;
@@ -87,7 +89,8 @@ const SearchBar = ({
     if (isHeight40 && !setText) {
       return;
     }
-    const baseUrl = !isHeight40 ? "/explore?" : "?";
+    const baseUrl = "/explore?";
+    console.log("baseUrl", baseUrl);
     if (!text) {
       params.delete("search");
       router.push(baseUrl + params.toString());
@@ -111,19 +114,13 @@ const SearchBar = ({
   }, [searchText]);
 
   // * FETCHING SUGGESTIONS AND AUTOCOMPLETE
+  const safeAutocomplete = Array.isArray(autocomplete) ? autocomplete : [];
+
   return (
-    <div
-      onBlur={() => {
-        setShowDialog(false);
-      }}
-      onFocus={() => {
-        setShowDialog(true);
-      }}
-      className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4"
-    >
+    <div className="w100 frc flex-col relative md:flex-row gap-x-[25px] gap-y-4">
       {searchText &&
         isHeight60 &&
-        (!autocomplete ||
+        (isLoading ||
           (Array.isArray(autocomplete) && autocomplete.length > 0)) && (
           <Dialog
             style={{
@@ -134,13 +131,12 @@ const SearchBar = ({
             show={showDialog}
             setShow={setShowDialog}
           >
-            {!autocomplete ? (
+            {isLoading ? (
               <div className="fcc w100">
                 <CircularProgress size={14} />
               </div>
             ) : (
-              Array.isArray(autocomplete) &&
-              autocomplete.map((item, index) => (
+              safeAutocomplete.map((item, index) => (
                 <SearchBarDropdownItem index={index} key={index} {...item} />
               ))
             )}
@@ -149,6 +145,7 @@ const SearchBar = ({
       <form
         autoComplete="off"
         className="searchBar  priBtn frc w100 overflow-hidden"
+        action="/explore"
         style={{
           height,
           maxWidth,
@@ -160,7 +157,8 @@ const SearchBar = ({
               }),
         }}
         onSubmit={(e) => {
-          isHeight40 && !setText && e.preventDefault();
+          e.preventDefault();
+          handleSearch();
         }}
       >
         {/* dropdown menu */}
