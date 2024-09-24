@@ -117,7 +117,7 @@ export const authOptions: AuthOptions = {
   ],
   session: { strategy: "jwt" },
   jwt: {
-    async encode({ secret, token }: { secret: string; token: any }) {
+    async encode({ secret, token }: any) {
       const newToken = {
         ...token,
         _id: token?._id || token?.id || token?.sub,
@@ -125,7 +125,7 @@ export const authOptions: AuthOptions = {
       };
       return jwt.sign(newToken, secret);
     },
-    async decode({ secret, token }: { secret: string; token: any }) {
+    async decode({ secret, token }: any) {
       const data = jwt.verify(token || "", secret);
       return data as any;
     },
@@ -135,21 +135,7 @@ export const authOptions: AuthOptions = {
     error: "/auth",
   },
   callbacks: {
-    jwt: async ({
-      token,
-      user,
-      account,
-      profile,
-      session,
-      trigger,
-    }: {
-      token: any;
-      user: any;
-      account: any;
-      profile: any;
-      session: any;
-      trigger: any;
-    }) => {
+    jwt: async ({ token, user, account, profile, session, trigger }: any) => {
       if (account && account.provider === "google") {
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
