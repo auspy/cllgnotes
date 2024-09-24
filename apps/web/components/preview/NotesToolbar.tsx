@@ -3,11 +3,12 @@ import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import { IconButton } from "ui";
 import { atomPdf, useKeyPress } from "@cllgnotes/lib";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import ButtonRotate from "./ButtonRotate";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import MapsUgcRoundedIcon from "@mui/icons-material/MapsUgcRounded";
+import { useCallback } from "react";
 const NotesToolbar = () => {
   // ? this has state management using search params and recoil
   // const router = useRouter();
@@ -53,6 +54,17 @@ const NotesToolbar = () => {
   const handleCommentVisibility = () => {
     setPdfState((prev) => ({ ...prev, showComments: !prev.showComments }));
   };
+  const handleRotateChnage = useCallback((rotate: number = 90) => {
+    setPdfState((prev) => {
+      const currentRotation = prev.rotate;
+      const currentRotationValue = currentRotation
+        ? currentRotation >= 270
+          ? -90
+          : currentRotation
+        : 0;
+      return { ...prev, rotate: currentRotationValue + rotate };
+    });
+  }, []);
   const kepPress = useKeyPress({
     dependencies: [pdfState.editTool, pdfState.scale],
     key: {
@@ -60,43 +72,69 @@ const NotesToolbar = () => {
       C: { func: handleCommentVisibility, shiftKey: true },
       Z: { func: handleScale, shiftKey: true },
       X: { func: () => handleScale(-1), shiftKey: true },
+      R: {
+        shiftKey: true,
+        func: handleRotateChnage,
+      },
     },
   });
+
   const size = 40;
+  const commonShortcutStyle = {
+    fontSize: 10,
+    marginTop: 3,
+    fontWeight: 500,
+    opacity: 0.7,
+  };
   return (
     <div className="frc gap-3">
-      <IconButton
-        title="Zoom Out"
-        size={size}
-        disabled={pdfState.scale <= -2}
-        icon={<ZoomOutIcon />}
-        onClick={() => handleScale(-1)}
-      />
-      <IconButton
-        title="Zoom In"
-        size={size}
-        disabled={pdfState.scale >= 5}
-        icon={<ZoomInIcon />}
-        onClick={() => handleScale()}
-      />
-      <ButtonRotate />
-      <IconButton
-        buttonClasses="!hidden md:!flex"
-        title={isFullScreen ? "Exit Fullscreen" : "Fullscreen"}
-        size={size}
-        icon={!isFullScreen ? <FullscreenIcon /> : <FullscreenExitIcon />}
-        onClick={() => {
-          handleFullscreen();
-        }}
-      />
-      <IconButton
-        buttonClasses="!hidden md:!flex"
-        title="Add Comment"
-        disabled={pdfState.editTool === "comment"}
-        size={size}
-        icon={<MapsUgcRoundedIcon />}
-        onClick={handleComment}
-      />
+      <div>
+        <IconButton
+          title="Zoom Out"
+          size={size}
+          disabled={pdfState.scale <= -2}
+          icon={<ZoomOutIcon />}
+          onClick={() => handleScale(-1)}
+        />
+        <h4 style={commonShortcutStyle}>{"Shift + X"}</h4>
+      </div>
+      <div>
+        <IconButton
+          title="Zoom In"
+          size={size}
+          disabled={pdfState.scale >= 5}
+          icon={<ZoomInIcon />}
+          onClick={() => handleScale()}
+        />
+        <h4 style={commonShortcutStyle}>{"Shift + Z"}</h4>
+      </div>
+      <div>
+        <ButtonRotate onClick={() => handleRotateChnage()} />
+        <h4 style={commonShortcutStyle}>{"Shift + R"}</h4>
+      </div>
+      <div className="fcc">
+        <IconButton
+          buttonClasses="!hidden md:!flex"
+          title={isFullScreen ? "Exit Fullscreen" : "Fullscreen"}
+          size={size}
+          icon={!isFullScreen ? <FullscreenIcon /> : <FullscreenExitIcon />}
+          onClick={() => {
+            handleFullscreen();
+          }}
+        />
+        <h4 style={commonShortcutStyle}>{"F11"}</h4>
+      </div>
+      <div className="fcc">
+        <IconButton
+          buttonClasses="!hidden md:!flex"
+          title="Add Comment"
+          disabled={pdfState.editTool === "comment"}
+          size={size}
+          icon={<MapsUgcRoundedIcon />}
+          onClick={handleComment}
+        />
+        <h4 style={commonShortcutStyle}>{"C"}</h4>
+      </div>
     </div>
   );
 };

@@ -29,6 +29,7 @@ const AddComment = ({
 
   const setToast = useSetRecoilState(atomToast);
   const session: any = useSession();
+  console.log("Session", session);
   const userId = session.data?.user?._id;
 
   const id = "page_" + index;
@@ -76,7 +77,7 @@ const AddComment = ({
           },
         };
       });
-      console.log("Comment created", newComment);
+      console.log("Comment created", newComment, projectId, userId);
       //   reset the comment
       setCommentPos(undefined);
       setComment("");

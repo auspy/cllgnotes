@@ -1,25 +1,11 @@
 "use client";
-import { atomPdf } from "@cllgnotes/lib";
 import { IconButton } from "ui";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
-import { useSetRecoilState } from "recoil";
 const ButtonRotate = ({
   onClick,
 }: {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  const setPdfState = useSetRecoilState(atomPdf);
-  const handleRotateChnage = (rotate: number = 90) => {
-    setPdfState((prev) => {
-      const currentRotation = prev.rotate;
-      const currentRotationValue = currentRotation
-        ? currentRotation >= 270
-          ? -90
-          : currentRotation
-        : 0;
-      return { ...prev, rotate: currentRotationValue + rotate };
-    });
-  };
   const handleRotate = () => {
     // if (onClick) {
     //   return onClick;
@@ -53,8 +39,8 @@ const ButtonRotate = ({
   return (
     <>
       <IconButton
-        onClick={() => {
-          handleRotateChnage();
+        onClick={(e) => {
+          onClick && onClick(e);
         }}
         title="Rotate Right"
         size={40}

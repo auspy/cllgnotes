@@ -120,7 +120,7 @@ export const authOptions: AuthOptions = {
     async encode({ secret, token }: { secret: string; token: any }) {
       const newToken = {
         ...token,
-        _id: token?._id || token?.id,
+        _id: token?._id || token?.id || token?.sub,
         username: token?.username || token?.email?.split("@")[0],
       };
       return jwt.sign(newToken, secret);
@@ -155,6 +155,10 @@ export const authOptions: AuthOptions = {
         token.refreshToken = account.refresh_token;
         token.accessTokenExpires = account.expires_at * 1000;
       }
+      if (token) {
+        token._id = token._id || token.sub;
+      }
+      // console.log("token in jwt callback", token, session, profile);
       return token;
     },
     session: async ({
@@ -166,9 +170,11 @@ export const authOptions: AuthOptions = {
       user: any;
       token: any;
     }) => {
+      // console.log("Session is", session, user, token);
       session.user = {
         ...session.user,
         ...token,
+        _id: token._id || token.sub,
       };
       return session;
     },

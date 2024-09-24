@@ -13,8 +13,8 @@ export const zodComments = z.object({
 });
 
 export const zodCommentInput = z.object({
-  doc: zodMongoId,
-  user: zodMongoId,
+  doc: z.string(),
+  user: z.string(),
   x: z.number().max(10000),
   y: z.number().max(10000),
   page: z.number().max(20),

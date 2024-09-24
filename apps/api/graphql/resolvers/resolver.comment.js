@@ -37,7 +37,7 @@ export const resolverMutComments = {
       const { user } = context;
       console.log("--- in add comment ---");
       // console.log("in add cousrse", args,args.input.img);
-      console.log("validating user");
+      console.log("validating user", user);
       const userWhoSentReq = zodMongoId.parse(user?._id);
       const commentRecieved = zodCommentInput.parse(args.input);
       if (userWhoSentReq !== commentRecieved.user) {
